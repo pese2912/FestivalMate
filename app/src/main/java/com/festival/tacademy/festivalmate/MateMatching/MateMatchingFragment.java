@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.festival.tacademy.festivalmate.R;
 
@@ -14,6 +15,8 @@ import com.festival.tacademy.festivalmate.R;
  */
 public class MateMatchingFragment extends Fragment {
 
+
+    TextView titleView;
 
     public MateMatchingFragment() {
         // Required empty public constructor
@@ -24,7 +27,12 @@ public class MateMatchingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_mate_matching, container, false);
+        View view =  inflater.inflate(R.layout.fragment_mate_matching, container, false);
+
+        titleView = (TextView) getActivity().findViewById(R.id.toolbar_title);
+        titleView.setText(getResources().getString(R.string.mate_matching));
+
+        return view;
     }
 
 }

@@ -36,10 +36,9 @@ public class HomeActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         tabHost.setup(this, getSupportFragmentManager(), android.R.id.tabcontent);
-        tabHost.addTab(tabHost.newTabSpec("tab1").setIndicator("공연정보"), FestivalInfoFragment.class, null);
-        tabHost.addTab(tabHost.newTabSpec("tab2").setIndicator("메이트톡"), MateTalkFragment.class, null);
-        tabHost.addTab(tabHost.newTabSpec("tab3").setIndicator("메이트매칭"), MateMatchingFragment.class,null);
-
+        tabHost.addTab(tabHost.newTabSpec("tab1").setIndicator(getResources().getString(R.string.festival_info)), FestivalInfoFragment.class, null);
+        tabHost.addTab(tabHost.newTabSpec("tab2").setIndicator(getResources().getString(R.string.mate_talk)), MateTalkFragment.class, null);
+        tabHost.addTab(tabHost.newTabSpec("tab3").setIndicator(getResources().getString(R.string.mate_matching)), MateMatchingFragment.class,null);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

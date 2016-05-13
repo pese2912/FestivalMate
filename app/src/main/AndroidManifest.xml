@@ -24,7 +24,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MyPage.LetsGoListActivity" />
         <activity android:name=".MyPage.JoinWaitListActivity" />
-        <activity android:name=".MyPage.SettingsActivity"></activity>
+        <activity android:name=".MyPage.SettingsActivity" />
+        <activity android:name=".login.SignUpActivity"></activity>
     </application>
 
 </manifest>
