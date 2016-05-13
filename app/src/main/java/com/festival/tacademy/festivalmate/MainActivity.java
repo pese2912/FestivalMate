@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         TextView btn = (TextView)findViewById(R.id.btn_login);
         btn.setOnClickListener(new View.OnClickListener() { // 로그인 버튼 눌렀을 경우
             @Override

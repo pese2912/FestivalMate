@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.festival.tacademy.festivalmate.HomeActivity;
 import com.festival.tacademy.festivalmate.R;
 
 public class LoginActivity extends AppCompatActivity {
@@ -28,6 +29,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(LoginActivity.this, "로그인",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(LoginActivity.this, HomeActivity.class)); // 일단 홈으로 이동
+                finish();
 
             }
         });
@@ -38,6 +41,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Toast.makeText(LoginActivity.this, "페이스북 로그인",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(LoginActivity.this, HomeActivity.class)); // 일단 홈으로 이동
+                finish();
             }
         });
 
@@ -47,6 +52,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Toast.makeText(LoginActivity.this, "카카오톡 로그인",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(LoginActivity.this, HomeActivity.class)); // 일단 홈으로 이동
+                finish();
             }
         });
 
@@ -56,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 startActivity(new Intent(LoginActivity.this, SignUpActivity.class)); // 회원가입 액티비티로 이동
+
 
             }
         });

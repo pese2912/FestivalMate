@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.festival.tacademy.festivalmate.HomeActivity;
+import com.festival.tacademy.festivalmate.Preference.PreferenceActivity;
 import com.festival.tacademy.festivalmate.R;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -46,13 +46,15 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
+
         btn = (Button)findViewById(R.id.btn_signup);
         btn.setOnClickListener(new View.OnClickListener() { // 가입하기 버튼 클릭시
             @Override
             public void onClick(View v) {
 
                 Toast.makeText(SignUpActivity.this, "가입하기",Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(SignUpActivity.this, HomeActivity.class));
+                startActivity(new Intent(SignUpActivity.this, PreferenceActivity.class));  // 선호도 조사 액티비티로 이동
+                finish();
 
             }
         });

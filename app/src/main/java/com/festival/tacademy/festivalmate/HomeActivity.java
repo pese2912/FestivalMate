@@ -27,8 +27,7 @@ public class HomeActivity extends AppCompatActivity
     FragmentTabHost tabHost;
     Toolbar toolbar;
     TextView closeTab;
-
-
+    TextView profileUpdate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +39,8 @@ public class HomeActivity extends AppCompatActivity
 
 
         setSupportActionBar(toolbar);
+
+
 
         tabHost.setup(this, getSupportFragmentManager(), android.R.id.tabcontent);
         tabHost.addTab(tabHost.newTabSpec("tab1").setIndicator(getResources().getString(R.string.festival_info)), FestivalInfoFragment.class, null);
@@ -66,8 +67,15 @@ public class HomeActivity extends AppCompatActivity
                 }
             }
         });
-    }
 
+        profileUpdate= (TextView)headerView.findViewById(R.id.profile_update);
+        profileUpdate.setOnClickListener(new View.OnClickListener() { // 프로필 수정 클릭 시
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
 
     @Override
     public void onBackPressed() {
@@ -81,6 +89,7 @@ public class HomeActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.home, menu);
         return true;
@@ -122,4 +131,7 @@ public class HomeActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+
 }
