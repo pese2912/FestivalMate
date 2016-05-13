@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <item
+            android:id="@+id/lets_go_list"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/lets_go_list" />
+
+        <item
+            android:id="@+id/wait_list"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/join_wait_list" />
+
+        <item
+            android:id="@+id/settings"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/settings" />
+
+
+</menu>
