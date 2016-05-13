@@ -11,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.festival.tacademy.festivalmate.FestivalInfo.FestivalInfoFragment;
 import com.festival.tacademy.festivalmate.MateMatching.MateMatchingFragment;
@@ -24,6 +26,9 @@ public class HomeActivity extends AppCompatActivity
 
     FragmentTabHost tabHost;
     Toolbar toolbar;
+    TextView closeTab;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +37,7 @@ public class HomeActivity extends AppCompatActivity
 
         tabHost = (FragmentTabHost)findViewById(R.id.tabHost);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+
 
         setSupportActionBar(toolbar);
 
@@ -48,11 +54,19 @@ public class HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View headerView = navigationView.getHeaderView(0);
+        closeTab = (TextView)headerView.findViewById(R.id.btn_close);
+        closeTab.setOnClickListener(new View.OnClickListener() { // 햄버거바 닫기
+            @Override
+            public void onClick(View v) {
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                if (drawer.isDrawerOpen(GravityCompat.START)) {
+                    drawer.closeDrawer(GravityCompat.START);
+                }
+            }
+        });
     }
-
-
-
-
 
 
     @Override

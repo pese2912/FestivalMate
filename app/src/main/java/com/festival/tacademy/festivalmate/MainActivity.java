@@ -6,11 +6,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.festival.tacademy.festivalmate.login.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
-
 
 
     @Override
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        Button btn = (Button)findViewById(R.id.btn_login);
+        TextView btn = (TextView)findViewById(R.id.btn_login);
         btn.setOnClickListener(new View.OnClickListener() { // 로그인 버튼 눌렀을 경우
             @Override
             public void onClick(View v) {
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btn = (Button)findViewById(R.id.btn_start);
+        btn = (TextView)findViewById(R.id.btn_start);
         btn.setOnClickListener(new View.OnClickListener() { // 시작하기 버튼 눌렀을 경우
             @Override
             public void onClick(View v) {
@@ -39,5 +40,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
     }
 }
