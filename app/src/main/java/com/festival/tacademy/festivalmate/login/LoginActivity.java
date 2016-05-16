@@ -21,53 +21,18 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        emailView = (EditText)findViewById(R.id.edit_email);
-        passwordView = (EditText)findViewById(R.id.edit_password);
 
-        Button btn = (Button)findViewById(R.id.btn_login);
-        btn.setOnClickListener(new View.OnClickListener() { //로그인 하기 버튼 클릭시
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(LoginActivity.this, "로그인",Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(LoginActivity.this, HomeActivity.class)); // 일단 홈으로 이동
-                finish();
+        if(savedInstanceState == null){
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.container, new LoginFragment())
+                    .commit();
+        }
 
-            }
-        });
+    }
 
-        btn = (Button)findViewById(R.id.btn_facebook_login);
-        btn.setOnClickListener(new View.OnClickListener() { // 페이스북 로그인 버튼 클릭시
-            @Override
-            public void onClick(View v) {
-
-                Toast.makeText(LoginActivity.this, "페이스북 로그인",Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(LoginActivity.this, HomeActivity.class)); // 일단 홈으로 이동
-                finish();
-            }
-        });
-
-        btn = (Button)findViewById(R.id.btn_kaokaotalk_login);
-        btn.setOnClickListener(new View.OnClickListener() { // 카카오톡 로그인 버튼 클릭시
-            @Override
-            public void onClick(View v) {
-
-                Toast.makeText(LoginActivity.this, "카카오톡 로그인",Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(LoginActivity.this, HomeActivity.class)); // 일단 홈으로 이동
-                finish();
-            }
-        });
-
-        btn= (Button)findViewById(R.id.btn_email_signup);
-        btn.setOnClickListener(new View.OnClickListener() { // 이메일가입하기 버튼 클릭시
-            @Override
-            public void onClick(View v) {
-
-                startActivity(new Intent(LoginActivity.this, SignUpActivity.class)); // 회원가입 액티비티로 이동
-
-
-            }
-        });
-
-
+    public void changeSignUp(){
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, new SignUpFragment())
+                .addToBackStack(null)
+                .commit();
     }
 }

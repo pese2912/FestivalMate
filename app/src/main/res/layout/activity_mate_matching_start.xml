@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/container"
-    tools:context=".login.LoginActivity">
+    tools:context="com.festival.tacademy.festivalmate.MateMatching.MateMatchingStartActivity">
 
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
@@ -18,13 +17,23 @@
         android:background="#ff3300">
 
         <TextView
-            android:text="@string/festival_mate"
-            android:textSize="30dp"
+            android:text="@string/mate_matching_start"
+            android:textSize="20dp"
             android:id="@+id/toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#ffffff"
-            android:layout_gravity="center"
+            android:layout_gravity="left"
             />
     </android.support.v7.widget.Toolbar>
-</FrameLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mate_matching_do"
+        android:id="@+id/btn_match"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="43dp" />
+
+</RelativeLayout>

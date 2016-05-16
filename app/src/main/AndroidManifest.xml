@@ -27,11 +27,12 @@
         <activity android:name=".MyPage.LetsGoListActivity" />
         <activity android:name=".MyPage.JoinWaitListActivity" />
         <activity android:name=".MyPage.SettingsActivity" />
-        <activity
-            android:name=".login.SignUpActivity"
-            android:windowSoftInputMode="adjustNothing" />
         <activity android:name=".Preference.PreferenceActivity" />
-        <activity android:name=".MyPage.QuestionActivity"></activity>
+        <activity android:name=".MyPage.QuestionActivity" />
+        <activity android:name=".MateMatching.MateMatchingStartActivity" />
+        <activity android:name=".MyPage.FestibalSearchActivity" />
+        <activity android:name=".MateMatching.MateMatchingActivity" />
+        <activity android:name=".MateMatching.MakeMateTalkActivity"></activity>
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package com.festival.tacademy.festivalmate.FestivalInfo;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -15,6 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.festival.tacademy.festivalmate.Data.Festival;
+import com.festival.tacademy.festivalmate.MateMatching.MateMatchingStartActivity;
+import com.festival.tacademy.festivalmate.MyPage.FestibalSearchActivity;
 import com.festival.tacademy.festivalmate.R;
 import com.viewpagerindicator.CirclePageIndicator;
 
@@ -55,6 +61,7 @@ public class FestivalInfoFragment extends Fragment {
             @Override
             public void onItemClick(View view, Festival festival) {
                 Toast.makeText(getContext(),festival.getName(), Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getContext(), MateMatchingStartActivity.class));
             }
         });
 
@@ -64,6 +71,7 @@ public class FestivalInfoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_festival_info, container, false);
         titleView = (TextView) getActivity().findViewById(R.id.toolbar_title);
@@ -91,13 +99,11 @@ public class FestivalInfoFragment extends Fragment {
         });
         mIndicator = (CirclePageIndicator) view.findViewById(R.id.page_indicator);
         mIndicator.setViewPager(pager);
-
-
-
         return  view;
     }
 
     private void initData() {
+
         int[] a = new int[] {R.drawable.back1, R.drawable.back2, R.drawable.back3, R.drawable.back4, R.drawable.back5};
         List<Integer> items = new ArrayList<Integer>();
         for(int i=0; i<a.length; i++) {
@@ -108,5 +114,23 @@ public class FestivalInfoFragment extends Fragment {
 
             mAdapter2.add(new Festival("Item: "+i, R.mipmap.ic_launcher, "Date: "+i, "Location: "+i));
         }
+    }
+
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_search, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if(id == R.id.festibal_search){
+            startActivity(new Intent(getContext(), FestibalSearchActivity.class));
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
