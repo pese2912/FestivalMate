@@ -9,6 +9,13 @@
     <string name="settings">설정</string>
     <string name="profile_update">프로필 수정</string>
 
+    <string name="alram">알림</string>
+    <string name="alram_ment">ON 하시면 메이트톡 알림 및 공연정보를 받아 볼 수 있습니다.</string>
+    <string name="question">문의하기</string>
+    <string name="agree_privarcyinfo">이용약관 및 개인정보 취급 방침</string>
+    <string name="festivalmate_version">공연메이트 버전 정보</string>
+    <string name="version">Android V1.001</string>
+
     <string name="prefer_research">선호도 조사</string>
     <string name="prefer_research_ment">좋아하는 가수를 선택하여 메이트를 만들어 보세요.
     </string>
@@ -32,8 +39,6 @@
     <string name="kaokaotalk_login">카카오톡으로 로그인하기</string>
     <string name="email_signup">이메일로 가입하기</string>
     <string name="signup">가입하기</string>
-
-
 
 
     <string name="title_activity_home"></string>

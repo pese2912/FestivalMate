@@ -7,6 +7,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.festival.tacademy.festivalmate.Data.Festival;
 import com.festival.tacademy.festivalmate.Data.PreferenceArtist;
 import com.festival.tacademy.festivalmate.R;
 
@@ -21,6 +22,15 @@ public class PreferenceViewHolder  extends RecyclerView.ViewHolder {
 
     PreferenceArtist artist;
 
+    public interface OnItemClickListener {
+        public void onItemClick(View view, PreferenceArtist artist);
+    }
+
+    OnItemClickListener mListener;
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mListener = listener;
+    }
 
     public PreferenceViewHolder(View itemView) {
         super(itemView);
@@ -28,13 +38,21 @@ public class PreferenceViewHolder  extends RecyclerView.ViewHolder {
         nameView = (TextView)itemView.findViewById(R.id.name_artist);
         imageView = (ImageView)itemView.findViewById(R.id.image_artist);
         checkBox = (CheckBox)itemView.findViewById(R.id.checkBox_artist);
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if( mListener!=null ) {
+                    mListener.onItemClick(v, artist);
+                }
+            }
+        });
     }
 
     public void setPreferenceArtist(PreferenceArtist artist){
         this.artist = artist;
         nameView.setText(artist.getName());
         imageView.setImageDrawable(artist.getImage());
-
 
     }
 }

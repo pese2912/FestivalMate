@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.festival.tacademy.festivalmate.Data.PreferenceArtist;
+import com.festival.tacademy.festivalmate.FestivalInfo.FestivalViewHolder;
 import com.festival.tacademy.festivalmate.R;
 
 import java.util.ArrayList;
@@ -33,6 +34,11 @@ public class PreferenceAdapter extends RecyclerView.Adapter<PreferenceViewHolder
     }
 
 
+    PreferenceViewHolder.OnItemClickListener mListener;
+    public void setOnItemClickListener(PreferenceViewHolder.OnItemClickListener listener) {
+        mListener = listener;
+    }
+
 
     @Override
     public PreferenceViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -43,6 +49,7 @@ public class PreferenceAdapter extends RecyclerView.Adapter<PreferenceViewHolder
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder, int position) {
         holder.setPreferenceArtist(items.get(position));
+        holder.setOnItemClickListener(mListener);
 
     }
 

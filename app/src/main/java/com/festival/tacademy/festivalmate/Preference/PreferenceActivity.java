@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.festival.tacademy.festivalmate.Data.PreferenceArtist;
@@ -31,6 +32,14 @@ public class PreferenceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_preference);
 
         mAdapter = new PreferenceAdapter();
+
+        mAdapter.setOnItemClickListener(new PreferenceViewHolder.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, PreferenceArtist artist) {
+                Toast.makeText(PreferenceActivity.this, artist.getCheck() + artist.getName(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
         listView = (RecyclerView)findViewById(R.id.rv_list);
         listView.setAdapter(mAdapter);
         listView.setLayoutManager(new GridLayoutManager(this,3));
@@ -40,6 +49,8 @@ public class PreferenceActivity extends AppCompatActivity {
         toolbar.setTitle("");
 
         setSupportActionBar(toolbar);
+
+
 
         setData();
     }
@@ -58,11 +69,10 @@ public class PreferenceActivity extends AppCompatActivity {
            for (int i = 0; i < 20; i++) {
                 PreferenceArtist artist = new PreferenceArtist();
                artist.setName("name " + i);
-              artist.setImage(ContextCompat.getDrawable(this, R.drawable.splash));
+              artist.setImage(ContextCompat.getDrawable(this, R.mipmap.ic_launcher));
              mAdapter.add(artist); // 값 추가
          }
     }
-
 
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
