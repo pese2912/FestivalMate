@@ -16,6 +16,9 @@
     <string name="festivalmate_version">공연메이트 버전 정보</string>
     <string name="version">Android V1.001</string>
 
+    <string name="send_mail">보내는 사람</string>
+    <string name="question_ment">공연메이트에 대한 궁금사항을 보내주시면 신속히 답변드리겠습니다.</string>
+
     <string name="prefer_research">선호도 조사</string>
     <string name="prefer_research_ment">좋아하는 가수를 선택하여 메이트를 만들어 보세요.
     </string>
@@ -49,6 +52,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 
 </resources>

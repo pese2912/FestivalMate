@@ -45,7 +45,7 @@ public class HomeActivity extends AppCompatActivity
         tabHost.setup(this, getSupportFragmentManager(), android.R.id.tabcontent);
         tabHost.addTab(tabHost.newTabSpec("tab1").setIndicator(getResources().getString(R.string.festival_info)), FestivalInfoFragment.class, null);
         tabHost.addTab(tabHost.newTabSpec("tab2").setIndicator(getResources().getString(R.string.mate_talk)), MateTalkFragment.class, null);
-        tabHost.addTab(tabHost.newTabSpec("tab3").setIndicator(getResources().getString(R.string.mate_matching)), MateMatchingFragment.class,null);
+       // tabHost.addTab(tabHost.newTabSpec("tab3").setIndicator(getResources().getString(R.string.mate_matching)), MateMatchingFragment.class,null);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
