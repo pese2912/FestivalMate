@@ -78,5 +78,13 @@ public class MateTalkFragment extends Fragment {
             mAdapter.add(room); // 값 추가
         }
     }
-
 }
+
+/*
+Chatting User Table
+id, serverid,name,email
+
+Chatting Table
+_id,uid,type,message,date
+ */
+

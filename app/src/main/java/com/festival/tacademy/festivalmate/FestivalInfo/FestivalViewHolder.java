@@ -15,6 +15,7 @@ public class FestivalViewHolder extends RecyclerView.ViewHolder {
 
     ImageView photoView;
     TextView text_title, text_date, text_location;
+
     Festival festival;
 
     public interface OnItemClickListener {

@@ -15,7 +15,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.festival.tacademy.festivalmate.FestivalInfo.FestivalInfoFragment;
-import com.festival.tacademy.festivalmate.MateMatching.MateMatchingFragment;
 import com.festival.tacademy.festivalmate.MateTalk.MateTalkFragment;
 import com.festival.tacademy.festivalmate.MyPage.JoinWaitListActivity;
 import com.festival.tacademy.festivalmate.MyPage.LetsGoListActivity;

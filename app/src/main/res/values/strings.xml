@@ -56,6 +56,8 @@
     <string name="festibal_search_ment">검색을 이용해서 원하는 공연을 찾으세요.</string>
     <string name="mate_matching_do">메이트 매칭하기</string>
     <string name="make_talk">메이트톡 만들기</string>
+    <string name="mate_matching_start_ment">좋아하는 가수를 선택하면 나와 같은 취향의 친구들을 만날 수 있어요.</string>
+    <string name="festibal">공연</string>
 
 
 </resources>

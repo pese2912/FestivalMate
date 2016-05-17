@@ -20,6 +20,7 @@ public class FestivalAdapter extends RecyclerView.Adapter<FestivalViewHolder> {
         items.add(festival);
         notifyDataSetChanged();
     }
+
     public void addAll(List<Festival> items) {
         this.items.addAll(items);
         notifyDataSetChanged();
@@ -35,8 +36,6 @@ public class FestivalAdapter extends RecyclerView.Adapter<FestivalViewHolder> {
     public void setOnItemClickListener(FestivalViewHolder.OnItemClickListener listener) {
         mListener = listener;
     }
-
-
 
     @Override
     public FestivalViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

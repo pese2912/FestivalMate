@@ -4,12 +4,14 @@ package com.festival.tacademy.festivalmate.Data;
  * Created by J.K.Lee on 2016-05-13.
  */
 public class Festival {
+
     String name;
     int photo;
     String date;
     String location;
 
     public Festival() {
+
     }
 
     public Festival(String name, int photo, String date, String location) {
@@ -35,7 +37,8 @@ public class Festival {
         this.location = location;
     }
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
@@ -47,7 +50,8 @@ public class Festival {
         return photo;
     }
 
-    public void setPhoto(int photo) {
+    public void setPhoto(int photo)
+    {
         this.photo = photo;
     }
 }
