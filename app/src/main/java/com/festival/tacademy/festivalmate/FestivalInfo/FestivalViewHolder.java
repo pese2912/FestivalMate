@@ -31,7 +31,7 @@ public class FestivalViewHolder extends RecyclerView.ViewHolder {
 
     public FestivalViewHolder(View itemView) {
         super(itemView);
-        text_title = (TextView)itemView.findViewById(R.id.textView2);
+        text_title = (TextView)itemView.findViewById(R.id.text_title);
         photoView = (ImageView)itemView.findViewById(R.id.photo_view);
         text_date = (TextView)itemView.findViewById(R.id.text_date);
         text_location = (TextView)itemView.findViewById(R.id.text_location);

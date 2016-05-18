@@ -5,7 +5,7 @@
     <string name="start">시작하기</string>
 
     <string name="lets_go_list">갈꺼야 한 목록</string>
-    <string name="join_wait_list">참여대기 모임리스트</string>
+    <string name="join_wait_list">메이트톡 대기 목록</string>
     <string name="settings">설정</string>
     <string name="profile_update">프로필 수정</string>
 
@@ -69,6 +69,7 @@
     <string name="prefer_age_ment">선호연령대를 선택하세요.</string>
     <string name="background_choice">배경선택</string>
     <string name="title_activity_main2">Main2Activity</string>
+    <string name="lets_go">갈꺼야</string>
 
 
 </resources>

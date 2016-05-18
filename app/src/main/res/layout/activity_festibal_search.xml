@@ -48,4 +48,15 @@
         android:layout_toLeftOf="@+id/btn_match"
         android:layout_toStartOf="@+id/btn_match" />
 
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rv_list"
+        android:layout_below="@+id/btn_search"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>
