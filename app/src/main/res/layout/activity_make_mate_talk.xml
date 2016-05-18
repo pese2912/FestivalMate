@@ -32,7 +32,102 @@
         android:layout_height="wrap_content"
         android:text="@string/make_talk"
         android:id="@+id/btn_maketalk"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="133dp" />
+        android:background="#ff3300"
+        android:textColor="#ffffff"
+        android:layout_marginRight="71dp"
+        android:layout_marginEnd="71dp"
+        android:layout_marginTop="142dp"
+        android:layout_below="@+id/textView17"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:paddingLeft="30dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingRight="30dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ff3300"
+        android:text="@string/mate_talk_room_name"
+        android:id="@+id/textView15"
+        android:layout_marginLeft="37dp"
+        android:layout_marginTop="45dp"
+        android:layout_below="@+id/toolbar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="37dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText2"
+        android:layout_alignBottom="@+id/textView15"
+        android:layout_alignRight="@+id/btn_maketalk"
+        android:layout_alignEnd="@+id/btn_maketalk"
+        android:layout_toRightOf="@+id/textView17"
+        android:layout_toEndOf="@+id/textView17" />
+
+    <TextView
+        android:textColor="#ff3300"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mate_talk_max_people"
+        android:id="@+id/textView16"
+        android:layout_alignBottom="@+id/editText3"
+        android:layout_alignLeft="@+id/textView15"
+        android:layout_alignStart="@+id/textView15" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText3"
+        android:layout_below="@+id/editText2"
+        android:layout_toRightOf="@+id/textView16"
+        android:layout_alignRight="@+id/editText2"
+        android:layout_alignEnd="@+id/editText2" />
+
+    <TextView
+        android:textColor="#ff3300"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/prefer_location"
+        android:id="@+id/textView17"
+        android:layout_marginTop="52dp"
+        android:layout_below="@+id/textView16"
+        android:layout_alignLeft="@+id/textView16"
+        android:layout_alignStart="@+id/textView16" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner"
+        android:entries="@array/city"
+        android:layout_alignTop="@+id/textView17"
+        android:layout_alignLeft="@+id/editText3"
+        android:layout_alignStart="@+id/editText3"
+        android:layout_alignRight="@+id/btn_maketalk"
+        android:layout_alignEnd="@+id/btn_maketalk" />
+
+    <TextView
+        android:textColor="#ff3300"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/prefer_age"
+        android:id="@+id/textView18"
+        android:layout_below="@+id/spinner"
+        android:layout_alignLeft="@+id/textView17"
+        android:layout_alignStart="@+id/textView17" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner2"
+        android:entries="@array/age"
+        android:layout_below="@+id/spinner"
+        android:layout_alignLeft="@+id/spinner"
+        android:layout_alignStart="@+id/spinner"
+        android:layout_alignRight="@+id/btn_maketalk"
+        android:layout_alignEnd="@+id/btn_maketalk" />
+
 </RelativeLayout>

@@ -59,5 +59,16 @@
     <string name="mate_matching_start_ment">좋아하는 가수를 선택하면 나와 같은 취향의 친구들을 만날 수 있어요.</string>
     <string name="festibal">공연</string>
 
+    <string name="mate_talk_room_name">방이름</string>
+    <string name="mate_talk_room_name_ment">방이름을 입력하세요.</string>
+    <string name="mate_talk_max_people">최대참여인원</string>
+    <string name="mate_talk_max_people_ment">2명~20명까지 설정 가능합니다.</string>
+    <string name="prefer_location">선호지역</string>
+    <string name="prefer_location_ment">선호지역을 선택하세요.</string>
+    <string name="prefer_age">선호연령대</string>
+    <string name="prefer_age_ment">선호연령대를 선택하세요.</string>
+    <string name="background_choice">배경선택</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
 
 </resources>

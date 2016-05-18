@@ -82,7 +82,9 @@ public class PreferenceActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.jump) {
-            startActivity(new Intent(PreferenceActivity.this, HomeActivity.class));
+            Intent intent = new Intent(PreferenceActivity.this, HomeActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
             finish();
 
             return true;

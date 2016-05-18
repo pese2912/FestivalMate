@@ -32,7 +32,8 @@
         <activity android:name=".MateMatching.MateMatchingStartActivity" />
         <activity android:name=".MyPage.FestibalSearchActivity" />
         <activity android:name=".MateMatching.MateMatchingActivity" />
-        <activity android:name=".MateMatching.MakeMateTalkActivity"></activity>
+        <activity android:name=".MateMatching.MakeMateTalkActivity" />
+        <activity android:name=".FestivalInfo.FestivalDetailActivity" />
     </application>
 
 </manifest>

@@ -3,6 +3,7 @@ package com.festival.tacademy.festivalmate.FestivalInfo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -18,7 +19,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.festival.tacademy.festivalmate.Data.Artist;
 import com.festival.tacademy.festivalmate.Data.Festival;
+import com.festival.tacademy.festivalmate.Data.Lineup;
+import com.festival.tacademy.festivalmate.Data.User;
 import com.festival.tacademy.festivalmate.MateMatching.MateMatchingStartActivity;
 import com.festival.tacademy.festivalmate.MyPage.FestibalSearchActivity;
 import com.festival.tacademy.festivalmate.R;
@@ -60,11 +64,20 @@ public class FestivalInfoFragment extends Fragment {
         mAdapter2.setOnItemClickListener(new FestivalViewHolder.OnItemClickListener() {
             @Override
             public void onItemClick(View view, Festival festival) {
-                Toast.makeText(getContext(),festival.getName(), Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getContext(), MateMatchingStartActivity.class));
+
+                final  Festival festival1 = festival;
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                       // Toast.makeText(getContext(),festival.getName(), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getActivity(), FestivalDetailActivity.class);
+                        intent.putExtra("festival", festival1);
+                        startActivity(intent);
+                    }
+                }, 250);
             }
         });
-
         initData();
     }
 
@@ -103,16 +116,26 @@ public class FestivalInfoFragment extends Fragment {
     }
 
     private void initData() {
-
         int[] a = new int[] {R.drawable.back1, R.drawable.back2, R.drawable.back3, R.drawable.back4, R.drawable.back5};
         List<Integer> items = new ArrayList<Integer>();
         for(int i=0; i<a.length; i++) {
             items.add(a[i]);
         }
         mAdapter.addAll(items);
-        for (int i = 0; i < 10; i++) {
+        List<User> users = new ArrayList<>();
+        List<Lineup> lineups = new ArrayList<>();
+        List<Artist> artists = new ArrayList<>();
 
-            mAdapter2.add(new Festival("Item: "+i, R.mipmap.ic_launcher, "Date: "+i, "Location: "+i));
+        for(int i=0; i<10; i++) {
+            users.add(new User("User: " + i, R.mipmap.ic_launcher));
+            artists.add(new Artist("Artist: " + i));
+        }
+        for(int i=0; i<3; i++) {
+            lineups.add(new Lineup("Date: " + i, artists));
+        }
+
+        for (int i = 0; i < 10; i++) {
+            mAdapter2.add(new Festival("Item: "+i, R.drawable.back2, "Date: "+i, "Location: "+i, users, lineups));
         }
     }
 

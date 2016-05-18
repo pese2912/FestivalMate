@@ -1,5 +1,6 @@
 package com.festival.tacademy.festivalmate.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,7 +8,23 @@ import java.util.List;
  */
 public class FestibalLineUp {
 
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public List<Artist> getArtist() {
+        return artist;
+    }
+
+    public void setArtist(List<Artist> artist) {
+        this.artist = artist;
+    }
+
     public String data;
-    public Artist artist;
+    public List<Artist> artist = new ArrayList<>();
 
 }

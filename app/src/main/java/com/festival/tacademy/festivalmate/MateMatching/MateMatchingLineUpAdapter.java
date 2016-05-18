@@ -35,13 +35,11 @@ public class MateMatchingLineUpAdapter extends RecyclerView.Adapter<MateMatching
     public MateMatchingLineUpViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view =  LayoutInflater.from(parent.getContext()).inflate(R.layout.view_mate_matching_lineup, null);
         return new MateMatchingLineUpViewHolder(view);
-
     }
 
     @Override
     public void onBindViewHolder(MateMatchingLineUpViewHolder holder, int position) {
         holder.setFestibalLineUp(items.get(position));
-
     }
 
     @Override
