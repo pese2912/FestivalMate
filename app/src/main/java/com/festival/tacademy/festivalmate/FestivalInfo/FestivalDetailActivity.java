@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,7 +18,8 @@ import com.festival.tacademy.festivalmate.R;
 
 public class FestivalDetailActivity extends AppCompatActivity {
 
-    TextView toolbar;
+    TextView toolbarTitle;
+    Toolbar toolbar;
     RecyclerView listView;
     FestivalDetailAdapter mAdapter;
     LinearLayoutManager mManager;
@@ -28,8 +30,12 @@ public class FestivalDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_festival_detail);
-        toolbar = (TextView) findViewById(R.id.toolbar_title);
+        toolbarTitle = (TextView) findViewById(R.id.toolbar_title);
         fab = (FloatingActionButton)findViewById(R.id.btn_matching_start);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         listView = (RecyclerView)findViewById(R.id.rv_list);
         mAdapter = new FestivalDetailAdapter();
@@ -39,7 +45,7 @@ public class FestivalDetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         festival = (Festival)intent.getExtras().getSerializable("festival");
-        toolbar.setText(festival.getName());
+        toolbarTitle.setText(festival.getName());
         mAdapter.setFestval(festival);
 
         Toast.makeText(this, festival.getName() + "+ " + festival.getDate() + "+ " + festival.getLocation(), Toast.LENGTH_SHORT).show();
@@ -52,5 +58,18 @@ public class FestivalDetailActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == android.R.id.home) {
+            finish();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

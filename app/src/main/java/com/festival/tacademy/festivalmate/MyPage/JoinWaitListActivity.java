@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -18,11 +20,18 @@ public class JoinWaitListActivity extends AppCompatActivity {
 
     RecyclerView listView;
     JoinWaitListAdapter mAdapter;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join_wait_list);
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         listView = (RecyclerView)findViewById(R.id.rv_list);
         mAdapter = new JoinWaitListAdapter();
         mAdapter.setOnItemClickListener(new JoinWaitListViewHolder.OnItemClickListener() {
@@ -47,5 +56,17 @@ public class JoinWaitListActivity extends AppCompatActivity {
             list.setWaitPeople(i+"명");
             mAdapter.add(list);
         }
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == android.R.id.home) {
+            finish();
+             return true;
+          }
+
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -22,8 +22,8 @@ public class MateMatchingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mate_matching);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
-
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 
@@ -41,10 +41,16 @@ public class MateMatchingActivity extends AppCompatActivity {
         if(id == R.id.make_talk){
             startActivity(new Intent(MateMatchingActivity.this, MakeMateTalkActivity.class));
 
-
+            return true;
+        }
+       else if (id == android.R.id.home) {
+            finish();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+
     }
+
+
 }

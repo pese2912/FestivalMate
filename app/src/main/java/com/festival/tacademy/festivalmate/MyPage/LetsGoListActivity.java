@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.festival.tacademy.festivalmate.Data.Artist;
@@ -24,12 +26,17 @@ public class LetsGoListActivity extends AppCompatActivity {
 
     RecyclerView listView;
     FestivalAdapter mAdapter;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lets_go_list);
 
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mAdapter = new FestivalAdapter();
         listView = (RecyclerView)findViewById(R.id.rv_list);
         listView.setAdapter(mAdapter);
@@ -74,5 +81,18 @@ public class LetsGoListActivity extends AppCompatActivity {
         for (int i = 0; i < 10; i++) {
             mAdapter.add(new Festival("Item: "+i, R.drawable.back2, "Date: "+i, "Location: "+i, users, lineups));
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == android.R.id.home) {
+            finish();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
