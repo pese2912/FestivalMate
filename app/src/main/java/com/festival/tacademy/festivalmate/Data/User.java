@@ -6,6 +6,7 @@ import java.io.Serializable;
  * Created by J.K.Lee on 2016-05-16.
  */
 public class User implements Serializable {
+
     String id;
     int photo;
 
@@ -26,7 +27,8 @@ public class User implements Serializable {
         return photo;
     }
 
-    public void setPhoto(int photo) {
+    public void setPhoto(int photo)
+    {
         this.photo = photo;
     }
 }

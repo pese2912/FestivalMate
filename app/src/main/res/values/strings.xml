@@ -87,6 +87,11 @@
     <string name="privacy_policy">개인정보 취급방침</string>
     <string name="terms_use_ment"></string>
     <string name="privacy_policy_ment"></string>
+    <string name="reject">거절</string>
+    <string name="approved">승인</string>
+    <string name="exile">강퇴</string>
+    <string name="approve_waiter">승인대기자</string>
+    <string name="chat_joiner">대화참여자</string>
 
 
 </resources>

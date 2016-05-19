@@ -23,6 +23,7 @@ public class FestivalDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     Festival festival;
 
+
     public void setFestval(Festival festival) {
         this.festival = festival;
         notifyDataSetChanged();
@@ -30,10 +31,10 @@ public class FestivalDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @Override
     public int getItemViewType(int position) {
-
         if( position == 0 ) {
             return VIEW_TYPE_FESTIVAL_PHOTO;
         }
+
         position--;
         if ( festival.getLineups().size() > 0 ) {
             if( position == 0 ) {
@@ -87,6 +88,7 @@ public class FestivalDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             h.setPhoto(festival);
             return;
         }
+
         position--;
         if( festival.getLineups().size() > 0 ) {
             if( position == 0 ) {
@@ -108,6 +110,7 @@ public class FestivalDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             h.setData("Lets Go");
             return;
         }
+
         position--;
         if( position == 0 ) {
             LetsgoViewHolder h = (LetsgoViewHolder)holder;
