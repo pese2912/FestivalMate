@@ -28,7 +28,7 @@ public class ChatJoinListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public void setMateTalkWaitJoinList(MateTalkWaitJoinList list){
         this.list = list;
-        Log.i("list" ,list.getName());
+        Log.i("lissadsdasdasdasdt" ,list.getName());
         notifyDataSetChanged();
     }
 
@@ -85,39 +85,51 @@ public class ChatJoinListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        int viewType = getItemViewType(position);
-
-        switch (viewType) {
-            case VIEW_TYPE_HEADER_WAIT: {
-                HeaderWaitViewHolder h = (HeaderWaitViewHolder)holder;
-                return;
-            }
-            case VIEW_TYPE_HEADER_JOIN: {
-                HeaderJoinViewHolder h = (HeaderJoinViewHolder)holder;
-                return;
-            }
-            case VIEW_TYPE_APPROVE_WAITER: {
-
-
+        if( position == 0 ) {
+            HeaderWaitViewHolder h = (HeaderWaitViewHolder)holder;
+            return;
+        }
+        position--;
+        if ( list.getChatroom_waitings().size() > 0 ) {
+            if( position < list.getChatroom_waitings().size() ) {
                 ApproveWaiterViewHolder h = (ApproveWaiterViewHolder)holder;
                 h.setApproveWaiter(list.getChatroom_waitings().get(position));
                 return;
             }
-
-            case VIEW_TYPE_CHAT_JOINER: {
-
-                ChatJoinerViewHolder h = (ChatJoinerViewHolder)holder;
-                h.setChatJoin(list.getChatroom_members().get(position));
-                return;
-            }
+            position -= list.getChatroom_waitings().size();
         }
-        throw new IllegalArgumentException("Invalid position");
+        if( position == 0 ) {
+            HeaderJoinViewHolder h = (HeaderJoinViewHolder)holder;
+            return;
+        }
+        position--;
+        if(list.getChatroom_members().size() > 0) {
+            if (position < list.getChatroom_members().size()) {
+                ChatJoinerViewHolder h = (ChatJoinerViewHolder)holder;
+              h.setChatJoin(list.getChatroom_members().get(position));
+               return;
+            }
+            position -= list.getChatroom_members().size();
+        }
+
+        throw new IllegalArgumentException("Invalid Position");
     }
 
     @Override
     public int getItemCount() {
-        if(list != null)
-            return 2+list.getChatroom_waitings().size()+list.getChatroom_members().size();
-        return 0;
+        int size =0;
+        if(list != null) {
+            size = 1;
+            if(list.getChatroom_waitings().size() > 0){
+                size +=list.getChatroom_waitings().size();
+            }
+
+            size+=1;
+            if(list.getChatroom_members().size() > 0 ){
+                size += list.getChatroom_members().size();
+            }
+        }
+
+        return size;
     }
 }

@@ -46,33 +46,31 @@ public class ChatJoinListActivity extends AppCompatActivity {
         listView.setLayoutManager(new LinearLayoutManager(this));
         setData();
 
-
-
     }
 
     private void setData(){
         MateTalkWaitJoinList list = new MateTalkWaitJoinList();
 
-//        List<chatroom_waiting> waitingList = new ArrayList<>();
-//        for(int i=0; i < 2; i++){
-//
-//            chatroom_waiting waiting = new chatroom_waiting();
-//            waiting.setMem_name("waitName" + i);
-//            waiting.setMem_img(ContextCompat.getDrawable(this, R.mipmap.ic_launcher));
-//            waitingList.add(waiting);
-//        }
-//        list.setChatroom_waitings(waitingList);
-//
-//        List<chatroom_member> memberList = new ArrayList<>();
-//        for(int i=0; i < 3; i++){
-//
-//            chatroom_member member = new chatroom_member();
-//            member.setMem_name("joinName" + i);
-//            member.setMem_img(ContextCompat.getDrawable(this, R.mipmap.ic_launcher));
-//            memberList.add(member);
-//        }
-//
-//        list.setChatroom_members(memberList);
+        List<chatroom_waiting> waitingList = new ArrayList<>();
+        for(int i=0; i < 2; i++){
+
+            chatroom_waiting waiting = new chatroom_waiting();
+            waiting.setMem_name("waitName" + i);
+            waiting.setMem_img(ContextCompat.getDrawable(this, R.mipmap.ic_launcher));
+            waitingList.add(waiting);
+        }
+        list.setChatroom_waitings(waitingList);
+
+        List<chatroom_member> memberList = new ArrayList<>();
+        for(int i=0; i < 3; i++){
+
+            chatroom_member member = new chatroom_member();
+            member.setMem_name("joinName" + i);
+            member.setMem_img(ContextCompat.getDrawable(this, R.mipmap.ic_launcher));
+            memberList.add(member);
+        }
+
+        list.setChatroom_members(memberList);
         list.setName(toolbarTitle.getText().toString());
 
         mAdapter.setMateTalkWaitJoinList(list);
