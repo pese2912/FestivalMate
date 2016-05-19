@@ -12,7 +12,6 @@
     <string name="alram">알림</string>
     <string name="alram_ment">ON 하시면 메이트톡 알림 및 공연정보를 받아 볼 수 있습니다.</string>
     <string name="question">문의하기</string>
-    <string name="agree_privarcyinfo">이용약관 및 개인정보 취급 방침</string>
     <string name="festivalmate_version">공연메이트 버전 정보</string>
     <string name="version">Android V1.001</string>
 
@@ -70,6 +69,12 @@
     <string name="background_choice">배경선택</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="lets_go">갈꺼야</string>
+    <string name="terms_use_privacy_policy">이용약관 및 개인정보 취급방침</string>
+    <string name="agree_terms_use_privacy_policy">서비스 이용약관, 개인정보 방침에 동의합니다.</string>
+    <string name="terms_use">이용약관</string>
+    <string name="privacy_policy">개인정보 취급방침</string>
+    <string name="terms_use_ment"></string>
+    <string name="privacy_policy_ment"></string>
 
 
 </resources>

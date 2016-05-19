@@ -5,14 +5,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.festival.tacademy.festivalmate.MyPage.TermsOfUsePrivacyPolicyActivity;
 import com.festival.tacademy.festivalmate.Preference.PreferenceActivity;
 import com.festival.tacademy.festivalmate.R;
 
@@ -26,7 +29,8 @@ public class SignUpFragment extends Fragment {
     EditText emailView; // 이메일 입력
     EditText passwordView; // 비밀번호 입력
     EditText repasswordView; // 비밀번호 재입력
-    CheckBox checkBoxAgree; // 이용약관 동의
+    CheckBox checkBoxAgree; // 이용약관 동의 체크
+    TextView agreeMent;  //이용약관 동의 멘트
 
 
     public SignUpFragment() {
@@ -46,6 +50,14 @@ public class SignUpFragment extends Fragment {
         passwordView = (EditText)view.findViewById(R.id.edit_password);
         repasswordView  =(EditText)view.findViewById(R.id.edit_re_password);
         checkBoxAgree = (CheckBox)view.findViewById(R.id.checkBox_agree);
+        agreeMent = (TextView)view.findViewById(R.id.text_agree);
+
+        agreeMent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), TermsOfUsePrivacyPolicyActivity.class));
+            }
+        });
 
         Button btn = (Button)view.findViewById(R.id.btn_gallery);
         btn.setOnClickListener(new View.OnClickListener() { // 갤러리 버튼 클릭 시

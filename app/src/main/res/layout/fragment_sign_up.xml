@@ -138,12 +138,11 @@ tools:context="com.festival.tacademy.festivalmate.login.SignUpFragment">
 <CheckBox
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="서비스 이용약관, 개인정보 방침에 동의합니다."
     android:id="@+id/checkBox_agree"
+    android:checked="false"
     android:layout_below="@+id/view6"
     android:layout_alignLeft="@+id/view6"
-    android:layout_alignStart="@+id/view6"
-    android:checked="false" />
+    android:layout_alignStart="@+id/view6" />
 
 <Button
     android:layout_width="wrap_content"
@@ -152,6 +151,16 @@ tools:context="com.festival.tacademy.festivalmate.login.SignUpFragment">
     android:id="@+id/btn_signup"
     android:layout_alignParentBottom="true"
     android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/agree_terms_use_privacy_policy"
+        android:id="@+id/text_agree"
+        android:layout_alignBottom="@+id/checkBox_agree"
+        android:layout_toRightOf="@+id/checkBox_agree"
+        android:layout_toEndOf="@+id/checkBox_agree" />
 
 
 </RelativeLayout>
