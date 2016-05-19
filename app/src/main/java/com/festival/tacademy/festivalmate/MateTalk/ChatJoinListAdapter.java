@@ -1,6 +1,7 @@
 package com.festival.tacademy.festivalmate.MateTalk;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,10 +24,11 @@ public class ChatJoinListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public static final int VIEW_TYPE_HEADER_JOIN  = 2;
     public static final int VIEW_TYPE_APPROVE_WAITER = 3;
     public static final int VIEW_TYPE_CHAT_JOINER = 4;
-    MateTalkWaitJoinList list;
+    MateTalkWaitJoinList list =  new MateTalkWaitJoinList();;
 
     public void setMateTalkWaitJoinList(MateTalkWaitJoinList list){
         this.list = list;
+        Log.i("list" ,list.getName());
         notifyDataSetChanged();
     }
 
@@ -35,26 +37,25 @@ public class ChatJoinListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         if( position == 0 ) {
             return VIEW_TYPE_HEADER_WAIT;
         }
-
         position--;
         if ( list.getChatroom_waitings().size() > 0 ) {
-            if( position == 0 ) {
-                return VIEW_TYPE_HEADER_JOIN;
-            }
-            position--;
             if( position < list.getChatroom_waitings().size() ) {
                 return VIEW_TYPE_APPROVE_WAITER;
             }
             position -= list.getChatroom_waitings().size();
-        }
-
-        if( position == 0 ) {
-            return VIEW_TYPE_HEADER_JOIN;
+            if( position == 0 ) {
+                return VIEW_TYPE_HEADER_JOIN;
+            }
+            position--;
         }
         position--;
-        if( position == 0 ) {
-            return VIEW_TYPE_HEADER_JOIN;
+        if(list.getChatroom_members().size() > 0) {
+            if (position < list.getChatroom_members().size()) {
+                return VIEW_TYPE_CHAT_JOINER;
+            }
+            position -= list.getChatroom_members().size();
         }
+
         throw new IllegalArgumentException("Invalid Position");
     }
 
@@ -102,6 +103,7 @@ public class ChatJoinListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 h.setApproveWaiter(list.getChatroom_waitings().get(position));
                 return;
             }
+
             case VIEW_TYPE_CHAT_JOINER: {
 
                 ChatJoinerViewHolder h = (ChatJoinerViewHolder)holder;
@@ -114,6 +116,8 @@ public class ChatJoinListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemCount() {
-        return 2+list.getChatroom_waitings().size()+list.getChatroom_members().size();
+        if(list != null)
+            return 2+list.getChatroom_waitings().size()+list.getChatroom_members().size();
+        return 0;
     }
 }
