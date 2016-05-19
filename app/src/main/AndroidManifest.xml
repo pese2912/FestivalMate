@@ -32,9 +32,18 @@
         <activity android:name=".MateMatching.MateMatchingStartActivity" />
         <activity android:name=".MyPage.FestibalSearchActivity" />
         <activity android:name=".MateMatching.MateMatchingActivity" />
-        <activity android:name=".MateMatching.MakeMateTalkActivity" />
+        <activity
+            android:name=".MateMatching.MakeMateTalkActivity"
+            android:windowSoftInputMode="adjustNothing" />
         <activity android:name=".FestivalInfo.FestivalDetailActivity" />
-        <activity android:name=".MyPage.TermsOfUsePrivacyPolicyActivity"></activity>
+        <activity android:name=".MyPage.TermsOfUsePrivacyPolicyActivity" />
+        <activity
+            android:name=".MyPage.ProfileUpdateActivity"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".MateTalk.ChattingActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".MateTalk.ChatJoinListActivity"></activity>
     </application>
 
 </manifest>

@@ -8,6 +8,18 @@
     <string name="join_wait_list">메이트톡 대기 목록</string>
     <string name="settings">설정</string>
     <string name="profile_update">프로필 수정</string>
+    <string name="profile_update_do">프로필 수정하기</string>
+
+
+    <string name="name_ment">이름을 입력하세요.</string>
+    <string name="state">상태</string>
+    <string name="state_ment">자신을 자유롭게 표현해 보세요.</string>
+    <string name="location">지역</string>
+    <string name="location_ment">지역을 선택하세요.</string>
+    <string name="birthday">생년월일</string>
+    <string name="birthday_ment">숫자만 입력해주세요.</string>
+    /
+
 
     <string name="alram">알림</string>
     <string name="alram_ment">ON 하시면 메이트톡 알림 및 공연정보를 받아 볼 수 있습니다.</string>

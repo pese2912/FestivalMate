@@ -1,6 +1,7 @@
 package com.festival.tacademy.festivalmate.MateTalk;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.festival.tacademy.festivalmate.Data.MateTalkRoom;
 import com.festival.tacademy.festivalmate.Data.PreferenceArtist;
+import com.festival.tacademy.festivalmate.MateMatching.MakeMateTalkActivity;
 import com.festival.tacademy.festivalmate.Preference.PreferenceAdapter;
 import com.festival.tacademy.festivalmate.Preference.PreferenceViewHolder;
 import com.festival.tacademy.festivalmate.R;
@@ -43,11 +45,12 @@ public class MateTalkFragment extends Fragment {
             @Override
             public void onItemClick(View view, MateTalkRoom talkRoom) {
                 Toast.makeText(getContext(), talkRoom.getName(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), ChattingActivity.class);
+                intent.putExtra("chatting",talkRoom.getName());
+                startActivity(intent);
             }
         });
         setData();
-
-
     }
 
     @Override

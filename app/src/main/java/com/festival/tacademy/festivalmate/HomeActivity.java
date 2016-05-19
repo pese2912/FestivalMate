@@ -18,6 +18,7 @@ import com.festival.tacademy.festivalmate.FestivalInfo.FestivalInfoFragment;
 import com.festival.tacademy.festivalmate.MateTalk.MateTalkFragment;
 import com.festival.tacademy.festivalmate.MyPage.JoinWaitListActivity;
 import com.festival.tacademy.festivalmate.MyPage.LetsGoListActivity;
+import com.festival.tacademy.festivalmate.MyPage.ProfileUpdateActivity;
 import com.festival.tacademy.festivalmate.MyPage.SettingsActivity;
 
 public class HomeActivity extends AppCompatActivity
@@ -69,7 +70,7 @@ public class HomeActivity extends AppCompatActivity
         profileUpdate.setOnClickListener(new View.OnClickListener() { // 프로필 수정 클릭 시
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(HomeActivity.this, ProfileUpdateActivity.class));
             }
         });
     }
