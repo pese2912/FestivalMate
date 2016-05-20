@@ -28,7 +28,6 @@ public class ChatJoinListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public void setMateTalkWaitJoinList(MateTalkWaitJoinList list){
         this.list = list;
-        Log.i("lissadsdasdasdasdt" ,list.getName());
         notifyDataSetChanged();
     }
 
