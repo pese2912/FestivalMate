@@ -62,9 +62,8 @@
         android:text="@string/mate_matching_start_ment"
         android:id="@+id/textView13"
         android:textSize="10dp"
-        android:layout_below="@+id/editText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_below="@+id/spinner_festival"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -78,13 +77,14 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <EditText
+    <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
-        android:layout_below="@+id/toolbar"
+        android:id="@+id/spinner_festival"
+        android:layout_alignTop="@+id/textView14"
         android:layout_toRightOf="@+id/textView14"
-        android:layout_alignRight="@+id/textView13"
-        android:layout_alignEnd="@+id/textView13" />
+        android:layout_toEndOf="@+id/textView14"
+        android:spinnerMode="dropdown"
+        android:layout_alignParentRight="true" />
 
 </RelativeLayout>

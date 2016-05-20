@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.festival.tacademy.festivalmate.Data.Artist;
@@ -24,6 +25,7 @@ public class MateMatchingStartActivity extends AppCompatActivity {
     Toolbar toolbar;
     RecyclerView listView;
     MateMatchingLineUpAdapter mAdapter;
+    Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,9 @@ public class MateMatchingStartActivity extends AppCompatActivity {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        spinner = (Spinner)findViewById(R.id.spinner_festival);
+        spinner.setPrompt(getResources().getString(R.string.mate_matching_select));
 
         listView = (RecyclerView)findViewById(R.id.rv_list);
         mAdapter = new MateMatchingLineUpAdapter();
@@ -50,12 +55,10 @@ public class MateMatchingStartActivity extends AppCompatActivity {
     }
     private void initData(){
 
-
-
             List<Artist> artistList = new ArrayList<>();
             for(int j=0; j<10; j++) {
                 Artist artist = new Artist("김창완밴드");
-                artist.setName("김창완밴드");
+                artist.setName("김창완밴드"+j);
                 artistList.add(artist);
             }
 
@@ -65,7 +68,6 @@ public class MateMatchingStartActivity extends AppCompatActivity {
                 festibalLineUp.setArtist(artistList);
                 mAdapter.add(festibalLineUp);
             }
-
          }
 
 

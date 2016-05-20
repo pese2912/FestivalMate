@@ -121,7 +121,8 @@
         android:entries="@array/city"
         android:spinnerMode="dropdown"
         android:layout_below="@+id/edit_state"
-        android:layout_toRightOf="@+id/textView19" />
+        android:layout_toRightOf="@+id/textView19"
+        android:layout_alignParentRight="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -142,7 +143,9 @@
         android:layout_below="@+id/spinner_location"
         android:layout_toRightOf="@+id/textView19"
         android:layout_alignRight="@+id/spinner_location"
-        android:layout_alignEnd="@+id/spinner_location" />
+        android:layout_alignEnd="@+id/spinner_location"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentRight="true" />
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
@@ -155,6 +158,8 @@
         android:paddingRight="30dp"
         android:layout_below="@+id/edit_birthday"
         android:layout_alignRight="@+id/edit_birthday"
-        android:layout_alignEnd="@+id/edit_birthday" />
+        android:layout_alignEnd="@+id/edit_birthday"
+        android:layout_marginRight="54dp"
+        android:layout_marginEnd="54dp" />
 
 </RelativeLayout>

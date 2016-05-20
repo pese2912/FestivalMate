@@ -19,4 +19,14 @@ public class Artist implements Serializable {
 
     public String name;
 
+    public boolean isCheck() {
+        return check;
+    }
+
+    public void setCheck(boolean check) {
+        this.check = check;
+    }
+
+    public boolean check;
+
 }

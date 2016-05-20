@@ -24,6 +24,7 @@ public class ProfileUpdateActivity extends AppCompatActivity {
 
     ImageView photoView;
     Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
