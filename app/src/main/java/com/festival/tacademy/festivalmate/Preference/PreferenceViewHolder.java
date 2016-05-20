@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -44,15 +45,21 @@ public class PreferenceViewHolder  extends RecyclerView.ViewHolder {
             public void onClick(View v) {
                 if( mListener!=null ) {
                     mListener.onItemClick(v, artist);
+                    checkBox.setChecked(!checkBox.isChecked());
                 }
             }
         });
     }
 
-    public void setPreferenceArtist(PreferenceArtist artist){
-        this.artist = artist;
-        nameView.setText(artist.getName());
-        imageView.setImageDrawable(artist.getImage());
-
+    public void setPreferenceArtist(PreferenceArtist item){
+        this.artist = item;
+        nameView.setText(item.getName());
+        imageView.setImageDrawable(item.getImage());
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                artist.setCheck(isChecked);
+            }
+        });
     }
 }

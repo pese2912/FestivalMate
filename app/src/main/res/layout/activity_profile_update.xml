@@ -154,9 +154,7 @@
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
         android:layout_below="@+id/edit_birthday"
-        android:layout_alignRight="@+id/spinner_location"
-        android:layout_alignEnd="@+id/spinner_location"
-        android:layout_marginRight="54dp"
-        android:layout_marginEnd="54dp" />
+        android:layout_alignRight="@+id/edit_birthday"
+        android:layout_alignEnd="@+id/edit_birthday" />
 
 </RelativeLayout>

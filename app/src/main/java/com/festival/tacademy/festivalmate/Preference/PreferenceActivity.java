@@ -44,14 +44,10 @@ public class PreferenceActivity extends AppCompatActivity {
         listView.setAdapter(mAdapter);
         listView.setLayoutManager(new GridLayoutManager(this,3));
 
-
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
 
         setSupportActionBar(toolbar);
-
-
-
         setData();
     }
 
@@ -63,7 +59,6 @@ public class PreferenceActivity extends AppCompatActivity {
     }
 
     private void setData() {
-
 
              mAdapter.clear(); //초기에 지우고
            for (int i = 0; i < 20; i++) {

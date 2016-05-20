@@ -10,12 +10,11 @@ public class PreferenceArtist {
 
     private String name;
     private Drawable image;
-    private int check;
+    private boolean check;
 
     public PreferenceArtist(){
 
     }
-
     public String getName() {
         return name;
     }
@@ -32,11 +31,11 @@ public class PreferenceArtist {
         this.image = image;
     }
 
-    public int getCheck() {
+    public boolean getCheck() {
         return check;
     }
 
-    public void setCheck(int check) {
+    public void setCheck(boolean check) {
         this.check = check;
     }
 }

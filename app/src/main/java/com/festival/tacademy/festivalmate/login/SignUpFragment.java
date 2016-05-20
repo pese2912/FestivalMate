@@ -1,9 +1,17 @@
 package com.festival.tacademy.festivalmate.login;
 
 
+import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,6 +27,8 @@ import com.festival.tacademy.festivalmate.MyPage.TermsOfUsePrivacyPolicyActivity
 import com.festival.tacademy.festivalmate.Preference.PreferenceActivity;
 import com.festival.tacademy.festivalmate.R;
 
+import java.io.File;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -32,11 +42,9 @@ public class SignUpFragment extends Fragment {
     CheckBox checkBoxAgree; // 이용약관 동의 체크
     TextView agreeMent;  //이용약관 동의 멘트
 
-
     public SignUpFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,8 +71,7 @@ public class SignUpFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() { // 갤러리 버튼 클릭 시
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "갤러리 사진 가져오기",Toast.LENGTH_SHORT).show();
-
+                getImageFromGallery();
             }
         });
 
@@ -79,7 +86,56 @@ public class SignUpFragment extends Fragment {
 
             }
         });
+
+        if (savedInstanceState != null) {
+            String path = savedInstanceState.getString("uploadFile");
+            if (!TextUtils.isEmpty(path)) {
+                mUploadFile = new File(path);
+                BitmapFactory.Options opts = new BitmapFactory.Options();
+                opts.inSampleSize = 2;
+                Bitmap bm = BitmapFactory.decodeFile(path, opts);
+            }
+        }
+
         return view;
     }
 
+    private static final int RC_GALLERY = 1;
+
+    private void getImageFromGallery() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.setType("image/jpeg");
+        startActivityForResult(intent, RC_GALLERY);
+    }
+
+    File mUploadFile = null;
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_GALLERY) {
+            if (resultCode == Activity.RESULT_OK) {
+                Uri uri = data.getData();
+                String[] projection = {MediaStore.Images.Media.DATA};
+                Cursor c = getActivity().getContentResolver().query(uri, projection, null, null, null);
+                if (c.moveToNext()) {
+                    String path = c.getString(c.getColumnIndex(MediaStore.Images.Media.DATA));
+                    mUploadFile = new File(path);
+                    BitmapFactory.Options opts = new BitmapFactory.Options();
+                    opts.inSampleSize = 2;
+                    Bitmap bm = BitmapFactory.decodeFile(path, opts);
+                    profileView.setImageBitmap(bm);
+                }
+            }
+            return;
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (mUploadFile != null) {
+            outState.putString("uploadfile", mUploadFile.getAbsolutePath());
+        }
+    }
 }
