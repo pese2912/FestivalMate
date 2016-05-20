@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.festival.tacademy.festivalmate.Data.Artist;
@@ -25,7 +24,6 @@ public class MateMatchingStartActivity extends AppCompatActivity {
     Toolbar toolbar;
     RecyclerView listView;
     MateMatchingLineUpAdapter mAdapter;
-    Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,16 +34,13 @@ public class MateMatchingStartActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        spinner = (Spinner)findViewById(R.id.spinner_festival);
-        spinner.setPrompt(getResources().getString(R.string.mate_matching_select));
-
         listView = (RecyclerView)findViewById(R.id.rv_list);
         mAdapter = new MateMatchingLineUpAdapter();
         listView.setAdapter(mAdapter);
         listView.setLayoutManager(new LinearLayoutManager(this));
         initData();
 
-     Button   btn = (Button)findViewById(R.id.btn_match);
+        Button btn = (Button)findViewById(R.id.btn_match);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,23 +49,21 @@ public class MateMatchingStartActivity extends AppCompatActivity {
         });
     }
     private void initData(){
+        List<Artist> artistList = new ArrayList<>();
+        for(int j=0; j<10; j++) {
+            Artist artist = new Artist("김창완밴드");
+            artist.setName("김창완밴드"+j);
+            artistList.add(artist);
+        }
 
-            List<Artist> artistList = new ArrayList<>();
-            for(int j=0; j<10; j++) {
-                Artist artist = new Artist("김창완밴드");
-                artist.setName("김창완밴드"+j);
-                artistList.add(artist);
-            }
+        for (int i = 0; i < 3; i++) {
+            FestibalLineUp festibalLineUp = new FestibalLineUp();
+            festibalLineUp.setData("2016-07-24");
+            festibalLineUp.setArtist(artistList);
+            mAdapter.add(festibalLineUp);
+        }
 
-            for (int i = 0; i < 3; i++) {
-                FestibalLineUp festibalLineUp = new FestibalLineUp();
-                festibalLineUp.setData("2016-07-24");
-                festibalLineUp.setArtist(artistList);
-                mAdapter.add(festibalLineUp);
-            }
-         }
-
-
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();

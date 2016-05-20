@@ -24,11 +24,11 @@ public class ProfileUpdateActivity extends AppCompatActivity {
 
     ImageView photoView;
     Toolbar toolbar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_update);
+
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         photoView = (ImageView)findViewById(R.id.image_profile);
         toolbar.setTitle("");
@@ -111,6 +111,7 @@ public class ProfileUpdateActivity extends AppCompatActivity {
             finish();
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 }

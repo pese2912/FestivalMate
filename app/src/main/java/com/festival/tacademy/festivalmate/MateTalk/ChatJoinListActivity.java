@@ -39,6 +39,7 @@ public class ChatJoinListActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String title = intent.getStringExtra("joinList");
+        toolbarTitle.setText(title);
 
         listView = (RecyclerView)findViewById(R.id.rv_list);
         mAdapter= new ChatJoinListAdapter();

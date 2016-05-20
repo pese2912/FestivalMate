@@ -5,6 +5,14 @@
     android:layout_height="match_parent"
     tools:context="com.festival.tacademy.festivalmate.MateMatching.MateMatchingActivity">
 
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rv_list"
+        android:layout_below="@+id/toolbar">
+
+    </android.support.v7.widget.RecyclerView>
+
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -25,5 +33,7 @@
             android:textColor="#ffffff"
             android:layout_gravity="left"
             />
+
     </android.support.v7.widget.Toolbar>
+
 </RelativeLayout>

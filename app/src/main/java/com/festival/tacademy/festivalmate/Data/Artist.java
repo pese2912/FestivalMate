@@ -17,8 +17,19 @@ public class Artist implements Serializable {
         this.name = name;
     }
 
-    public String name;
+    public int getPhoto() {
+        return photo;
+    }
 
+    public void setPhoto(int photo) {
+        this.photo = photo;
+    }
+
+    public Artist(String name, int photo) {
+
+        this.name = name;
+        this.photo = photo;
+    }
     public boolean isCheck() {
         return check;
     }
@@ -28,5 +39,7 @@ public class Artist implements Serializable {
     }
 
     public boolean check;
+    public String name;
+    public int photo;
 
 }

@@ -54,9 +54,9 @@ public class MateTalkRoomViewHolder extends RecyclerView.ViewHolder {
 
     public void setMateTalkRoom(MateTalkRoom room){
         this.talkRoom = room;
-        nameView.setText(room.getName());
+        nameView.setText(room.getFestival_name());
         contentView.setText(room.getContent());
-        photoView.setImageDrawable(room.getPhoto());
+        photoView.setImageResource(room.getPhoto());
         numberView.setText(room.getNumber());
         dateView.setText(room.getDate());
         unReadView.setText(room.getUnRead());

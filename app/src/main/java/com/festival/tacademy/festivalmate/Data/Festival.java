@@ -15,7 +15,19 @@ public class Festival implements Serializable {
     String location;
     List<User> letsgo_users = new ArrayList<>();
     List<Lineup> lineups = new ArrayList<>();
+    int photo_location;
 
+    public int getPhoto_location() {
+        return photo_location;
+    }
+
+    public void setPhoto_location(int photo_location) {
+        this.photo_location = photo_location;
+    }
+
+    public Festival(String name) {
+        this.name = name;
+    }
 
     public List<Lineup> getLineups() {
         return lineups;

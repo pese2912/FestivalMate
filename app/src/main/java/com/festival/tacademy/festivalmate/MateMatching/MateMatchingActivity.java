@@ -3,19 +3,40 @@ package com.festival.tacademy.festivalmate.MateMatching;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
+import com.festival.tacademy.festivalmate.Data.Artist;
+import com.festival.tacademy.festivalmate.Data.Festival;
+import com.festival.tacademy.festivalmate.Data.MateTalkRoom;
+import com.festival.tacademy.festivalmate.Data.User;
+import com.festival.tacademy.festivalmate.FestivalDetail.UserViewHolder;
 import com.festival.tacademy.festivalmate.MyPage.FestibalSearchActivity;
+import com.festival.tacademy.festivalmate.Profile.ProfileDialogFragment;
 import com.festival.tacademy.festivalmate.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MateMatchingActivity extends AppCompatActivity {
 
     Toolbar toolbar;
+    boolean isClicked = false;
+    RecyclerView listView;
+    MatetalkDetailAdapter mAdapter;
+    LinearLayoutManager mManager;
+    boolean isClick = false;
+
+    List<Artist> artists = new ArrayList<>();
+    List<User> users = new ArrayList<>();
+    List<MateTalkRoom> chatinfoes = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +45,19 @@ public class MateMatchingActivity extends AppCompatActivity {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+        listView = (RecyclerView)findViewById(R.id.rv_list);
+        mAdapter = new MatetalkDetailAdapter();
+        mManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+
+        listView.setAdapter(mAdapter);
+        listView.setLayoutManager(mManager);
+
+        initData();
+
+
+
 
     }
 
@@ -51,6 +85,56 @@ public class MateMatchingActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
 
     }
+    private void initData() {
+        for (int i = 0; i < 10; i++) {
+            artists.add(new Artist("Artist " + i));
+            users.add(new User("Name " + i, R.mipmap.ic_launcher));
+        }
 
+        for( int i=0; i<10; i++ ) {
+            chatinfoes.add(new MateTalkRoom("모두모두 대환영 " + i, R.drawable.back5, "Festival " + i, artists, 1, 1, users));
+        }
+
+
+        mAdapter.addAll(chatinfoes);
+        mAdapter.setOnItemClickListener(new MatetalkDetailViewHolder.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view) {
+                View v = view.findViewById(R.id.detail_view);
+
+                if(isClick == false) {
+                    v.setVisibility(View.VISIBLE);
+                    isClick = true;
+                } else {
+                    v.setVisibility(View.GONE);
+                    isClick = false;
+                }
+            }
+        });
+
+        mAdapter.setOnItemClickListener(new UserViewHolder.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view) {
+                ProfileDialogFragment f = new ProfileDialogFragment();
+
+                List<Artist> artists = new ArrayList<>();
+                List<Festival> letsgo = new ArrayList<>();
+
+                for(int i=0; i<3; i++) {
+                    letsgo.add(new Festival("Festival "+i));
+                }
+
+                for(int i=0; i<10; i++) {
+                    artists.add(new Artist("Artist: " + i, R.drawable.face));
+                }
+                User user = new User("ID " + 1, R.drawable.face, "Email " + 1,"Name " + 1, letsgo, artists);
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("user", user);
+                f.setArguments(bundle);
+                f.show(getSupportFragmentManager(), "aaaa");
+            }
+        });
+    }
 
 }

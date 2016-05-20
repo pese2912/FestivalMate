@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +32,7 @@ public class FestivalDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_festival_detail);
         toolbarTitle = (TextView) findViewById(R.id.toolbar_title);
-        fab = (FloatingActionButton)findViewById(R.id.btn_matching_start);
+      //  fab = (FloatingActionButton)findViewById(R.id.btn_matching_start);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
@@ -50,8 +51,8 @@ public class FestivalDetailActivity extends AppCompatActivity {
 
         Toast.makeText(this, festival.getName() + "+ " + festival.getDate() + "+ " + festival.getLocation(), Toast.LENGTH_SHORT).show();
 
-
-        fab.setOnClickListener(new View.OnClickListener() {
+        Button btn = (Button)findViewById(R.id.btn_matching);
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(FestivalDetailActivity.this, MateMatchingStartActivity.class);

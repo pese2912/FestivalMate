@@ -7,4 +7,7 @@
     <dimen name="nav_header_height">160dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="festival_preview_img">100dp</dimen>
+
+    <dimen name="dialog_width">300dp</dimen>
+    <dimen name="dialog_height">500dp</dimen>
 </resources>
