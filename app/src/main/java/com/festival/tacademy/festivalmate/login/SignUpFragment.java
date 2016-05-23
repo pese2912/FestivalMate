@@ -34,6 +34,8 @@ import com.festival.tacademy.festivalmate.R;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import okhttp3.Request;
 
@@ -49,6 +51,10 @@ public class SignUpFragment extends Fragment {
     EditText repasswordView; // 비밀번호 재입력
     CheckBox checkBoxAgree; // 이용약관 동의 체크
     TextView agreeMent;  //이용약관 동의 멘트
+
+    String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+    private Matcher matcher;
+    private Pattern pattern = Pattern.compile(EMAIL_PATTERN);
 
     public SignUpFragment() {
         // Required empty public constructor
@@ -94,12 +100,12 @@ public class SignUpFragment extends Fragment {
                 final String password = passwordView.getText().toString();
                 String repassword = repasswordView.getText().toString();
 
-                if (TextUtils.isEmpty(name) || TextUtils.isEmpty(email) || !Patterns.EMAIL_ADDRESS.matcher(email).matches()
-                        || TextUtils.isEmpty(password) || password.length() < 8 || TextUtils.isEmpty(repassword) || !password.equals(repassword)) {
+                if (TextUtils.isEmpty(name) || TextUtils.isEmpty(email) || !validateEmail(email)
+                        || TextUtils.isEmpty(password) || password.length() < 8 || TextUtils.isEmpty(repassword) || !password.equals(repassword) || !checkBoxAgree.isChecked()) {
                     Toast.makeText(getContext(), "invalid value", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
+                
                 NetworkManager.getInstance().signup(getContext(), name, email, password, new NetworkManager.OnResultListener<MySignUpResult>() { // 회원가입
                     @Override
                     public void onSuccess(Request request, MySignUpResult result) {
@@ -189,6 +195,8 @@ public class SignUpFragment extends Fragment {
         }
     }
 
-
-
+    public boolean validateEmail(final String hex) {
+        matcher = pattern.matcher(hex);
+        return matcher.matches();
+    }
 }

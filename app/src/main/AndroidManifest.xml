@@ -24,7 +24,7 @@
         </activity>
         <activity
             android:name=".login.LoginActivity"
-            android:windowSoftInputMode="adjustNothing" />
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"

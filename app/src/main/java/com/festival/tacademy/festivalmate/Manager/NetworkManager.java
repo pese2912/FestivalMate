@@ -105,7 +105,7 @@ public class NetworkManager {
 
     Gson gson = new Gson();
 
-    private static final String MY_SERVER = "127.0.0.1";  //회원가입
+    private static final String MY_SERVER = "http://";  //회원가입
     private static final String URL_SIGN_UP = MY_SERVER + "/signup";
     public Request signup(Object tag, String mem_name,
                           String mem_id,
@@ -166,7 +166,7 @@ public class NetworkManager {
                 .build();
 
         Request request = new Request.Builder()
-                .url(URL_SIGN_UP)
+                .url(URL_SIGN_IN)
                 .post(body)
                 .build();
 
