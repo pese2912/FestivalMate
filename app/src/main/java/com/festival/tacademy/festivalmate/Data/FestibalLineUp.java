@@ -28,4 +28,14 @@ public class FestibalLineUp {
     public String data;
     public List<Artist> artist = new ArrayList<>();
 
+    public String getFestival_date() {
+        return festival_date;
+    }
+
+    public void setFestival_date(String festival_date) {
+        this.festival_date = festival_date;
+    }
+
+    public String festival_date;
+
 }

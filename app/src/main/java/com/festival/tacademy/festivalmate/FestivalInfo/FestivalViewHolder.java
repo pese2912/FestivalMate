@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.festival.tacademy.festivalmate.Data.Festival;
 import com.festival.tacademy.festivalmate.R;
 
@@ -48,7 +49,7 @@ public class FestivalViewHolder extends RecyclerView.ViewHolder {
     public void setFestival(Festival festival) {
         this.festival = festival;
         text_title.setText(festival.getName());
-        photoView.setImageResource(festival.getPhoto());
+        Glide.with(photoView.getContext()).load(festival.getPhoto()).into(photoView);
         text_date.setText(festival.getDate());
         text_location.setText(festival.getLocation());
     }

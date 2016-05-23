@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.festival.tacademy.festivalmate.Data.Festival;
 import com.festival.tacademy.festivalmate.R;
 
@@ -23,6 +24,7 @@ public class PhotoViewHolder extends RecyclerView.ViewHolder {
 
     public void setPhoto(Festival festival) {
         this.festival = festival;
-        festival_photo.setImageResource(festival.getPhoto());
+        Glide.with(festival_photo.getContext()).load(festival.getPhoto()).into(festival_photo);
+
     }
 }

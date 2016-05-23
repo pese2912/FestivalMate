@@ -61,7 +61,6 @@ public class PreferenceActivity extends AppCompatActivity {
                 if(artistList.size()>=10){
                     item.setTitle("완료");
                 }
-
 //                Toast.makeText(PreferenceActivity.this, artist.isCheck() + artist.getName(), Toast.LENGTH_SHORT).show();
 //                Toast.makeText(PreferenceActivity.this, artistList.size()+"", Toast.LENGTH_SHORT).show();
             }
@@ -147,6 +146,7 @@ public class PreferenceActivity extends AppCompatActivity {
 //             mAdapter.add(artist); // 값 추가
 //         }
     }
+
 
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

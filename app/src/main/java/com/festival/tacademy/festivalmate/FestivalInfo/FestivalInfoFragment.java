@@ -135,7 +135,7 @@ public class FestivalInfoFragment extends Fragment {
         }
 
         for (int i = 0; i < 10; i++) {
-            mAdapter2.add(new Festival("Item: "+i, R.drawable.back2, "Date: "+i, "Location: "+i, users, lineups));
+            mAdapter2.add(new Festival("Item: "+i, "http://www.betanews.net/imagedb/thumb/2014/0627/7ec1b12a.jpg", "Date: "+i, "Location: "+i, users, lineups));
         }
     }
 

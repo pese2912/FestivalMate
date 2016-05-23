@@ -257,6 +257,7 @@ public class NetworkManager {
                                     OnResultListener<ShowArtistSurveyResult> listener) {
         RequestBody body = new FormBody.Builder()
                 .add("mem_no", mem_no+"")
+                .add("artist_name", artist_name+"")
                 .build();
 
         Request request = new Request.Builder()
@@ -291,7 +292,7 @@ public class NetworkManager {
         return request;
     }
 
-    private static final String URL_SAVE_ARTIST_SURVEY = MY_SERVER + "/save_artist_survey"; // 선호가수 조사
+    private static final String URL_SAVE_ARTIST_SURVEY = MY_SERVER + "/save_artist_survey"; // 선호가수 저장
     public Request saveArtistSurvey(Object tag,
                                       int mem_no,
                                       List<Artist> artist_no,
@@ -307,6 +308,7 @@ public class NetworkManager {
                 .url(URL_SAVE_ARTIST_SURVEY)
                 .post(body)
                 .build();
+
 
         final NetworkResult<ShowArtistSurveyResult> result = new NetworkResult<>();
         result.request = request;
@@ -334,4 +336,6 @@ public class NetworkManager {
         });
         return request;
     }
+
+
 }
