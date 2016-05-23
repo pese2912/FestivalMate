@@ -77,6 +77,7 @@ public class SignUpFragment extends Fragment {
 
         btn = (Button)view.findViewById(R.id.btn_signup);
         btn.setOnClickListener(new View.OnClickListener() { // 가입하기 버튼 클릭시
+
             @Override
             public void onClick(View v) {
 
