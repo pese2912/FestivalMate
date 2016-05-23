@@ -25,6 +25,7 @@ import com.festival.tacademy.festivalmate.Manager.PropertyManager;
 import com.festival.tacademy.festivalmate.R;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Request;
@@ -35,7 +36,7 @@ public class PreferenceActivity extends AppCompatActivity {
     PreferenceAdapter mAdapter;
     Toolbar toolbar;
     EditText editSearch;
-
+    List<Artist> artistList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +44,26 @@ public class PreferenceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_preference);
 
         mAdapter = new PreferenceAdapter();
-
+        artistList = new ArrayList<Artist>();
         mAdapter.setOnItemClickListener(new PreferenceViewHolder.OnItemClickListener() {
+
             @Override
             public void onItemClick(View view, Artist artist) {
-                Toast.makeText(PreferenceActivity.this, artist.isCheck() + artist.getName(), Toast.LENGTH_SHORT).show();
+
+                if(artist.isCheck()==1){
+                    artistList.add(artist);
+                }
+
+                else if(artist.isCheck()==0){
+                    artistList.remove(artist);
+                }
+
+                if(artistList.size()>=10){
+                    item.setTitle("완료");
+                }
+
+//                Toast.makeText(PreferenceActivity.this, artist.isCheck() + artist.getName(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(PreferenceActivity.this, artistList.size()+"", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -94,10 +110,14 @@ public class PreferenceActivity extends AppCompatActivity {
         setData();
     }
 
+    MenuItem item;
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_prefer, menu);
+         item = menu.findItem(R.id.complete);
+      //  item.setTitle(getResources().getString(R.string.complete));
         return true;
     }
 
@@ -135,12 +155,23 @@ public class PreferenceActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.jump) {
-            Intent intent = new Intent(PreferenceActivity.this, HomeActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
+        if (id == R.id.complete) {
+            int memNo = PropertyManager.getInstance().getNo();
+            NetworkManager.getInstance().saveArtistSurvey(PreferenceActivity.this, memNo, artistList, new NetworkManager.OnResultListener<ShowArtistSurveyResult>() {
+                @Override
+                public void onSuccess(Request request, ShowArtistSurveyResult result) {
+                    Intent intent = new Intent(PreferenceActivity.this, HomeActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    finish();
+                }
 
+                @Override
+                public void onFail(Request request, IOException exception) {
+
+                    Toast.makeText(PreferenceActivity.this,"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            });
             return true;
         }
 

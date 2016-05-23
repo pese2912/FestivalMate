@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 
+import com.festival.tacademy.festivalmate.Data.Artist;
 import com.festival.tacademy.festivalmate.Data.MySignInResult;
 import com.festival.tacademy.festivalmate.Data.MySignUpResult;
 import com.festival.tacademy.festivalmate.Data.ShowArtistSurveyResult;
@@ -14,6 +15,7 @@ import com.google.gson.Gson;
 import java.io.File;
 import java.io.IOException;
 import java.net.CookieManager;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
@@ -248,7 +250,6 @@ public class NetworkManager {
     }
 
 
-
     private static final String URL_SEARCH_ARTIST_SURVEY = MY_SERVER + "/search_artist_survey"; // 선호가수 조사
     public Request searchArtistSurvey(Object tag,
                                     int mem_no,
@@ -260,6 +261,50 @@ public class NetworkManager {
 
         Request request = new Request.Builder()
                 .url(URL_SEARCH_ARTIST_SURVEY)
+                .post(body)
+                .build();
+
+        final NetworkResult<ShowArtistSurveyResult> result = new NetworkResult<>();
+        result.request = request;
+        result.listener = listener;
+        mClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                result.exception = e;
+                mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String text = response.body().string();
+                    ShowArtistSurveyResult data = gson.fromJson(text, ShowArtistSurveyResult.class);
+                    result.result = data;
+                    mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SUCCESS, result));
+
+                } else {
+                    result.exception = new IOException(response.message());
+                    mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                }
+            }
+        });
+        return request;
+    }
+
+    private static final String URL_SAVE_ARTIST_SURVEY = MY_SERVER + "/save_artist_survey"; // 선호가수 조사
+    public Request saveArtistSurvey(Object tag,
+                                      int mem_no,
+                                      List<Artist> artist_no,
+                                      OnResultListener<ShowArtistSurveyResult> listener) {
+
+        RequestBody body = new FormBody.Builder()
+                .add("mem_no", mem_no+"")
+                .add("artist_no[0]",artist_no.get(0).getArtist_no()+"")
+                .build();
+
+
+        Request request = new Request.Builder()
+                .url(URL_SAVE_ARTIST_SURVEY)
                 .post(body)
                 .build();
 

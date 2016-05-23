@@ -60,6 +60,6 @@ public class Artist implements Serializable {
     public String artist_name;
     public int artist_img_no;
     public String artist_img;
-    public int artist_fav_state;
+    public int artist_fav_state=0;
 
 }

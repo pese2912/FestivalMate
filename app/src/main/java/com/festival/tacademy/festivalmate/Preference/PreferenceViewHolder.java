@@ -7,11 +7,13 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.festival.tacademy.festivalmate.Data.Artist;
 import com.festival.tacademy.festivalmate.Data.Festival;
 import com.festival.tacademy.festivalmate.Data.PreferenceArtist;
+import com.festival.tacademy.festivalmate.MyApplication;
 import com.festival.tacademy.festivalmate.R;
 
 /**
@@ -43,11 +45,17 @@ public class PreferenceViewHolder  extends RecyclerView.ViewHolder {
         checkBox = (CheckBox)itemView.findViewById(R.id.checkBox_artist);
 
         itemView.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 if( mListener!=null ) {
                     mListener.onItemClick(v, artist);
                     checkBox.setChecked(!checkBox.isChecked());
+
+                    if(!checkBox.isChecked())
+                        artist.setCheck(1);
+                    else
+                        artist.setCheck(0);
                 }
             }
         });
@@ -57,14 +65,18 @@ public class PreferenceViewHolder  extends RecyclerView.ViewHolder {
         this.artist = item;
         nameView.setText(item.getName());
         Glide.with(imageView.getContext()).load(item.getPhoto()).into(imageView);
+
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked)
-                    artist.setCheck(1);
-                else
-                    artist.setCheck(0);
+//                if(isChecked)
+//                    artist.setCheck(1);
+//                else
+//                    artist.setCheck(0);
+//                Toast.makeText(MyApplication.getContext(), "checked : "+ artist.getName()+ artist.isCheck(),Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 }

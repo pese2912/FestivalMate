@@ -34,7 +34,6 @@ public class PreferenceAdapter extends RecyclerView.Adapter<PreferenceViewHolder
         notifyDataSetChanged();
     }
 
-
     PreferenceViewHolder.OnItemClickListener mListener;
     public void setOnItemClickListener(PreferenceViewHolder.OnItemClickListener listener) {
         mListener = listener;
@@ -51,7 +50,6 @@ public class PreferenceAdapter extends RecyclerView.Adapter<PreferenceViewHolder
     public void onBindViewHolder(PreferenceViewHolder holder, int position) {
         holder.setPreferenceArtist(items.get(position));
         holder.setOnItemClickListener(mListener);
-
     }
 
     @Override
