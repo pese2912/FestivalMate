@@ -8,9 +8,12 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.festival.tacademy.festivalmate.Data.Artist;
@@ -31,6 +34,8 @@ public class PreferenceActivity extends AppCompatActivity {
     RecyclerView listView;
     PreferenceAdapter mAdapter;
     Toolbar toolbar;
+    EditText editSearch;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,11 +55,37 @@ public class PreferenceActivity extends AppCompatActivity {
         listView.setAdapter(mAdapter);
         listView.setLayoutManager(new GridLayoutManager(this,3));
 
+        editSearch= (EditText)findViewById(R.id.edit_search);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
 
         setSupportActionBar(toolbar);
         setData();
+
+        Button btn = (Button)findViewById(R.id.btn_search);
+        btn.setOnClickListener(new View.OnClickListener() { // 검색
+            @Override
+            public void onClick(View v) {
+                String name =editSearch.getText().toString();
+                int memNo = PropertyManager.getInstance().getNo();
+                if(!TextUtils.isEmpty(name)){
+                    NetworkManager.getInstance().searchArtistSurvey(PreferenceActivity.this, memNo, name, new NetworkManager.OnResultListener<ShowArtistSurveyResult>() {
+                        @Override
+                        public void onSuccess(Request request, ShowArtistSurveyResult result) {
+                            Toast.makeText(PreferenceActivity.this,"성공",Toast.LENGTH_SHORT).show();
+                            mAdapter.clear();
+                            mAdapter.addAll(result.result);
+
+                        }
+
+                        @Override
+                        public void onFail(Request request, IOException exception) {
+                            Toast.makeText(PreferenceActivity.this,"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+        });
     }
 
     @Override
