@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 
+import com.festival.tacademy.festivalmate.Data.MySignUpResult;
 import com.festival.tacademy.festivalmate.MyApplication;
 import com.google.gson.Gson;
 
@@ -102,21 +103,16 @@ public class NetworkManager {
     }
     Gson gson = new Gson();
 
-
-    private static final String MY_SERVER ="https://miniproject-1313.appspot.com";
-    private static final String URL_SIGN_UP = MY_SERVER+ "/signup";
-
+    private static final String MY_SERVER = "https://dongjaeducation.appspot.com";  //회원가입
+    private static final String URL_SIGN_UP = MY_SERVER + "/signup";
     public Request signup(Object tag, String username,
                           String email,
                           String password,
-                          String registrationId,
-                          OnResultListener<MyResultUser> listener) {
-
+                          OnResultListener<MySignUpResult> listener) {
         RequestBody body = new FormBody.Builder()
-                .add("username",username)
-                .add("email",email)
-                .add("password",password)
-                .add("registrationId",registrationId)
+                .add("username", username)
+                .add("password", password)
+                .add("email", email)
                 .build();
 
         Request request = new Request.Builder()
@@ -124,7 +120,7 @@ public class NetworkManager {
                 .post(body)
                 .build();
 
-        final NetworkResult<MyResultUser> result = new NetworkResult<>();
+        final NetworkResult<MySignUpResult> result = new NetworkResult<>();
         result.request = request;
         result.listener = listener;
         mClient.newCall(request).enqueue(new Callback() {
@@ -138,24 +134,21 @@ public class NetworkManager {
             public void onResponse(Call call, Response response) throws IOException {
                 if (response.isSuccessful()) {
                     String text = response.body().string();
+                    MySignUpResult data = gson.fromJson(text, MySignUpResult.class);
+                    if (data.success == 1) {
+                        result.result = data;
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SUCCESS, result));
+                    } else {
+                        result.exception = new IOException(data.message);
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                    }
 
-                    MyResultUser data = gson.fromJson(text, MyResultUser.class);
-                    result.result = data;
-                    mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SUCCESS, result));
                 } else {
-                    throw new IOException(response.message());
+                    result.exception = new IOException(response.message());
+                    mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
                 }
             }
         });
         return request;
     }
-
-
-
-
-
-
-
-
-
 }
