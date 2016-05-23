@@ -25,7 +25,6 @@ public class ChatJoinListActivity extends AppCompatActivity {
     RecyclerView listView;
     ChatJoinListAdapter mAdapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
