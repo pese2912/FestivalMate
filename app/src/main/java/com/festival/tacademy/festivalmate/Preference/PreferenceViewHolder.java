@@ -8,6 +8,8 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.festival.tacademy.festivalmate.Data.Artist;
 import com.festival.tacademy.festivalmate.Data.Festival;
 import com.festival.tacademy.festivalmate.Data.PreferenceArtist;
 import com.festival.tacademy.festivalmate.R;
@@ -21,10 +23,10 @@ public class PreferenceViewHolder  extends RecyclerView.ViewHolder {
     ImageView imageView;
     CheckBox checkBox;
 
-    PreferenceArtist artist;
+    Artist artist;
 
     public interface OnItemClickListener {
-        public void onItemClick(View view, PreferenceArtist artist);
+        public void onItemClick(View view, Artist artist);
     }
 
     OnItemClickListener mListener;
@@ -51,14 +53,17 @@ public class PreferenceViewHolder  extends RecyclerView.ViewHolder {
         });
     }
 
-    public void setPreferenceArtist(PreferenceArtist item){
+    public void setPreferenceArtist(Artist item){
         this.artist = item;
         nameView.setText(item.getName());
-        imageView.setImageDrawable(item.getImage());
+        Glide.with(imageView.getContext()).load(item.getPhoto()).into(imageView);
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                artist.setCheck(isChecked);
+                if(isChecked)
+                    artist.setCheck(1);
+                else
+                    artist.setCheck(0);
             }
         });
     }

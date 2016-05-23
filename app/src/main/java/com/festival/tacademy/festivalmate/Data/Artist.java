@@ -7,39 +7,59 @@ import java.io.Serializable;
  */
 public class Artist implements Serializable {
     public String getName() {
-        return name;
+        return artist_name;
     }
 
     public Artist(String name) {
-        this.name = name;
+        this.artist_name = name;
     }
     public void setName(String name) {
-        this.name = name;
+        this.artist_name = name;
     }
 
-    public int getPhoto() {
-        return photo;
+    public String getPhoto() {
+        return artist_img;
     }
 
-    public void setPhoto(int photo) {
-        this.photo = photo;
+    public void setPhoto(String photo) {
+        this.artist_img = photo;
     }
 
-    public Artist(String name, int photo) {
+    public Artist(String name, String photo) {
 
-        this.name = name;
-        this.photo = photo;
-    }
-    public boolean isCheck() {
-        return check;
+        this.artist_name = name;
+        this.artist_img = photo;
     }
 
-    public void setCheck(boolean check) {
-        this.check = check;
+    public int isCheck() {
+        return artist_fav_state;
     }
 
-    public boolean check;
-    public String name;
-    public int photo;
+    public void setCheck(int check) {
+        this.artist_fav_state = check;
+    }
+
+
+    public int getArtist_img_no() {
+        return artist_img_no;
+    }
+
+    public void setArtist_img_no(int artist_img_no) {
+        this.artist_img_no = artist_img_no;
+    }
+
+    public int getArtist_no() {
+        return artist_no;
+    }
+
+    public void setArtist_no(int artist_no) {
+        this.artist_no = artist_no;
+    }
+
+    public int artist_no;
+    public String artist_name;
+    public int artist_img_no;
+    public String artist_img;
+    public int artist_fav_state;
 
 }

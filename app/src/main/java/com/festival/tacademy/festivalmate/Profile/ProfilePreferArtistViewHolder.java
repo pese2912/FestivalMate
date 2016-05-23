@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.festival.tacademy.festivalmate.Data.Artist;
 import com.festival.tacademy.festivalmate.R;
 
@@ -24,7 +25,8 @@ public class ProfilePreferArtistViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void setArtist(Artist artist) {
-        photo_view.setImageResource(artist.getPhoto());
+        Glide.with(photo_view.getContext()).load(artist.getPhoto()).into(photo_view);
+       // photo_view.setImageResource(artist.getPhoto());
         name_view.setText(artist.getName());
     }
 }

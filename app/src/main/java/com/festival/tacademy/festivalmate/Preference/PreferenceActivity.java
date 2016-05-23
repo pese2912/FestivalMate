@@ -13,12 +13,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.festival.tacademy.festivalmate.Data.Artist;
 import com.festival.tacademy.festivalmate.Data.PreferenceArtist;
+import com.festival.tacademy.festivalmate.Data.ShowArtistSurveyResult;
 import com.festival.tacademy.festivalmate.HomeActivity;
+import com.festival.tacademy.festivalmate.Manager.NetworkManager;
+import com.festival.tacademy.festivalmate.Manager.PropertyManager;
 import com.festival.tacademy.festivalmate.R;
 
 import java.io.IOException;
 import java.util.List;
+
+import okhttp3.Request;
 
 public class PreferenceActivity extends AppCompatActivity {
 
@@ -35,8 +41,8 @@ public class PreferenceActivity extends AppCompatActivity {
 
         mAdapter.setOnItemClickListener(new PreferenceViewHolder.OnItemClickListener() {
             @Override
-            public void onItemClick(View view, PreferenceArtist artist) {
-                Toast.makeText(PreferenceActivity.this, artist.getCheck() + artist.getName(), Toast.LENGTH_SHORT).show();
+            public void onItemClick(View view, Artist artist) {
+                Toast.makeText(PreferenceActivity.this, artist.isCheck() + artist.getName(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -52,6 +58,12 @@ public class PreferenceActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        setData();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_prefer, menu);
@@ -59,14 +71,30 @@ public class PreferenceActivity extends AppCompatActivity {
     }
 
     private void setData() {
+        int memNo = PropertyManager.getInstance().getNo();
 
-             mAdapter.clear(); //초기에 지우고
-           for (int i = 0; i < 20; i++) {
-                PreferenceArtist artist = new PreferenceArtist();
-               artist.setName("name " + i);
-              artist.setImage(ContextCompat.getDrawable(this, R.mipmap.ic_launcher));
-             mAdapter.add(artist); // 값 추가
-         }
+        NetworkManager.getInstance().showArtistSurvey(PreferenceActivity.this, memNo, new NetworkManager.OnResultListener<ShowArtistSurveyResult>() {
+            @Override
+            public void onSuccess(Request request, ShowArtistSurveyResult result) {
+                Toast.makeText(PreferenceActivity.this,"성공",Toast.LENGTH_SHORT).show();
+                mAdapter.clear();
+                mAdapter.addAll(result.result);
+            }
+
+            @Override
+            public void onFail(Request request, IOException exception) {
+
+                Toast.makeText(PreferenceActivity.this,"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
+//           for (int i = 0; i < 20; i++) {
+//                Artist artist = new Artist("name " + i,"http://sitehomebos.kocca.kr/knowledge/abroad/deep/__icsFiles/artimage/2012/03/26/2_1.jpg");
+//               artist.setName("name " + i);
+//            //  artist.setImage(ContextCompat.getDrawable(this, R.mipmap.ic_launcher));
+//               artist.setPhoto("http://sitehomebos.kocca.kr/knowledge/abroad/deep/__icsFiles/artimage/2012/03/26/2_1.jpg");
+//             mAdapter.add(artist); // 값 추가
+//         }
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {

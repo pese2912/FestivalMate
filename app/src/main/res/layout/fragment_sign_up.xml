@@ -90,6 +90,7 @@ tools:context="com.festival.tacademy.festivalmate.login.SignUpFragment">
     <EditText
         android:id="@+id/edit_email"
         android:hint="@string/email"
+        android:inputType="textEmailAddress"
         android:paddingLeft="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -111,6 +112,7 @@ tools:context="com.festival.tacademy.festivalmate.login.SignUpFragment">
         android:id="@+id/edit_password"
         android:hint="@string/password"
         android:paddingLeft="30dp"
+        android:inputType="textPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -131,6 +133,7 @@ tools:context="com.festival.tacademy.festivalmate.login.SignUpFragment">
         android:id="@+id/edit_re_password"
         android:hint="@string/re_password"
         android:paddingLeft="30dp"
+        android:inputType="textPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </android.support.design.widget.TextInputLayout>
@@ -161,6 +164,8 @@ tools:context="com.festival.tacademy.festivalmate.login.SignUpFragment">
         android:layout_alignBottom="@+id/checkBox_agree"
         android:layout_toRightOf="@+id/checkBox_agree"
         android:layout_toEndOf="@+id/checkBox_agree" />
+
+
 
 
 </RelativeLayout>

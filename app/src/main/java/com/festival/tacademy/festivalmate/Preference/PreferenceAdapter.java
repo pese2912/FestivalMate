@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.festival.tacademy.festivalmate.Data.Artist;
 import com.festival.tacademy.festivalmate.Data.PreferenceArtist;
 import com.festival.tacademy.festivalmate.FestivalInfo.FestivalViewHolder;
 import com.festival.tacademy.festivalmate.R;
@@ -16,19 +17,19 @@ import java.util.List;
  * Created by Tacademy on 2016-05-13.
  */
 public class PreferenceAdapter extends RecyclerView.Adapter<PreferenceViewHolder>{
-   List<PreferenceArtist> items = new ArrayList<PreferenceArtist>();
+   List<Artist> items = new ArrayList<Artist>();
 
     public void clear(){
         items.clear();
         notifyDataSetChanged();
     }
 
-    public void add(PreferenceArtist artist){
+    public void add(Artist artist){
         items.add(artist);
         notifyDataSetChanged();
 
     }
-    public void addAll(List<PreferenceArtist> artists){
+    public void addAll(List<Artist> artists){
         items.addAll(artists);
         notifyDataSetChanged();
     }

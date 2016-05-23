@@ -9,8 +9,6 @@ import java.util.List;
  */
 public class User implements Serializable {
 
-
-
     public int mem_no;
     public String mem_id;
     public int photo;
@@ -18,9 +16,6 @@ public class User implements Serializable {
     public  List<Festival> letsgo = new ArrayList<>();
     public List<Artist> artist = new ArrayList<>();
     public int bad_cnt;
-
-
-
     public int getMem_no() {
         return mem_no;
     }

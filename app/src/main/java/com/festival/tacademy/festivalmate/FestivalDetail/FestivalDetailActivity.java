@@ -65,7 +65,7 @@ public class FestivalDetailActivity extends AppCompatActivity {
                 }
 
                 for(int i=0; i<10; i++) {
-                    artists.add(new Artist("Artist: " + i, R.drawable.back1));
+                    artists.add(new Artist("Artist: " + i, "http://www.betanews.net/imagedb/thumb/2014/0627/7ec1b12a.jpg"));
                 }
 
                 User user = new User("ID " + 1, R.drawable.face,"Name " + 1, letsgo, artists);

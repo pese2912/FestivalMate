@@ -32,29 +32,31 @@ public class SplashActivity extends AppCompatActivity {
 
 
     private void startSplash() {
-        String email = PropertyManager.getInstance().getEmail();
-        if (!TextUtils.isEmpty(email)) {
-            String password = PropertyManager.getInstance().getPassword();
-            NetworkManager.getInstance().signin(SplashActivity.this, email, password, new NetworkManager.OnResultListener<MySignInResult>() {
-                @Override
-                public void onSuccess(Request request, MySignInResult result) {
-                    if(result.success==1)
-                    {
-                        Toast.makeText(SplashActivity.this,"자동로그인성공",Toast.LENGTH_SHORT).show();
-                        PropertyManager.getInstance().setLogin(true);
-                        PropertyManager.getInstance().setUser(result.result);
-                        goHomeActivity();
-                    }
-                }
-                @Override
-                public void onFail(Request request, IOException exception) {
-                    Toast.makeText(SplashActivity.this, "자동로그인 실패 : " + exception.getMessage(), Toast.LENGTH_SHORT).show();
-                    goMainActivity();
-                }
-            });
-        }else {
-            goMainActivity();
-        }
+//        String email = PropertyManager.getInstance().getEmail();
+//        if (!TextUtils.isEmpty(email)) {
+//            String password = PropertyManager.getInstance().getPassword();
+//            NetworkManager.getInstance().signin(SplashActivity.this, email, password, new NetworkManager.OnResultListener<MySignInResult>() {
+//                @Override
+//                public void onSuccess(Request request, MySignInResult result) {
+//                    if(result.success==1)
+//                    {
+//                        Toast.makeText(SplashActivity.this,"자동로그인성공",Toast.LENGTH_SHORT).show();
+//                        PropertyManager.getInstance().setLogin(true);
+//                        PropertyManager.getInstance().setUser(result.result);
+//                        goHomeActivity();
+//                    }
+//                }
+//                @Override
+//                public void onFail(Request request, IOException exception) {
+//                    Toast.makeText(SplashActivity.this, "자동로그인 실패 : " + exception.getMessage(), Toast.LENGTH_SHORT).show();
+//                    goMainActivity();
+//                }
+//            });
+//        }else {
+//            goMainActivity();
+//        }
+
+        goMainActivity();
     }
 
 

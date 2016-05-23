@@ -17,7 +17,7 @@ import com.festival.tacademy.festivalmate.R;
  */
 
 public class MateMatchingLineUpArtistViewHolder extends RecyclerView.ViewHolder {
-
+    
     CheckBox nameView;
     Artist artist;
 
@@ -33,7 +33,10 @@ public class MateMatchingLineUpArtistViewHolder extends RecyclerView.ViewHolder 
         nameView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                artist.setCheck(isChecked);
+                if(isChecked)
+                    artist.setCheck(1);
+                else
+                    artist.setCheck(0);
                 Toast.makeText(MyApplication.getContext(), "checked : "+ artist.getName()+ artist.isCheck(),Toast.LENGTH_SHORT).show();
             }
         });

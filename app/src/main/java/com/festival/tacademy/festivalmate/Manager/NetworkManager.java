@@ -7,6 +7,7 @@ import android.os.Message;
 
 import com.festival.tacademy.festivalmate.Data.MySignInResult;
 import com.festival.tacademy.festivalmate.Data.MySignUpResult;
+import com.festival.tacademy.festivalmate.Data.ShowArtistSurveyResult;
 import com.festival.tacademy.festivalmate.MyApplication;
 import com.google.gson.Gson;
 
@@ -105,17 +106,19 @@ public class NetworkManager {
 
     Gson gson = new Gson();
 
-    private static final String MY_SERVER = "http://";  //회원가입
+    private static final String MY_SERVER = "http://52.79.159.248:3000";  //회원가입
     private static final String URL_SIGN_UP = MY_SERVER + "/signup";
     public Request signup(Object tag, String mem_name,
                           String mem_id,
                           String mem_pwd,
+                          String mem_img,
                           OnResultListener<MySignUpResult> listener) {
 
         RequestBody body = new FormBody.Builder()
                 .add("mem_name", mem_name)
                 .add("mem_pwd", mem_pwd)
                 .add("mem_id", mem_id)
+                .add("mem_img",mem_img)
                 .build();
 
         Request request = new Request.Builder()
@@ -155,7 +158,7 @@ public class NetworkManager {
         return request;
     }
 
-    private static final String URL_SIGN_IN = MY_SERVER + "/signin"; // 로그인
+    private static final String URL_SIGN_IN = MY_SERVER + "/login"; // 로그인
     public Request signin(Object tag,
                           String mem_id,
                           String mem_pwd,
@@ -192,6 +195,48 @@ public class NetworkManager {
                         result.exception = new IOException(data.message);
                         mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
                     }
+
+                } else {
+                    result.exception = new IOException(response.message());
+                    mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                }
+            }
+        });
+        return request;
+    }
+
+
+
+    private static final String URL_SHOW_ARTIST_SURVEY = MY_SERVER + "/show_artist_survey"; // 로그인
+    public Request showArtistSurvey(Object tag,
+                          int mem_no,
+                          OnResultListener<ShowArtistSurveyResult> listener) {
+        RequestBody body = new FormBody.Builder()
+                .add("mem_no", mem_no+"")
+                .build();
+
+        Request request = new Request.Builder()
+                .url(URL_SHOW_ARTIST_SURVEY)
+                .post(body)
+                .build();
+
+        final NetworkResult<ShowArtistSurveyResult> result = new NetworkResult<>();
+        result.request = request;
+        result.listener = listener;
+        mClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                result.exception = e;
+                mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String text = response.body().string();
+                    ShowArtistSurveyResult data = gson.fromJson(text, ShowArtistSurveyResult.class);
+                    result.result = data;
+                    mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SUCCESS, result));
 
                 } else {
                     result.exception = new IOException(response.message());

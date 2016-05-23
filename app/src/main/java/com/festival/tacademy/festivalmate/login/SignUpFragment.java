@@ -105,14 +105,15 @@ public class SignUpFragment extends Fragment {
                     Toast.makeText(getContext(), "invalid value", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                
-                NetworkManager.getInstance().signup(getContext(), name, email, password, new NetworkManager.OnResultListener<MySignUpResult>() { // 회원가입
+
+                NetworkManager.getInstance().signup(getContext(), name, email, password,"https://image", new NetworkManager.OnResultListener<MySignUpResult>() { // 회원가입
                     @Override
                     public void onSuccess(Request request, MySignUpResult result) {
 
                         Toast.makeText(getContext(), "가입성공 : " + result.message,Toast.LENGTH_SHORT).show();
 
                         NetworkManager.getInstance().signin(getContext(), email, password, new NetworkManager.OnResultListener<MySignInResult>() { //가입 성공하면 바로 로그인 요청
+
                             @Override
                             public void onSuccess(Request request, MySignInResult result) {  // 로그인 성공
                                 Toast.makeText(getContext(), "로그인 성공 : " + result.message,Toast.LENGTH_SHORT).show();
@@ -124,9 +125,9 @@ public class SignUpFragment extends Fragment {
                                 startActivity(new Intent(getContext(), PreferenceActivity.class));  // 선호도 조사 액티비티로 이동
                                 getActivity().finish();
                             }
+
                             @Override
                             public void onFail(Request request, IOException exception) {
-
                                 Toast.makeText(getContext(), "로그인 실패 : " + exception,Toast.LENGTH_SHORT).show();
                             }
                         });
