@@ -68,7 +68,8 @@ public class FestivalDetailActivity extends AppCompatActivity {
                     artists.add(new Artist("Artist: " + i, R.drawable.back1));
                 }
 
-                User user = new User("ID " + 1, R.drawable.face,"Name " + 1, "Email " + 1, letsgo, artists);
+                User user = new User("ID " + 1, R.drawable.face,"Name " + 1, letsgo, artists);
+
 
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("user", user);

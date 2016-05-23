@@ -56,9 +56,6 @@ public class MateMatchingActivity extends AppCompatActivity {
 
         initData();
 
-
-
-
     }
 
     @Override
@@ -127,7 +124,7 @@ public class MateMatchingActivity extends AppCompatActivity {
                 for(int i=0; i<10; i++) {
                     artists.add(new Artist("Artist: " + i, R.drawable.face));
                 }
-                User user = new User("ID " + 1, R.drawable.face, "Email " + 1,"Name " + 1, letsgo, artists);
+                User user = new User("ID " + 1, R.drawable.face,"Name " + 1, letsgo, artists);
 
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("user", user);

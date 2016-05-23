@@ -11,8 +11,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.festival.tacademy.festivalmate.Data.MySignInResult;
 import com.festival.tacademy.festivalmate.HomeActivity;
+import com.festival.tacademy.festivalmate.Manager.NetworkManager;
+import com.festival.tacademy.festivalmate.Manager.PropertyManager;
 import com.festival.tacademy.festivalmate.R;
+
+import java.io.IOException;
+
+import okhttp3.Request;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,11 +45,33 @@ public class LoginFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() { //로그인 하기 버튼 클릭시
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "로그인",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getContext(), HomeActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent); // 일단 홈으로 이동
-                getActivity().finish();
+                final String email = emailView.getText().toString();
+                final String password = passwordView.getText().toString();
+
+                NetworkManager.getInstance().signin(getContext(), email, password, new NetworkManager.OnResultListener<MySignInResult>() {
+                    @Override
+                    public void onSuccess(Request request, MySignInResult result) { // 로그인 성공하면
+
+                        if (result.success == 1) {
+                            Toast.makeText(getContext(),"로그인 성공 : "+ result.message,Toast.LENGTH_SHORT ).show();
+                            PropertyManager.getInstance().setLogin(true);
+                            PropertyManager.getInstance().setUser(result.result);
+                            PropertyManager.getInstance().setEmail(email);
+                            PropertyManager.getInstance().setNo(result.result.mem_no);
+                            PropertyManager.getInstance().setPassword(password);
+
+                            Intent intent = new Intent(getContext(), HomeActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent); // 일단 홈으로 이동
+                            getActivity().finish();
+                        }
+                    }
+                    @Override
+                    public void onFail(Request request, IOException exception) { // 로그인 실패하면
+
+                        Toast.makeText(getContext(),"로그인 실패 : "+ exception,Toast.LENGTH_SHORT ).show();
+                    }
+                });
             }
         });
 
