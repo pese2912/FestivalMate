@@ -12,6 +12,7 @@ import android.os.PersistableBundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -23,11 +24,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.festival.tacademy.festivalmate.Data.MySignInResult;
+import com.festival.tacademy.festivalmate.Data.MySignUpResult;
+import com.festival.tacademy.festivalmate.Manager.NetworkManager;
+import com.festival.tacademy.festivalmate.Manager.PropertyManager;
 import com.festival.tacademy.festivalmate.MyPage.TermsOfUsePrivacyPolicyActivity;
 import com.festival.tacademy.festivalmate.Preference.PreferenceActivity;
 import com.festival.tacademy.festivalmate.R;
 
 import java.io.File;
+import java.io.IOException;
+
+import okhttp3.Request;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -81,9 +89,50 @@ public class SignUpFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(getContext(), "가입하기",Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getContext(), PreferenceActivity.class));  // 선호도 조사 액티비티로 이동
-               getActivity().finish();
+                String name = nameView.getText().toString();
+                final String email = emailView.getText().toString();
+                final String password = passwordView.getText().toString();
+                String repassword = repasswordView.getText().toString();
+
+                if (TextUtils.isEmpty(name) || TextUtils.isEmpty(email) || !Patterns.EMAIL_ADDRESS.matcher(email).matches()
+                        || TextUtils.isEmpty(password) || password.length() < 8 || TextUtils.isEmpty(repassword) || !password.equals(repassword)) {
+                    Toast.makeText(getContext(), "invalid value", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                NetworkManager.getInstance().signup(getContext(), name, email, password, new NetworkManager.OnResultListener<MySignUpResult>() { // 회원가입
+                    @Override
+                    public void onSuccess(Request request, MySignUpResult result) {
+
+                        Toast.makeText(getContext(), "가입성공 : " + result.message,Toast.LENGTH_SHORT).show();
+
+                        NetworkManager.getInstance().signin(getContext(), email, password, new NetworkManager.OnResultListener<MySignInResult>() { //가입 성공하면 바로 로그인 요청
+                            @Override
+                            public void onSuccess(Request request, MySignInResult result) {  // 로그인 성공
+                                Toast.makeText(getContext(), "로그인 성공 : " + result.message,Toast.LENGTH_SHORT).show();
+                                PropertyManager.getInstance().setLogin(true);
+                                PropertyManager.getInstance().setUser(result.result);
+                                PropertyManager.getInstance().setEmail(email);
+                                PropertyManager.getInstance().setPassword(password);
+                                PropertyManager.getInstance().setNo(result.result.mem_no);
+                                startActivity(new Intent(getContext(), PreferenceActivity.class));  // 선호도 조사 액티비티로 이동
+                                getActivity().finish();
+                            }
+                            @Override
+                            public void onFail(Request request, IOException exception) {
+
+                                Toast.makeText(getContext(), "로그인 실패 : " + exception,Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                    }
+
+                    @Override
+                    public void onFail(Request request, IOException exception) {
+                        Toast.makeText(getContext(), "가입실패 : "+exception,Toast.LENGTH_SHORT).show();
+                    }
+                });
+//
 
             }
         });
@@ -139,4 +188,7 @@ public class SignUpFragment extends Fragment {
             outState.putString("uploadfile", mUploadFile.getAbsolutePath());
         }
     }
+
+
+
 }
