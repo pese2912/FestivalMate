@@ -13,8 +13,6 @@ import com.festival.tacademy.festivalmate.R;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText emailView; // 이메일 입력
-    EditText passwordView; // 패스워드 입력
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +25,9 @@ public class LoginActivity extends AppCompatActivity {
                     .add(R.id.container, new LoginFragment())
                     .commit();
         }
+
+
+
 
     }
 

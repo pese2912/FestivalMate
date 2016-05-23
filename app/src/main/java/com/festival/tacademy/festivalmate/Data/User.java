@@ -9,16 +9,36 @@ import java.util.List;
  */
 public class User implements Serializable {
 
-    String id;
-    int photo;
-    String name;
-    String email;
-    List<Festival> letsgo = new ArrayList<>();
-    List<Artist> artist = new ArrayList<>();
-    int bad_cnt;
 
+
+    public int mem_no;
+    public String mem_id;
+    public int photo;
+    public  String name;
+    public String email;
+    public  List<Festival> letsgo = new ArrayList<>();
+    public List<Artist> artist = new ArrayList<>();
+    public int bad_cnt;
+
+
+
+    public int getMem_no() {
+        return mem_no;
+    }
+
+    public void setMem_no(int mem_no) {
+        this.mem_no = mem_no;
+    }
+
+    public String getMem_id() {
+        return mem_id;
+    }
+
+    public void setMem_id(String mem_id) {
+        this.mem_id = mem_id;
+    }
     public User(String id, int photo, String name, String email, List<Festival> letsgo, List<Artist> artist) {
-        this.id = id;
+        this.mem_id = id;
         this.photo = photo;
         this.name = name;
         this.email = email;
@@ -27,11 +47,11 @@ public class User implements Serializable {
     }
 
     public String getId() {
-        return id;
+        return mem_id;
     }
 
     public User(String id, int photo) {
-        this.id = id;
+        this.mem_id = id;
         this.photo = photo;
     }
 
@@ -76,7 +96,7 @@ public class User implements Serializable {
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.mem_id = id;
     }
 
     public int getPhoto() {
