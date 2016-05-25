@@ -14,8 +14,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.festival.tacademy.festivalmate.Data.Festival;
+import com.festival.tacademy.festivalmate.Data.FestivalDetailResult;
+import com.festival.tacademy.festivalmate.Manager.NetworkManager;
+import com.festival.tacademy.festivalmate.Manager.PropertyManager;
 import com.festival.tacademy.festivalmate.MateMatching.MateMatchingStartActivity;
 import com.festival.tacademy.festivalmate.R;
+
+import java.io.IOException;
+
+import okhttp3.Request;
 
 public class FestivalDetailActivity extends AppCompatActivity {
 
@@ -32,7 +39,7 @@ public class FestivalDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_festival_detail);
         toolbarTitle = (TextView) findViewById(R.id.toolbar_title);
-      //  fab = (FloatingActionButton)findViewById(R.id.btn_matching_start);
+        //  fab = (FloatingActionButton)findViewById(R.id.btn_matching_start);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
@@ -47,18 +54,46 @@ public class FestivalDetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         festival = (Festival)intent.getExtras().getSerializable("festival");
         toolbarTitle.setText(festival.getFestival_name());
-        mAdapter.setFestval(festival);
 
-        Toast.makeText(this, festival.getFestival_name() + "+ " + festival.getDate() + "+ " + festival.getFestival_location(), Toast.LENGTH_SHORT).show();
+        setData();
 
         Button btn = (Button)findViewById(R.id.btn_matching);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(FestivalDetailActivity.this, MateMatchingStartActivity.class);
+                intent.putExtra("festival", festival);
                 startActivity(intent);
             }
         });
+        Toast.makeText(FestivalDetailActivity.this, festival.getFestival_name() + "+ " + festival.getDate() + "+ " + festival.getFestival_location(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setData();
+    }
+
+    private void setData(){
+
+        mAdapter.setFestval(festival);
+//        NetworkManager.getInstance().show_festival_detail(this, festival.getFestival_no(), 1,
+//                new NetworkManager.OnResultListener<FestivalDetailResult>() {
+//                    @Override
+//                    public void onSuccess(Request request, FestivalDetailResult result) {
+//                        if(result.success==1) {
+//                            Toast.makeText(FestivalDetailActivity.this, "Success", Toast.LENGTH_SHORT).show();
+//                            mAdapter.setFestval(result.getResult());
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFail(Request request, IOException exception) {
+//                        Toast.makeText(FestivalDetailActivity.this, "Fail", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+
     }
 
     @Override

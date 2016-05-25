@@ -11,19 +11,28 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.festival.tacademy.festivalmate.Data.Artist;
 import com.festival.tacademy.festivalmate.Data.FestibalLineUp;
+import com.festival.tacademy.festivalmate.Data.Festival;
+import com.festival.tacademy.festivalmate.Data.Lineup;
+import com.festival.tacademy.festivalmate.Data.ShowFestivalLineups;
+import com.festival.tacademy.festivalmate.Manager.NetworkManager;
 import com.festival.tacademy.festivalmate.R;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Request;
 
 public class MateMatchingStartActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     RecyclerView listView;
     MateMatchingLineUpAdapter mAdapter;
+    Festival festival;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +47,10 @@ public class MateMatchingStartActivity extends AppCompatActivity {
         mAdapter = new MateMatchingLineUpAdapter();
         listView.setAdapter(mAdapter);
         listView.setLayoutManager(new LinearLayoutManager(this));
+
+        Intent intent = getIntent();
+        festival = (Festival)intent.getExtras().getSerializable("festival");
+
         initData();
 
         Button btn = (Button)findViewById(R.id.btn_match);
@@ -48,22 +61,45 @@ public class MateMatchingStartActivity extends AppCompatActivity {
             }
         });
     }
-    private void initData(){
-        List<Artist> artistList = new ArrayList<>();
-        for(int j=0; j<10; j++) {
-            Artist artist = new Artist("김창완밴드");
-            artist.setName("김창완밴드"+j);
-            artistList.add(artist);
-        }
 
-        for (int i = 0; i < 3; i++) {
-            FestibalLineUp festibalLineUp = new FestibalLineUp();
-            festibalLineUp.setData("2016-07-24");
-            festibalLineUp.setArtist(artistList);
-            mAdapter.add(festibalLineUp);
-        }
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initData();
     }
+
+    private void initData(){
+
+        NetworkManager.getInstance().show_festival_lineups(MateMatchingStartActivity.this, festival.getFestival_no(), new NetworkManager.OnResultListener<ShowFestivalLineups>() {
+            @Override
+            public void onSuccess(Request request, ShowFestivalLineups result) {
+                Toast.makeText(MateMatchingStartActivity.this,"성공",Toast.LENGTH_SHORT).show();
+                mAdapter.clear();
+                mAdapter.addAll(result.result.getFestival_lineups());
+            }
+
+            @Override
+            public void onFail(Request request, IOException exception) {
+                Toast.makeText(MateMatchingStartActivity.this,"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
+//        mAdapter.clear();
+//        List<Artist> artistList = new ArrayList<>();
+//        for(int j=0; j<10; j++) {
+//            Artist artist = new Artist("김창완밴드");
+//            artist.setName("김창완밴드"+j);
+//            artistList.add(artist);
+//        }
+//
+//        for (int i = 0; i < 3; i++) {
+//            Lineup festibalLineUp = new Lineup("2016-07-24");
+//            festibalLineUp.setDate("2016-07-24");
+//            festibalLineUp.setLineup(artistList);
+//            mAdapter.add(festibalLineUp);
+//        }
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();

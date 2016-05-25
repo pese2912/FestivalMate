@@ -20,21 +20,26 @@ public class FestivalDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public static final int VIEW_TYPE_MAPVIEW = 4;
     public static final int VIEW_TYPE_TITLE = 5;
 
-
     Festival festival;
-
 
     public void setFestval(Festival festival) {
         this.festival = festival;
         notifyDataSetChanged();
     }
 
+
+    UserViewHolder.OnItemClickListener mListener;
+
+    public void setOnItemClickListener(UserViewHolder.OnItemClickListener listener) {
+        mListener = listener;
+    }
+
     @Override
     public int getItemViewType(int position) {
+
         if( position == 0 ) {
             return VIEW_TYPE_FESTIVAL_PHOTO;
         }
-
         position--;
         if ( festival.getLineups().size() > 0 ) {
             if( position == 0 ) {
@@ -54,8 +59,12 @@ public class FestivalDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         if( position == 0 ) {
             return VIEW_TYPE_LETSGO;
         }
-
-       throw new IllegalArgumentException("Invalid Position");
+        position--;
+        if( position == 0 ) {
+            return VIEW_TYPE_MAPVIEW;
+        }
+        position--;
+        throw new IllegalArgumentException("Invalid Position");
     }
 
     @Override
@@ -77,6 +86,10 @@ public class FestivalDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_letsgo, null);
                 return new LetsgoViewHolder(view);
             }
+            case VIEW_TYPE_MAPVIEW: {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_map, null);
+                return new MapViewHolder(view);
+            }
         }
         throw new IllegalArgumentException("Invalid position");
     }
@@ -88,7 +101,6 @@ public class FestivalDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             h.setPhoto(festival);
             return;
         }
-
         position--;
         if( festival.getLineups().size() > 0 ) {
             if( position == 0 ) {
@@ -106,15 +118,20 @@ public class FestivalDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         }
 
         if( position == 0 ) {
-            TitleViewHolder h = (TitleViewHolder)holder;
+           TitleViewHolder h = (TitleViewHolder)holder;
             h.setData("Lets Go");
             return;
         }
-
         position--;
         if( position == 0 ) {
             LetsgoViewHolder h = (LetsgoViewHolder)holder;
-            h.setList(festival.getFestival_going_mem());
+            h.setList(festival.getFestival_going_mem(), mListener);
+            return;
+        }
+        position--;
+        if( position == 0 ) {
+            MapViewHolder h = (MapViewHolder)holder;
+            h.setLocation(festival);
             return;
         }
 
@@ -131,7 +148,7 @@ public class FestivalDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             size++;
             size += festival.getLineups().size();
         }
-        size += 2;
+        size += 3;
 
         return size;
     }

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.festival.tacademy.festivalmate.Data.FestibalLineUp;
+import com.festival.tacademy.festivalmate.Data.Lineup;
 import com.festival.tacademy.festivalmate.MyApplication;
 import com.festival.tacademy.festivalmate.R;
 
@@ -17,7 +18,7 @@ public class MateMatchingLineUpViewHolder extends RecyclerView.ViewHolder {
 
     TextView dateView;
     RecyclerView listView;
-    FestibalLineUp festibalLineUp;
+    Lineup festibalLineUp;
     MateMatchingLineUpArtistAdapter mAdapter;
     LinearLayoutManager mManager;
 
@@ -29,15 +30,15 @@ public class MateMatchingLineUpViewHolder extends RecyclerView.ViewHolder {
 
     }
 
-    public void setFestibalLineUp(FestibalLineUp lineUp){
+    public void setFestibalLineUp(Lineup lineUp){
         this.festibalLineUp = lineUp;
-        dateView.setText(lineUp.getData());
+        dateView.setText(lineUp.getDate());
         mAdapter = new MateMatchingLineUpArtistAdapter();
         listView.setAdapter(mAdapter);
        // mManager = new LinearLayoutManager(MyApplication.getContext());
         //mManager = new LinearLayoutManager(MyApplication.getContext(), LinearLayoutManager.HORIZONTAL,false);
         mManager = new GridLayoutManager(MyApplication.getContext(),3);
         listView.setLayoutManager(mManager);
-        mAdapter.addAll(lineUp.getArtist());
+        mAdapter.addAll(lineUp.getLineup());
     }
 }

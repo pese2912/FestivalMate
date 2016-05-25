@@ -6,19 +6,15 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.ContextMenu;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 
 import com.festival.tacademy.festivalmate.Data.Artist;
 import com.festival.tacademy.festivalmate.Data.Festival;
 import com.festival.tacademy.festivalmate.Data.MateTalkRoom;
 import com.festival.tacademy.festivalmate.Data.User;
-import com.festival.tacademy.festivalmate.FestivalDetail.UserViewHolder;
-import com.festival.tacademy.festivalmate.MyPage.FestibalSearchActivity;
+import com.festival.tacademy.festivalmate.FestivalInfo.UserViewHolder;
 import com.festival.tacademy.festivalmate.Profile.ProfileDialogFragment;
 import com.festival.tacademy.festivalmate.R;
 

@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 
 import com.festival.tacademy.festivalmate.Data.MateTalkRoom;
-import com.festival.tacademy.festivalmate.FestivalDetail.UserViewHolder;
+import com.festival.tacademy.festivalmate.FestivalInfo.UserViewHolder;
 import com.festival.tacademy.festivalmate.R;
 
 import java.util.ArrayList;

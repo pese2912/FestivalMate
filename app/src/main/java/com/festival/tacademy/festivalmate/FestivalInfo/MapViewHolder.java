@@ -1,4 +1,4 @@
-package com.festival.tacademy.festivalmate.FestivalDetail;
+package com.festival.tacademy.festivalmate.FestivalInfo;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

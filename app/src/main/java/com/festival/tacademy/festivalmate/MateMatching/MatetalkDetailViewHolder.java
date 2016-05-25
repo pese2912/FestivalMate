@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.festival.tacademy.festivalmate.Data.MateTalkRoom;
-import com.festival.tacademy.festivalmate.FestivalDetail.UserViewHolder;
+import com.festival.tacademy.festivalmate.FestivalInfo.UserViewHolder;
 import com.festival.tacademy.festivalmate.R;
 
 

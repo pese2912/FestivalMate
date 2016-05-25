@@ -9,20 +9,16 @@ import java.util.List;
  */
 public class Festival implements Serializable {
 
-
     public int festival_no;
     public String festival_name;
     public String festival_img;
     public String festival_location;
     public int mem_going_check;
-
     public List<Lineup> festival_lineups;
-
     public List<User>  festival_going_mem = new ArrayList<>();
 
     int photo_location;
     String date;
-
 
     public Festival() {
     }

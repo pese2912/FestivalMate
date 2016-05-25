@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.festival.tacademy.festivalmate.Data.FestibalLineUp;
+import com.festival.tacademy.festivalmate.Data.Lineup;
 import com.festival.tacademy.festivalmate.Preference.PreferenceViewHolder;
 import com.festival.tacademy.festivalmate.R;
 
@@ -16,13 +17,13 @@ import java.util.List;
  * Created by Tacademy on 2016-05-17.
  */
 public class MateMatchingLineUpAdapter extends RecyclerView.Adapter<MateMatchingLineUpViewHolder> {
-    List<FestibalLineUp> items = new ArrayList<FestibalLineUp>();
+    List<Lineup> items = new ArrayList<Lineup>();
 
-    public void add(FestibalLineUp lineUp){
+    public void add(Lineup lineUp){
         this.items.add(lineUp);
         notifyDataSetChanged();
     }
-    public void addAll(List<FestibalLineUp> items){
+    public void addAll(List<Lineup> items){
         this.items.addAll(items);
         notifyDataSetChanged();
     }

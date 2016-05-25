@@ -5,12 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 
 import com.festival.tacademy.festivalmate.Data.User;
 import com.festival.tacademy.festivalmate.R;
 
-import java.net.ContentHandler;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +23,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
     public UserAdapter(Context context) {
         mContext = context;
     }
+
     public void add(User user) {
         items.add(user);
         notifyDataSetChanged();
@@ -38,6 +37,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
         notifyDataSetChanged();
     }
 
+    UserViewHolder.OnItemClickListener mListener;
+
+    public void setOnItemClickListener(UserViewHolder.OnItemClickListener listener) {
+        mListener = listener;
+    }
+
     @Override
     public UserViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_user, null);
@@ -48,6 +53,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
     @Override
     public void onBindViewHolder(UserViewHolder holder, int position) {
         holder.setUser(items.get(position));
+        holder.setOnItemClickListener(mListener);
     }
 
     @Override

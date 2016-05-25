@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.festival.tacademy.festivalmate.Data.MateTalkRoom;
-import com.festival.tacademy.festivalmate.FestivalDetail.UserAdapter;
+import com.festival.tacademy.festivalmate.FestivalInfo.UserAdapter;
 import com.festival.tacademy.festivalmate.MyApplication;
 import com.festival.tacademy.festivalmate.R;
 
@@ -69,7 +69,7 @@ public class MatetalkDetailView extends RelativeLayout {
 
         text_artist_num.setText(chatinfo.getMatching_artists().size() + "명");
 
-        text_artists.setText(chatinfo.getMatching_artists().get(0).getName());
+                text_artists.setText(chatinfo.getMatching_artists().get(0).getName());
         for (int j = 1; j < chatinfo.getMatching_artists().size(); j++) {
             text_artists.append(", " + chatinfo.getMatching_artists().get(j).getName());
         }
@@ -78,18 +78,17 @@ public class MatetalkDetailView extends RelativeLayout {
         text_age.setText(chatinfo.getAge() + "");
 
         text_mem_user.setText(chatinfo.getMember().size() + "명");
-
         Button btn = (Button)findViewById(R.id.btn_request);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Button btn = (Button)findViewById(R.id.btn_request);
                 if(!isClicked) {
-                    btn.setText("신청 완료");
+                    btn.setText("?좎껌 ?꾨즺");
                     Toast.makeText(MyApplication.getContext(), "dddddd", Toast.LENGTH_SHORT);
                     isClicked = true;
                 } else {
-                    btn.setText("신청하기");
+                    btn.setText("?좎껌?섍린");
                     Toast.makeText(MyApplication.getContext(), "ffffff", Toast.LENGTH_SHORT);
                     isClicked = false;
                 }
@@ -97,7 +96,7 @@ public class MatetalkDetailView extends RelativeLayout {
             }
         });
 
-          mAdapter.addAll(chatinfo.getMember());
+        mAdapter.addAll(chatinfo.getMember());
     }
 }
 
