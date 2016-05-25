@@ -130,6 +130,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/birthday"
         android:id="@+id/textView19"
+        android:inputType="number"
         android:textColor="#ff3300"
         android:layout_below="@+id/spinner_location"
         android:layout_alignLeft="@+id/textView8"

@@ -13,11 +13,23 @@ public class User implements Serializable {
     public String mem_id;
     public String mem_img;
     public  String mem_name;
+
+
+
+    public String mem_state_msg;
     public  List<Festival> letsgo = new ArrayList<>();
     public List<Artist> artist = new ArrayList<>();
     public int bad_cnt;
     public int getMem_no() {
         return mem_no;
+    }
+
+    public String getMem_state_msg() {
+        return mem_state_msg;
+    }
+
+    public void setMem_state_msg(String mem_state_msg) {
+        this.mem_state_msg = mem_state_msg;
     }
 
     public void setMem_no(int mem_no) {

@@ -13,17 +13,35 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.festival.tacademy.festivalmate.Data.ShowMiniProfileResult;
+import com.festival.tacademy.festivalmate.Manager.NetworkManager;
+import com.festival.tacademy.festivalmate.Manager.PropertyManager;
 import com.festival.tacademy.festivalmate.R;
 
 import java.io.File;
+import java.io.IOException;
+
+import okhttp3.Request;
 
 public class ProfileUpdateActivity extends AppCompatActivity {
 
     ImageView photoView;
     Toolbar toolbar;
+
+    EditText nameView;
+    EditText messageView;
+    Spinner locationView;
+    EditText birthView;
+    String location;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,11 +53,35 @@ public class ProfileUpdateActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+        nameView= (EditText)findViewById(R.id.edit_name);
+        messageView = (EditText)findViewById(R.id.edit_state);
+        locationView= (Spinner)findViewById(R.id.spinner_location);
+        birthView  = (EditText)findViewById(R.id.edit_birthday);
+
+
         Button btn = (Button)findViewById(R.id.btn_update);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                int memNo = PropertyManager.getInstance().getNo();
+                String name = nameView.getText().toString();
+                String message = messageView.getText().toString();
+                int birthday = Integer.parseInt(birthView.getText().toString());
+
+                NetworkManager.getInstance().modify_profile(ProfileUpdateActivity.this, memNo, "", name, message, new NetworkManager.OnResultListener<ShowMiniProfileResult>() {
+                    @Override
+                    public void onSuccess(Request request, ShowMiniProfileResult result) {
+                        Toast.makeText(ProfileUpdateActivity.this,"성공",Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+
+                    @Override
+                    public void onFail(Request request, IOException exception) {
+                        Toast.makeText(ProfileUpdateActivity.this,"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 

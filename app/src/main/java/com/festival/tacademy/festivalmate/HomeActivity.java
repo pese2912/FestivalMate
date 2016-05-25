@@ -105,7 +105,7 @@ public class HomeActivity extends AppCompatActivity
         NetworkManager.getInstance().show_mini_profile(HomeActivity.this, memNo, new NetworkManager.OnResultListener<ShowMiniProfileResult>() {
             @Override
             public void onSuccess(Request request, ShowMiniProfileResult result) {
-                    nameView.setText(result.result.getName());
+                nameView.setText(result.result.getName());
                 Glide.with(HomeActivity.this).load(result.result.getPhoto()).into(profileView);
             }
 

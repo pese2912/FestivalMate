@@ -483,14 +483,65 @@ public class NetworkManager {
 
     private static final String URL_SHOW_MINI_PROFILE = MY_SERVER + "/show_mini_profile";       // 햄버거바에서 프로필 조회
     public Request show_mini_profile(Object tag,
-                                   int mem_no,
-                                   OnResultListener<ShowMiniProfileResult> listener) {
+                                     int mem_no,
+                                     OnResultListener<ShowMiniProfileResult> listener) {
         RequestBody body = new FormBody.Builder()
                 .add("mem_no", mem_no+"")
                 .build();
 
         Request request = new Request.Builder()
                 .url(URL_SHOW_MINI_PROFILE)
+                .post(body)
+                .build();
+
+        final NetworkResult<ShowMiniProfileResult> result = new NetworkResult<>();
+        result.request = request;
+        result.listener = listener;
+        mClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                result.exception = e;
+                mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String text = response.body().string();
+                    ShowMiniProfileResult data = gson.fromJson(text, ShowMiniProfileResult.class);
+                    if (data.success == 1) {
+                        result.result = data;
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SUCCESS, result));
+                    } else {
+                        result.exception = new IOException(data.message);
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                    }
+
+                } else {
+                    result.exception = new IOException(response.message());
+                    mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                }
+            }
+        });
+        return request;
+    }
+
+
+    private static final String URL_MODIFY_PROFILE = MY_SERVER + "/modify_profile";       // 프로필 수정
+    public Request modify_profile(Object tag,
+                                     int mem_no,
+                                     String mem_img,
+                                    String mem_name,
+                                  String mem_state_msg,
+                                     OnResultListener<ShowMiniProfileResult> listener) {
+        RequestBody body = new FormBody.Builder()
+                .add("mem_no", mem_no+"")
+                .add("mem_name", mem_name)
+                .add("mem_state_msg", mem_state_msg)
+                .build();
+
+        Request request = new Request.Builder()
+                .url(URL_MODIFY_PROFILE)
                 .post(body)
                 .build();
 
