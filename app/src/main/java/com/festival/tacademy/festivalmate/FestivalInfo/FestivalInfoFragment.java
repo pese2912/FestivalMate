@@ -21,15 +21,21 @@ import android.widget.Toast;
 
 import com.festival.tacademy.festivalmate.Data.Artist;
 import com.festival.tacademy.festivalmate.Data.Festival;
+import com.festival.tacademy.festivalmate.Data.FestivalResultResult;
 import com.festival.tacademy.festivalmate.Data.Lineup;
 import com.festival.tacademy.festivalmate.Data.User;
+import com.festival.tacademy.festivalmate.Manager.NetworkManager;
+import com.festival.tacademy.festivalmate.Manager.PropertyManager;
 import com.festival.tacademy.festivalmate.MateMatching.MateMatchingStartActivity;
 import com.festival.tacademy.festivalmate.MyPage.FestibalSearchActivity;
 import com.festival.tacademy.festivalmate.R;
 import com.viewpagerindicator.CirclePageIndicator;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Request;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -115,28 +121,53 @@ public class FestivalInfoFragment extends Fragment {
         return  view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        initData();
+    }
+
     private void initData() {
+        mAdapter.clear();
         int[] a = new int[] {R.drawable.back1, R.drawable.back2, R.drawable.back3, R.drawable.back4, R.drawable.back5};
         List<Integer> items = new ArrayList<Integer>();
         for(int i=0; i<a.length; i++) {
             items.add(a[i]);
         }
         mAdapter.addAll(items);
-        List<User> users = new ArrayList<>();
-        List<Lineup> lineups = new ArrayList<>();
-        List<Artist> artists = new ArrayList<>();
 
-        for(int i=0; i<10; i++) {
-            users.add(new User("User: " + i,"http://www.betanews.net/imagedb/thumb/2014/0627/7ec1b12a.jpg"));
-            artists.add(new Artist("Artist: " + i));
-        }
-        for(int i=0; i<3; i++) {
-            lineups.add(new Lineup("Date: " + i, artists));
-        }
+        int memNo = PropertyManager.getInstance().getNo();
 
-        for (int i = 0; i < 10; i++) {
-            mAdapter2.add(new Festival("Item: "+i, "http://www.betanews.net/imagedb/thumb/2014/0627/7ec1b12a.jpg", "Date: "+i, "Location: "+i, users, lineups));
-        }
+        NetworkManager.getInstance().show_festival_list(getContext(), memNo, new NetworkManager.OnResultListener<FestivalResultResult>() {
+            @Override
+            public void onSuccess(Request request, FestivalResultResult result) {
+                mAdapter2.clear();
+                Toast.makeText(getContext(),"성공",Toast.LENGTH_SHORT).show();
+                mAdapter2.addAll(result.result);
+            }
+
+            @Override
+            public void onFail(Request request, IOException exception) {
+                Toast.makeText(getContext(),"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
+//        List<User> users = new ArrayList<>();
+//        List<Lineup> lineups = new ArrayList<>();
+//        List<Artist> artists = new ArrayList<>();
+//
+//        for(int i=0; i<10; i++) {
+//            users.add(new User("User: " + i,"http://www.betanews.net/imagedb/thumb/2014/0627/7ec1b12a.jpg"));
+//            artists.add(new Artist("Artist: " + i));
+//        }
+//        for(int i=0; i<3; i++) {
+//            lineups.add(new Lineup("Date: " + i, artists));
+//        }
+//
+//        for (int i = 0; i < 10; i++) {
+//            mAdapter2.add(new Festival("Item: "+i, "http://www.betanews.net/imagedb/thumb/2014/0627/7ec1b12a.jpg", "Date: "+i, "Location: "+i, users, lineups));
+//        }
+
     }
 
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

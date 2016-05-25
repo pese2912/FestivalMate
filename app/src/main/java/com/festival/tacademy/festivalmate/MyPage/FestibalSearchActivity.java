@@ -85,7 +85,7 @@ public class FestibalSearchActivity extends AppCompatActivity {
         mAdapter.clear();
 
         //PropertyManager.getInstance().setUser(new User(11));
-        NetworkManager.getInstance().show_festival_list(this, editText.getText().toString(), PropertyManager.getInstance().getNo(),
+        NetworkManager.getInstance().show_festival_result(this, editText.getText().toString(), PropertyManager.getInstance().getNo(),
                 new NetworkManager.OnResultListener<FestivalResultResult>() {
                     @Override
                     public void onSuccess(Request request, FestivalResultResult result) {

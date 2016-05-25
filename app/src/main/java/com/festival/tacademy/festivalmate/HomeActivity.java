@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.festival.tacademy.festivalmate.Data.ShowMiniProfileResult;
@@ -49,6 +50,7 @@ public class HomeActivity extends AppCompatActivity
         tabHost = (FragmentTabHost)findViewById(R.id.tabHost);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
+      //  Toast.makeText(HomeActivity.this,PropertyManager.getInstance().getNo()+"",Toast.LENGTH_SHORT).show();
 
         setSupportActionBar(toolbar);
 

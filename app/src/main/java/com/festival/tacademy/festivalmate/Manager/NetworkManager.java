@@ -343,7 +343,7 @@ public class NetworkManager {
 
 
     private static final String URL_SHOW_FESTIVAL_RESULT = MY_SERVER + "/show_festival_result";       // 공연 검색했을 때
-    public Request show_festival_list(Object tag,
+    public Request show_festival_result(Object tag,
                                       String festival_name,
                                       int mem_no,
                                       OnResultListener<FestivalResultResult> listener) {
@@ -560,6 +560,51 @@ public class NetworkManager {
                 if (response.isSuccessful()) {
                     String text = response.body().string();
                     ShowMiniProfileResult data = gson.fromJson(text, ShowMiniProfileResult.class);
+                    if (data.success == 1) {
+                        result.result = data;
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SUCCESS, result));
+                    } else {
+                        result.exception = new IOException(data.message);
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                    }
+
+                } else {
+                    result.exception = new IOException(response.message());
+                    mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                }
+            }
+        });
+        return request;
+    }
+
+    private static final String URL_SHOW_FESTIVAL_LIST = MY_SERVER + "/show_festival_list";       //  홈 공연 정보 리스트 조회
+    public Request show_festival_list(Object tag,
+                                  int mem_no,
+                                  OnResultListener<FestivalResultResult> listener) {
+        RequestBody body = new FormBody.Builder()
+                .add("mem_no", mem_no+"")
+                .build();
+
+        Request request = new Request.Builder()
+                .url(URL_SHOW_FESTIVAL_LIST)
+                .post(body)
+                .build();
+
+        final NetworkResult<FestivalResultResult> result = new NetworkResult<>();
+        result.request = request;
+        result.listener = listener;
+        mClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                result.exception = e;
+                mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String text = response.body().string();
+                    FestivalResultResult data = gson.fromJson(text, FestivalResultResult.class);
                     if (data.success == 1) {
                         result.result = data;
                         mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SUCCESS, result));

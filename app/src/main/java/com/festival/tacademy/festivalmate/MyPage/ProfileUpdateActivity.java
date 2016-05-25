@@ -68,7 +68,12 @@ public class ProfileUpdateActivity extends AppCompatActivity {
                 int memNo = PropertyManager.getInstance().getNo();
                 String name = nameView.getText().toString();
                 String message = messageView.getText().toString();
-                int birthday = Integer.parseInt(birthView.getText().toString());
+//                int birthday = Integer.parseInt(birthView.getText().toString());
+
+                if (TextUtils.isEmpty(name) || TextUtils.isEmpty(message)) {
+                    Toast.makeText(ProfileUpdateActivity.this, "invalid value", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 NetworkManager.getInstance().modify_profile(ProfileUpdateActivity.this, memNo, "", name, message, new NetworkManager.OnResultListener<ShowMiniProfileResult>() {
                     @Override

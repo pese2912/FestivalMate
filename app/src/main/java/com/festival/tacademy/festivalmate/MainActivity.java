@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.festival.tacademy.festivalmate.Manager.PropertyManager;
 import com.festival.tacademy.festivalmate.login.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,6 +19,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        PropertyManager.getInstance().setNo(0);
+        PropertyManager.getInstance().setEmail("");
+        PropertyManager.getInstance().setPassword("");
+        PropertyManager.getInstance().setUser(null);
 
         TextView btn = (TextView)findViewById(R.id.btn_login);
         btn.setOnClickListener(new View.OnClickListener() { // 로그인 버튼 눌렀을 경우

@@ -21,6 +21,11 @@ public class FestivalPagerAdapter extends FragmentPagerAdapter {
         this.items.addAll(items);
         notifyDataSetChanged();
     }
+    public void clear()
+    {
+        this.items.clear();
+        notifyDataSetChanged();
+    }
 
     public FestivalPagerAdapter(FragmentManager fm) {
         super(fm);
