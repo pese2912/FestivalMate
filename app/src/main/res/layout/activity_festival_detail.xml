@@ -25,20 +25,13 @@
             android:textColor="#ffffff"
             android:layout_gravity="left"
             />
+
     </android.support.v7.widget.Toolbar>
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar"
         android:id="@+id/rv_list"></android.support.v7.widget.RecyclerView>
-
-    <android.support.design.widget.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btn_matching_start"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="94dp" />
 
     <Button
         android:layout_width="wrap_content"

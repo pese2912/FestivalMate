@@ -27,6 +27,7 @@ public class JoinWaitListAdapter extends RecyclerView.Adapter<JoinWaitListViewHo
         this.items.addAll(items);
         notifyDataSetChanged();
     }
+
     public void clear(){
         this.items.clear();
         notifyDataSetChanged();

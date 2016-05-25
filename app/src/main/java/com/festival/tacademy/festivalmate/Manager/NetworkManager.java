@@ -626,50 +626,7 @@ public class NetworkManager {
 
 
 
-    private static final String URL_SHOW_FESTIVAL_LINEUPS = MY_SERVER + "/show_festival_lineups";       //  공연의 라인업 선택 화면을 보여줌
-    public Request show_festival_lineups(Object tag,
-                                        int festival_no,
-                                        OnResultListener<ShowFestivalLineups> listener) {
-        RequestBody body = new FormBody.Builder()
-                .add("festival_no",festival_no+"")
-                .build();
 
-        Request request = new Request.Builder()
-                .url(URL_SHOW_FESTIVAL_LINEUPS)
-                .post(body)
-                .build();
-
-        final NetworkResult<ShowFestivalLineups> result = new NetworkResult<>();
-        result.request = request;
-        result.listener = listener;
-        mClient.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                result.exception = e;
-                mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (response.isSuccessful()) {
-                    String text = response.body().string();
-                    ShowFestivalLineups data = gson.fromJson(text, ShowFestivalLineups.class);
-                    if (data.success == 1) {
-                        result.result = data;
-                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SUCCESS, result));
-                    } else {
-                        result.exception = new IOException(data.message);
-                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
-                    }
-
-                } else {
-                    result.exception = new IOException(response.message());
-                    mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
-                }
-            }
-        });
-        return request;
-    }
     private static final String URL_SHOW_FESTIVAL_DETAIL = MY_SERVER + "/show_festival_detail";       // 선택한 공연의 상세 정보를 보여줌
     public Request show_festival_detail(Object tag,
                                         int festival_no,
@@ -717,6 +674,49 @@ public class NetworkManager {
         return request;
     }
 
+    private static final String URL_SHOW_FESTIVAL_LINEUPS = MY_SERVER + "/show_festival_lineups";       //  공연의 라인업 선택 화면을 보여줌
+    public Request show_festival_lineups(Object tag,
+                                         int festival_no,
+                                         OnResultListener<ShowFestivalLineups> listener) {
+        RequestBody body = new FormBody.Builder()
+                .add("festival_no",festival_no+"")
+                .build();
 
+        Request request = new Request.Builder()
+                .url(URL_SHOW_FESTIVAL_LINEUPS)
+                .post(body)
+                .build();
+
+        final NetworkResult<ShowFestivalLineups> result = new NetworkResult<>();
+        result.request = request;
+        result.listener = listener;
+        mClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                result.exception = e;
+                mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String text = response.body().string();
+                    ShowFestivalLineups data = gson.fromJson(text, ShowFestivalLineups.class);
+                    if (data.success == 1) {
+                        result.result = data;
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SUCCESS, result));
+                    } else {
+                        result.exception = new IOException(data.message);
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                    }
+
+                } else {
+                    result.exception = new IOException(response.message());
+                    mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                }
+            }
+        });
+        return request;
+    }
 
 }
