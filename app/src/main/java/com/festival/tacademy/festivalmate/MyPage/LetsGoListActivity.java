@@ -84,7 +84,6 @@ public class LetsGoListActivity extends AppCompatActivity {
                 mAdapter.clear();
 
                 Toast.makeText(LetsGoListActivity.this,"성공",Toast.LENGTH_SHORT).show();
-                Toast.makeText(LetsGoListActivity.this,result.result.toString(),Toast.LENGTH_SHORT).show();
                 mAdapter.addAll(result.result);
             }
 

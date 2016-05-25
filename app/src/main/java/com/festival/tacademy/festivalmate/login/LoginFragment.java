@@ -101,7 +101,6 @@ public class LoginFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() { // 이메일가입하기 버튼 클릭시
             @Override
             public void onClick(View v) {
-
                 ((LoginActivity)getActivity()).changeSignUp(); // 회원가입으로 이동
 
 

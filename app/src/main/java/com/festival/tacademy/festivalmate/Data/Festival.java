@@ -37,8 +37,6 @@ public class Festival implements Serializable {
         this.festival_lineups = lineup;
     }
 
-
-
     public Festival(String festival_name) {
         this.festival_name = festival_name;
     }
@@ -122,6 +120,4 @@ public class Festival implements Serializable {
     public void setDate(String date) {
         this.date = date;
     }
-
-
 }

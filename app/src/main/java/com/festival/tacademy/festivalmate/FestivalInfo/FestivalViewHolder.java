@@ -48,11 +48,12 @@ public class FestivalViewHolder extends RecyclerView.ViewHolder {
 
     public void setFestival(Festival festival) {
 
+        int size = festival.getFestival_lineups().size();
         this.festival = festival;
         text_title.setText(festival.getFestival_name());
         Glide.with(photoView.getContext()).load(festival.getFestival_img()).into(photoView);
         if(festival.festival_lineups!=null)
-        text_date.setText(festival.getFestival_lineups().get(0).getDate());
+        text_date.setText(festival.getFestival_lineups().get(0).getDate() + "-" + festival.getFestival_lineups().get(size-1).getDate());
         text_location.setText(festival.getFestival_location());
     }
 }
