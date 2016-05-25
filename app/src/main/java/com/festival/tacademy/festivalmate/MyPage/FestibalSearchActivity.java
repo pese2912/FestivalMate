@@ -10,24 +10,33 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.festival.tacademy.festivalmate.Data.Artist;
 import com.festival.tacademy.festivalmate.Data.Festival;
+import com.festival.tacademy.festivalmate.Data.FestivalResultResult;
 import com.festival.tacademy.festivalmate.Data.Lineup;
 import com.festival.tacademy.festivalmate.Data.User;
 import com.festival.tacademy.festivalmate.FestivalInfo.FestivalAdapter;
 import com.festival.tacademy.festivalmate.FestivalInfo.FestivalDetailActivity;
 import com.festival.tacademy.festivalmate.FestivalInfo.FestivalViewHolder;
+import com.festival.tacademy.festivalmate.Manager.NetworkManager;
+import com.festival.tacademy.festivalmate.Manager.PropertyManager;
 import com.festival.tacademy.festivalmate.R;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Request;
 
 public class FestibalSearchActivity extends AppCompatActivity {
 
     RecyclerView listView;
     Toolbar toolbar;
     FestivalAdapter mAdapter;
+    EditText editText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +51,7 @@ public class FestibalSearchActivity extends AppCompatActivity {
         listView = (RecyclerView)findViewById(R.id.rv_list);
         listView.setAdapter(mAdapter);
         listView.setLayoutManager(new LinearLayoutManager(this));
+        editText = (EditText)findViewById(R.id.edit_info);
 
         mAdapter.setOnItemClickListener(new FestivalViewHolder.OnItemClickListener() {
             @Override
@@ -50,6 +60,7 @@ public class FestibalSearchActivity extends AppCompatActivity {
                 final  Festival festival1 = festival;
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
+
                     @Override
                     public void run() {
                         // Toast.makeText(getContext(),festival.getName(), Toast.LENGTH_SHORT).show();
@@ -72,21 +83,23 @@ public class FestibalSearchActivity extends AppCompatActivity {
 
     private void initData() {
         mAdapter.clear();
-        List<User> users = new ArrayList<>();
-        List<Lineup> lineups = new ArrayList<>();
-        List<Artist> artists = new ArrayList<>();
 
-        for(int i=0; i<10; i++) {
-            users.add(new User("User: " + i, R.mipmap.ic_launcher));
-            artists.add(new Artist("Artist: " + i));
-        }
-        for(int i=0; i<3; i++) {
-            lineups.add(new Lineup("Date: " + i, artists));
-        }
+        //PropertyManager.getInstance().setUser(new User(11));
+        NetworkManager.getInstance().show_festival_list(this, editText.getText().toString(), PropertyManager.getInstance().getNo(),
+                new NetworkManager.OnResultListener<FestivalResultResult>() {
+                    @Override
+                    public void onSuccess(Request request, FestivalResultResult result) {
 
-        for (int i = 0; i < 10; i++) {
-            mAdapter.add(new Festival("Item: "+i, "http://www.betanews.net/imagedb/thumb/2014/0627/7ec1b12a.jpg", "Date: "+i, "Location: "+i, users, lineups));
-        }
+                        if( result.success == 1 ) {
+                            Toast.makeText(FestibalSearchActivity.this, "Search Success", Toast.LENGTH_SHORT).show();
+                            mAdapter.addAll(result.result);
+                        }
+                    }
+                    @Override
+                    public void onFail(Request request, IOException exception) {
+                        Toast.makeText(FestibalSearchActivity.this, "Search Failed", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

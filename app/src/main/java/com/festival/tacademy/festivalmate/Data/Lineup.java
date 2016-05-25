@@ -8,28 +8,28 @@ import java.util.List;
  * Created by J.K.Lee on 2016-05-17.
  */
 public class Lineup implements Serializable{
-    String date;
-    List<Artist> lineup = new ArrayList<>();
+    String festival_date;
+    List<Artist> festival_lineup = new ArrayList<>();
 
     public String getDate() {
-        return date;
+        return festival_date;
     }
 
     public void setDate(String date) {
-        this.date = date;
+        this.festival_date = date;
     }
 
     public List<Artist> getLineup() {
-        return lineup;
+        return festival_lineup;
     }
 
     public void setLineup(List<Artist> lineup) {
-        this.lineup = lineup;
+        this.festival_lineup = lineup;
     }
 
     public Lineup(String date, List<Artist> lineup) {
 
-        this.date = date;
-        this.lineup = lineup;
+        this.festival_date = date;
+        this.festival_lineup = lineup;
     }
 }

@@ -121,7 +121,7 @@ public class FestivalDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         position--;
         if( position == 0 ) {
             LetsgoViewHolder h = (LetsgoViewHolder)holder;
-            h.setList(festival.getLetsgo_users(), mListener);
+            h.setList(festival.getFestival_going_mem(), mListener);
             return;
         }
         position--;

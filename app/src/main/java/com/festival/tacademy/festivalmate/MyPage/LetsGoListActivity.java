@@ -71,7 +71,7 @@ public class LetsGoListActivity extends AppCompatActivity {
         List<Artist> artists = new ArrayList<>();
 
         for(int i=0; i<10; i++) {
-            users.add(new User("User: " + i, R.mipmap.ic_launcher));
+            users.add(new User("User: " + i, "http://www.betanews.net/imagedb/thumb/2014/0627/7ec1b12a.jpg"));
             artists.add(new Artist("Artist: " + i));
         }
         for(int i=0; i<3; i++) {

@@ -23,6 +23,6 @@ public class PhotoViewHolder extends RecyclerView.ViewHolder {
     }
     public void setPhoto(Festival festival) {
         this.festival = festival;
-        Glide.with(festival_photo.getContext()).load(festival.getPhoto()).into(festival_photo);
+        Glide.with(festival_photo.getContext()).load(festival.getFestival_img()).into(festival_photo);
     }
 }

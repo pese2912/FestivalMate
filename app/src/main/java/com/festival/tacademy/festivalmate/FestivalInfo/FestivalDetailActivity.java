@@ -46,10 +46,10 @@ public class FestivalDetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         festival = (Festival)intent.getExtras().getSerializable("festival");
-        toolbarTitle.setText(festival.getName());
+        toolbarTitle.setText(festival.getFestival_name());
         mAdapter.setFestval(festival);
 
-        Toast.makeText(this, festival.getName() + "+ " + festival.getDate() + "+ " + festival.getLocation(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, festival.getFestival_name() + "+ " + festival.getDate() + "+ " + festival.getFestival_location(), Toast.LENGTH_SHORT).show();
 
         Button btn = (Button)findViewById(R.id.btn_matching);
         btn.setOnClickListener(new View.OnClickListener() {

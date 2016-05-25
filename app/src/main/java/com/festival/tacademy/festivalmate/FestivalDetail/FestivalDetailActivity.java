@@ -42,7 +42,7 @@ public class FestivalDetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mAdapter.setFestval(festival);
 
-        Toast.makeText(this, festival.getName() + "+ " + festival.getDate() + "+ " + festival.getLocation(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, festival.getFestival_name() + "+ " + festival.getDate() + "+ " + festival.getFestival_location(), Toast.LENGTH_SHORT).show();
 
         Button btn = (Button)findViewById(R.id.btn_matching);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +68,7 @@ public class FestivalDetailActivity extends AppCompatActivity {
                     artists.add(new Artist("Artist: " + i, "http://www.betanews.net/imagedb/thumb/2014/0627/7ec1b12a.jpg"));
                 }
 
-                User user = new User("ID " + 1, R.drawable.face,"Name " + 1, letsgo, artists);
+                User user = new User("ID " + 1, "http://www.betanews.net/imagedb/thumb/2014/0627/7ec1b12a.jpg","Name " + 1, letsgo, artists);
 
 
                 Bundle bundle = new Bundle();

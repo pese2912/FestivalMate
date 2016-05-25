@@ -11,8 +11,8 @@ public class User implements Serializable {
 
     public int mem_no;
     public String mem_id;
-    public int photo;
-    public  String name;
+    public String mem_img;
+    public  String mem_name;
     public  List<Festival> letsgo = new ArrayList<>();
     public List<Artist> artist = new ArrayList<>();
     public int bad_cnt;
@@ -31,9 +31,9 @@ public class User implements Serializable {
     public void setMem_id(String mem_id) {
         this.mem_id = mem_id;
     }
-    public User( String mem_id,int photo, String name,  List<Festival> letsgo, List<Artist> artist) {
-        this.photo = photo;
-        this.name = name;
+    public User( String mem_id,String photo, String name,  List<Festival> letsgo, List<Artist> artist) {
+        this.mem_img = photo;
+        this.mem_name = name;
         this.mem_id = mem_id;
         this.letsgo = letsgo;
         this.artist = artist;
@@ -43,17 +43,17 @@ public class User implements Serializable {
         return mem_id;
     }
 
-    public User(String id, int photo) {
+    public User(String id, String photo) {
         this.mem_id = id;
-        this.photo = photo;
+        this.mem_img = photo;
     }
 
     public String getName() {
-        return name;
+        return mem_name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.mem_name = name;
     }
 
 
@@ -85,12 +85,12 @@ public class User implements Serializable {
         this.mem_id = id;
     }
 
-    public int getPhoto() {
-        return photo;
+    public String getPhoto() {
+        return mem_img;
     }
 
-    public void setPhoto(int photo)
+    public void setPhoto(String photo)
     {
-        this.photo = photo;
+        this.mem_img = photo;
     }
 }

@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.bumptech.glide.Glide;
 import com.festival.tacademy.festivalmate.Data.User;
 import com.festival.tacademy.festivalmate.R;
 
@@ -27,7 +28,7 @@ public class UserViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void setUser(User user) {
-        photoView.setImageResource(user.getPhoto());
+        Glide.with(photoView.getContext()).load(user.getPhoto()).into(photoView);
         idView.setText(user.getId());
     }
 }

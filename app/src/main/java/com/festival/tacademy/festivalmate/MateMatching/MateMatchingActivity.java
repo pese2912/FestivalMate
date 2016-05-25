@@ -85,7 +85,7 @@ public class MateMatchingActivity extends AppCompatActivity {
     private void initData() {
         for (int i = 0; i < 10; i++) {
             artists.add(new Artist("Artist " + i));
-            users.add(new User("Name " + i, R.mipmap.ic_launcher));
+            users.add(new User("Name " + i,"http://sitehomebos.kocca.kr/knowledge/abroad/deep/__icsFiles/artimage/2012/03/26/2_1.jpg"));
         }
 
         for( int i=0; i<10; i++ ) {
@@ -124,7 +124,7 @@ public class MateMatchingActivity extends AppCompatActivity {
                 for(int i=0; i<10; i++) {
                     artists.add(new Artist("Artist: " + i, "http://sitehomebos.kocca.kr/knowledge/abroad/deep/__icsFiles/artimage/2012/03/26/2_1.jpg"));
                 }
-                User user = new User("ID " + 1, R.drawable.face,"Name " + 1, letsgo, artists);
+                User user = new User("ID " + 1, "http://sitehomebos.kocca.kr/knowledge/abroad/deep/__icsFiles/artimage/2012/03/26/2_1.jpg","Name " + 1, letsgo, artists);
 
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("user", user);

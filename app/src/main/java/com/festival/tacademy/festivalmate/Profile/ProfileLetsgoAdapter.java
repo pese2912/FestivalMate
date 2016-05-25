@@ -42,7 +42,7 @@ public class ProfileLetsgoAdapter extends RecyclerView.Adapter<ProfileLetsgoView
 
     @Override
     public void onBindViewHolder(ProfileLetsgoViewHolder holder, int position) {
-        holder.setText(items.get(position).getName());
+        holder.setText(items.get(position).getFestival_name());
     }
 
     @Override
