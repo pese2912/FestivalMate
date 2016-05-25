@@ -32,4 +32,8 @@ public class Lineup implements Serializable{
         this.festival_date = date;
         this.festival_lineup = lineup;
     }
+    public Lineup(String date) {
+
+        this.festival_date = date;
+    }
 }

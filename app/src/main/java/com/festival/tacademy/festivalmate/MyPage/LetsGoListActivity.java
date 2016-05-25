@@ -81,6 +81,7 @@ public class LetsGoListActivity extends AppCompatActivity {
         for (int i = 0; i < 10; i++) {
             mAdapter.add(new Festival("Item: "+i, "http://www.betanews.net/imagedb/thumb/2014/0627/7ec1b12a.jpg", "Date: "+i, "Location: "+i, users, lineups));
         }
+
     }
 
     @Override

@@ -2,64 +2,65 @@ package com.festival.tacademy.festivalmate.Data;
 
 import android.graphics.drawable.Drawable;
 
+import java.util.List;
+
 /**
  * Created by Tacademy on 2016-05-18.
  */
 public class MateTalkWaitList {
-    public String name;
-    public String title;
-    public String people;
-    public String date;
-    public String waitPeople;
 
-    public Drawable photo;
+    public int chatroom_no;
+    public String chatroom_img;
+    public String chatroom_festival;
+    public String chatroom_name;
+    public List<Lineup> festival_lineups;
+    public int chatroom_wait_num;
 
-    public Drawable getPhoto() {
-        return photo;
+    public int getChatroom_no() {
+        return chatroom_no;
     }
 
-    public void setPhoto(Drawable photo) {
-        this.photo = photo;
+    public void setChatroom_no(int chatroom_no) {
+        this.chatroom_no = chatroom_no;
     }
 
-    public String getName() {
-        return name;
+    public String getChatroom_img() {
+        return chatroom_img;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setChatroom_img(String chatroom_img) {
+        this.chatroom_img = chatroom_img;
     }
 
-    public String getTitle() {
-        return title;
+    public String getChatroom_festival() {
+        return chatroom_festival;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setChatroom_festival(String chatroom_festival) {
+        this.chatroom_festival = chatroom_festival;
     }
 
-    public String getPeople() {
-        return people;
+    public String getChatroom_name() {
+        return chatroom_name;
     }
 
-    public void setPeople(String people) {
-        this.people = people;
+    public void setChatroom_name(String chatroom_name) {
+        this.chatroom_name = chatroom_name;
     }
 
-    public String getDate() {
-        return date;
+    public List<Lineup> getFestival_lineups() {
+        return festival_lineups;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setFestival_lineups(List<Lineup> festival_lineups) {
+        this.festival_lineups = festival_lineups;
     }
 
-    public String getWaitPeople() {
-        return waitPeople;
+    public int getChatroom_wait_num() {
+        return chatroom_wait_num;
     }
 
-    public void setWaitPeople(String waitPeople) {
-        this.waitPeople = waitPeople;
+    public void setChatroom_wait_num(int chatroom_wait_num) {
+        this.chatroom_wait_num = chatroom_wait_num;
     }
-
 }

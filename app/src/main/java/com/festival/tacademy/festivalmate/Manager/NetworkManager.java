@@ -10,6 +10,7 @@ import com.festival.tacademy.festivalmate.Data.FestivalResultResult;
 import com.festival.tacademy.festivalmate.Data.MySignInResult;
 import com.festival.tacademy.festivalmate.Data.MySignUpResult;
 import com.festival.tacademy.festivalmate.Data.ShowArtistSurveyResult;
+import com.festival.tacademy.festivalmate.Data.ShowWaitingListResult;
 import com.festival.tacademy.festivalmate.MyApplication;
 import com.google.gson.Gson;
 
@@ -210,7 +211,7 @@ public class NetworkManager {
 
 
 
-    private static final String URL_SHOW_ARTIST_SURVEY = MY_SERVER + "/show_artist_survey"; // 선호가수 조사
+    private static final String URL_SHOW_ARTIST_SURVEY = MY_SERVER + "/show_artist_survey"; // 선호가수 조사 리스트 조회
     public Request showArtistSurvey(Object tag,
                           int mem_no,
                           OnResultListener<ShowArtistSurveyResult> listener) {
@@ -251,7 +252,7 @@ public class NetworkManager {
     }
 
 
-    private static final String URL_SEARCH_ARTIST_SURVEY = MY_SERVER + "/search_artist_survey"; // 선호가수 조사
+    private static final String URL_SEARCH_ARTIST_SURVEY = MY_SERVER + "/search_artist_survey"; // 선호가수 조사 검색
     public Request searchArtistSurvey(Object tag,
                                     int mem_no,
                                       String artist_name,
@@ -386,4 +387,48 @@ public class NetworkManager {
         return request;
     }
 
+    private static final String URL_SHOW_WAITING_LIST = MY_SERVER + "/show_waiting_list";       // 모임 승인 대기 리스트 조회
+    public Request show_waiting_list(Object tag,
+                                      int mem_no,
+                                      OnResultListener<ShowWaitingListResult> listener) {
+        RequestBody body = new FormBody.Builder()
+                .add("mem_no", mem_no+"")
+                .build();
+
+        Request request = new Request.Builder()
+                .url(URL_SHOW_WAITING_LIST)
+                .post(body)
+                .build();
+
+        final NetworkResult<ShowWaitingListResult> result = new NetworkResult<>();
+        result.request = request;
+        result.listener = listener;
+        mClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                result.exception = e;
+                mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String text = response.body().string();
+                    ShowWaitingListResult data = gson.fromJson(text, ShowWaitingListResult.class);
+                    if (data.success == 1) {
+                        result.result = data;
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SUCCESS, result));
+                    } else {
+                        result.exception = new IOException(data.message);
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                    }
+
+                } else {
+                    result.exception = new IOException(response.message());
+                    mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                }
+            }
+        });
+        return request;
+    }
 }
