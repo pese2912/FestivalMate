@@ -27,9 +27,11 @@ public class LineupViewHolder extends RecyclerView.ViewHolder {
 
     public void setText(Lineup lineup) {
         textDate.setText(lineup.getDate());
-        textLineup.setText(lineup.getLineup().get(0).getName());
-        for( int i=1; i<lineup.getLineup().size(); i++ ) {
-            textLineup.append(", " + lineup.getLineup().get(i).getName());
+        if(lineup.getLineup()!=null) {
+            textLineup.setText(lineup.getLineup().get(0).getName());
+            for (int i = 1; i < lineup.getLineup().size(); i++) {
+                textLineup.append(", " + lineup.getLineup().get(i).getName());
+            }
         }
     }
 }

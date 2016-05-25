@@ -9,18 +9,25 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.festival.tacademy.festivalmate.Data.Artist;
 import com.festival.tacademy.festivalmate.Data.Festival;
 import com.festival.tacademy.festivalmate.Data.Lineup;
+import com.festival.tacademy.festivalmate.Data.ShowGoingListResult;
 import com.festival.tacademy.festivalmate.Data.User;
 import com.festival.tacademy.festivalmate.FestivalInfo.FestivalAdapter;
 import com.festival.tacademy.festivalmate.FestivalInfo.FestivalDetailActivity;
 import com.festival.tacademy.festivalmate.FestivalInfo.FestivalViewHolder;
+import com.festival.tacademy.festivalmate.Manager.NetworkManager;
+import com.festival.tacademy.festivalmate.Manager.PropertyManager;
 import com.festival.tacademy.festivalmate.R;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Request;
 
 public class LetsGoListActivity extends AppCompatActivity {
 
@@ -62,25 +69,49 @@ public class LetsGoListActivity extends AppCompatActivity {
             }
         });
         initData();
-
     }
 
+
     private void initData() {
-        List<User> users = new ArrayList<>();
-        List<Lineup> lineups = new ArrayList<>();
-        List<Artist> artists = new ArrayList<>();
 
-        for(int i=0; i<10; i++) {
-            users.add(new User("User: " + i, "http://www.betanews.net/imagedb/thumb/2014/0627/7ec1b12a.jpg"));
-            artists.add(new Artist("Artist: " + i));
-        }
-        for(int i=0; i<3; i++) {
-            lineups.add(new Lineup("Date: " + i, artists));
-        }
 
-        for (int i = 0; i < 10; i++) {
-            mAdapter.add(new Festival("Item: "+i, "http://www.betanews.net/imagedb/thumb/2014/0627/7ec1b12a.jpg", "Date: "+i, "Location: "+i, users, lineups));
-        }
+        int memNo = PropertyManager.getInstance().getNo();
+
+
+        NetworkManager.getInstance().show_going_list(LetsGoListActivity.this, memNo, new NetworkManager.OnResultListener<ShowGoingListResult>() {
+            @Override
+            public void onSuccess(Request request, ShowGoingListResult result) {
+                mAdapter.clear();
+
+                Toast.makeText(LetsGoListActivity.this,"성공",Toast.LENGTH_SHORT).show();
+                Toast.makeText(LetsGoListActivity.this,result.result.toString(),Toast.LENGTH_SHORT).show();
+                mAdapter.addAll(result.result);
+            }
+
+            @Override
+            public void onFail(Request request, IOException exception) {
+                Toast.makeText(LetsGoListActivity.this,"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
+//
+//        List<User> users = new ArrayList<>();
+//        List<Lineup> lineups = new ArrayList<>();
+//        List<Artist> artists = new ArrayList<>();
+//
+//        for(int i=0; i<10; i++) {
+//            users.add(new User("User: " + i, "http://www.betanews.net/imagedb/thumb/2014/0627/7ec1b12a.jpg"));
+//            artists.add(new Artist("Artist: " + i));
+//        }
+//        for(int i=0; i<3; i++) {
+//            lineups.add(new Lineup("Date: " + i, artists));
+//        }
+//
+//        for (int i = 0; i < 10; i++) {
+//            mAdapter.add(new Festival("Item: "+i, "http://www.betanews.net/imagedb/thumb/2014/0627/7ec1b12a.jpg", "Date: "+i, "Location: "+i, users, lineups));
+//        }
+
+
 
     }
 
