@@ -79,23 +79,25 @@ public class MateMatchingStartActivity extends AppCompatActivity {
                 int memNo = PropertyManager.getInstance().getNo();
                 int fesNo = festival.getFestival_no();
 
-                NetworkManager.getInstance().show_matching_result(MateMatchingStartActivity.this, memNo, fesNo, selectedArtist, new NetworkManager.OnResultListener<ShowMatchingResult>() {
-                    //매칭 결과
-                    @Override
-                    public void onSuccess(Request request, ShowMatchingResult result) {
-
-                        Toast.makeText(MateMatchingStartActivity.this,"성공",Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(MateMatchingStartActivity.this, MateMatchingActivity.class);
+//                NetworkManager.getInstance().show_matching_result(MateMatchingStartActivity.this, memNo, fesNo, selectedArtist, new NetworkManager.OnResultListener<ShowMatchingResult>() {
+//                    //매칭 결과
+//                    @Override
+//                    public void onSuccess(Request request, ShowMatchingResult result) {
+//
+//                        Toast.makeText(MateMatchingStartActivity.this,"성공",Toast.LENGTH_SHORT).show();
+//                        Intent intent = new Intent(MateMatchingStartActivity.this, MateMatchingActivity.class);
+//                        intent.putExtra("ShowMatchingResult",result);
+//                        startActivity(intent);
+//                    }
+//
+//                    @Override
+//                    public void onFail(Request request, IOException exception) {
+//                        Toast.makeText(MateMatchingStartActivity.this,"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+                Intent intent = new Intent(MateMatchingStartActivity.this, MateMatchingActivity.class);
                         intent.putExtra("ShowMatchingResult",result);
                         startActivity(intent);
-                    }
-
-                    @Override
-                    public void onFail(Request request, IOException exception) {
-                        Toast.makeText(MateMatchingStartActivity.this,"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
-                    }
-                });
-
             }
         });
     }

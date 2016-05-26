@@ -13,6 +13,11 @@ public class User implements Serializable {
     public String mem_id;
     public String mem_img;
     public  String mem_name;
+    public String mem_state_msg;
+
+    public  List<Festival> mem_going = new ArrayList<>();
+    public List<Artist> mem_fav_artist = new ArrayList<>();
+    public int bad_cnt;
 
 
     public int chatroom_mems_no;
@@ -44,10 +49,6 @@ public class User implements Serializable {
         this.chatroom_mem_img = chatroom_mem_img;
     }
 
-    public String mem_state_msg;
-    public  List<Festival> letsgo = new ArrayList<>();
-    public List<Artist> artist = new ArrayList<>();
-    public int bad_cnt;
     public int getMem_no() {
         return mem_no;
     }
@@ -75,13 +76,14 @@ public class User implements Serializable {
         this.mem_img = photo;
         this.mem_name = name;
         this.mem_id = mem_id;
-        this.letsgo = letsgo;
-        this.artist = artist;
+        this.mem_going = letsgo;
+        this.mem_fav_artist = artist;
     }
 
     public User(){
 
     }
+
     public String getId() {
         return mem_id;
     }
@@ -100,20 +102,20 @@ public class User implements Serializable {
     }
 
 
-    public List<Festival> getLetsgo() {
-        return letsgo;
+    public List<Festival> getMem_going() {
+        return mem_going;
     }
 
-    public void setLetsgo(List<Festival> letsgo) {
-        this.letsgo = letsgo;
+    public void setMem_going(List<Festival> mem_going) {
+        this.mem_going = mem_going;
     }
 
     public List<Artist> getArtist() {
-        return artist;
+        return mem_fav_artist;
     }
 
     public void setArtist(List<Artist> artist) {
-        this.artist = artist;
+        this.mem_fav_artist = artist;
     }
 
     public int getBad_cnt() {

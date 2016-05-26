@@ -17,8 +17,9 @@ public class ChatUserViewHolder extends RecyclerView.ViewHolder {
     ImageView photoView;
     TextView idView;
 
+    User user;
     public interface OnItemClickListener {
-        public void onItemClick(View view);
+        public void onItemClick(View view,User user);
     }
 
     OnItemClickListener mListener;
@@ -36,13 +37,14 @@ public class ChatUserViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View v) {
                 if (mListener != null) {
-                    mListener.onItemClick(v);
+                    mListener.onItemClick(v,user);
                 }
             }
         });
     }
 
     public void setUser(User user) {
+        this.user = user;
         Glide.with(photoView.getContext()).load(user.getChatroom_mem_img()).into(photoView);
         idView.setText(user.getChatroom_mem_name());
     }

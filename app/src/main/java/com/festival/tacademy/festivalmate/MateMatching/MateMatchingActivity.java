@@ -15,6 +15,7 @@ import com.festival.tacademy.festivalmate.Data.Artist;
 import com.festival.tacademy.festivalmate.Data.Festival;
 import com.festival.tacademy.festivalmate.Data.MateTalkRoom;
 import com.festival.tacademy.festivalmate.Data.ShowMatchingResult;
+import com.festival.tacademy.festivalmate.Data.ShowMemProfileResult;
 import com.festival.tacademy.festivalmate.Data.User;
 import com.festival.tacademy.festivalmate.FestivalInfo.UserViewHolder;
 import com.festival.tacademy.festivalmate.Manager.NetworkManager;
@@ -94,25 +95,45 @@ public class MateMatchingActivity extends AppCompatActivity {
 
         mAdapter.setOnItemClickListener(new ChatUserViewHolder.OnItemClickListener() {
             @Override
-            public void onItemClick(View view) {
-                ProfileDialogFragment f = new ProfileDialogFragment();
+            public void onItemClick(View view, User user) {
 
-                List<Artist> artists = new ArrayList<>();
-                List<Festival> letsgo = new ArrayList<>();
+                NetworkManager.getInstance().show_mem_profile(MateMatchingActivity.this, user.getMem_no(), new NetworkManager.OnResultListener<ShowMemProfileResult>() {
+                    @Override
+                    public void onSuccess(Request request, ShowMemProfileResult result) {
+                        Toast.makeText(MateMatchingActivity.this, "성공",Toast.LENGTH_SHORT).show();
+                        ProfileDialogFragment f = new ProfileDialogFragment();
 
-                for(int i=0; i<3; i++) {
-                    letsgo.add(new Festival("Festival "+i));
-                }
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("user", result.result);
+                        f.setArguments(bundle);
+                        f.show(getSupportFragmentManager(), "aaaa");
+                    }
 
-                for(int i=0; i<10; i++) {
-                    artists.add(new Artist("Artist: " + i, "http://sitehomebos.kocca.kr/knowledge/abroad/deep/__icsFiles/artimage/2012/03/26/2_1.jpg"));
-                }
-                User user = new User("ID " + 1, "http://sitehomebos.kocca.kr/knowledge/abroad/deep/__icsFiles/artimage/2012/03/26/2_1.jpg","Name " + 1, letsgo, artists);
+                    @Override
+                    public void onFail(Request request, IOException exception) {
+                        Toast.makeText(MateMatchingActivity.this, "실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                });
 
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("user", user);
-                f.setArguments(bundle);
-                f.show(getSupportFragmentManager(), "aaaa");
+
+//                ProfileDialogFragment f = new ProfileDialogFragment();
+//
+//                List<Artist> artists = new ArrayList<>();
+//                List<Festival> letsgo = new ArrayList<>();
+//
+//                for(int i=0; i<3; i++) {
+//                    letsgo.add(new Festival("Festival "+i));
+//                }
+//
+//                for(int i=0; i<10; i++) {
+//                    artists.add(new Artist("Artist: " + i, "http://sitehomebos.kocca.kr/knowledge/abroad/deep/__icsFiles/artimage/2012/03/26/2_1.jpg"));
+//                }
+//                User user = new User("ID " + 1, "http://sitehomebos.kocca.kr/knowledge/abroad/deep/__icsFiles/artimage/2012/03/26/2_1.jpg","Name " + 1, letsgo, artists);
+//
+//                Bundle bundle = new Bundle();
+//                bundle.putSerializable("user", user);
+//                f.setArguments(bundle);
+//                f.show(getSupportFragmentManager(), "aaaa");
             }
         });
 
@@ -158,28 +179,29 @@ public class MateMatchingActivity extends AppCompatActivity {
 
     private void initData() {
 
-        mAdapter.clear();
-        mAdapter.addAll(result.result);
+//        mAdapter.clear();
+//        mAdapter.addAll(result.result);
 
-//        for (int i = 0; i < 10; i++) {
-//
-//            Artist artist = new Artist();
-//            artist.setMatched_artist_name("matchedName : "+ i);
-//            artist.setMatched_artist_no(i);
-//            artists.add(artist);
-//
-//            User user = new User();
-//            user.setChatroom_mem_name("chatName : "+ i);
-//            user.setChatroom_mem_img("http://sitehomebos.kocca.kr/knowledge/abroad/deep/__icsFiles/artimage/2012/03/26/2_1.jpg");
-//            user.setChatroom_mems_no(i);
-//            users.add(user);
-//
-//        }
-//
-//        for( int i=0; i<10; i++ ) {
-//            chatinfoes.add(new MateTalkRoom("모두모두 대환영 " + i,"http://sitehomebos.kocca.kr/knowledge/abroad/deep/__icsFiles/artimage/2012/03/26/2_1.jpg" , "Festival " + i, artists, 1, 1, users));
-//        }
-//        mAdapter.addAll(chatinfoes);
+        for (int i = 0; i < 10; i++) {
+
+            Artist artist = new Artist();
+            artist.setMatched_artist_name("matchedName : "+ i);
+            artist.setMatched_artist_no(i);
+            artists.add(artist);
+
+            User user = new User();
+            user.setMem_no(1);
+            user.setChatroom_mem_name("chatName : "+ i);
+            user.setChatroom_mem_img("http://sitehomebos.kocca.kr/knowledge/abroad/deep/__icsFiles/artimage/2012/03/26/2_1.jpg");
+            user.setChatroom_mems_no(i);
+            users.add(user);
+
+        }
+
+        for( int i=0; i<10; i++ ) {
+            chatinfoes.add(new MateTalkRoom("모두모두 대환영 " + i,"http://sitehomebos.kocca.kr/knowledge/abroad/deep/__icsFiles/artimage/2012/03/26/2_1.jpg" , "Festival " + i, artists, 1, 1, users));
+        }
+        mAdapter.addAll(chatinfoes);
 
     }
 

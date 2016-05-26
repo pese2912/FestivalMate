@@ -9,9 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.festival.tacademy.festivalmate.Data.HateResult;
 import com.festival.tacademy.festivalmate.Data.User;
 import com.festival.tacademy.festivalmate.Manager.NetworkManager;
@@ -32,6 +34,7 @@ public class ProfileDialogFragment extends DialogFragment {
 
     User user;
     TextView user_state, user_name, user_email;
+    ImageView user_image;
     RecyclerView rv_list1, rv_list2;
     ProfileLetsgoAdapter mAdapter1;
     ProfilePreferArtistAdapter mAdapter2;
@@ -59,7 +62,7 @@ public class ProfileDialogFragment extends DialogFragment {
 
         Bundle bundle = getArguments();
         user = (User)bundle.getSerializable("user");
-        mAdapter1.addAll(user.getLetsgo());
+        mAdapter1.addAll(user.getMem_going());
         mAdapter2.addAll(user.getArtist());
     }
 
@@ -79,7 +82,6 @@ public class ProfileDialogFragment extends DialogFragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 NetworkManager.getInstance().hate(getContext(), user.getMem_no(), new NetworkManager.OnResultListener<HateResult>() {
                     @Override
                     public void onSuccess(Request request, HateResult result) {
@@ -97,10 +99,12 @@ public class ProfileDialogFragment extends DialogFragment {
         });
 
         user_state = (TextView)view.findViewById(R.id.text_user_state);
+        user_image= (ImageView)view.findViewById(R.id.profile_photo);
         user_name = (TextView)view.findViewById(R.id.text_user_name);
         user_email = (TextView)view.findViewById(R.id.text_user_email);
         rv_list1 = (RecyclerView)view.findViewById(R.id.rv_list1);
         rv_list2 = (RecyclerView)view.findViewById(R.id.rv_list2);
+
 
         rv_list1.setAdapter(mAdapter1);
         rv_list1.setLayoutManager(mLayoutManager1);
@@ -109,9 +113,13 @@ public class ProfileDialogFragment extends DialogFragment {
 
         Bundle bundle = getArguments();
         bundle.getSerializable("user");
-        mAdapter1.addAll(user.getLetsgo());
+        mAdapter1.addAll(user.getMem_going());
         mAdapter2.addAll(user.getArtist());
 
+        user_state.setText(user.getMem_state_msg());
+        user_name.setText(user.getName());
+        user_email.setText(user.getMem_id());
+        Glide.with(user_image.getContext()).load(user.getChatroom_mem_img()).into(user_image);
         return view;
     }
 

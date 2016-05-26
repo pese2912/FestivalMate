@@ -15,6 +15,7 @@ import com.festival.tacademy.festivalmate.Data.ShowArtistSurveyResult;
 import com.festival.tacademy.festivalmate.Data.ShowFestivalLineups;
 import com.festival.tacademy.festivalmate.Data.ShowGoingListResult;
 import com.festival.tacademy.festivalmate.Data.ShowMatchingResult;
+import com.festival.tacademy.festivalmate.Data.ShowMemProfileResult;
 import com.festival.tacademy.festivalmate.Data.ShowMiniProfileResult;
 import com.festival.tacademy.festivalmate.Data.ShowWaitingListResult;
 import com.festival.tacademy.festivalmate.MyApplication;
@@ -857,6 +858,51 @@ public class NetworkManager {
                 if (response.isSuccessful()) {
                     String text = response.body().string();
                     HateResult data = gson.fromJson(text, HateResult.class);
+                    if (data.success == 1) {
+                        result.result = data;
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SUCCESS, result));
+                    } else {
+                        result.exception = new IOException(data.message);
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                    }
+
+                } else {
+                    result.exception = new IOException(response.message());
+                    mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                }
+            }
+        });
+        return request;
+    }
+
+    private static final String URL_SHOW_MEM_PROFILE = MY_SERVER + "/show_mem_profile";       // 선택 회원 프로필 정보 조회
+    public Request show_mem_profile(Object tag,
+                        int selected_mem_no,
+                        OnResultListener<ShowMemProfileResult> listener) {
+        RequestBody body = new FormBody.Builder()
+                .add("selected_mem_no", selected_mem_no+"")
+                .build();
+
+        Request request = new Request.Builder()
+                .url(URL_SHOW_MEM_PROFILE)
+                .post(body)
+                .build();
+
+        final NetworkResult<ShowMemProfileResult> result = new NetworkResult<>();
+        result.request = request;
+        result.listener = listener;
+        mClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                result.exception = e;
+                mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String text = response.body().string();
+                    ShowMemProfileResult data = gson.fromJson(text, ShowMemProfileResult.class);
                     if (data.success == 1) {
                         result.result = data;
                         mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SUCCESS, result));
