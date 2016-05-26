@@ -6,6 +6,8 @@ import android.os.Looper;
 import android.os.Message;
 
 import com.festival.tacademy.festivalmate.Data.Artist;
+import com.festival.tacademy.festivalmate.Data.ChatroomApproveResult;
+import com.festival.tacademy.festivalmate.Data.ChatroomKickResult;
 import com.festival.tacademy.festivalmate.Data.ChatroomMemListResult;
 import com.festival.tacademy.festivalmate.Data.FestivalDetailResult;
 import com.festival.tacademy.festivalmate.Data.FestivalResultResult;
@@ -970,6 +972,102 @@ public class NetworkManager {
         return request;
     }
 
+
+    private static final String URL_CHATROOM_APPROVE = MY_SERVER + "/chatroom_approve";       // 채팅 대기자 승인
+    public Request chatroom_approve(Object tag,
+                                     int approved_mem_no,
+                                     int chatroom_no,
+                                     OnResultListener<ChatroomApproveResult> listener) {
+
+        RequestBody body = new FormBody.Builder()
+                .add("approved_mem_no", approved_mem_no+"")
+                .add("chatroom_no", chatroom_no+"")
+                .build();
+
+        Request request = new Request.Builder()
+                .url(URL_CHATROOM_APPROVE)
+                .post(body)
+                .build();
+
+        final NetworkResult<ChatroomApproveResult> result = new NetworkResult<>();
+        result.request = request;
+        result.listener = listener;
+        mClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                result.exception = e;
+                mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String text = response.body().string();
+                    ChatroomApproveResult data = gson.fromJson(text, ChatroomApproveResult.class);
+                    if (data.success == 1) {
+                        result.result = data;
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SUCCESS, result));
+                    } else {
+                        result.exception = new IOException(data.message);
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                    }
+
+                } else {
+                    result.exception = new IOException(response.message());
+                    mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                }
+            }
+        });
+        return request;
+    }
+
+    private static final String URL_CHATROOM_KICK = MY_SERVER + "/chatroom_kick";       // 채팅방 강퇴
+    public Request chatroom_kick(Object tag,
+                                    int kicked_mem_no,
+                                    int chatroom_no,
+                                    OnResultListener<ChatroomKickResult> listener) {
+
+        RequestBody body = new FormBody.Builder()
+                .add("kicked_mem_no", kicked_mem_no+"")
+                .add("chatroom_no", chatroom_no+"")
+                .build();
+
+        Request request = new Request.Builder()
+                .url(URL_CHATROOM_KICK)
+                .post(body)
+                .build();
+
+        final NetworkResult<ChatroomKickResult> result = new NetworkResult<>();
+        result.request = request;
+        result.listener = listener;
+        mClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                result.exception = e;
+                mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String text = response.body().string();
+                    ChatroomKickResult data = gson.fromJson(text, ChatroomKickResult.class);
+                    if (data.success == 1) {
+                        result.result = data;
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SUCCESS, result));
+                    } else {
+                        result.exception = new IOException(data.message);
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                    }
+
+                } else {
+                    result.exception = new IOException(response.message());
+                    mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                }
+            }
+        });
+        return request;
+    }
 
 
 }

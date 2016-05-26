@@ -9,9 +9,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.festival.tacademy.festivalmate.Data.ChatroomKickResult;
 import com.festival.tacademy.festivalmate.Data.chatroom_member;
+import com.festival.tacademy.festivalmate.Manager.NetworkManager;
 import com.festival.tacademy.festivalmate.MyApplication;
 import com.festival.tacademy.festivalmate.R;
+
+import java.io.IOException;
+
+import okhttp3.Request;
 
 /**
  * Created by Tacademy on 2016-05-19.
@@ -30,7 +36,7 @@ public class ChatJoinerViewHolder extends RecyclerView.ViewHolder {
 
     }
 
-    public void setChatJoin(final chatroom_member member){
+    public void setChatJoin(final chatroom_member member, final int chatNo){
         this.member = member;
         Glide.with(photoView.getContext()).load(member.getMem_img()).into(photoView);
 
@@ -38,7 +44,18 @@ public class ChatJoinerViewHolder extends RecyclerView.ViewHolder {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MyApplication.getContext(), "강퇴 : "+member.getMem_name(), Toast.LENGTH_SHORT).show();
+                NetworkManager.getInstance().chatroom_kick(MyApplication.getContext(), member.getChatroom_mems_no(), chatNo, new NetworkManager.OnResultListener<ChatroomKickResult>() {
+                    @Override
+                    public void onSuccess(Request request, ChatroomKickResult result) {
+                        Toast.makeText(MyApplication.getContext(), "강퇴 : "+member.getMem_name(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFail(Request request, IOException exception) {
+                        Toast.makeText(MyApplication.getContext(), "실패 : "+exception.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
             }
         });
     }

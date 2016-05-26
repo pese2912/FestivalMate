@@ -92,7 +92,7 @@ public class ChatJoinListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         if ( list.getChatroom_waitings().size() > 0 ) {
             if( position < list.getChatroom_waitings().size() ) {
                 ApproveWaiterViewHolder h = (ApproveWaiterViewHolder)holder;
-                h.setApproveWaiter(list.getChatroom_waitings().get(position));
+                h.setApproveWaiter(list.getChatroom_waitings().get(position),list.getChatroom_no());
                 return;
             }
             position -= list.getChatroom_waitings().size();
@@ -105,7 +105,7 @@ public class ChatJoinListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         if(list.getChatroom_members().size() > 0) {
             if (position < list.getChatroom_members().size()) {
                 ChatJoinerViewHolder h = (ChatJoinerViewHolder)holder;
-              h.setChatJoin(list.getChatroom_members().get(position));
+              h.setChatJoin(list.getChatroom_members().get(position), list.getChatroom_no());
                return;
             }
             position -= list.getChatroom_members().size();

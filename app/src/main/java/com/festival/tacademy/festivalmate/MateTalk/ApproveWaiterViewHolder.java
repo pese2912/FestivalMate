@@ -8,10 +8,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.festival.tacademy.festivalmate.Data.ChatroomApproveResult;
 import com.festival.tacademy.festivalmate.Data.MateTalkRoom;
 import com.festival.tacademy.festivalmate.Data.chatroom_waiting;
+import com.festival.tacademy.festivalmate.Manager.NetworkManager;
 import com.festival.tacademy.festivalmate.MyApplication;
 import com.festival.tacademy.festivalmate.R;
+
+import java.io.IOException;
+
+import okhttp3.Request;
 
 /**
  * Created by Tacademy on 2016-05-19.
@@ -42,20 +48,32 @@ public class ApproveWaiterViewHolder extends RecyclerView.ViewHolder {
         btnApproved = (Button)itemView.findViewById(R.id.btn_approved);
     }
 
-    public void setApproveWaiter(chatroom_waiting waiter){
+    public void setApproveWaiter(final chatroom_waiting waiter,final int chatNo){
         this.waiting =waiter;
         Glide.with(photoView.getContext()).load(waiter.getMem_img()).into(photoView);
         nameView.setText(waiter.getMem_name());
         btnReject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Toast.makeText(MyApplication.getContext(), "거절 : "+waiting.getMem_name(), Toast.LENGTH_SHORT).show();
             }
         });
         btnApproved.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MyApplication.getContext(), "승인 : "+waiting.getMem_name(), Toast.LENGTH_SHORT).show();
+                NetworkManager.getInstance().chatroom_approve(MyApplication.getContext(), waiter.getChatroom_waiting_no(), chatNo, new NetworkManager.OnResultListener<ChatroomApproveResult>() {
+                    @Override
+                    public void onSuccess(Request request, ChatroomApproveResult result) {
+                        Toast.makeText(MyApplication.getContext(), "승인 : "+waiting.getMem_name(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFail(Request request, IOException exception) {
+                        Toast.makeText(MyApplication.getContext(), "실패 : "+exception.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
             }
         });
     }

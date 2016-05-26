@@ -54,12 +54,18 @@ public class ChatJoinListActivity extends AppCompatActivity {
         listView.setAdapter(mAdapter);
         listView.setLayoutManager(new LinearLayoutManager(this));
         setData();
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setData();
     }
 
     private void setData(){
         int memNo = PropertyManager.getInstance().getNo();
         int chatNo = mateTalkRoom.getChatroom_no();
+
         NetworkManager.getInstance().chatroom_mem_list(ChatJoinListActivity.this, memNo, chatNo, new NetworkManager.OnResultListener<ChatroomMemListResult>() {
             @Override
             public void onSuccess(Request request, ChatroomMemListResult result) {
