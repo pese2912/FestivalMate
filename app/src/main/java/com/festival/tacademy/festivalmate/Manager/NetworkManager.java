@@ -8,6 +8,7 @@ import android.os.Message;
 import com.festival.tacademy.festivalmate.Data.Artist;
 import com.festival.tacademy.festivalmate.Data.FestivalDetailResult;
 import com.festival.tacademy.festivalmate.Data.FestivalResultResult;
+import com.festival.tacademy.festivalmate.Data.HateResult;
 import com.festival.tacademy.festivalmate.Data.MySignInResult;
 import com.festival.tacademy.festivalmate.Data.MySignUpResult;
 import com.festival.tacademy.festivalmate.Data.ShowArtistSurveyResult;
@@ -811,6 +812,51 @@ public class NetworkManager {
                 if (response.isSuccessful()) {
                     String text = response.body().string();
                     ShowMatchingResult data = gson.fromJson(text, ShowMatchingResult.class);
+                    if (data.success == 1) {
+                        result.result = data;
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SUCCESS, result));
+                    } else {
+                        result.exception = new IOException(data.message);
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                    }
+
+                } else {
+                    result.exception = new IOException(response.message());
+                    mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                }
+            }
+        });
+        return request;
+    }
+
+    private static final String URL_HATE = MY_SERVER + "/hate";       // 선택 회원 신고하기
+    public Request hate(Object tag,
+                                        int selected_mem_no,
+                                        OnResultListener<HateResult> listener) {
+        RequestBody body = new FormBody.Builder()
+                .add("selected_mem_no", selected_mem_no+"")
+                .build();
+
+        Request request = new Request.Builder()
+                .url(URL_HATE)
+                .post(body)
+                .build();
+
+        final NetworkResult<HateResult> result = new NetworkResult<>();
+        result.request = request;
+        result.listener = listener;
+        mClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                result.exception = e;
+                mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String text = response.body().string();
+                    HateResult data = gson.fromJson(text, HateResult.class);
                     if (data.success == 1) {
                         result.result = data;
                         mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SUCCESS, result));

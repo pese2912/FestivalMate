@@ -12,9 +12,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.festival.tacademy.festivalmate.Data.HateResult;
 import com.festival.tacademy.festivalmate.Data.User;
+import com.festival.tacademy.festivalmate.Manager.NetworkManager;
 import com.festival.tacademy.festivalmate.MyApplication;
 import com.festival.tacademy.festivalmate.R;
+
+import java.io.IOException;
+
+import okhttp3.Request;
 
 
 /**
@@ -67,6 +73,26 @@ public class ProfileDialogFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 dismiss();
+            }
+        });
+        btn =(Button)view.findViewById(R.id.btn_report); // 신고하기
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                NetworkManager.getInstance().hate(getContext(), user.getMem_no(), new NetworkManager.OnResultListener<HateResult>() {
+                    @Override
+                    public void onSuccess(Request request, HateResult result) {
+
+                        Toast.makeText(getContext(), "성공",Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFail(Request request, IOException exception) {
+
+                        Toast.makeText(getContext(), "실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 
