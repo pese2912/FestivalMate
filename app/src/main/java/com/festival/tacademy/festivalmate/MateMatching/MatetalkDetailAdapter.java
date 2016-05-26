@@ -36,12 +36,12 @@ public class MatetalkDetailAdapter extends RecyclerView.Adapter<MatetalkDetailVi
     }
 
     MatetalkDetailViewHolder.OnItemClickListener mListener;
-    UserViewHolder.OnItemClickListener mListener2;
+    ChatUserViewHolder.OnItemClickListener mListener2;
 
     public void setOnItemClickListener(MatetalkDetailViewHolder.OnItemClickListener listener) {
         mListener = listener;
     }
-    public void setOnItemClickListener(UserViewHolder.OnItemClickListener listener) {
+    public void setOnItemClickListener(ChatUserViewHolder.OnItemClickListener listener) {
         mListener2 = listener;
     }
 

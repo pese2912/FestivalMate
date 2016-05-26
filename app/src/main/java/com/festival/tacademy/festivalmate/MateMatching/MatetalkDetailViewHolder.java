@@ -3,6 +3,7 @@ package com.festival.tacademy.festivalmate.MateMatching;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.bumptech.glide.Glide;
 import com.festival.tacademy.festivalmate.Data.MateTalkRoom;
 import com.festival.tacademy.festivalmate.FestivalInfo.UserViewHolder;
 import com.festival.tacademy.festivalmate.R;
@@ -43,27 +44,27 @@ public class MatetalkDetailViewHolder extends RecyclerView.ViewHolder {
 
     }
 
-    public void setMateTalkRoom(MateTalkRoom chatinfo, UserViewHolder.OnItemClickListener listener) {
-        detailView.text_title.setText(chatinfo.getFestival_name());
-        detailView.text_artist_num.setText(chatinfo.getMatching_artists().size() + "명");
+    public void setMateTalkRoom(MateTalkRoom chatinfo, ChatUserViewHolder.OnItemClickListener listener) {
+        detailView.text_title.setText(chatinfo.getChatroom_festival_name());
+        detailView.text_artist_num.setText(chatinfo.getMatched_artist().size() + "명");
 
-        detailView.text_artists.setText(chatinfo.getMatching_artists().get(0).getName());
-        for (int j = 1; j < chatinfo.getMatching_artists().size(); j++) {
-            detailView.text_artists.append(", " + chatinfo.getMatching_artists().get(j).getName());
+        detailView.text_artists.setText(chatinfo.getMatched_artist().get(0).getMatched_artist_name());
+        for (int j = 1; j < chatinfo.getMatched_artist().size(); j++) {
+            detailView.text_artists.append(", " + chatinfo.getMatched_artist().get(j).getMatched_artist_name());
         }
 
-        detailView.text_region.setText(chatinfo.getPrefer_location()+"");
-        detailView.text_age.setText(chatinfo.getAge()+"");
+        detailView.text_region.setText(chatinfo.getChatroom_location()+"");
+        detailView.text_age.setText(chatinfo.getChatroom_age()+"");
 
-        detailView.text_mem_user.setText(chatinfo.getMember().size()+"명");
+        detailView.text_mem_user.setText(chatinfo.getChatroom_mems().size()+"명");
 
         detailView.listView.setAdapter(detailView.mAdapter);
         detailView.listView.setLayoutManager(detailView.mLayoutManager);
 
-        detailView.mAdapter.addAll(chatinfo.getMember());
+        detailView.mAdapter.addAll(chatinfo.getChatroom_mems());
         detailView.mAdapter.setOnItemClickListener(listener);
 
-        infoView.photoView.setImageResource(chatinfo.getPhoto());
-        infoView.textView.setText(chatinfo.getTitle());
+        Glide.with(infoView.photoView.getContext()).load(chatinfo.getChatroom_img()).into(infoView.photoView);
+        infoView.textView.setText(chatinfo.getChatroom_name());
     }
 }

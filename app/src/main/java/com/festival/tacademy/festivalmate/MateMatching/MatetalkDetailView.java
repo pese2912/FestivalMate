@@ -42,7 +42,7 @@ public class MatetalkDetailView extends RelativeLayout {
 
     TextView text_title, text_artist_num, text_artists, text_region, text_age, text_mem_user;
     RecyclerView listView;
-    UserAdapter mAdapter;
+    ChatUserAdapter mAdapter;
     LinearLayoutManager mLayoutManager;
 
     private void init() {
@@ -56,7 +56,7 @@ public class MatetalkDetailView extends RelativeLayout {
         text_mem_user = (TextView) findViewById(R.id.text_mem_user);
 
         listView = (RecyclerView) findViewById(R.id.rv_list);
-        mAdapter = new UserAdapter(getContext());
+        mAdapter = new ChatUserAdapter(getContext());
         mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         listView.setAdapter(mAdapter);
         listView.setLayoutManager(mLayoutManager);
@@ -67,17 +67,17 @@ public class MatetalkDetailView extends RelativeLayout {
         }
 
 
-        text_artist_num.setText(chatinfo.getMatching_artists().size() + "명");
+        text_artist_num.setText(chatinfo.getMatched_artist().size() + "명");
 
-                text_artists.setText(chatinfo.getMatching_artists().get(0).getName());
-        for (int j = 1; j < chatinfo.getMatching_artists().size(); j++) {
-            text_artists.append(", " + chatinfo.getMatching_artists().get(j).getName());
+                text_artists.setText(chatinfo.getMatched_artist().get(0).getMatched_artist_name());
+        for (int j = 1; j < chatinfo.getMatched_artist().size(); j++) {
+            text_artists.append(", " + chatinfo.getMatched_artist().get(j).getMatched_artist_name());
         }
 
-        text_region.setText(chatinfo.getPrefer_location() + "");
-        text_age.setText(chatinfo.getAge() + "");
+        text_region.setText(chatinfo.getChatroom_location() + "");
+        text_age.setText(chatinfo.getChatroom_age() + "");
 
-        text_mem_user.setText(chatinfo.getMember().size() + "명");
+        text_mem_user.setText(chatinfo.getChatroom_mems().size() + "명");
         Button btn = (Button)findViewById(R.id.btn_request);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,7 +96,7 @@ public class MatetalkDetailView extends RelativeLayout {
             }
         });
 
-        mAdapter.addAll(chatinfo.getMember());
+        mAdapter.addAll(chatinfo.getChatroom_mems());
     }
 }
 

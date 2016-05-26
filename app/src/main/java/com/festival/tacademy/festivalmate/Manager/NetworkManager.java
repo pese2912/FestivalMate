@@ -302,11 +302,20 @@ public class NetworkManager {
     public Request saveArtistSurvey(Object tag,
                                       int mem_no,
                                       List<Artist> artist_no,
-                                      OnResultListener<ShowArtistSurveyResult> listener) {
+                                      OnResultListener<MySignUpResult> listener) {
 
         RequestBody body = new FormBody.Builder()
                 .add("mem_no", mem_no+"")
                 .add("artist_no[0]",artist_no.get(0).getArtist_no()+"")
+                .add("artist_no[1]",artist_no.get(1).getArtist_no()+"")
+                .add("artist_no[2]",artist_no.get(2).getArtist_no()+"")
+                .add("artist_no[3]",artist_no.get(3).getArtist_no()+"")
+                .add("artist_no[4]",artist_no.get(4).getArtist_no()+"")
+                .add("artist_no[5]",artist_no.get(5).getArtist_no()+"")
+                .add("artist_no[6]",artist_no.get(6).getArtist_no()+"")
+                .add("artist_no[7]",artist_no.get(7).getArtist_no()+"")
+                .add("artist_no[8]",artist_no.get(8).getArtist_no()+"")
+                .add("artist_no[9]",artist_no.get(9).getArtist_no()+"")
                 .build();
 
 
@@ -316,7 +325,7 @@ public class NetworkManager {
                 .build();
 
 
-        final NetworkResult<ShowArtistSurveyResult> result = new NetworkResult<>();
+        final NetworkResult<MySignUpResult> result = new NetworkResult<>();
         result.request = request;
         result.listener = listener;
         mClient.newCall(request).enqueue(new Callback() {
@@ -330,7 +339,7 @@ public class NetworkManager {
             public void onResponse(Call call, Response response) throws IOException {
                 if (response.isSuccessful()) {
                     String text = response.body().string();
-                    ShowArtistSurveyResult data = gson.fromJson(text, ShowArtistSurveyResult.class);
+                    MySignUpResult data = gson.fromJson(text, MySignUpResult.class);
                     result.result = data;
                     mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SUCCESS, result));
 
@@ -632,6 +641,7 @@ public class NetworkManager {
                                         int festival_no,
                                         int mem_no,
                                         OnResultListener<FestivalDetailResult> listener) {
+
         RequestBody body = new FormBody.Builder()
                 .add("festival_no", festival_no+"")
                 .add("mem_no", mem_no+"")

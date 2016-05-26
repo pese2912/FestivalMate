@@ -27,10 +27,12 @@ public class MateTalkRoomAdapter extends RecyclerView.Adapter<MateTalkRoomViewHo
         items.add(mateTalkRoom);
         notifyDataSetChanged();
     }
+
     public void addAll(List<MateTalkRoom> items){
         this.items.addAll(items);
         notifyDataSetChanged();
     }
+
 
     MateTalkRoomViewHolder.OnItemClickListener mListener;
     public void setOnItemClickListener(MateTalkRoomViewHolder.OnItemClickListener listener) {

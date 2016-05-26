@@ -33,6 +33,7 @@ public class MateMatchingActivity extends AppCompatActivity {
     List<Artist> artists = new ArrayList<>();
     List<User> users = new ArrayList<>();
     List<MateTalkRoom> chatinfoes = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,14 +79,25 @@ public class MateMatchingActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
 
     }
+
     private void initData() {
         for (int i = 0; i < 10; i++) {
-            artists.add(new Artist("Artist " + i));
-            users.add(new User("Name " + i,"http://sitehomebos.kocca.kr/knowledge/abroad/deep/__icsFiles/artimage/2012/03/26/2_1.jpg"));
+
+            Artist artist = new Artist();
+            artist.setMatched_artist_name("matchedName : "+ i);
+            artist.setMatched_artist_no(i);
+            artists.add(artist);
+
+            User user = new User();
+            user.setChatroom_mem_name("chatName : "+ i);
+            user.setChatroom_mem_img("http://sitehomebos.kocca.kr/knowledge/abroad/deep/__icsFiles/artimage/2012/03/26/2_1.jpg");
+            user.setChatroom_mems_no(i);
+            users.add(user);
+
         }
 
         for( int i=0; i<10; i++ ) {
-            chatinfoes.add(new MateTalkRoom("모두모두 대환영 " + i, R.drawable.back5, "Festival " + i, artists, 1, 1, users));
+            chatinfoes.add(new MateTalkRoom("모두모두 대환영 " + i,"http://sitehomebos.kocca.kr/knowledge/abroad/deep/__icsFiles/artimage/2012/03/26/2_1.jpg" , "Festival " + i, artists, 1, 1, users));
         }
 
 
@@ -105,7 +117,7 @@ public class MateMatchingActivity extends AppCompatActivity {
             }
         });
 
-        mAdapter.setOnItemClickListener(new UserViewHolder.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new ChatUserViewHolder.OnItemClickListener() {
             @Override
             public void onItemClick(View view) {
                 ProfileDialogFragment f = new ProfileDialogFragment();

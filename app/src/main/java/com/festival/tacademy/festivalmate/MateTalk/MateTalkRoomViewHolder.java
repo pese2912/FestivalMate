@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.festival.tacademy.festivalmate.Data.MateTalkRoom;
 import com.festival.tacademy.festivalmate.Data.PreferenceArtist;
 import com.festival.tacademy.festivalmate.R;
@@ -54,11 +55,11 @@ public class MateTalkRoomViewHolder extends RecyclerView.ViewHolder {
 
     public void setMateTalkRoom(MateTalkRoom room){
         this.talkRoom = room;
-        nameView.setText(room.getFestival_name());
-        contentView.setText(room.getContent());
-        photoView.setImageResource(room.getPhoto());
-        numberView.setText(room.getNumber());
-        dateView.setText(room.getDate());
+        nameView.setText(room.getChatroom_festival_name());
+        contentView.setText(room.getChatroom_name());
+        Glide.with(photoView.getContext()).load(room.getChatroom_img()).into(photoView);
+        numberView.setText(room.getMatched_artist_number()+"");
+        dateView.setText(room.date);
         unReadView.setText(room.getUnRead());
     }
 }

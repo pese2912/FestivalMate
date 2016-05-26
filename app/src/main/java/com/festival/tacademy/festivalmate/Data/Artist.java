@@ -31,6 +31,9 @@ public class Artist implements Serializable {
         this.artist_img = photo;
     }
 
+    public Artist(){
+
+    }
     public int isCheck() {
         return artist_fav_state;
     }
@@ -62,4 +65,23 @@ public class Artist implements Serializable {
     public String artist_img;
     public int artist_fav_state=0;
 
+
+    public int matched_artist_no;
+    public String matched_artist_name;
+
+    public String getMatched_artist_name() {
+        return matched_artist_name;
+    }
+
+    public void setMatched_artist_name(String matched_artist_name) {
+        this.matched_artist_name = matched_artist_name;
+    }
+
+    public int getMatched_artist_no() {
+        return matched_artist_no;
+    }
+
+    public void setMatched_artist_no(int matched_artist_no) {
+        this.matched_artist_no = matched_artist_no;
+    }
 }

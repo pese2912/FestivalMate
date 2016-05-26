@@ -44,9 +44,9 @@ public class MateTalkFragment extends Fragment {
         mAdapter.setOnItemClickListener(new MateTalkRoomViewHolder.OnItemClickListener() {
             @Override
             public void onItemClick(View view, MateTalkRoom talkRoom) {
-                Toast.makeText(getContext(), talkRoom.getFestival_name(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), talkRoom.getChatroom_festival_name(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(), ChattingActivity.class);
-                intent.putExtra("chatting",talkRoom.getFestival_name());
+                intent.putExtra("chatting",talkRoom.getChatroom_festival_name());
                 startActivity(intent);
             }
         });
@@ -72,11 +72,11 @@ public class MateTalkFragment extends Fragment {
     private void setData(){
         for (int i = 0; i < 20; i++) {
             MateTalkRoom room = new MateTalkRoom();
-            room.setFestival_name("name " + i);
-            room.setPhoto(R.mipmap.ic_launcher);
-            room.setContent("hey, 모두들 안녕~ 내가누군지 아니??");
-            room.setDate("7월 24일");
-            room.setNumber(i +"명");
+            room.setChatroom_festival_name("name " + i);
+       //     room.setChatroom_img(R.mipmap.ic_launcher);
+            room.setChatroom_name("hey, 모두들 안녕~ 내가누군지 아니??");
+            room.date="7월 24일";
+            room.setMatched_artist_number(i);
             room.setUnRead(i+"");
             mAdapter.add(room); // 값 추가
         }

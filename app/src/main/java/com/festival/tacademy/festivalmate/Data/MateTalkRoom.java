@@ -9,119 +9,135 @@ import java.util.List;
  */
 public class MateTalkRoom {
 
-    private  String festival_name;
-    private  String content;
-    private String number;
-    private String date;
+    public int chatroom_no;
+    public String chatroom_img;
+    public int chatroom_size;
+    public int chatroom_maxSize;
+    public List<Artist> matched_artist;
+    public int matched_artist_number;
+    public  String chatroom_name;
+    public int chatroom_host_no;
+    public String chatroom_host_name;
+    public  int chatroom_festival_no;
+    public   String chatroom_festival_name;
+    public int chatroom_location;
+    public int chatroom_age;
 
-    String title;
-    int photo;
+    public String date;
 
-    public String getTitle() {
-        return title;
+    public List<User> chatroom_mems;
+    public String unRead;
+
+    public int getChatroom_no() {
+        return chatroom_no;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setChatroom_no(int chatroom_no) {
+        this.chatroom_no = chatroom_no;
     }
 
-    public int getPhoto() {
-        return photo;
+    public String getChatroom_img() {
+        return chatroom_img;
     }
 
-    public MateTalkRoom() {
+    public void setChatroom_img(String chatroom_img) {
+        this.chatroom_img = chatroom_img;
     }
 
-    public void setPhoto(int photo) {
-        this.photo = photo;
+    public int getChatroom_size() {
+        return chatroom_size;
     }
 
-    public List<Artist> getMatching_artists() {
-        return matching_artists;
+    public void setChatroom_size(int chatroom_size) {
+        this.chatroom_size = chatroom_size;
     }
 
-    public void setMatching_artists(List<Artist> matching_artists) {
-        this.matching_artists = matching_artists;
+    public int getChatroom_maxSize() {
+        return chatroom_maxSize;
     }
 
-    public int getPrefer_location() {
-        return prefer_location;
+    public void setChatroom_maxSize(int chatroom_maxSize) {
+        this.chatroom_maxSize = chatroom_maxSize;
     }
 
-    public void setPrefer_location(int prefer_location) {
-        this.prefer_location = prefer_location;
+    public List<Artist> getMatched_artist() {
+        return matched_artist;
     }
 
-    public int getAge() {
-        return age;
+    public void setMatched_artist(List<Artist> matched_artist) {
+        this.matched_artist = matched_artist;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public int getMatched_artist_number() {
+        return matched_artist_number;
     }
 
-    public List<User> getMember() {
-        return member;
+    public void setMatched_artist_number(int matched_artist_number) {
+        this.matched_artist_number = matched_artist_number;
     }
 
-    public void setMember(List<User> member) {
-        this.member = member;
+    public String getChatroom_name() {
+        return chatroom_name;
     }
 
-    public MateTalkRoom(String name, String content, String number, String date, String unRead) {
-
-        this.festival_name = name;
-        this.content = content;
-        this.number = number;
-        this.date = date;
-        this.unRead = unRead;
+    public void setChatroom_name(String chatroom_name) {
+        this.chatroom_name = chatroom_name;
     }
 
-    public MateTalkRoom(String title, int photo, String name, List<Artist> matching_artists, int prefer_location, int age, List<User> member) {
-        this.title = title;
-        this.photo = photo;
-        this.festival_name = name;
-        this.matching_artists = matching_artists;
-        this.prefer_location = prefer_location;
-        this.age = age;
-        this.member = member;
+    public int getChatroom_host_no() {
+        return chatroom_host_no;
     }
 
-    List<Artist> matching_artists;
-    int prefer_location;
-    int age;
-    List<User> member;
-
-    public String getFestival_name() {
-        return festival_name;
+    public void setChatroom_host_no(int chatroom_host_no) {
+        this.chatroom_host_no = chatroom_host_no;
     }
 
-    public void setFestival_name(String festival_name) {
-        this.festival_name = festival_name;
+    public String getChatroom_host_name() {
+        return chatroom_host_name;
     }
 
-    public String getContent() {
-        return content;
+    public void setChatroom_host_name(String chatroom_host_name) {
+        this.chatroom_host_name = chatroom_host_name;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public int getChatroom_festival_no() {
+        return chatroom_festival_no;
     }
 
-    public String getNumber() {
-        return number;
+    public void setChatroom_festival_no(int chatroom_festival_no) {
+        this.chatroom_festival_no = chatroom_festival_no;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public String getChatroom_festival_name() {
+        return chatroom_festival_name;
     }
 
-    public String getDate() {
-        return date;
+    public void setChatroom_festival_name(String chatroom_festival_name) {
+        this.chatroom_festival_name = chatroom_festival_name;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public int getChatroom_location() {
+        return chatroom_location;
+    }
+
+    public void setChatroom_location(int chatroom_location) {
+        this.chatroom_location = chatroom_location;
+    }
+
+    public int getChatroom_age() {
+        return chatroom_age;
+    }
+
+    public void setChatroom_age(int chatroom_age) {
+        this.chatroom_age = chatroom_age;
+    }
+
+    public List<User> getChatroom_mems() {
+        return chatroom_mems;
+    }
+
+    public void setChatroom_mems(List<User> chatroom_mems) {
+        this.chatroom_mems = chatroom_mems;
     }
 
     public String getUnRead() {
@@ -132,6 +148,20 @@ public class MateTalkRoom {
         this.unRead = unRead;
     }
 
-    private String unRead;
+    public MateTalkRoom(String title, String photo, String name, List<Artist> matching_artists, int prefer_location, int age, List<User> member) {
+        this.chatroom_name = title;
+        this.chatroom_img = photo;
+        this.chatroom_festival_name = name;
+        this.matched_artist = matching_artists;
+        this.chatroom_location = prefer_location;
+        this.chatroom_age = age;
+        this.chatroom_mems = member;
+    }
+    public MateTalkRoom() {
+
+    }
+
+
+
 
 }

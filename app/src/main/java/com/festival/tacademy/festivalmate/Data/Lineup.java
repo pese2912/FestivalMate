@@ -11,7 +11,8 @@ public class Lineup implements Serializable{
     String festival_date;
     List<Artist> festival_lineup = new ArrayList<>();
 
-    public String getDate() {
+    public String getDate()
+    {
         return festival_date;
     }
 

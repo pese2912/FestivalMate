@@ -15,6 +15,34 @@ public class User implements Serializable {
     public  String mem_name;
 
 
+    public int chatroom_mems_no;
+    public String chatroom_mem_name;
+    public String chatroom_mem_img;
+
+
+    public int getChatroom_mems_no() {
+        return chatroom_mems_no;
+    }
+
+    public void setChatroom_mems_no(int chatroom_mems_no) {
+        this.chatroom_mems_no = chatroom_mems_no;
+    }
+
+    public String getChatroom_mem_name() {
+        return chatroom_mem_name;
+    }
+
+    public void setChatroom_mem_name(String chatroom_mem_name) {
+        this.chatroom_mem_name = chatroom_mem_name;
+    }
+
+    public String getChatroom_mem_img() {
+        return chatroom_mem_img;
+    }
+
+    public void setChatroom_mem_img(String chatroom_mem_img) {
+        this.chatroom_mem_img = chatroom_mem_img;
+    }
 
     public String mem_state_msg;
     public  List<Festival> letsgo = new ArrayList<>();
@@ -51,6 +79,9 @@ public class User implements Serializable {
         this.artist = artist;
     }
 
+    public User(){
+
+    }
     public String getId() {
         return mem_id;
     }
