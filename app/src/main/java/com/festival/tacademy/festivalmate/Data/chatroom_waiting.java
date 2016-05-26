@@ -22,11 +22,11 @@ public class chatroom_waiting {
         this.mem_name = mem_name;
     }
 
-    public Drawable getMem_img() {
+    public String getMem_img() {
         return mem_img;
     }
 
-    public void setMem_img(Drawable mem_img) {
+    public void setMem_img(String mem_img) {
         this.mem_img = mem_img;
     }
 
@@ -40,7 +40,7 @@ public class chatroom_waiting {
 
     public int chatroom_waiting_no;
     public String mem_name;
-    public Drawable mem_img;
+    public String mem_img;
     public String mem_state_msg;
 
 }

@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.festival.tacademy.festivalmate.Data.chatroom_member;
 import com.festival.tacademy.festivalmate.MyApplication;
 import com.festival.tacademy.festivalmate.R;
@@ -31,7 +32,8 @@ public class ChatJoinerViewHolder extends RecyclerView.ViewHolder {
 
     public void setChatJoin(final chatroom_member member){
         this.member = member;
-        photoView.setImageDrawable(member.getMem_img());
+        Glide.with(photoView.getContext()).load(member.getMem_img()).into(photoView);
+
         nameView.setText(member.getMem_name());
         btn.setOnClickListener(new View.OnClickListener() {
             @Override

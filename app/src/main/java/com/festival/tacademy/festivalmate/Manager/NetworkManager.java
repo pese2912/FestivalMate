@@ -6,6 +6,7 @@ import android.os.Looper;
 import android.os.Message;
 
 import com.festival.tacademy.festivalmate.Data.Artist;
+import com.festival.tacademy.festivalmate.Data.ChatroomMemListResult;
 import com.festival.tacademy.festivalmate.Data.FestivalDetailResult;
 import com.festival.tacademy.festivalmate.Data.FestivalResultResult;
 import com.festival.tacademy.festivalmate.Data.HateResult;
@@ -919,5 +920,56 @@ public class NetworkManager {
         });
         return request;
     }
+
+
+    private static final String URL_CHATROOM_MEM_LIST = MY_SERVER + "/chatroom_mem_list";       // 채팅방 참여/대기(host) 목록 보여줌
+    public Request chatroom_mem_list(Object tag,
+                                    int mem_no,
+                                     int chatroom_no,
+                                    OnResultListener<ChatroomMemListResult> listener) {
+
+        RequestBody body = new FormBody.Builder()
+                .add("mem_no", mem_no+"")
+                .add("chatroom_no", chatroom_no+"")
+                .build();
+
+        Request request = new Request.Builder()
+                .url(URL_CHATROOM_MEM_LIST)
+                .post(body)
+                .build();
+
+        final NetworkResult<ChatroomMemListResult> result = new NetworkResult<>();
+        result.request = request;
+        result.listener = listener;
+        mClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                result.exception = e;
+                mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String text = response.body().string();
+                    ChatroomMemListResult data = gson.fromJson(text, ChatroomMemListResult.class);
+                    if (data.success == 1) {
+                        result.result = data;
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SUCCESS, result));
+                    } else {
+                        result.exception = new IOException(data.message);
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                    }
+
+                } else {
+                    result.exception = new IOException(response.message());
+                    mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                }
+            }
+        });
+        return request;
+    }
+
+
 
 }

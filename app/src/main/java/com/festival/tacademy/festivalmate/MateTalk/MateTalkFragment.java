@@ -46,7 +46,7 @@ public class MateTalkFragment extends Fragment {
             public void onItemClick(View view, MateTalkRoom talkRoom) {
                 Toast.makeText(getContext(), talkRoom.getChatroom_festival_name(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(), ChattingActivity.class);
-                intent.putExtra("chatting",talkRoom.getChatroom_festival_name());
+                intent.putExtra("chatting",talkRoom);
                 startActivity(intent);
             }
         });

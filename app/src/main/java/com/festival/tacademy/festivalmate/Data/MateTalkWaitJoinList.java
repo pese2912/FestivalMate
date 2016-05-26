@@ -17,11 +17,11 @@ public class MateTalkWaitJoinList {
     }
 
     public String getName() {
-        return name;
+        return chatroom_name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.chatroom_name = name;
     }
 
     public List<chatroom_member> getChatroom_members() {
@@ -33,16 +33,25 @@ public class MateTalkWaitJoinList {
     }
 
     public List<chatroom_waiting> getChatroom_waitings() {
-        return chatroom_waitings;
+        return chatroom_waiting;
     }
 
     public void setChatroom_waitings(List<chatroom_waiting> chatroom_waitings) {
-        this.chatroom_waitings = chatroom_waitings;
+        this.chatroom_waiting = chatroom_waitings;
     }
 
+    public int getIs_host() {
+        return is_host;
+    }
+
+    public void setIs_host(int is_host) {
+        this.is_host = is_host;
+    }
+
+    public int is_host;
     public int chatroom_no;
-    public String name;
-    List<chatroom_member> chatroom_members;
-    List<chatroom_waiting> chatroom_waitings;
+    public String chatroom_name;
+    public List<chatroom_member> chatroom_members;
+    public List<chatroom_waiting> chatroom_waiting;
 
 }

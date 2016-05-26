@@ -16,6 +16,8 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.festival.tacademy.festivalmate.Data.Festival;
+import com.festival.tacademy.festivalmate.Data.MateTalkRoom;
 import com.festival.tacademy.festivalmate.R;
 
 public class ChattingActivity extends AppCompatActivity {
@@ -28,6 +30,7 @@ public class ChattingActivity extends AppCompatActivity {
 
     EditText inputView;
     RadioGroup typeView;
+    MateTalkRoom mateTalkRoom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +58,8 @@ public class ChattingActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        String title = intent.getStringExtra("chatting");
-        toolbarTitle.setText(title);
+        mateTalkRoom = (MateTalkRoom) intent.getExtras().getSerializable("chatting");
+        toolbarTitle.setText(mateTalkRoom.getChatroom_name());
 
         Button btn = (Button)findViewById(R.id.btn_send);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -117,7 +120,7 @@ public class ChattingActivity extends AppCompatActivity {
         }
         else if(id == R.id.chat_join_list){
             Intent intent = new Intent(ChattingActivity.this, ChatJoinListActivity.class);
-            intent.putExtra("joinList",toolbarTitle.getText().toString());
+            intent.putExtra("chatting",mateTalkRoom);
             startActivity(intent);
 
         }

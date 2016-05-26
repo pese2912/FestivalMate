@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.festival.tacademy.festivalmate.Data.MateTalkRoom;
 import com.festival.tacademy.festivalmate.Data.chatroom_waiting;
 import com.festival.tacademy.festivalmate.MyApplication;
@@ -43,7 +44,7 @@ public class ApproveWaiterViewHolder extends RecyclerView.ViewHolder {
 
     public void setApproveWaiter(chatroom_waiting waiter){
         this.waiting =waiter;
-        photoView.setImageDrawable(waiter.getMem_img());
+        Glide.with(photoView.getContext()).load(waiter.getMem_img()).into(photoView);
         nameView.setText(waiter.getMem_name());
         btnReject.setOnClickListener(new View.OnClickListener() {
             @Override
