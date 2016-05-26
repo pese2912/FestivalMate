@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.bumptech.glide.Glide;
+import com.festival.tacademy.festivalmate.Data.Festival;
 import com.festival.tacademy.festivalmate.Data.MateTalkRoom;
 import com.festival.tacademy.festivalmate.FestivalInfo.UserViewHolder;
 import com.festival.tacademy.festivalmate.R;
@@ -16,7 +17,7 @@ public class MatetalkDetailViewHolder extends RecyclerView.ViewHolder {
 
     MatetalkDetailView detailView;
     MatetalkInfoView infoView;
-
+    MateTalkRoom mateTalkRoom;
     public MatetalkDetailViewHolder(View itemView) {
         super(itemView);
         detailView = (MatetalkDetailView)itemView.findViewById(R.id.detail_view);
@@ -26,14 +27,14 @@ public class MatetalkDetailViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View v) {
                 if (mListener != null) {
-                    mListener.onItemClick(v);
+                    mListener.onItemClick(v, mateTalkRoom);
                 }
             }
         });
     }
 
     public interface OnItemClickListener {
-        public void onItemClick(View view);
+        public void onItemClick(View view, MateTalkRoom mateTalkRoom);
     }
 
     OnItemClickListener mListener;
@@ -45,6 +46,7 @@ public class MatetalkDetailViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void setMateTalkRoom(MateTalkRoom chatinfo, ChatUserViewHolder.OnItemClickListener listener) {
+        mateTalkRoom = chatinfo;
         detailView.text_title.setText(chatinfo.getChatroom_festival_name());
         detailView.text_artist_num.setText(chatinfo.getMatched_artist().size() + "명");
 

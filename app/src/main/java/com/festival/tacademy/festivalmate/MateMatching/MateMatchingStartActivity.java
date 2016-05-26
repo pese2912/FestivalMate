@@ -18,7 +18,9 @@ import com.festival.tacademy.festivalmate.Data.FestibalLineUp;
 import com.festival.tacademy.festivalmate.Data.Festival;
 import com.festival.tacademy.festivalmate.Data.Lineup;
 import com.festival.tacademy.festivalmate.Data.ShowFestivalLineups;
+import com.festival.tacademy.festivalmate.Data.ShowMatchingResult;
 import com.festival.tacademy.festivalmate.Manager.NetworkManager;
+import com.festival.tacademy.festivalmate.Manager.PropertyManager;
 import com.festival.tacademy.festivalmate.R;
 
 import java.io.IOException;
@@ -33,6 +35,9 @@ public class MateMatchingStartActivity extends AppCompatActivity {
     RecyclerView listView;
     MateMatchingLineUpAdapter mAdapter;
     Festival festival;
+    ShowMatchingResult result;
+    List<Lineup> selectedLineup;
+    List<Artist> selectedArtist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,19 +50,52 @@ public class MateMatchingStartActivity extends AppCompatActivity {
 
         listView = (RecyclerView)findViewById(R.id.rv_list);
         mAdapter = new MateMatchingLineUpAdapter();
+
         listView.setAdapter(mAdapter);
         listView.setLayoutManager(new LinearLayoutManager(this));
 
         Intent intent = getIntent();
         festival = (Festival)intent.getExtras().getSerializable("festival");
 
+        selectedLineup = new ArrayList<>();
+        selectedArtist= new ArrayList<>();
+        result = new ShowMatchingResult();
         initData();
 
         Button btn = (Button)findViewById(R.id.btn_match);
         btn.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MateMatchingStartActivity.this, MateMatchingActivity.class));
+                for(int i=0; i<selectedLineup.size(); i++){
+                    for(int j =0; j<selectedLineup.get(i).getLineup().size(); j++){
+                        if(selectedLineup.get(i).getLineup().get(j).isCheck() == 1){
+                          //  Toast.makeText(MateMatchingStartActivity.this,""+selectedLineup.get(i).getLineup().get(j).getName(),Toast.LENGTH_SHORT).show();
+                            selectedArtist.add(selectedLineup.get(i).getLineup().get(j));
+                        }
+                    }
+                }
+
+                int memNo = PropertyManager.getInstance().getNo();
+                int fesNo = festival.getFestival_no();
+
+                NetworkManager.getInstance().show_matching_result(MateMatchingStartActivity.this, memNo, fesNo, selectedArtist, new NetworkManager.OnResultListener<ShowMatchingResult>() {
+                    //매칭 결과
+                    @Override
+                    public void onSuccess(Request request, ShowMatchingResult result) {
+
+                        Toast.makeText(MateMatchingStartActivity.this,"성공",Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MateMatchingStartActivity.this, MateMatchingActivity.class);
+                        intent.putExtra("ShowMatchingResult",result);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onFail(Request request, IOException exception) {
+                        Toast.makeText(MateMatchingStartActivity.this,"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                });
+
             }
         });
     }
@@ -65,6 +103,8 @@ public class MateMatchingStartActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        selectedArtist.clear();
+        selectedLineup.clear();
         initData();
     }
 
@@ -74,8 +114,11 @@ public class MateMatchingStartActivity extends AppCompatActivity {
             @Override
             public void onSuccess(Request request, ShowFestivalLineups result) {
                 Toast.makeText(MateMatchingStartActivity.this,"성공",Toast.LENGTH_SHORT).show();
+
                 mAdapter.clear();
                 mAdapter.addAll(result.result.getFestival_lineups());
+                selectedLineup = result.result.getFestival_lineups();
+
             }
 
             @Override
@@ -96,8 +139,10 @@ public class MateMatchingStartActivity extends AppCompatActivity {
 //            Lineup festibalLineUp = new Lineup("2016-07-24");
 //            festibalLineUp.setDate("2016-07-24");
 //            festibalLineUp.setLineup(artistList);
+//            selectedLineup.add(festibalLineUp);
 //            mAdapter.add(festibalLineUp);
 //        }
+
     }
 
     @Override

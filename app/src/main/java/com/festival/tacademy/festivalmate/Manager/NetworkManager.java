@@ -13,6 +13,7 @@ import com.festival.tacademy.festivalmate.Data.MySignUpResult;
 import com.festival.tacademy.festivalmate.Data.ShowArtistSurveyResult;
 import com.festival.tacademy.festivalmate.Data.ShowFestivalLineups;
 import com.festival.tacademy.festivalmate.Data.ShowGoingListResult;
+import com.festival.tacademy.festivalmate.Data.ShowMatchingResult;
 import com.festival.tacademy.festivalmate.Data.ShowMiniProfileResult;
 import com.festival.tacademy.festivalmate.Data.ShowWaitingListResult;
 import com.festival.tacademy.festivalmate.MyApplication;
@@ -712,6 +713,104 @@ public class NetworkManager {
                 if (response.isSuccessful()) {
                     String text = response.body().string();
                     ShowFestivalLineups data = gson.fromJson(text, ShowFestivalLineups.class);
+                    if (data.success == 1) {
+                        result.result = data;
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SUCCESS, result));
+                    } else {
+                        result.exception = new IOException(data.message);
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                    }
+
+                } else {
+                    result.exception = new IOException(response.message());
+                    mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                }
+            }
+        });
+        return request;
+    }
+
+
+    private static final String URL_SHOW_MATCHING_RESULT = MY_SERVER + "/show_matching_result";       // 선택한 라인업으로 채팅방 매칭
+    public Request show_matching_result(Object tag,
+                                        int mem_no,
+                                        int  festival_no,
+                                        List<Artist> selected_artist,
+                                                OnResultListener<ShowMatchingResult> listener) {
+        RequestBody body = new FormBody.Builder()
+                .add("mem_no", mem_no+"")
+                .add("festival_no", festival_no+"")
+                .build();
+
+        Request request = new Request.Builder()
+                .url(URL_SHOW_MATCHING_RESULT)
+                .post(body)
+                .build();
+
+        final NetworkResult<ShowMatchingResult> result = new NetworkResult<>();
+        result.request = request;
+        result.listener = listener;
+        mClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                result.exception = e;
+                mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String text = response.body().string();
+                    ShowMatchingResult data = gson.fromJson(text, ShowMatchingResult.class);
+                    if (data.success == 1) {
+                        result.result = data;
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SUCCESS, result));
+                    } else {
+                        result.exception = new IOException(data.message);
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                    }
+
+                } else {
+                    result.exception = new IOException(response.message());
+                    mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                }
+            }
+        });
+        return request;
+    }
+
+
+
+    private static final String URL_SHOW_CHATROOM_DETAIL = MY_SERVER + "/show_chatroom_detail";       // 매칭된 채팅방의 상세 정보 조회
+    public Request show_chatroom_detail(Object tag,
+                                        int mem_no,
+                                        int  chatroom_no,
+                                        OnResultListener<ShowMatchingResult> listener) {
+        RequestBody body = new FormBody.Builder()
+                .add("mem_no", mem_no+"")
+                .add("room_no", chatroom_no+"")
+                .build();
+
+        Request request = new Request.Builder()
+                .url(URL_SHOW_CHATROOM_DETAIL)
+                .post(body)
+                .build();
+
+        final NetworkResult<ShowMatchingResult> result = new NetworkResult<>();
+        result.request = request;
+        result.listener = listener;
+        mClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                result.exception = e;
+                mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String text = response.body().string();
+                    ShowMatchingResult data = gson.fromJson(text, ShowMatchingResult.class);
                     if (data.success == 1) {
                         result.result = data;
                         mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SUCCESS, result));

@@ -38,6 +38,8 @@ public class PreferenceActivity extends AppCompatActivity {
     Toolbar toolbar;
     EditText editSearch;
     List<Artist> artistList;
+    List<Artist> selectedArtist;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,24 +48,25 @@ public class PreferenceActivity extends AppCompatActivity {
 
         mAdapter = new PreferenceAdapter();
         artistList = new ArrayList<Artist>();
+        selectedArtist = new ArrayList<Artist>();
         mAdapter.setOnItemClickListener(new PreferenceViewHolder.OnItemClickListener() {
 
             @Override
             public void onItemClick(View view, Artist artist) {
 
-                if(artist.isCheck()==1){
-                    artistList.add(artist);
+               for(int i = 0; i < artistList.size(); i++){
+                   if(artistList.get(i).isCheck() == 1){
+                       selectedArtist.add(artistList.get(i));
+                   }
+               }
+
+                if(selectedArtist.size() >= 10){
+                    item.setTitle(getString(R.string.complete));
                 }
 
-                else if(artist.isCheck()==0){
-                    artistList.remove(artist);
-                }
 
-                if(artistList.size()>=10){
-                    item.setTitle("완료");
-                }
-                Toast.makeText(PreferenceActivity.this, artist.isCheck() + artist.getName(), Toast.LENGTH_SHORT).show();
-                Toast.makeText(PreferenceActivity.this, artistList.size()+"", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(PreferenceActivity.this, artist.isCheck() + artist.getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(PreferenceActivity.this, selectedArtist.size()+"", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -130,6 +133,8 @@ public class PreferenceActivity extends AppCompatActivity {
 //                Toast.makeText(PreferenceActivity.this,"성공",Toast.LENGTH_SHORT).show();
 //                mAdapter.clear();
 //                mAdapter.addAll(result.result);
+//
+//                artistList = result.result;
 //            }
 //
 //            @Override
@@ -145,6 +150,7 @@ public class PreferenceActivity extends AppCompatActivity {
             //  artist.setImage(ContextCompat.getDrawable(this, R.mipmap.ic_launcher));
                artist.setPhoto("http://sitehomebos.kocca.kr/knowledge/abroad/deep/__icsFiles/artimage/2012/03/26/2_1.jpg");
              mAdapter.add(artist); // 값 추가
+               artistList.add(artist);
          }
     }
 
@@ -158,7 +164,7 @@ public class PreferenceActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.complete) {
             int memNo = PropertyManager.getInstance().getNo();
-            NetworkManager.getInstance().saveArtistSurvey(PreferenceActivity.this, memNo, artistList, new NetworkManager.OnResultListener<MySignUpResult>() {
+            NetworkManager.getInstance().saveArtistSurvey(PreferenceActivity.this, memNo, selectedArtist, new NetworkManager.OnResultListener<MySignUpResult>() {
                 @Override
                 public void onSuccess(Request request, MySignUpResult result) {
                     Toast.makeText(PreferenceActivity.this,"성공",Toast.LENGTH_SHORT).show();
