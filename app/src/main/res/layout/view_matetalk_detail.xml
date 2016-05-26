@@ -118,7 +118,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="New Button"
+        android:text="매칭 시작하기"
         android:id="@+id/btn_request"
         android:layout_below="@+id/rv_list"
         android:layout_centerHorizontal="true" />

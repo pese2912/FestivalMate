@@ -77,22 +77,22 @@ public class FestivalDetailActivity extends AppCompatActivity {
 
     private void setData(){
 
-        mAdapter.setFestval(festival);
-//        NetworkManager.getInstance().show_festival_detail(this, festival.getFestival_no(), 1,
-//                new NetworkManager.OnResultListener<FestivalDetailResult>() {
-//                    @Override
-//                    public void onSuccess(Request request, FestivalDetailResult result) {
-//                        if(result.success==1) {
-//                            Toast.makeText(FestivalDetailActivity.this, "Success", Toast.LENGTH_SHORT).show();
-//                            mAdapter.setFestval(result.getResult());
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFail(Request request, IOException exception) {
-//                        Toast.makeText(FestivalDetailActivity.this, "Fail", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
+    //    mAdapter.setFestval(festival);
+        NetworkManager.getInstance().show_festival_detail(this, festival.getFestival_no(), 1,
+                new NetworkManager.OnResultListener<FestivalDetailResult>() {
+                    @Override
+                    public void onSuccess(Request request, FestivalDetailResult result) {
+                        if(result.success==1) {
+                            Toast.makeText(FestivalDetailActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                            mAdapter.setFestval(result.getResult());
+                        }
+                    }
+
+                    @Override
+                    public void onFail(Request request, IOException exception) {
+                        Toast.makeText(FestivalDetailActivity.this, "Fail", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
     }
 

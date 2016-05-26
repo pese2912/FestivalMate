@@ -15,7 +15,7 @@ public class Festival implements Serializable {
     public String festival_location;
     public int mem_going_check;
     public List<Lineup> festival_lineups;
-    public List<User>  festival_going_mem = new ArrayList<>();
+    public List<User>  festival_going_mema = new ArrayList<>();
 
     int photo_location;
     String date;
@@ -29,7 +29,7 @@ public class Festival implements Serializable {
         this.festival_img = photo;
         this.date = date;
         this.festival_location = location;
-        this. festival_going_mem = letsgo_users;
+        this. festival_going_mema = letsgo_users;
         this.festival_lineups = lineup;
     }
 
@@ -86,11 +86,11 @@ public class Festival implements Serializable {
     }
 
     public List<User> getFestival_going_mem() {
-        return festival_going_mem;
+        return festival_going_mema;
     }
 
     public void setFestival_going_mem(List<User> festival_going_mem) {
-        this.festival_going_mem = festival_going_mem;
+        this.festival_going_mema = festival_going_mem;
     }
 
     public List<Lineup> getLineups() {

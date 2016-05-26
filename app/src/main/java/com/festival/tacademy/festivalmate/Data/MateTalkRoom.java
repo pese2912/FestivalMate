@@ -23,11 +23,21 @@ public class MateTalkRoom implements Serializable {
     public   String chatroom_festival_name;
     public int chatroom_location;
     public int chatroom_age;
+    public int mem_chatroom_state;
 
     public String date;
 
     public List<User> chatroom_mems;
     public String unRead;
+
+    public int getMem_chatroom_state() {
+        return mem_chatroom_state;
+    }
+
+    public void setMem_chatroom_state(int mem_chatroom_state) {
+        this.mem_chatroom_state = mem_chatroom_state;
+    }
+
 
     public int getChatroom_no() {
         return chatroom_no;
@@ -149,7 +159,8 @@ public class MateTalkRoom implements Serializable {
         this.unRead = unRead;
     }
 
-    public MateTalkRoom(String title, String photo, String name, List<Artist> matching_artists, int prefer_location, int age, List<User> member) {
+    public MateTalkRoom(int no,String title, String photo, String name, List<Artist> matching_artists, int prefer_location, int age, List<User> member) {
+        this.chatroom_no = no;
         this.chatroom_name = title;
         this.chatroom_img = photo;
         this.chatroom_festival_name = name;

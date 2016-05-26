@@ -9,11 +9,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.festival.tacademy.festivalmate.Data.Artist;
 import com.festival.tacademy.festivalmate.Data.Festival;
 import com.festival.tacademy.festivalmate.Data.MateTalkRoom;
+import com.festival.tacademy.festivalmate.Data.RequestChatroomJoinResult;
 import com.festival.tacademy.festivalmate.Data.ShowMatchingResult;
 import com.festival.tacademy.festivalmate.Data.ShowMemProfileResult;
 import com.festival.tacademy.festivalmate.Data.User;
@@ -58,18 +60,20 @@ public class MateMatchingActivity extends AppCompatActivity {
 
         listView = (RecyclerView)findViewById(R.id.rv_list);
         mAdapter = new MatetalkDetailAdapter();
-        mAdapter.setOnItemClickListener(new MatetalkDetailViewHolder.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new MatetalkDetailViewHolder.OnItemClickListener() { // 더보기
             @Override
-            public void onItemClick(View view, MateTalkRoom room) {
+            public void onItemClick(final View view, final MateTalkRoom room) {
+                final View v = view.findViewById(R.id.detail_view);
+                final int memNo = PropertyManager.getInstance().getNo();
+               final int roomNo = room.getChatroom_no();
 
-                int memNo = PropertyManager.getInstance().getNo();
-                int roomNo = room.getChatroom_no();
-
+                final Button btn = (Button)v.findViewById(R.id.btn_request);
 
                 NetworkManager.getInstance().show_chatroom_detail(MateMatchingActivity.this, memNo, roomNo, new NetworkManager.OnResultListener<ShowMatchingResult>() {
                     @Override
                     public void onSuccess(Request request, ShowMatchingResult result) {
                         Toast.makeText(MateMatchingActivity.this, "성공",Toast.LENGTH_SHORT).show();
+
                         mAdapter.clear();
                         mAdapter.addAll(result.result);
 
@@ -81,7 +85,39 @@ public class MateMatchingActivity extends AppCompatActivity {
                     }
                 });
 
-                View v = view.findViewById(R.id.detail_view);
+
+                if(room.getMem_chatroom_state() == 2)
+                    btn.setText("참여중");
+                else if(room.getMem_chatroom_state() == 1)
+                    btn.setText("대기중");
+                else if(room.getMem_chatroom_state() == 0)
+                    btn.setText("메이트톡 시작");
+
+
+                btn.setOnClickListener(new View.OnClickListener() {  // 버튼 클릭
+                    @Override
+                    public void onClick(View v) {
+
+                        NetworkManager.getInstance().request_chatroom_join(MateMatchingActivity.this, memNo, roomNo, new NetworkManager.OnResultListener<RequestChatroomJoinResult>() {
+                            @Override
+                            public void onSuccess(Request request, RequestChatroomJoinResult result) {
+                                Toast.makeText(MateMatchingActivity.this, "성공",Toast.LENGTH_SHORT).show();
+                                if(result.result.getMem_chatroom_state() == 2)
+                                    btn.setText("참여중");
+                                else if(result.result.getMem_chatroom_state() == 1)
+                                    btn.setText("대기중");
+                                else if(result.result.getMem_chatroom_state() == 0)
+                                    btn.setText("메이트톡 시작");
+
+                            }
+
+                            @Override
+                            public void onFail(Request request, IOException exception) {
+                                Toast.makeText(MateMatchingActivity.this, "실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
 
                 if(isClick == false) {
                     v.setVisibility(View.VISIBLE);
@@ -93,7 +129,7 @@ public class MateMatchingActivity extends AppCompatActivity {
             }
         });
 
-        mAdapter.setOnItemClickListener(new ChatUserViewHolder.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new ChatUserViewHolder.OnItemClickListener() {  // 프로필 조회
             @Override
             public void onItemClick(View view, User user) {
 
@@ -108,7 +144,7 @@ public class MateMatchingActivity extends AppCompatActivity {
                         f.setArguments(bundle);
                         f.show(getSupportFragmentManager(), "aaaa");
                     }
-
+                    
                     @Override
                     public void onFail(Request request, IOException exception) {
                         Toast.makeText(MateMatchingActivity.this, "실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
@@ -182,6 +218,7 @@ public class MateMatchingActivity extends AppCompatActivity {
 //        mAdapter.clear();
 //        mAdapter.addAll(result.result);
 
+        mAdapter.clear();
         for (int i = 0; i < 10; i++) {
 
             Artist artist = new Artist();
@@ -199,10 +236,10 @@ public class MateMatchingActivity extends AppCompatActivity {
         }
 
         for( int i=0; i<10; i++ ) {
-            chatinfoes.add(new MateTalkRoom("모두모두 대환영 " + i,"http://sitehomebos.kocca.kr/knowledge/abroad/deep/__icsFiles/artimage/2012/03/26/2_1.jpg" , "Festival " + i, artists, 1, 1, users));
+            chatinfoes.add(new MateTalkRoom(1,"모두모두 대환영 " + i,"http://sitehomebos.kocca.kr/knowledge/abroad/deep/__icsFiles/artimage/2012/03/26/2_1.jpg" , "Festival " + i, artists, 1, 1, users));
         }
-        mAdapter.addAll(chatinfoes);
 
+        mAdapter.addAll(chatinfoes);
     }
 
 }

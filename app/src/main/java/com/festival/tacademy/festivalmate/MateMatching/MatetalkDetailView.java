@@ -84,11 +84,11 @@ public class MatetalkDetailView extends RelativeLayout {
             public void onClick(View v) {
                 Button btn = (Button)findViewById(R.id.btn_request);
                 if(!isClicked) {
-                    btn.setText("?좎껌 ?꾨즺");
+                    btn.setText("매칭시작");
                     Toast.makeText(MyApplication.getContext(), "dddddd", Toast.LENGTH_SHORT);
                     isClicked = true;
                 } else {
-                    btn.setText("?좎껌?섍린");
+                    btn.setText("매칭됨");
                     Toast.makeText(MyApplication.getContext(), "ffffff", Toast.LENGTH_SHORT);
                     isClicked = false;
                 }
