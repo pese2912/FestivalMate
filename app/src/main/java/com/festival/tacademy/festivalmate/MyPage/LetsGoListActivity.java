@@ -67,6 +67,11 @@ public class LetsGoListActivity extends AppCompatActivity {
                     }
                 }, 250);
             }
+
+            @Override
+            public void onItemCheck(View view, Festival festival) {
+
+            }
         });
         initData();
     }

@@ -70,6 +70,11 @@ public class FestibalSearchActivity extends AppCompatActivity {
                     }
                 }, 250);
             }
+
+            @Override
+            public void onItemCheck(View view, Festival festival) {
+
+            }
         });
 
         Button btn= (Button)findViewById(R.id.btn_search);

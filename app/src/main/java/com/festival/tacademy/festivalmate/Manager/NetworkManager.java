@@ -9,6 +9,8 @@ import com.festival.tacademy.festivalmate.Data.Artist;
 import com.festival.tacademy.festivalmate.Data.ChatroomApproveResult;
 import com.festival.tacademy.festivalmate.Data.ChatroomKickResult;
 import com.festival.tacademy.festivalmate.Data.ChatroomMemListResult;
+import com.festival.tacademy.festivalmate.Data.CheckGoingResult;
+import com.festival.tacademy.festivalmate.Data.DeleteGoingListResult;
 import com.festival.tacademy.festivalmate.Data.FestivalDetailResult;
 import com.festival.tacademy.festivalmate.Data.FestivalResultResult;
 import com.festival.tacademy.festivalmate.Data.HateResult;
@@ -1131,4 +1133,101 @@ public class NetworkManager {
         return request;
     }
 
+    private static final String URL_DELETE_GOING_LIST = MY_SERVER + "/delete_going_list";       // 갈꺼야 공연 삭제
+    public Request delete_going_list(Object tag,
+                                         int mem_no,
+                                         int festival_no,
+                                         OnResultListener<DeleteGoingListResult> listener) {
+
+        RequestBody body = new FormBody.Builder()
+                .add("mem_no", mem_no+"")
+                .add("festival_no", festival_no+"")
+                .build();
+
+        Request request = new Request.Builder()
+                .url(URL_DELETE_GOING_LIST)
+                .post(body)
+                .build();
+
+        final NetworkResult<DeleteGoingListResult> result = new NetworkResult<>();
+        result.request = request;
+        result.listener = listener;
+        mClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                result.exception = e;
+                mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String text = response.body().string();
+                    DeleteGoingListResult data = gson.fromJson(text, DeleteGoingListResult.class);
+                    if (data.success == 1) {
+                        result.result = data;
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SUCCESS, result));
+                    } else {
+                        result.exception = new IOException(data.message);
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                    }
+
+                } else {
+                    result.exception = new IOException(response.message());
+                    mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                }
+            }
+        });
+        return request;
+    }
+
+    private static final String URL_CHECK_GOING = MY_SERVER + "/check_going";       // 갈꺼야 버튼 선택
+    public Request check_going(Object tag,
+                                     int mem_no,
+                                     int festival_no,
+                               int mem_going_check,
+                                     OnResultListener<CheckGoingResult> listener) {
+
+        RequestBody body = new FormBody.Builder()
+                .add("mem_no", mem_no+"")
+                .add("festival_no", festival_no+"")
+                .add("mem_going_check", mem_going_check+"")
+                .build();
+
+        Request request = new Request.Builder()
+                .url(URL_CHECK_GOING)
+                .post(body)
+                .build();
+
+        final NetworkResult<CheckGoingResult> result = new NetworkResult<>();
+        result.request = request;
+        result.listener = listener;
+        mClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                result.exception = e;
+                mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String text = response.body().string();
+                    CheckGoingResult data = gson.fromJson(text, CheckGoingResult.class);
+                    if (data.success == 1) {
+                        result.result = data;
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SUCCESS, result));
+                    } else {
+                        result.exception = new IOException(data.message);
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                    }
+
+                } else {
+                    result.exception = new IOException(response.message());
+                    mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                }
+            }
+        });
+        return request;
+    }
 }

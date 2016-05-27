@@ -15,11 +15,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.festival.tacademy.festivalmate.Data.Artist;
+import com.festival.tacademy.festivalmate.Data.CheckGoingResult;
 import com.festival.tacademy.festivalmate.Data.Festival;
 import com.festival.tacademy.festivalmate.Data.FestivalResultResult;
 import com.festival.tacademy.festivalmate.Data.Lineup;
@@ -52,7 +54,6 @@ public class FestivalInfoFragment extends Fragment {
 
     CirclePageIndicator mIndicator;
 
-
     int res;
     public FestivalInfoFragment() {
         // Required empty public constructor
@@ -83,7 +84,29 @@ public class FestivalInfoFragment extends Fragment {
                     }
                 }, 250);
             }
+
+            @Override
+            public void onItemCheck(final View view, final Festival festival) {
+          //     Toast.makeText(getContext(),festival.getMem_going_check()+festival.getFestival_name(), Toast.LENGTH_SHORT).show();
+                int memNo = PropertyManager.getInstance().getNo();
+                int fesNo = festival.getFestival_no();
+                int goingCheck = festival.getMem_going_check();
+
+                NetworkManager.getInstance().check_going(getContext(), memNo, fesNo, goingCheck, new NetworkManager.OnResultListener<CheckGoingResult>() {
+                    @Override
+                    public void onSuccess(Request request, CheckGoingResult result) {
+                        CheckBox checkBox = (CheckBox) view;
+                        festival.setMem_going_check(result.result.getMem_going_check());
+                    }
+
+                    @Override
+                    public void onFail(Request request, IOException exception) {
+
+                    }
+                });
+            }
         });
+
         initData();
     }
 
