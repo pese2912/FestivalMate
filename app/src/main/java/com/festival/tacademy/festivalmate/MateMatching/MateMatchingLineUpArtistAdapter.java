@@ -23,6 +23,7 @@ public class MateMatchingLineUpArtistAdapter extends RecyclerView.Adapter<MateMa
         notifyDataSetChanged();
     }
 
+
     public void addAll(List<Artist> items){
         this.items.addAll(items);
         notifyDataSetChanged();

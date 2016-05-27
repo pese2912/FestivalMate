@@ -27,7 +27,6 @@ public class MateMatchingLineUpViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
         dateView = (TextView)itemView.findViewById(R.id.text_date);
         listView = (RecyclerView)itemView.findViewById(R.id.rv_list);
-
     }
 
     public void setFestibalLineUp(Lineup lineUp){
@@ -39,6 +38,7 @@ public class MateMatchingLineUpViewHolder extends RecyclerView.ViewHolder {
         //mManager = new LinearLayoutManager(MyApplication.getContext(), LinearLayoutManager.HORIZONTAL,false);
         mManager = new GridLayoutManager(MyApplication.getContext(),3);
         listView.setLayoutManager(mManager);
-        mAdapter.addAll(lineUp.getLineup());
+        if(lineUp.getLineup()!=null)
+          mAdapter.addAll(lineUp.getLineup());
     }
 }

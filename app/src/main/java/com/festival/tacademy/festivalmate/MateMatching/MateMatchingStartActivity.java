@@ -67,6 +67,7 @@ public class MateMatchingStartActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+
                 for(int i=0; i<selectedLineup.size(); i++){
                     for(int j =0; j<selectedLineup.get(i).getLineup().size(); j++){
                         if(selectedLineup.get(i).getLineup().get(j).isCheck() == 1){
