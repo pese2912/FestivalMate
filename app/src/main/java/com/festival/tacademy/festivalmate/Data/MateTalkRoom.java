@@ -15,7 +15,7 @@ public class MateTalkRoom implements Serializable {
     public int chatroom_size;
     public int chatroom_maxSize;
     public List<Artist> matched_artist;
-    public int matched_artist_number;
+    public int matched_artist_numbers;
     public  String chatroom_name;
     public int chatroom_host_no;
     public String chatroom_host_name;
@@ -80,11 +80,11 @@ public class MateTalkRoom implements Serializable {
     }
 
     public int getMatched_artist_number() {
-        return matched_artist_number;
+        return matched_artist_numbers;
     }
 
     public void setMatched_artist_number(int matched_artist_number) {
-        this.matched_artist_number = matched_artist_number;
+        this.matched_artist_numbers = matched_artist_number;
     }
 
     public String getChatroom_name() {

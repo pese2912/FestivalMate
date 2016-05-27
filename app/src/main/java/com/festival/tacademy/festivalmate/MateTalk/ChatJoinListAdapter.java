@@ -24,6 +24,7 @@ public class ChatJoinListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public static final int VIEW_TYPE_HEADER_JOIN  = 2;
     public static final int VIEW_TYPE_APPROVE_WAITER = 3;
     public static final int VIEW_TYPE_CHAT_JOINER = 4;
+
     MateTalkWaitJoinList list =  new MateTalkWaitJoinList();;
 
     public void setMateTalkWaitJoinList(MateTalkWaitJoinList list){
@@ -116,7 +117,9 @@ public class ChatJoinListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemCount() {
+
         int size =0;
+
         if(list != null && list.getChatroom_waitings().size()!=0 && list.getChatroom_members().size()!=0) {
             size = 1;
             if(list.getChatroom_waitings().size() > 0){

@@ -66,8 +66,7 @@ public class MatetalkDetailView extends RelativeLayout {
             return;
         }
 
-
-        text_artist_num.setText(chatinfo.getMatched_artist().size() + "명");
+        text_artist_num.setText(chatinfo.getMatched_artist_number() + "명");
 
                 text_artists.setText(chatinfo.getMatched_artist().get(0).getMatched_artist_name());
         for (int j = 1; j < chatinfo.getMatched_artist().size(); j++) {
@@ -77,7 +76,7 @@ public class MatetalkDetailView extends RelativeLayout {
         text_region.setText(chatinfo.getChatroom_location() + "");
         text_age.setText(chatinfo.getChatroom_age() + "");
 
-        text_mem_user.setText(chatinfo.getChatroom_mems().size() + "명");
+        text_mem_user.setText(chatinfo.getChatroom_size() + "명");
         Button btn = (Button)findViewById(R.id.btn_request);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
