@@ -7,7 +7,7 @@ public class FestivalDetailResult {
 
     public int success;
     public String message;
-    Festival result;
+    public Festival result;
 
     public Festival getResult() {
         return result;

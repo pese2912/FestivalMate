@@ -29,7 +29,8 @@
         android:id="@+id/text_title"
         android:layout_below="@+id/text_name"
         android:layout_toRightOf="@+id/image_photo"
-        android:layout_toEndOf="@+id/image_photo" />
+        android:layout_toEndOf="@+id/image_photo"
+        android:layout_marginTop="5dp" />
 
     <TextView
         android:layout_width="wrap_content"

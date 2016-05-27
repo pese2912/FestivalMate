@@ -29,7 +29,6 @@ public class LetsgoViewHolder extends RecyclerView.ViewHolder {
         rv_list.setAdapter(mAdapter);
         mManager = new LinearLayoutManager(MyApplication.getContext(), LinearLayoutManager.HORIZONTAL, false);
         rv_list.setLayoutManager(mManager);
-
         mAdapter.addAll(user);
         mAdapter.setOnItemClickListener(listener);
 

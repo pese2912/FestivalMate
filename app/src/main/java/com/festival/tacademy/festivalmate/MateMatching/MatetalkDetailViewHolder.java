@@ -18,6 +18,7 @@ public class MatetalkDetailViewHolder extends RecyclerView.ViewHolder {
     MatetalkDetailView detailView;
     MatetalkInfoView infoView;
     MateTalkRoom mateTalkRoom;
+
     public MatetalkDetailViewHolder(View itemView) {
         super(itemView);
         detailView = (MatetalkDetailView)itemView.findViewById(R.id.detail_view);
@@ -42,31 +43,40 @@ public class MatetalkDetailViewHolder extends RecyclerView.ViewHolder {
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener;
-
     }
 
     public void setMateTalkRoom(MateTalkRoom chatinfo, ChatUserViewHolder.OnItemClickListener listener) {
+
         mateTalkRoom = chatinfo;
         detailView.text_title.setText(chatinfo.getChatroom_festival_name());
-        detailView.text_artist_num.setText(chatinfo.getMatched_artist().size() + "명");
+        detailView.text_artist_num.setText(chatinfo.getMatched_artist_number() + "명");
 
-        detailView.text_artists.setText(chatinfo.getMatched_artist().get(0).getMatched_artist_name());
-        for (int j = 1; j < chatinfo.getMatched_artist().size(); j++) {
-            detailView.text_artists.append(", " + chatinfo.getMatched_artist().get(j).getMatched_artist_name());
+        if(chatinfo.getMatched_artist().size()!=0) {
+            detailView.text_artists.setText(chatinfo.getMatched_artist().get(0).getMatched_artist_name());
+            for (int j = 1; j < chatinfo.getMatched_artist().size(); j++) {
+                detailView.text_artists.append(", " + chatinfo.getMatched_artist().get(j).getMatched_artist_name());
+            }
         }
 
         detailView.text_region.setText(chatinfo.getChatroom_location()+"");
         detailView.text_age.setText(chatinfo.getChatroom_age()+"");
 
-        detailView.text_mem_user.setText(chatinfo.getChatroom_mems().size()+"명");
+        detailView.text_mem_user.setText(chatinfo.getChatroom_size()+"명");
 
         detailView.listView.setAdapter(detailView.mAdapter);
         detailView.listView.setLayoutManager(detailView.mLayoutManager);
 
-        detailView.mAdapter.addAll(chatinfo.getChatroom_mems());
-        detailView.mAdapter.setOnItemClickListener(listener);
+        if(chatinfo.getChatroom_mems()!=null) {
+            detailView.mAdapter.addAll(chatinfo.getChatroom_mems());
+            detailView.mAdapter.setOnItemClickListener(listener);
+        }
 
         Glide.with(infoView.photoView.getContext()).load(chatinfo.getChatroom_img()).into(infoView.photoView);
-        infoView.textView.setText(chatinfo.getChatroom_name());
+        infoView.titleView.setText(chatinfo.getChatroom_name());
+        infoView.joinView.setText(chatinfo.getChatroom_size()+"명 참여중");
+        infoView.matchrateView.setText(chatinfo.getMatched_artist_number()+"명 일치");
+        infoView.hostNameView.setText(chatinfo.getChatroom_host_name()+" 님");
+
     }
+
 }

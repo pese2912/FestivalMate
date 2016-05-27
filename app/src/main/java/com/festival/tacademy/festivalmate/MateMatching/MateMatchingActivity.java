@@ -69,21 +69,20 @@ public class MateMatchingActivity extends AppCompatActivity {
 
                 final Button btn = (Button)v.findViewById(R.id.btn_request);
 
-                NetworkManager.getInstance().show_chatroom_detail(MateMatchingActivity.this, memNo, roomNo, new NetworkManager.OnResultListener<ShowMatchingResult>() {
-                    @Override
-                    public void onSuccess(Request request, ShowMatchingResult result) {
-                        Toast.makeText(MateMatchingActivity.this, "성공",Toast.LENGTH_SHORT).show();
-
-                        mAdapter.clear();
-                        mAdapter.addAll(result.result);
-
-                    }
-
-                    @Override
-                    public void onFail(Request request, IOException exception) {
-                        Toast.makeText(MateMatchingActivity.this, "실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
-                    }
-                });
+//                NetworkManager.getInstance().show_chatroom_detail(MateMatchingActivity.this, memNo, roomNo, new NetworkManager.OnResultListener<ShowMatchingResult>() {
+//                    @Override
+//                    public void onSuccess(Request request, ShowMatchingResult result) {
+//                        Toast.makeText(MateMatchingActivity.this, "성공",Toast.LENGTH_SHORT).show();
+//                        mAdapter.clear();
+//                        mAdapter.addAll(result.result);
+//
+//                    }
+//
+//                    @Override
+//                    public void onFail(Request request, IOException exception) {
+//                        Toast.makeText(MateMatchingActivity.this, "실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+//                    }
+//                });
 
 
                 if(room.getMem_chatroom_state() == 2)
@@ -92,7 +91,6 @@ public class MateMatchingActivity extends AppCompatActivity {
                     btn.setText("대기중");
                 else if(room.getMem_chatroom_state() == 0)
                     btn.setText("메이트톡 시작");
-
 
                 btn.setOnClickListener(new View.OnClickListener() {  // 버튼 클릭
                     @Override
@@ -185,7 +183,7 @@ public class MateMatchingActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        initData();
+    //    initData();
     }
 
     @Override
@@ -215,31 +213,31 @@ public class MateMatchingActivity extends AppCompatActivity {
 
     private void initData() {
 
-//        mAdapter.clear();
-//        mAdapter.addAll(result.result);
-
         mAdapter.clear();
-        for (int i = 0; i < 10; i++) {
+        mAdapter.addAll(result.result);
 
-            Artist artist = new Artist();
-            artist.setMatched_artist_name("matchedName : "+ i);
-            artist.setMatched_artist_no(i);
-            artists.add(artist);
+//        mAdapter.clear();
+//        for (int i = 0; i < 10; i++) {
+//
+//            Artist artist = new Artist();
+//            artist.setMatched_artist_name("matchedName : "+ i);
+//            artist.setMatched_artist_no(i);
+//            artists.add(artist);
+//
+//            User user = new User();
+//            user.setMem_no(1);
+//            user.setChatroom_mem_name("chatName : "+ i);
+//            user.setChatroom_mem_img("http://sitehomebos.kocca.kr/knowledge/abroad/deep/__icsFiles/artimage/2012/03/26/2_1.jpg");
+//            user.setChatroom_mems_no(i);
+//            users.add(user);
+//
+//        }
 
-            User user = new User();
-            user.setMem_no(1);
-            user.setChatroom_mem_name("chatName : "+ i);
-            user.setChatroom_mem_img("http://sitehomebos.kocca.kr/knowledge/abroad/deep/__icsFiles/artimage/2012/03/26/2_1.jpg");
-            user.setChatroom_mems_no(i);
-            users.add(user);
+//        for( int i=0; i<10; i++ ) {
+//            chatinfoes.add(new MateTalkRoom(1,"모두모두 대환영 " + i,"http://sitehomebos.kocca.kr/knowledge/abroad/deep/__icsFiles/artimage/2012/03/26/2_1.jpg" , "Festival " + i, artists, 1, 1, users));
+//        }
 
-        }
-
-        for( int i=0; i<10; i++ ) {
-            chatinfoes.add(new MateTalkRoom(1,"모두모두 대환영 " + i,"http://sitehomebos.kocca.kr/knowledge/abroad/deep/__icsFiles/artimage/2012/03/26/2_1.jpg" , "Festival " + i, artists, 1, 1, users));
-        }
-
-        mAdapter.addAll(chatinfoes);
+//        mAdapter.addAll(chatinfoes);
     }
 
 }

@@ -40,7 +40,6 @@ public class PreferenceActivity extends AppCompatActivity {
     List<Artist> artistList;
     List<Artist> selectedArtist;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,12 +58,9 @@ public class PreferenceActivity extends AppCompatActivity {
                        selectedArtist.add(artistList.get(i));
                    }
                }
-
                 if(selectedArtist.size() >= 10){
                     item.setTitle(getString(R.string.complete));
                 }
-
-
                // Toast.makeText(PreferenceActivity.this, artist.isCheck() + artist.getName(), Toast.LENGTH_SHORT).show();
                 Toast.makeText(PreferenceActivity.this, selectedArtist.size()+"", Toast.LENGTH_SHORT).show();
             }
@@ -127,31 +123,31 @@ public class PreferenceActivity extends AppCompatActivity {
     private void setData() {
         int memNo = PropertyManager.getInstance().getNo();
 
-//        NetworkManager.getInstance().showArtistSurvey(PreferenceActivity.this, memNo, new NetworkManager.OnResultListener<ShowArtistSurveyResult>() {
-//            @Override
-//            public void onSuccess(Request request, ShowArtistSurveyResult result) {
-//                Toast.makeText(PreferenceActivity.this,"성공",Toast.LENGTH_SHORT).show();
-//                mAdapter.clear();
-//                mAdapter.addAll(result.result);
-//
-//                artistList = result.result;
-//            }
-//
-//            @Override
-//            public void onFail(Request request, IOException exception) {
-//
-//                Toast.makeText(PreferenceActivity.this,"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        NetworkManager.getInstance().showArtistSurvey(PreferenceActivity.this, memNo, new NetworkManager.OnResultListener<ShowArtistSurveyResult>() {
+            @Override
+            public void onSuccess(Request request, ShowArtistSurveyResult result) {
+                Toast.makeText(PreferenceActivity.this,"성공",Toast.LENGTH_SHORT).show();
+                mAdapter.clear();
+                mAdapter.addAll(result.result);
 
-           for (int i = 0; i < 20; i++) {
-                Artist artist = new Artist("name " + i,"http://sitehomebos.kocca.kr/knowledge/abroad/deep/__icsFiles/artimage/2012/03/26/2_1.jpg");
-               artist.setName("name " + i);
-            //  artist.setImage(ContextCompat.getDrawable(this, R.mipmap.ic_launcher));
-               artist.setPhoto("http://sitehomebos.kocca.kr/knowledge/abroad/deep/__icsFiles/artimage/2012/03/26/2_1.jpg");
-             mAdapter.add(artist); // 값 추가
-               artistList.add(artist);
-         }
+                artistList = result.result;
+            }
+
+            @Override
+            public void onFail(Request request, IOException exception) {
+
+                Toast.makeText(PreferenceActivity.this,"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
+//           for (int i = 0; i < 20; i++) {
+//                Artist artist = new Artist("name " + i,"http://sitehomebos.kocca.kr/knowledge/abroad/deep/__icsFiles/artimage/2012/03/26/2_1.jpg");
+//               artist.setName("name " + i);
+//            //  artist.setImage(ContextCompat.getDrawable(this, R.mipmap.ic_launcher));
+//               artist.setPhoto("http://sitehomebos.kocca.kr/knowledge/abroad/deep/__icsFiles/artimage/2012/03/26/2_1.jpg");
+//             mAdapter.add(artist); // 값 추가
+//               artistList.add(artist);
+//         }
     }
 
 

@@ -41,8 +41,7 @@
         android:id="@+id/text_artists"
         android:layout_below="@+id/text_title1"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:text="ㅇㅇㅇ" />
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"

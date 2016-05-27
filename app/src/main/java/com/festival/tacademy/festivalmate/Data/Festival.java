@@ -20,6 +20,25 @@ public class Festival implements Serializable {
     int photo_location;
     String date;
 
+    public String festival_ticket_link;
+    public String festival_homepage;
+
+    public String getFestival_ticket_link() {
+        return festival_ticket_link;
+    }
+
+    public void setFestival_ticket_link(String festival_ticket_link) {
+        this.festival_ticket_link = festival_ticket_link;
+    }
+
+    public String getFestival_homepage() {
+        return festival_homepage;
+    }
+
+    public void setFestival_homepage(String festival_homepage) {
+        this.festival_homepage = festival_homepage;
+    }
+
     public Festival() {
     }
 

@@ -26,6 +26,10 @@ public class FestivalDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         this.festival = festival;
         notifyDataSetChanged();
     }
+    public void clear(){
+        this.festival=null;
+        notifyDataSetChanged();
+    }
 
 
     UserViewHolder.OnItemClickListener mListener;

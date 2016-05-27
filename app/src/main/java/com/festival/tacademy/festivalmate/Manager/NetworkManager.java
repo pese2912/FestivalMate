@@ -308,23 +308,18 @@ public class NetworkManager {
     private static final String URL_SAVE_ARTIST_SURVEY = MY_SERVER + "/save_artist_survey"; // 선호가수 저장
     public Request saveArtistSurvey(Object tag,
                                       int mem_no,
-                                      List<Artist> artist_no,
+                                      List<Artist> artist,
                                       OnResultListener<MySignUpResult> listener) {
 
-        RequestBody body = new FormBody.Builder()
-                .add("mem_no", mem_no+"")
-                .add("artist_no[0]",artist_no.get(0).getArtist_no()+"")
-                .add("artist_no[1]",artist_no.get(1).getArtist_no()+"")
-                .add("artist_no[2]",artist_no.get(2).getArtist_no()+"")
-                .add("artist_no[3]",artist_no.get(3).getArtist_no()+"")
-                .add("artist_no[4]",artist_no.get(4).getArtist_no()+"")
-                .add("artist_no[5]",artist_no.get(5).getArtist_no()+"")
-                .add("artist_no[6]",artist_no.get(6).getArtist_no()+"")
-                .add("artist_no[7]",artist_no.get(7).getArtist_no()+"")
-                .add("artist_no[8]",artist_no.get(8).getArtist_no()+"")
-                .add("artist_no[9]",artist_no.get(9).getArtist_no()+"")
-                .build();
 
+        FormBody.Builder builder = new FormBody.Builder();
+        builder.add("mem_no", mem_no+"");
+
+        for(Artist a : artist) {
+            builder.add("artist_no",a.getArtist_no()+"");
+        }
+
+        RequestBody body = builder.build();
 
         Request request = new Request.Builder()
                 .url(URL_SAVE_ARTIST_SURVEY)
@@ -743,10 +738,22 @@ public class NetworkManager {
                                         int  festival_no,
                                         List<Artist> selected_artist,
                                                 OnResultListener<ShowMatchingResult> listener) {
-        RequestBody body = new FormBody.Builder()
-                .add("mem_no", mem_no+"")
-                .add("festival_no", festival_no+"")
-                .build();
+
+//        RequestBody body = new FormBody.Builder()
+//                .add("mem_no", mem_no+"")
+//                .add("festival_no", festival_no+"")
+//                .build();
+
+        FormBody.Builder builder = new FormBody.Builder();
+        builder.add("mem_no", mem_no+"");
+        builder.add("festival_no", festival_no+"");
+
+        for(Artist a : selected_artist) {
+            builder.add("selected_artist_no",a.getArtist_no()+"");
+            builder.add("selected_artist_name",a.getName());
+        }
+
+        RequestBody body = builder.build();
 
         Request request = new Request.Builder()
                 .url(URL_SHOW_MATCHING_RESULT)
@@ -787,52 +794,52 @@ public class NetworkManager {
 
 
 
-    private static final String URL_SHOW_CHATROOM_DETAIL = MY_SERVER + "/show_chatroom_detail";       // 매칭된 채팅방의 상세 정보 조회
-    public Request show_chatroom_detail(Object tag,
-                                        int mem_no,
-                                        int  chatroom_no,
-                                        OnResultListener<ShowMatchingResult> listener) {
-        RequestBody body = new FormBody.Builder()
-                .add("mem_no", mem_no+"")
-                .add("room_no", chatroom_no+"")
-                .build();
-
-        Request request = new Request.Builder()
-                .url(URL_SHOW_CHATROOM_DETAIL)
-                .post(body)
-                .build();
-
-        final NetworkResult<ShowMatchingResult> result = new NetworkResult<>();
-        result.request = request;
-        result.listener = listener;
-        mClient.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                result.exception = e;
-                mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (response.isSuccessful()) {
-                    String text = response.body().string();
-                    ShowMatchingResult data = gson.fromJson(text, ShowMatchingResult.class);
-                    if (data.success == 1) {
-                        result.result = data;
-                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SUCCESS, result));
-                    } else {
-                        result.exception = new IOException(data.message);
-                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
-                    }
-
-                } else {
-                    result.exception = new IOException(response.message());
-                    mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
-                }
-            }
-        });
-        return request;
-    }
+//    private static final String URL_SHOW_CHATROOM_DETAIL = MY_SERVER + "/show_chatroom_detail";       // 매칭된 채팅방의 상세 정보 조회
+//    public Request show_chatroom_detail(Object tag,
+//                                        int mem_no,
+//                                        int  chatroom_no,
+//                                        OnResultListener<ShowMatchingResult> listener) {
+//        RequestBody body = new FormBody.Builder()
+//                .add("mem_no", mem_no+"")
+//                .add("room_no", chatroom_no+"")
+//                .build();
+//
+//        Request request = new Request.Builder()
+//                .url(URL_SHOW_CHATROOM_DETAIL)
+//                .post(body)
+//                .build();
+//
+//        final NetworkResult<ShowMatchingResult> result = new NetworkResult<>();
+//        result.request = request;
+//        result.listener = listener;
+//        mClient.newCall(request).enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                result.exception = e;
+//                mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                if (response.isSuccessful()) {
+//                    String text = response.body().string();
+//                    ShowMatchingResult data = gson.fromJson(text, ShowMatchingResult.class);
+//                    if (data.success == 1) {
+//                        result.result = data;
+//                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SUCCESS, result));
+//                    } else {
+//                        result.exception = new IOException(data.message);
+//                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+//                    }
+//
+//                } else {
+//                    result.exception = new IOException(response.message());
+//                    mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+//                }
+//            }
+//        });
+//        return request;
+//    }
 
     private static final String URL_HATE = MY_SERVER + "/hate";       // 선택 회원 신고하기
     public Request hate(Object tag,
@@ -1072,7 +1079,7 @@ public class NetworkManager {
     }
 
 
-    private static final String URL_REQUEST_CHATROOM_JOIN = MY_SERVER + "/request_chatroom_join";       // 채팅방 강퇴
+    private static final String URL_REQUEST_CHATROOM_JOIN = MY_SERVER + "/request_chatroom_join";       // 모임 참여 신청
     public Request request_chatroom_join(Object tag,
                                  int mem_no,
                                  int chatroom_no,

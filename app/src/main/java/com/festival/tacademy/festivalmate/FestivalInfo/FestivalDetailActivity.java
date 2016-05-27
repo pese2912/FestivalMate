@@ -66,13 +66,13 @@ public class FestivalDetailActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        Toast.makeText(FestivalDetailActivity.this, festival.getFestival_name() + "+ " + festival.getDate() + "+ " + festival.getFestival_location(), Toast.LENGTH_SHORT).show();
+       // Toast.makeText(FestivalDetailActivity.this, festival.getFestival_name() + "+ " + festival.getDate() + "+ " + festival.getFestival_location(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        setData();
+      //  setData();
     }
 
     private void setData(){
@@ -84,7 +84,8 @@ public class FestivalDetailActivity extends AppCompatActivity {
                     public void onSuccess(Request request, FestivalDetailResult result) {
                         if(result.success==1) {
                             Toast.makeText(FestivalDetailActivity.this, "Success", Toast.LENGTH_SHORT).show();
-                            mAdapter.setFestval(result.getResult());
+
+                            mAdapter.setFestval(result.result);
                         }
                     }
 

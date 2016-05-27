@@ -55,7 +55,7 @@ public class JoinWaitListViewHolder extends RecyclerView.ViewHolder {
     public void setMateTalkWaitList(MateTalkWaitList mateTalkWaitList){
         this.mateTalkWaitList = mateTalkWaitList;
         Glide.with(photoView.getContext()).load(mateTalkWaitList.getChatroom_img()).into(photoView);
-        nameView.setText(mateTalkWaitList.getChatroom_festival());
+      //  nameView.setText(mateTalkWaitList.getChatroom_festival());
         titleView.setText(mateTalkWaitList.getChatroom_name());
         //peopleView.setText(mateTalkWaitList.getChatroom_wait_num());
         dateView.setText(mateTalkWaitList.getFestival_lineups().get(0).getDate());

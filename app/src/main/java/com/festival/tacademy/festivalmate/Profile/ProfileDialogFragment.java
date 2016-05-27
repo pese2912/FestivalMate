@@ -110,11 +110,11 @@ public class ProfileDialogFragment extends DialogFragment {
         rv_list1.setLayoutManager(mLayoutManager1);
         rv_list2.setAdapter(mAdapter2);
         rv_list2.setLayoutManager(mLayoutManager2);
-
-        Bundle bundle = getArguments();
-        bundle.getSerializable("user");
-        mAdapter1.addAll(user.getMem_going());
-        mAdapter2.addAll(user.getArtist());
+//
+//        Bundle bundle = getArguments();
+//        bundle.getSerializable("user");
+//        mAdapter1.addAll(user.getMem_going());
+//        mAdapter2.addAll(user.getArtist());
 
         user_state.setText(user.getMem_state_msg());
         user_name.setText(user.getName());

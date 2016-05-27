@@ -61,6 +61,12 @@ public class PreferenceViewHolder  extends RecyclerView.ViewHolder {
         nameView.setText(item.getName());
         Glide.with(imageView.getContext()).load(item.getPhoto()).into(imageView);
 
+       if(item.isCheck()==1){
+           checkBox.setChecked(true);
+       }else{
+           checkBox.setChecked(false);
+       }
+
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
@@ -69,7 +75,7 @@ public class PreferenceViewHolder  extends RecyclerView.ViewHolder {
                     artist.setCheck(1);
                 else
                     artist.setCheck(0);
-                Toast.makeText(MyApplication.getContext(), "checked : "+ artist.getName()+ artist.isCheck(),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MyApplication.getContext(), "checked : "+ artist.getName()+ artist.isCheck(),Toast.LENGTH_SHORT).show();
             }
         });
 

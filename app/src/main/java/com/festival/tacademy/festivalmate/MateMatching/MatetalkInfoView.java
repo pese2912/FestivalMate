@@ -27,7 +27,11 @@ public class MatetalkInfoView extends RelativeLayout {
     }
 
     ImageView photoView;
-    TextView textView;
+    TextView titleView;
+    TextView hostNameView;
+    TextView matchrateView;
+    TextView joinView;
+
     MateTalkRoom chatinfo;
 
     public MateTalkRoom getChatinfo() {
@@ -39,9 +43,12 @@ public class MatetalkInfoView extends RelativeLayout {
     }
 
     private void init() {
-        LayoutInflater.from(getContext()).inflate(R.layout.view_matetalk_info, this);
 
+        LayoutInflater.from(getContext()).inflate(R.layout.view_matetalk_info, this);
+        hostNameView = (TextView)findViewById(R.id.text_hostName);
+        matchrateView = (TextView)findViewById(R.id.text_match_rate);
+        joinView = (TextView)findViewById(R.id.text_joining);
         photoView = (ImageView)findViewById(R.id.image_view);
-        textView = (TextView)findViewById(R.id.title_view);
+        titleView = (TextView)findViewById(R.id.title_view);
     }
 }
