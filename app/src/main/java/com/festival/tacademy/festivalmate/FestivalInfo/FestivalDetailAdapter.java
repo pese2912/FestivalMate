@@ -31,7 +31,6 @@ public class FestivalDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         notifyDataSetChanged();
     }
 
-
     UserViewHolder.OnItemClickListener mListener;
 
     public void setOnItemClickListener(UserViewHolder.OnItemClickListener listener) {
@@ -74,8 +73,9 @@ public class FestivalDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
+
             case VIEW_TYPE_FESTIVAL_PHOTO: {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_festival_photo, null);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_festival_photo, parent, false);
                 return new PhotoViewHolder(view);
             }
             case VIEW_TYPE_TITLE: {

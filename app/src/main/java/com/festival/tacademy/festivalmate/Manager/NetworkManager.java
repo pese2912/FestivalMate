@@ -316,8 +316,12 @@ public class NetworkManager {
         builder.add("mem_no", mem_no+"");
 
         for(Artist a : artist) {
+
             builder.add("artist_no",a.getArtist_no()+"");
+            builder.add("artist_name",a.getName()+"");
+            builder.add("artist_img",a.getPhoto()+"");
         }
+
 
         RequestBody body = builder.build();
 
@@ -553,6 +557,7 @@ public class NetworkManager {
                 .add("mem_state_msg", mem_state_msg)
                 .build();
 
+
         Request request = new Request.Builder()
                 .url(URL_MODIFY_PROFILE)
                 .post(body)
@@ -750,7 +755,6 @@ public class NetworkManager {
 
         for(Artist a : selected_artist) {
             builder.add("selected_artist_no",a.getArtist_no()+"");
-            builder.add("selected_artist_name",a.getName());
         }
 
         RequestBody body = builder.build();
