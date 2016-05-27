@@ -605,7 +605,8 @@ public class NetworkManager {
                 .add("mem_no", mem_no+"")
                 .build();
 
-        Request request = new Request.Builder()
+
+        final Request request = new Request.Builder()
                 .url(URL_SHOW_FESTIVAL_LIST)
                 .post(body)
                 .build();
@@ -626,7 +627,7 @@ public class NetworkManager {
                     String text = response.body().string();
                     FestivalResultResult data = gson.fromJson(text, FestivalResultResult.class);
                     if (data.success == 1) {
-                        result.result = data;
+                       result.result = data;
                         mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SUCCESS, result));
                     } else {
                         result.exception = new IOException(data.message);

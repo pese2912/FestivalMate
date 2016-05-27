@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Lineup implements Serializable{
     String festival_date;
-    List<Artist> festival_lineup = new ArrayList<>();
+    List<Artist> festival_lineupa = new ArrayList<>();
 
     public String getDate()
     {
@@ -21,17 +21,17 @@ public class Lineup implements Serializable{
     }
 
     public List<Artist> getLineup() {
-        return festival_lineup;
+        return festival_lineupa;
     }
 
     public void setLineup(List<Artist> lineup) {
-        this.festival_lineup = lineup;
+        this.festival_lineupa = lineup;
     }
 
     public Lineup(String date, List<Artist> lineup) {
 
         this.festival_date = date;
-        this.festival_lineup = lineup;
+        this.festival_lineupa = lineup;
     }
     public Lineup(String date) {
 
