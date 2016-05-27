@@ -17,7 +17,8 @@
         android:layout_gravity="center_horizontal"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/photo_view"
-        android:layout_toEndOf="@+id/photo_view" />
+        android:layout_toEndOf="@+id/photo_view"
+        android:layout_marginTop="15dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -46,10 +47,10 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New CheckBox"
         android:id="@+id/checkBox"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:checked="false" />
 
 </RelativeLayout>

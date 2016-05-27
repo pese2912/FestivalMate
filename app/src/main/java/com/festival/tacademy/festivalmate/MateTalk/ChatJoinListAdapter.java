@@ -117,7 +117,7 @@ public class ChatJoinListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public int getItemCount() {
         int size =0;
-        if(list != null) {
+        if(list != null && list.getChatroom_waitings().size()!=0 && list.getChatroom_members().size()!=0) {
             size = 1;
             if(list.getChatroom_waitings().size() > 0){
                 size +=list.getChatroom_waitings().size();
