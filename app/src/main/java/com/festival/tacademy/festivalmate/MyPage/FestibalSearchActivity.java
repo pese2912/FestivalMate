@@ -10,10 +10,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.festival.tacademy.festivalmate.Data.Artist;
+import com.festival.tacademy.festivalmate.Data.CheckGoingResult;
 import com.festival.tacademy.festivalmate.Data.Festival;
 import com.festival.tacademy.festivalmate.Data.FestivalResultResult;
 import com.festival.tacademy.festivalmate.Data.Lineup;
@@ -72,8 +74,23 @@ public class FestibalSearchActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onItemCheck(View view, Festival festival) {
+            public void onItemCheck(final View view, final Festival festival) {
+                int memNo = PropertyManager.getInstance().getNo();
+                int fesNo = festival.getFestival_no();
+                int goingCheck = festival.getMem_going_check();
 
+                NetworkManager.getInstance().check_going(FestibalSearchActivity.this, memNo, fesNo, goingCheck, new NetworkManager.OnResultListener<CheckGoingResult>() {
+                    @Override
+                    public void onSuccess(Request request, CheckGoingResult result) {
+                        CheckBox checkBox = (CheckBox) view;
+                        festival.setMem_going_check(result.result.getMem_going_check());
+                    }
+
+                    @Override
+                    public void onFail(Request request, IOException exception) {
+
+                    }
+                });
             }
         });
 

@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.festival.tacademy.festivalmate.Data.Artist;
+import com.festival.tacademy.festivalmate.Data.DeleteGoingListResult;
 import com.festival.tacademy.festivalmate.Data.Festival;
 import com.festival.tacademy.festivalmate.Data.Lineup;
 import com.festival.tacademy.festivalmate.Data.ShowGoingListResult;
@@ -70,6 +71,20 @@ public class LetsGoListActivity extends AppCompatActivity {
 
             @Override
             public void onItemCheck(View view, Festival festival) {
+                int memNo = PropertyManager.getInstance().getNo();
+                int fesNo = festival.getFestival_no();
+              NetworkManager.getInstance().delete_going_list(LetsGoListActivity.this, memNo, fesNo, new NetworkManager.OnResultListener<DeleteGoingListResult>() {
+                  @Override
+                  public void onSuccess(Request request, DeleteGoingListResult result) {
+                      mAdapter.clear();
+                      mAdapter.addAll(result.result);
+                  }
+
+                  @Override
+                  public void onFail(Request request, IOException exception) {
+
+                  }
+              });
 
             }
         });
