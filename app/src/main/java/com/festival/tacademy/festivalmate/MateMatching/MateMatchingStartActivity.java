@@ -76,6 +76,7 @@ public class MateMatchingStartActivity extends AppCompatActivity {
                     }
                 }
 
+                Toast.makeText(MateMatchingStartActivity.this,""+selectedArtist.size(),Toast.LENGTH_SHORT).show();
                 int memNo = PropertyManager.getInstance().getNo();
                 int fesNo = festival.getFestival_no();
 

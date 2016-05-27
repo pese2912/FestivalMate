@@ -37,7 +37,7 @@ public class MateMatchingLineUpArtistViewHolder extends RecyclerView.ViewHolder 
                     artist.setCheck(1);
                 else
                     artist.setCheck(0);
-                Toast.makeText(MyApplication.getContext(), "checked : "+ artist.getName()+ artist.isCheck(),Toast.LENGTH_SHORT).show();
+               // Toast.makeText(MyApplication.getContext(), "checked : "+ artist.getName()+ artist.isCheck(),Toast.LENGTH_SHORT).show();
             }
         });
 //        Log.i("name" , artist.getName());

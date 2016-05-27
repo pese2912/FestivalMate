@@ -48,6 +48,6 @@ public class UserViewHolder extends RecyclerView.ViewHolder {
 
     public void setUser(User user) {
         Glide.with(photoView.getContext()).load(user.getPhoto()).into(photoView);
-        idView.setText(user.getId());
+        idView.setText(user.getName());
     }
 }

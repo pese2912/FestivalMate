@@ -84,7 +84,6 @@ public class MateMatchingActivity extends AppCompatActivity {
 //                    }
 //                });
 
-
                 if(room.getMem_chatroom_state() == 2)
                     btn.setText("참여중");
                 else if(room.getMem_chatroom_state() == 1)
@@ -100,12 +99,18 @@ public class MateMatchingActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(Request request, RequestChatroomJoinResult result) {
                                 Toast.makeText(MateMatchingActivity.this, "성공",Toast.LENGTH_SHORT).show();
-                                if(result.result.getMem_chatroom_state() == 2)
+                                if(result.result.getMem_chatroom_state() == 2) {
+                                    room.setMem_chatroom_state(2);
                                     btn.setText("참여중");
-                                else if(result.result.getMem_chatroom_state() == 1)
+                                }
+                                else if(result.result.getMem_chatroom_state() == 1) {
+                                    room.setMem_chatroom_state(1);
                                     btn.setText("대기중");
-                                else if(result.result.getMem_chatroom_state() == 0)
+                                }
+                                else if(result.result.getMem_chatroom_state() == 0) {
+                                    room.setMem_chatroom_state(0);
                                     btn.setText("메이트톡 시작");
+                                }
 
                             }
 
