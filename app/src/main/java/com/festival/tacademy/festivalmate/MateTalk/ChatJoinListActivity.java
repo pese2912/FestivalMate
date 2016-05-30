@@ -70,9 +70,9 @@ public class ChatJoinListActivity extends AppCompatActivity {
             @Override
             public void onSuccess(Request request, ChatroomMemListResult result) {
               //  Toast.makeText(ChatJoinListActivity.this, result.result.getChatroom_waitings().get(0).getMem_name()+"", Toast.LENGTH_SHORT).show();
-              //  Toast.makeText(ChatJoinListActivity.this, result.result.getChatroom_members().get(0).getMem_name()+"", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChatJoinListActivity.this, result.result.getChatroom_members().size()+"", Toast.LENGTH_SHORT).show();
 
-                mAdapter.setMateTalkWaitJoinList(result.result);
+                //mAdapter.setMateTalkWaitJoinList(result.result);
             }
 
             @Override

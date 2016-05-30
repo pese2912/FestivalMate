@@ -7,26 +7,60 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 
+import com.festival.tacademy.festivalmate.Data.Festival;
+import com.festival.tacademy.festivalmate.Data.SelectedArtist;
+import com.festival.tacademy.festivalmate.Data.ShowMatchingResult;
 import com.festival.tacademy.festivalmate.HomeActivity;
+import com.festival.tacademy.festivalmate.Manager.PropertyManager;
 import com.festival.tacademy.festivalmate.R;
 
 public class MakeMateTalkActivity extends AppCompatActivity {
 
     Toolbar toolbar;
+    Festival festival;
+    EditText roomNameView;
+    EditText maxSizeView;
+    Spinner locationView;
+    Spinner ageView;
+    SelectedArtist selectedArtist;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_mate_talk);
 
+        roomNameView = (EditText)findViewById(R.id.edit_room_name);
+        maxSizeView = (EditText)findViewById(R.id.edit_max_size);
+        locationView = (Spinner)findViewById(R.id.spinner_location);
+        ageView = (Spinner)findViewById(R.id.spinner_age);
+
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
+
+        Intent intent = getIntent();
+        festival = (Festival) intent.getExtras().getSerializable("festival");
+        selectedArtist = (SelectedArtist) intent.getExtras().getSerializable("selectedArtist");
+
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Button btn = (Button)findViewById(R.id.btn_maketalk);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                int memNo = PropertyManager.getInstance().getNo();
+                int fesNo = festival.getFestival_no();
+
+                String chatroom_name = roomNameView.getText().toString();
+                int chatroom_maxSize = Integer.parseInt(maxSizeView.getText().toString());
+
+
                 Intent intent = new Intent(MakeMateTalkActivity.this, HomeActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);

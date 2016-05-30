@@ -5,6 +5,7 @@ import java.io.Serializable;
 /**
  * Created by Tacademy on 2016-05-17.
  */
+
 public class Artist implements Serializable {
     public String getName() {
         return artist_name;
@@ -64,10 +65,19 @@ public class Artist implements Serializable {
     public int artist_img_no;
     public String artist_img;
     public int artist_fav_state=0;
-
-
     public int matched_artist_no;
     public String matched_artist_name;
+
+    public String getArtist_date() {
+        return artist_date;
+    }
+
+    public void setArtist_date(String artist_date) {
+        this.artist_date = artist_date;
+    }
+
+    public String artist_date;
+
 
     public String getMatched_artist_name() {
         return matched_artist_name;

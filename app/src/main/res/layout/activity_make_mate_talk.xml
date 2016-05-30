@@ -61,7 +61,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText2"
+        android:id="@+id/edit_room_name"
         android:layout_alignBottom="@+id/textView15"
         android:layout_alignRight="@+id/btn_maketalk"
         android:layout_alignEnd="@+id/btn_maketalk"
@@ -74,18 +74,18 @@
         android:layout_height="wrap_content"
         android:text="@string/mate_talk_max_people"
         android:id="@+id/textView16"
-        android:layout_alignBottom="@+id/editText3"
+        android:layout_alignBottom="@+id/edit_max_size"
         android:layout_alignLeft="@+id/textView15"
         android:layout_alignStart="@+id/textView15" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText3"
-        android:layout_below="@+id/editText2"
+        android:id="@+id/edit_max_size"
+        android:layout_below="@+id/edit_room_name"
         android:layout_toRightOf="@+id/textView16"
-        android:layout_alignRight="@+id/editText2"
-        android:layout_alignEnd="@+id/editText2" />
+        android:layout_alignRight="@+id/edit_room_name"
+        android:layout_alignEnd="@+id/edit_room_name" />
 
     <TextView
         android:textColor="#ff3300"
@@ -101,11 +101,11 @@
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/spinner"
+        android:id="@+id/spinner_location"
         android:entries="@array/city"
         android:layout_alignTop="@+id/textView17"
-        android:layout_alignLeft="@+id/editText3"
-        android:layout_alignStart="@+id/editText3"
+        android:layout_alignLeft="@+id/edit_max_size"
+        android:layout_alignStart="@+id/edit_max_size"
         android:layout_alignRight="@+id/btn_maketalk"
         android:layout_alignEnd="@+id/btn_maketalk" />
 
@@ -115,18 +115,18 @@
         android:layout_height="wrap_content"
         android:text="@string/prefer_age"
         android:id="@+id/textView18"
-        android:layout_below="@+id/spinner"
+        android:layout_below="@+id/spinner_location"
         android:layout_alignLeft="@+id/textView17"
         android:layout_alignStart="@+id/textView17" />
 
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/spinner2"
+        android:id="@+id/spinner_age"
         android:entries="@array/age"
-        android:layout_below="@+id/spinner"
-        android:layout_alignLeft="@+id/spinner"
-        android:layout_alignStart="@+id/spinner"
+        android:layout_below="@+id/spinner_location"
+        android:layout_alignLeft="@+id/spinner_location"
+        android:layout_alignStart="@+id/spinner_location"
         android:layout_alignRight="@+id/btn_maketalk"
         android:layout_alignEnd="@+id/btn_maketalk" />
 

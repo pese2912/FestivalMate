@@ -130,7 +130,7 @@ public class NetworkManager {
                           String mem_id,
                           String mem_pwd,
                           String mem_img,
-                          String mem_notification_key,
+                          String mem_registration_id,
                           OnResultListener<MySignUpResult> listener) {
 
 
@@ -139,7 +139,7 @@ public class NetworkManager {
                 .add("mem_pwd", mem_pwd)
                 .add("mem_id", mem_id)
                 .add("mem_img",mem_img)
-                .add("mem_notification_key",mem_notification_key)
+                .add("mem_registration_id",mem_registration_id)
                 .build();
 
         Request request = new Request.Builder()
@@ -1200,6 +1200,75 @@ public class NetworkManager {
 
         Request request = new Request.Builder()
                 .url(URL_CHECK_GOING)
+                .post(body)
+                .build();
+
+        final NetworkResult<CheckGoingResult> result = new NetworkResult<>();
+        result.request = request;
+        result.listener = listener;
+        mClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                result.exception = e;
+                mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String text = response.body().string();
+                    CheckGoingResult data = gson.fromJson(text, CheckGoingResult.class);
+                    if (data.success == 1) {
+                        result.result = data;
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SUCCESS, result));
+                    } else {
+                        result.exception = new IOException(data.message);
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                    }
+
+                } else {
+                    result.exception = new IOException(response.message());
+                    mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                }
+            }
+        });
+        return request;
+    }
+
+
+    private static final String URL_CREATE_NEW_CHATROOM = MY_SERVER + "/create_new_chatroom";       // 새로운 채팅방을 만듦
+    public Request create_new_chatroom(Object tag,
+                               int mem_no,
+                               int festival_no,
+                               String chatroom_name,
+                                       int chatroom_maxSize,
+                                       int chatroom_location,
+                                       int chatroom_age,
+                                       String chatroom_img,
+                                       List<Artist> chatroom_lineups,
+                               OnResultListener<CheckGoingResult> listener) {
+
+
+        FormBody.Builder builder = new FormBody.Builder();
+        builder.add("mem_no", mem_no+"");
+        builder.add("festival_no", festival_no+"");
+        builder.add("mem_no", mem_no+"");
+        builder.add("festival_no", festival_no+"");
+        builder.add("chatroom_name", chatroom_name);
+        builder.add("chatroom_maxSize", chatroom_maxSize+"");
+        builder.add("chatroom_location", chatroom_location+"");
+        builder.add("chatroom_age", chatroom_age+"");
+        builder.add("chatroom_img", chatroom_img);
+
+        for(Artist a : chatroom_lineups) {
+            builder.add("chatroom_lineups_no",a.getArtist_no()+"");
+            builder.add("chatroom_lineups_date",a.getArtist_date());
+        }
+
+        RequestBody body = builder.build();
+
+        Request request = new Request.Builder()
+                .url(URL_CREATE_NEW_CHATROOM)
                 .post(body)
                 .build();
 

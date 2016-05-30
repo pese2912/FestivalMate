@@ -38,7 +38,13 @@ public class MateMatchingLineUpViewHolder extends RecyclerView.ViewHolder {
         //mManager = new LinearLayoutManager(MyApplication.getContext(), LinearLayoutManager.HORIZONTAL,false);
         mManager = new GridLayoutManager(MyApplication.getContext(),3);
         listView.setLayoutManager(mManager);
-        if(lineUp.getLineup()!=null)
-          mAdapter.addAll(lineUp.getLineup());
+        if(lineUp.getLineup()!=null) {
+
+            for(int i=0; i < lineUp.getLineup().size(); i++){
+                lineUp.getLineup().get(i).setArtist_date(lineUp.getDate());
+            }
+
+            mAdapter.addAll(lineUp.getLineup());
+        }
     }
 }

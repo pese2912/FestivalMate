@@ -17,6 +17,7 @@ import com.festival.tacademy.festivalmate.Data.Artist;
 import com.festival.tacademy.festivalmate.Data.FestibalLineUp;
 import com.festival.tacademy.festivalmate.Data.Festival;
 import com.festival.tacademy.festivalmate.Data.Lineup;
+import com.festival.tacademy.festivalmate.Data.SelectedArtist;
 import com.festival.tacademy.festivalmate.Data.ShowFestivalLineups;
 import com.festival.tacademy.festivalmate.Data.ShowMatchingResult;
 import com.festival.tacademy.festivalmate.Manager.NetworkManager;
@@ -38,6 +39,7 @@ public class MateMatchingStartActivity extends AppCompatActivity {
     ShowMatchingResult result;
     List<Lineup> selectedLineup;
     List<Artist> selectedArtist;
+    SelectedArtist selectedArtistResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,7 @@ public class MateMatchingStartActivity extends AppCompatActivity {
         listView = (RecyclerView)findViewById(R.id.rv_list);
         mAdapter = new MateMatchingLineUpAdapter();
 
+        selectedArtistResult= new SelectedArtist();
         listView.setAdapter(mAdapter);
         listView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -77,7 +80,7 @@ public class MateMatchingStartActivity extends AppCompatActivity {
                     }
                 }
 
-                Toast.makeText(MateMatchingStartActivity.this,""+selectedArtist.size(),Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(MateMatchingStartActivity.this,""+selectedArtist.size(),Toast.LENGTH_SHORT).show();
                 int memNo = PropertyManager.getInstance().getNo();
                 int fesNo = festival.getFestival_no();
 
@@ -89,7 +92,11 @@ public class MateMatchingStartActivity extends AppCompatActivity {
                         Toast.makeText(MateMatchingStartActivity.this,"성공",Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(MateMatchingStartActivity.this, MateMatchingActivity.class);
                         intent.putExtra("ShowMatchingResult",result);
+                        intent.putExtra("festival",festival);
+                        selectedArtistResult.result = selectedArtist;
+                        intent.putExtra("selectedArtist",selectedArtistResult);
                         startActivity(intent);
+
                     }
 
                     @Override

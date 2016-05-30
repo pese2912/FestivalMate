@@ -16,6 +16,7 @@ import com.festival.tacademy.festivalmate.Data.Artist;
 import com.festival.tacademy.festivalmate.Data.Festival;
 import com.festival.tacademy.festivalmate.Data.MateTalkRoom;
 import com.festival.tacademy.festivalmate.Data.RequestChatroomJoinResult;
+import com.festival.tacademy.festivalmate.Data.SelectedArtist;
 import com.festival.tacademy.festivalmate.Data.ShowMatchingResult;
 import com.festival.tacademy.festivalmate.Data.ShowMemProfileResult;
 import com.festival.tacademy.festivalmate.Data.User;
@@ -40,6 +41,9 @@ public class MateMatchingActivity extends AppCompatActivity {
     LinearLayoutManager mManager;
     boolean isClick = false;
     ShowMatchingResult result;
+    SelectedArtist selectedArtist;
+
+    Festival festival;
 
     List<Artist> artists = new ArrayList<>();
     List<User> users = new ArrayList<>();
@@ -57,6 +61,8 @@ public class MateMatchingActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         result = (ShowMatchingResult)intent.getExtras().getSerializable("ShowMatchingResult");
+        festival = (Festival) intent.getExtras().getSerializable("festival");
+        selectedArtist = (SelectedArtist)intent.getExtras().getSerializable("selectedArtist");
 
         listView = (RecyclerView)findViewById(R.id.rv_list);
         mAdapter = new MatetalkDetailAdapter();
@@ -204,7 +210,10 @@ public class MateMatchingActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if(id == R.id.make_talk){
-            startActivity(new Intent(MateMatchingActivity.this, MakeMateTalkActivity.class));
+            Intent intent = new Intent(MateMatchingActivity.this, MakeMateTalkActivity.class);
+            intent.putExtra("festival",festival);
+            intent.putExtra("selectedArtist",selectedArtist);
+            startActivity(intent);
 
             return true;
         }
@@ -214,7 +223,6 @@ public class MateMatchingActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-
     }
 
     private void initData() {
