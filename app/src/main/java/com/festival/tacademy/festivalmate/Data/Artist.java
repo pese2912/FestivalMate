@@ -1,5 +1,7 @@
 package com.festival.tacademy.festivalmate.Data;
 
+import com.google.gson.annotations.Expose;
+
 import java.io.Serializable;
 
 /**
@@ -62,12 +64,16 @@ public class Artist implements Serializable {
 
     public int artist_no;
     public String artist_name;
-    public int artist_img_no;
     public String artist_img;
-    public int artist_fav_state=0;
-    public int matched_artist_no;
-    public String matched_artist_name;
 
+    @Expose
+    public int artist_img_no;
+    @Expose
+    public int artist_fav_state=0;
+    @Expose
+    public int matched_artist_no;
+    @Expose
+    public String matched_artist_name;
     public String getArtist_date() {
         return artist_date;
     }
@@ -75,6 +81,7 @@ public class Artist implements Serializable {
     public void setArtist_date(String artist_date) {
         this.artist_date = artist_date;
     }
+
 
     public String artist_date;
 

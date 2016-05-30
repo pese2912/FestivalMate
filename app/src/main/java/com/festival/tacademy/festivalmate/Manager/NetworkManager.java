@@ -6,14 +6,18 @@ import android.os.Looper;
 import android.os.Message;
 
 import com.festival.tacademy.festivalmate.Data.Artist;
+import com.festival.tacademy.festivalmate.Data.ArtistNo;
 import com.festival.tacademy.festivalmate.Data.ChatroomApproveResult;
+import com.festival.tacademy.festivalmate.Data.ChatroomDisapproveResult;
 import com.festival.tacademy.festivalmate.Data.ChatroomKickResult;
 import com.festival.tacademy.festivalmate.Data.ChatroomMemListResult;
 import com.festival.tacademy.festivalmate.Data.CheckGoingResult;
+import com.festival.tacademy.festivalmate.Data.CreateNewChatroomResult;
 import com.festival.tacademy.festivalmate.Data.DeleteGoingListResult;
 import com.festival.tacademy.festivalmate.Data.FestivalDetailResult;
 import com.festival.tacademy.festivalmate.Data.FestivalResultResult;
 import com.festival.tacademy.festivalmate.Data.HateResult;
+import com.festival.tacademy.festivalmate.Data.JsonNewChatroom;
 import com.festival.tacademy.festivalmate.Data.MySignInResult;
 import com.festival.tacademy.festivalmate.Data.MySignUpResult;
 import com.festival.tacademy.festivalmate.Data.RequestChatroomJoinResult;
@@ -38,6 +42,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
 import okhttp3.JavaNetCookieJar;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -318,17 +323,23 @@ public class NetworkManager {
                                       OnResultListener<MySignUpResult> listener) {
 
 
-        FormBody.Builder builder = new FormBody.Builder();
-        builder.add("mem_no", mem_no+"");
+        ArtistNo data = new ArtistNo();
+        data.mem_no = mem_no;
+        data.artist = artist;
 
-        for(Artist a : artist) {
-            builder.add("artist_no",a.getArtist_no()+"");
-            builder.add("artist_name",a.getName()+"");
-            builder.add("artist_img",a.getPhoto()+"");
-        }
+//        FormBody.Builder builder = new FormBody.Builder();
+//        builder.add("mem_no", mem_no+"");
+//
+//        for(Artist a : artist) {
+////            builder.add("artist",a+"");
+//            builder.add("artist_no",a.getArtist_no()+"");
+//            builder.add("artist_name",a.getName()+"");
+//            builder.add("artist_img",a.getPhoto()+"");
+//        }
+//
 
-
-        RequestBody body = builder.build();
+        String json = gson.toJson(data);
+        RequestBody body = RequestBody.create(MediaType.parse("application/json"), json);
 
         Request request = new Request.Builder()
                 .url(URL_SAVE_ARTIST_SURVEY)
@@ -900,6 +911,7 @@ public class NetworkManager {
     public Request show_mem_profile(Object tag,
                         int selected_mem_no,
                         OnResultListener<ShowMemProfileResult> listener) {
+
         RequestBody body = new FormBody.Builder()
                 .add("selected_mem_no", selected_mem_no+"")
                 .build();
@@ -1246,47 +1258,61 @@ public class NetworkManager {
                                        int chatroom_age,
                                        String chatroom_img,
                                        List<Artist> chatroom_lineups,
-                               OnResultListener<CheckGoingResult> listener) {
+                               OnResultListener<CreateNewChatroomResult> listener) {
 
 
-        FormBody.Builder builder = new FormBody.Builder();
-        builder.add("mem_no", mem_no+"");
-        builder.add("festival_no", festival_no+"");
-        builder.add("mem_no", mem_no+"");
-        builder.add("festival_no", festival_no+"");
-        builder.add("chatroom_name", chatroom_name);
-        builder.add("chatroom_maxSize", chatroom_maxSize+"");
-        builder.add("chatroom_location", chatroom_location+"");
-        builder.add("chatroom_age", chatroom_age+"");
-        builder.add("chatroom_img", chatroom_img);
+        JsonNewChatroom data = new JsonNewChatroom();
+        data.mem_no = mem_no;
+        data.festival_no = festival_no;
+        data.chatroom_name = chatroom_name;
+        data.chatroom_maxSize = chatroom_maxSize;
+        data.chatroom_location = chatroom_location;
+        data.chatroom_age = chatroom_age;
+        data.chatroom_img = chatroom_img;
+        data.chatroom_lineups = chatroom_lineups;
 
-        for(Artist a : chatroom_lineups) {
-            builder.add("chatroom_lineups_no",a.getArtist_no()+"");
-            builder.add("chatroom_lineups_date",a.getArtist_date());
-        }
 
-        RequestBody body = builder.build();
+//        FormBody.Builder builder = new FormBody.Builder();
+//        builder.add("mem_no", mem_no+"");
+//        builder.add("festival_no", festival_no+"");
+//        builder.add("mem_no", mem_no+"");
+//        builder.add("festival_no", festival_no+"");
+//        builder.add("chatroom_name", chatroom_name);
+//        builder.add("chatroom_maxSize", chatroom_maxSize+"");
+//        builder.add("chatroom_location", chatroom_location+"");
+//        builder.add("chatroom_age", chatroom_age+"");
+//        builder.add("chatroom_img", chatroom_img);
+//
+//        for(Artist a : chatroom_lineups) {
+//            builder.add("chatroom_lineups_no",a+"");
+//            builder.add("chatroom_lineups_date",a.getArtist_date());
+//        }
+
+        String json = gson.toJson(data);
+        RequestBody body = RequestBody.create(MediaType.parse("application/json"), json);
 
         Request request = new Request.Builder()
                 .url(URL_CREATE_NEW_CHATROOM)
                 .post(body)
                 .build();
 
-        final NetworkResult<CheckGoingResult> result = new NetworkResult<>();
+        final NetworkResult<CreateNewChatroomResult> result = new NetworkResult<>();
         result.request = request;
         result.listener = listener;
         mClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+
                 result.exception = e;
                 mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if (response.isSuccessful()) {
                     String text = response.body().string();
-                    CheckGoingResult data = gson.fromJson(text, CheckGoingResult.class);
+                    CreateNewChatroomResult data = gson.fromJson(text, CreateNewChatroomResult.class);
                     if (data.success == 1) {
                         result.result = data;
                         mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SUCCESS, result));
@@ -1301,6 +1327,55 @@ public class NetworkManager {
                 }
             }
         });
+        return request;
+    }
+
+    private static final String URL_CHATROOM_DISAPPROVE = MY_SERVER + "/chatroom_disapprove";       // 채팅방 거절
+    public Request chatroom_disapprove(Object tag,
+                                 int disapproved_mem_no,
+                                 int chatroom_no,
+                                 OnResultListener<ChatroomDisapproveResult> listener) {
+
+        RequestBody body = new FormBody.Builder()
+                .add("disapproved_mem_no", disapproved_mem_no+"")
+                .add("chatroom_no", chatroom_no+"")
+                .build();
+
+        Request request = new Request.Builder()
+                .url(URL_CHATROOM_DISAPPROVE)
+                .post(body)
+                .build();
+
+        final NetworkResult<ChatroomDisapproveResult> result = new NetworkResult<>();
+        result.request = request;
+        result.listener = listener;
+        mClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                result.exception = e;
+                mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String text = response.body().string();
+                    ChatroomDisapproveResult data = gson.fromJson(text, ChatroomDisapproveResult.class);
+                    if (data.success == 1) {
+                        result.result = data;
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SUCCESS, result));
+                    } else {
+                        result.exception = new IOException(data.message);
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                    }
+
+                } else {
+                    result.exception = new IOException(response.message());
+                    mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                }
+            }
+        });
+
         return request;
     }
 }

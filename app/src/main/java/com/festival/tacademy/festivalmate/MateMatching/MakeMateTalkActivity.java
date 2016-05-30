@@ -9,13 +9,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.festival.tacademy.festivalmate.Data.CreateNewChatroomResult;
 import com.festival.tacademy.festivalmate.Data.Festival;
 import com.festival.tacademy.festivalmate.Data.SelectedArtist;
 import com.festival.tacademy.festivalmate.Data.ShowMatchingResult;
 import com.festival.tacademy.festivalmate.HomeActivity;
+import com.festival.tacademy.festivalmate.Manager.NetworkManager;
 import com.festival.tacademy.festivalmate.Manager.PropertyManager;
+import com.festival.tacademy.festivalmate.MateTalk.ChattingActivity;
 import com.festival.tacademy.festivalmate.R;
+
+import java.io.IOException;
+
+import okhttp3.Request;
 
 public class MakeMateTalkActivity extends AppCompatActivity {
 
@@ -61,9 +69,25 @@ public class MakeMateTalkActivity extends AppCompatActivity {
                 int chatroom_maxSize = Integer.parseInt(maxSizeView.getText().toString());
 
 
-                Intent intent = new Intent(MakeMateTalkActivity.this, HomeActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
+                NetworkManager.getInstance().create_new_chatroom(MakeMateTalkActivity.this, memNo, fesNo, chatroom_name, chatroom_maxSize, 1, 1, "", selectedArtist.result, new NetworkManager.OnResultListener<CreateNewChatroomResult>() {
+                    @Override
+                    public void onSuccess(Request request, CreateNewChatroomResult result) {
+                        Toast.makeText(MakeMateTalkActivity.this,"성공",Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MakeMateTalkActivity.this, ChattingActivity.class);
+                        intent.putExtra("chatroomNo",result.result.getChatroom_no());
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onFail(Request request, IOException exception) {
+                        Toast.makeText(MakeMateTalkActivity.this,"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
+//                Intent intent = new Intent(MakeMateTalkActivity.this, HomeActivity.class);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                startActivity(intent);
             }
         });
     }

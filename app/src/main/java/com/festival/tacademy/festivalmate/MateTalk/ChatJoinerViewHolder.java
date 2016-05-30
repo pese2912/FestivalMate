@@ -44,10 +44,11 @@ public class ChatJoinerViewHolder extends RecyclerView.ViewHolder {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(MyApplication.getContext(), "강퇴 : "+member.getChatroom_mems_no(), Toast.LENGTH_SHORT).show();
                 NetworkManager.getInstance().chatroom_kick(MyApplication.getContext(), member.getChatroom_mems_no(), chatNo, new NetworkManager.OnResultListener<ChatroomKickResult>() {
                     @Override
                     public void onSuccess(Request request, ChatroomKickResult result) {
-                        Toast.makeText(MyApplication.getContext(), "강퇴 : "+member.getMem_name(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MyApplication.getContext(), "강퇴 : "+member.getChatroom_mems_no(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

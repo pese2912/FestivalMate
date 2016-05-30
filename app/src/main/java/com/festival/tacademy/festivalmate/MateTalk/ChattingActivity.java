@@ -56,9 +56,10 @@ public class ChattingActivity extends AppCompatActivity {
         // GridLayoutManager layoutManager = new GridLayoutManager(this, 3, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
-
         Intent intent = getIntent();
         mateTalkRoom = (MateTalkRoom) intent.getExtras().getSerializable("chatting");
+        String chatroomNo = intent.getStringExtra("chatroomNo");
+
         toolbarTitle.setText(mateTalkRoom.getChatroom_name());
 
         Button btn = (Button)findViewById(R.id.btn_send);

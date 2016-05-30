@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.festival.tacademy.festivalmate.Data.ChatroomApproveResult;
+import com.festival.tacademy.festivalmate.Data.ChatroomDisapproveResult;
 import com.festival.tacademy.festivalmate.Data.MateTalkRoom;
 import com.festival.tacademy.festivalmate.Data.chatroom_waiting;
 import com.festival.tacademy.festivalmate.Manager.NetworkManager;
@@ -55,17 +56,13 @@ public class ApproveWaiterViewHolder extends RecyclerView.ViewHolder {
         btnReject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(MyApplication.getContext(), "거절 : "+waiting.getChatroom_waiting_no(), Toast.LENGTH_SHORT).show();
 
-                Toast.makeText(MyApplication.getContext(), "거절 : "+waiting.getMem_name(), Toast.LENGTH_SHORT).show();
-            }
-        });
-        btnApproved.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NetworkManager.getInstance().chatroom_approve(MyApplication.getContext(), waiter.getChatroom_waiting_no(), chatNo, new NetworkManager.OnResultListener<ChatroomApproveResult>() {
+              //  Toast.makeText(MyApplication.getContext(), "거절 : "+waiting.getMem_name(), Toast.LENGTH_SHORT).show();
+                NetworkManager.getInstance().chatroom_disapprove(MyApplication.getContext(), waiter.getChatroom_waiting_no(), chatNo, new NetworkManager.OnResultListener<ChatroomDisapproveResult>() {
                     @Override
-                    public void onSuccess(Request request, ChatroomApproveResult result) {
-                        Toast.makeText(MyApplication.getContext(), "승인 : "+waiting.getMem_name(), Toast.LENGTH_SHORT).show();
+                    public void onSuccess(Request request, ChatroomDisapproveResult result) {
+                        Toast.makeText(MyApplication.getContext(), "거절 : "+waiting.getChatroom_waiting_no(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -73,7 +70,24 @@ public class ApproveWaiterViewHolder extends RecyclerView.ViewHolder {
                         Toast.makeText(MyApplication.getContext(), "실패 : "+exception.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+            }
+        });
 
+        btnApproved.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MyApplication.getContext(), "승인 : "+waiting.getChatroom_waiting_no(), Toast.LENGTH_SHORT).show();
+                NetworkManager.getInstance().chatroom_approve(MyApplication.getContext(), waiter.getChatroom_waiting_no(), chatNo, new NetworkManager.OnResultListener<ChatroomApproveResult>() {
+                    @Override
+                    public void onSuccess(Request request, ChatroomApproveResult result) {
+                        Toast.makeText(MyApplication.getContext(), "승인 : "+waiting.getChatroom_waiting_no(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFail(Request request, IOException exception) {
+                        Toast.makeText(MyApplication.getContext(), "실패 : "+exception.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }
