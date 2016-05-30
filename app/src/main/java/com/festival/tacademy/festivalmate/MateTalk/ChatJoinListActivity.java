@@ -8,9 +8,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.festival.tacademy.festivalmate.Data.ChatroomApproveResult;
+import com.festival.tacademy.festivalmate.Data.ChatroomDisapproveResult;
+import com.festival.tacademy.festivalmate.Data.ChatroomKickResult;
 import com.festival.tacademy.festivalmate.Data.ChatroomMemListResult;
 import com.festival.tacademy.festivalmate.Data.MateTalkRoom;
 import com.festival.tacademy.festivalmate.Data.MateTalkWaitJoinList;
@@ -18,6 +22,7 @@ import com.festival.tacademy.festivalmate.Data.chatroom_member;
 import com.festival.tacademy.festivalmate.Data.chatroom_waiting;
 import com.festival.tacademy.festivalmate.Manager.NetworkManager;
 import com.festival.tacademy.festivalmate.Manager.PropertyManager;
+import com.festival.tacademy.festivalmate.MyApplication;
 import com.festival.tacademy.festivalmate.R;
 
 import java.io.IOException;
@@ -51,6 +56,68 @@ public class ChatJoinListActivity extends AppCompatActivity {
 
         listView = (RecyclerView)findViewById(R.id.rv_list);
         mAdapter= new ChatJoinListAdapter();
+        mAdapter.setOnItemClickListener(new ApproveWaiterViewHolder.OnItemClickListener() { //거절
+            @Override
+            public void onItemClick(View view, final chatroom_waiting waiting) {
+
+
+
+              //  Toast.makeText(MyApplication.getContext(), "거절 : "+waiting.getMem_name(), Toast.LENGTH_SHORT).show();
+                NetworkManager.getInstance().chatroom_disapprove(MyApplication.getContext(), waiting.getChatroom_waiting_no(), mateTalkRoom.getChatroom_no(), new NetworkManager.OnResultListener<ChatroomDisapproveResult>() {
+                    @Override
+                    public void onSuccess(Request request, ChatroomDisapproveResult result) {
+                        Toast.makeText(MyApplication.getContext(), "거절 : "+waiting.getMem_no(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFail(Request request, IOException exception) {
+                        Toast.makeText(MyApplication.getContext(), "실패 : "+exception.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
+
+        mAdapter.setOnItemClickListener2(new ApproveWaiterViewHolder.OnItemClickListener2() { //승인
+            @Override
+            public void onItemClick2(View view, final chatroom_waiting waiting) {
+
+
+                NetworkManager.getInstance().chatroom_approve(MyApplication.getContext(), waiting.getChatroom_waiting_no(), mateTalkRoom.getChatroom_no(), new NetworkManager.OnResultListener<ChatroomApproveResult>() {
+                    @Override
+                    public void onSuccess(Request request, ChatroomApproveResult result) {
+                        Toast.makeText(MyApplication.getContext(), "승인 : " + waiting.getMem_no(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFail(Request request, IOException exception) {
+                        Toast.makeText(MyApplication.getContext(), "실패 : " + exception.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
+
+        mAdapter.setOnItemClickListener(new ChatJoinerViewHolder.OnItemClickListener() { //강퇴
+            @Override
+            public void onItemClick(View view, final chatroom_member member) {
+
+
+                NetworkManager.getInstance().chatroom_kick(MyApplication.getContext(), member.getChatroom_mems_no(), mateTalkRoom.getChatroom_no(), new NetworkManager.OnResultListener<ChatroomKickResult>() {
+                    @Override
+                    public void onSuccess(Request request, ChatroomKickResult result) {
+                        Toast.makeText(MyApplication.getContext(), "강퇴 : "+member.getMem_no(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFail(Request request, IOException exception) {
+                        Toast.makeText(MyApplication.getContext(), "실패 : "+exception.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
+
         listView.setAdapter(mAdapter);
         listView.setLayoutManager(new LinearLayoutManager(this));
         setData();
@@ -71,8 +138,9 @@ public class ChatJoinListActivity extends AppCompatActivity {
             @Override
             public void onSuccess(Request request, ChatroomMemListResult result) {
               //  Toast.makeText(ChatJoinListActivity.this, result.result.getChatroom_waitings().get(0).getMem_name()+"", Toast.LENGTH_SHORT).show();
-                Toast.makeText(ChatJoinListActivity.this, result.result.getChatroom_members().size()+"", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChatJoinListActivity.this, result.result.getChatroom_members().get(0)+"", Toast.LENGTH_SHORT).show();
                 mAdapter.setMateTalkWaitJoinList(result.result);
+
             }
 
             @Override
@@ -113,6 +181,7 @@ public class ChatJoinListActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
+
         if (id == android.R.id.home) {
             finish();
             return true;

@@ -39,6 +39,15 @@ public class chatroom_member {
     }
 
     public int chatroom_mems_no;
+
+    public int getMem_no() {
+        return mem_no;
+    }
+
+    public void setMem_no(int mem_no) {
+        this.mem_no = mem_no;
+    }
+
     public int mem_no;
     public String mem_name;
     public String mem_img;

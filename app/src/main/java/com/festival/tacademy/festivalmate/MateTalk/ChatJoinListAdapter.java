@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.festival.tacademy.festivalmate.Data.MateTalkWaitJoinList;
 import com.festival.tacademy.festivalmate.Data.MateTalkWaitList;
+import com.festival.tacademy.festivalmate.FestivalInfo.FestivalViewHolder;
 import com.festival.tacademy.festivalmate.FestivalInfo.LetsgoViewHolder;
 import com.festival.tacademy.festivalmate.FestivalInfo.LineupViewHolder;
 import com.festival.tacademy.festivalmate.FestivalInfo.PhotoViewHolder;
@@ -66,7 +67,24 @@ public class ChatJoinListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         throw new IllegalArgumentException("Invalid Position");
     }
+    ApproveWaiterViewHolder.OnItemClickListener mListener;
 
+    public void setOnItemClickListener(ApproveWaiterViewHolder.OnItemClickListener listener) {
+        mListener = listener;
+    }
+
+    ChatJoinerViewHolder.OnItemClickListener mListener3;
+
+    public void setOnItemClickListener(ChatJoinerViewHolder.OnItemClickListener listener) {
+        mListener3 = listener;
+    }
+
+
+    ApproveWaiterViewHolder.OnItemClickListener2 mListener2;
+
+    public void setOnItemClickListener2(ApproveWaiterViewHolder.OnItemClickListener2 listener) {
+        mListener2 = listener;
+    }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -103,6 +121,8 @@ public class ChatJoinListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             if( position < list.getChatroom_waitings().size() ) {
                 ApproveWaiterViewHolder h = (ApproveWaiterViewHolder)holder;
                 h.setApproveWaiter(list.getChatroom_waitings().get(position),list.getChatroom_no());
+                h.setOnItemClickListener(mListener);
+                h.setOnItemClickListener2(mListener2);
                 return;
             }
             position -= list.getChatroom_waitings().size();
@@ -116,6 +136,7 @@ public class ChatJoinListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             if (position < list.getChatroom_members().size()) {
                 ChatJoinerViewHolder h = (ChatJoinerViewHolder)holder;
               h.setChatJoin(list.getChatroom_members().get(position), list.getChatroom_no());
+                h.setOnItemClickListener(mListener3);
                return;
             }
             position -= list.getChatroom_members().size();
