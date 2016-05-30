@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.festival.tacademy.festivalmate.Data.MateTalkWaitJoinList;
 import com.festival.tacademy.festivalmate.Data.MateTalkWaitList;
@@ -27,6 +28,10 @@ public class ChatJoinListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     MateTalkWaitJoinList list =  new MateTalkWaitJoinList();;
 
+    public ChatJoinListAdapter(ChatJoinListActivity chatJoinListActivity) {
+
+    }
+
     public void setMateTalkWaitJoinList(MateTalkWaitJoinList list){
         this.list = list;
         notifyDataSetChanged();
@@ -38,26 +43,32 @@ public class ChatJoinListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             return VIEW_TYPE_HEADER_WAIT;
         }
         position--;
-        if ( list.getChatroom_waitings().size() > 0 ) {
-            if( position < list.getChatroom_waitings().size() ) {
-                return VIEW_TYPE_APPROVE_WAITER;
+        if(list.getChatroom_waitings()!=null) {
+            if (list.getChatroom_waitings().size() > 0) {
+                if (position < list.getChatroom_waitings().size()) {
+                    return VIEW_TYPE_APPROVE_WAITER;
+                }
+                position -= list.getChatroom_waitings().size();
+                if (position == 0) {
+                    return VIEW_TYPE_HEADER_JOIN;
+                }
+                position--;
             }
-            position -= list.getChatroom_waitings().size();
-            if( position == 0 ) {
-                return VIEW_TYPE_HEADER_JOIN;
-            }
-            position--;
         }
+
         position--;
-        if(list.getChatroom_members().size() > 0) {
-            if (position < list.getChatroom_members().size()) {
-                return VIEW_TYPE_CHAT_JOINER;
+        if(list.getChatroom_members()!=null) {
+            if (list.getChatroom_members().size() > 0) {
+                if (position < list.getChatroom_members().size()) {
+                    return VIEW_TYPE_CHAT_JOINER;
+                }
+                position -= list.getChatroom_members().size();
             }
-            position -= list.getChatroom_members().size();
         }
 
         throw new IllegalArgumentException("Invalid Position");
     }
+
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -120,18 +131,22 @@ public class ChatJoinListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         int size =0;
 
-        if(list != null && list.getChatroom_waitings().size()!=0 && list.getChatroom_members().size()!=0) {
+        if(list != null) {
             size = 1;
-            if(list.getChatroom_waitings().size() > 0){
-                size +=list.getChatroom_waitings().size();
+
+            if(list.getChatroom_waitings()!=null) {
+                if (list.getChatroom_waitings().size() > 0) {
+                    size += list.getChatroom_waitings().size();
+                }
             }
 
             size+=1;
-            if(list.getChatroom_members().size() > 0 ){
-                size += list.getChatroom_members().size();
+            if(list.getChatroom_members()!=null) {
+                if (list.getChatroom_members().size() > 0) {
+                    size += list.getChatroom_members().size();
+                }
             }
         }
-
         return size;
     }
 }

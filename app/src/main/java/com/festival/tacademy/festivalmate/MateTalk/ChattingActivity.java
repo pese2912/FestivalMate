@@ -122,7 +122,6 @@ public class ChattingActivity extends AppCompatActivity {
             Intent intent = new Intent(ChattingActivity.this, ChatJoinListActivity.class);
             intent.putExtra("chatting",mateTalkRoom);
             startActivity(intent);
-
         }
 
         return super.onOptionsItemSelected(item);

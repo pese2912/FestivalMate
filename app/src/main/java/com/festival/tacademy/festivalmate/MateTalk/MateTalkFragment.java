@@ -76,6 +76,7 @@ public class MateTalkFragment extends Fragment {
        //     room.setChatroom_img(R.mipmap.ic_launcher);
             room.setChatroom_name("hey, 모두들 안녕~ 내가누군지 아니??");
             room.date="7월 24일";
+            room.setChatroom_no(i);
             room.setMatched_artist_number(i);
             room.setUnRead(i+"");
             mAdapter.add(room); // 값 추가

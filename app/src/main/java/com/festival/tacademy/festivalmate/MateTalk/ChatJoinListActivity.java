@@ -50,7 +50,7 @@ public class ChatJoinListActivity extends AppCompatActivity {
         toolbarTitle.setText(mateTalkRoom.getChatroom_name());
 
         listView = (RecyclerView)findViewById(R.id.rv_list);
-        mAdapter= new ChatJoinListAdapter();
+        mAdapter= new ChatJoinListAdapter(this);
         listView.setAdapter(mAdapter);
         listView.setLayoutManager(new LinearLayoutManager(this));
         setData();
@@ -59,7 +59,7 @@ public class ChatJoinListActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        setData();
+    //    setData();
     }
 
     private void setData(){
@@ -69,7 +69,9 @@ public class ChatJoinListActivity extends AppCompatActivity {
         NetworkManager.getInstance().chatroom_mem_list(ChatJoinListActivity.this, memNo, chatNo, new NetworkManager.OnResultListener<ChatroomMemListResult>() {
             @Override
             public void onSuccess(Request request, ChatroomMemListResult result) {
-                Toast.makeText(ChatJoinListActivity.this, "성공", Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(ChatJoinListActivity.this, result.result.getChatroom_waitings().get(0).getMem_name()+"", Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(ChatJoinListActivity.this, result.result.getChatroom_members().get(0).getMem_name()+"", Toast.LENGTH_SHORT).show();
+
                 mAdapter.setMateTalkWaitJoinList(result.result);
             }
 

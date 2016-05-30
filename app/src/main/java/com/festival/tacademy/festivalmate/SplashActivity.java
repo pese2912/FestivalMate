@@ -9,11 +9,13 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Handler;
 import android.os.Looper;
+import android.provider.Settings;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.festival.tacademy.festivalmate.Data.MySignInResult;
@@ -72,7 +74,8 @@ public class SplashActivity extends AppCompatActivity {
         if (checkPlayServices()) {
             String regId = PropertyManager.getInstance().getRegistrationToken();
             if (!regId.equals("")) {
-              //  Toast.makeText(SplashActivity.this,regId,Toast.LENGTH_SHORT).show();
+            //    Toast.makeText(SplashActivity.this,regId,Toast.LENGTH_SHORT).show();
+              //  System.out.print("regId"+regId);
                 doRealStart();
             } else {
                 Intent intent = new Intent(this, RegistrationIntentService.class);

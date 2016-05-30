@@ -39,6 +39,7 @@ public class chatroom_member {
     }
 
     public int chatroom_mems_no;
+    public int mem_no;
     public String mem_name;
     public String mem_img;
     public String mem_state_msg;

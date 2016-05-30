@@ -133,6 +133,7 @@ public class NetworkManager {
                           String mem_notification_key,
                           OnResultListener<MySignUpResult> listener) {
 
+
         RequestBody body = new FormBody.Builder()
                 .add("mem_name", mem_name)
                 .add("mem_pwd", mem_pwd)
@@ -321,7 +322,6 @@ public class NetworkManager {
         builder.add("mem_no", mem_no+"");
 
         for(Artist a : artist) {
-
             builder.add("artist_no",a.getArtist_no()+"");
             builder.add("artist_name",a.getName()+"");
             builder.add("artist_img",a.getPhoto()+"");

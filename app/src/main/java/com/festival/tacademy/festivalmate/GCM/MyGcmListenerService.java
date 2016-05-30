@@ -61,6 +61,7 @@ public class MyGcmListenerService extends GcmListenerService {
         Log.d(TAG, "From: " + from);
         Log.d(TAG, "ChatMessage: " + message);
 
+        
 //        if (from.startsWith("/topics/")) {
 //            // message received from some topic.
 //        } else {
@@ -91,7 +92,7 @@ public class MyGcmListenerService extends GcmListenerService {
 //            }
 //        }
 
-//        sendNotification(message);
+        sendNotification(message);
     }
     // [END receive_message]
 
@@ -100,7 +101,8 @@ public class MyGcmListenerService extends GcmListenerService {
      *
      * @param message GCM message received.
      */
-    private void sendNotification(String message, User user) {
+
+    private void sendNotification(String message) {
         Intent intent = new Intent(this, ChattingActivity.class);
         //intent.putExtra(ChattingActivity.EXTRA_USER, user);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
