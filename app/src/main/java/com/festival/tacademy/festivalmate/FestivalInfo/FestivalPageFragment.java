@@ -8,7 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.festival.tacademy.festivalmate.Data.Festival;
 import com.festival.tacademy.festivalmate.R;
 
 /**
@@ -21,21 +24,23 @@ public class FestivalPageFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static FestivalPageFragment newInstance(int id) {
+    public static FestivalPageFragment newInstance(Festival festival) {
         Bundle b = new Bundle();
-        b.putInt("ID", id);
+       // b.putInt("ID", id);
+        b.putSerializable("festival",festival);
         FestivalPageFragment f = new FestivalPageFragment();
         f.setArguments(b);
         return f;
     }
 
-    int res;
+    Festival festival;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            res = getArguments().getInt("ID");
+            //festival = getArguments().getInt("ID");
+            festival = (Festival)getArguments().get("festival");
         }
     }
 
@@ -44,7 +49,10 @@ public class FestivalPageFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_festival_page, container, false);
         ImageView image_festival = (ImageView) view.findViewById(R.id.image_festival);
-        image_festival.setImageResource(res);
+        TextView name_festival = (TextView)view.findViewById(R.id.text_name);
+        //image_festival.setImageResource(res);
+        Glide.with(image_festival.getContext()).load(festival.getFestival_img()).into(image_festival);
+        name_festival.setText(festival.getFestival_name());
         return view;
     }
 }

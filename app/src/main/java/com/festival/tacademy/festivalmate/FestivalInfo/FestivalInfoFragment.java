@@ -107,6 +107,7 @@ public class FestivalInfoFragment extends Fragment {
             }
         });
 
+
         initData();
     }
 
@@ -123,6 +124,7 @@ public class FestivalInfoFragment extends Fragment {
         listView = (RecyclerView)view.findViewById(R.id.rv_list);
         listView.setAdapter(mAdapter2);
         listView.setLayoutManager(new LinearLayoutManager(getContext()));
+
         pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -151,13 +153,13 @@ public class FestivalInfoFragment extends Fragment {
     }
 
     private void initData() {
-        mAdapter.clear();
-        int[] a = new int[] {R.drawable.back1, R.drawable.back2, R.drawable.back3, R.drawable.back4, R.drawable.back5};
-        List<Integer> items = new ArrayList<Integer>();
-        for(int i=0; i<a.length; i++) {
-            items.add(a[i]);
-        }
-        mAdapter.addAll(items);
+//        mAdapter.clear();
+//        int[] a = new int[] {R.drawable.back1, R.drawable.back2, R.drawable.back3, R.drawable.back4, R.drawable.back5};
+//        List<Integer> items = new ArrayList<Integer>();
+//        for(int i=0; i<a.length; i++) {
+//            items.add(a[i]);
+//        }
+//        mAdapter.addAll(items);
 
         int memNo = PropertyManager.getInstance().getNo();
 
@@ -165,8 +167,13 @@ public class FestivalInfoFragment extends Fragment {
             @Override
             public void onSuccess(Request request, FestivalResultResult result) {
                 mAdapter2.clear();
+                mAdapter.clear();
+
                 Toast.makeText(getContext(),"성공",Toast.LENGTH_SHORT).show();
+
+                mAdapter.addAll(result.result_promotion);
                 mAdapter2.addAll(result.result);
+
             }
 
             @Override

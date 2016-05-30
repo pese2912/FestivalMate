@@ -51,6 +51,7 @@ public class PreferenceViewHolder  extends RecyclerView.ViewHolder {
                 if( mListener!=null ) {
                     mListener.onItemClick(v, artist);
                     checkBox.setChecked(!checkBox.isChecked());
+
                 }
             }
         });
@@ -67,17 +68,17 @@ public class PreferenceViewHolder  extends RecyclerView.ViewHolder {
            checkBox.setChecked(false);
        }
 
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked)
-                    artist.setCheck(1);
-                else
-                    artist.setCheck(0);
-                //Toast.makeText(MyApplication.getContext(), "checked : "+ artist.getName()+ artist.isCheck(),Toast.LENGTH_SHORT).show();
-            }
-        });
+//        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if(isChecked)
+//                    artist.setCheck(1);
+//                else
+//                    artist.setCheck(0);
+//                //Toast.makeText(MyApplication.getContext(), "checked : "+ artist.getName()+ artist.isCheck(),Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
     }
 }

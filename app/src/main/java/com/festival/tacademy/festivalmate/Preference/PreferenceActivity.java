@@ -48,16 +48,24 @@ public class PreferenceActivity extends AppCompatActivity {
         mAdapter = new PreferenceAdapter();
         artistList = new ArrayList<Artist>();
         selectedArtist = new ArrayList<Artist>();
+
         mAdapter.setOnItemClickListener(new PreferenceViewHolder.OnItemClickListener() {
 
             @Override
             public void onItemClick(View view, Artist artist) {
+
+                selectedArtist.clear();
+                if(artist.isCheck()==1)
+                    artist.setCheck(0);
+                else
+                    artist.setCheck(1);
 
                for(int i = 0; i < artistList.size(); i++){
                    if(artistList.get(i).isCheck() == 1){
                        selectedArtist.add(artistList.get(i));
                    }
                }
+
                 if(selectedArtist.size() >= 10){
                     item.setTitle(getString(R.string.complete));
                 }
@@ -90,7 +98,7 @@ public class PreferenceActivity extends AppCompatActivity {
                             Toast.makeText(PreferenceActivity.this,"성공",Toast.LENGTH_SHORT).show();
                             mAdapter.clear();
                             mAdapter.addAll(result.result);
-
+                           // artistList=result.result;
                         }
 
                         @Override
@@ -176,6 +184,7 @@ public class PreferenceActivity extends AppCompatActivity {
                     Toast.makeText(PreferenceActivity.this,"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
                 }
             });
+
             return true;
         }
 
