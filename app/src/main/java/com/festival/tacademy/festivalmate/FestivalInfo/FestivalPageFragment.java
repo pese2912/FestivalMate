@@ -43,6 +43,7 @@ public class FestivalPageFragment extends Fragment {
             festival = (Festival)getArguments().get("festival");
         }
     }
+    
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

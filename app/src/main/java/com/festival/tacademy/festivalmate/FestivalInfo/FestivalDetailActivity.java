@@ -1,6 +1,7 @@
 package com.festival.tacademy.festivalmate.FestivalInfo;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,9 +16,12 @@ import android.widget.Toast;
 
 import com.festival.tacademy.festivalmate.Data.Festival;
 import com.festival.tacademy.festivalmate.Data.FestivalDetailResult;
+import com.festival.tacademy.festivalmate.Data.ShowMemProfileResult;
+import com.festival.tacademy.festivalmate.Data.User;
 import com.festival.tacademy.festivalmate.Manager.NetworkManager;
 import com.festival.tacademy.festivalmate.Manager.PropertyManager;
 import com.festival.tacademy.festivalmate.MateMatching.MateMatchingStartActivity;
+import com.festival.tacademy.festivalmate.Profile.ProfileDialogFragment;
 import com.festival.tacademy.festivalmate.R;
 
 import java.io.IOException;
@@ -48,6 +52,41 @@ public class FestivalDetailActivity extends AppCompatActivity {
         listView = (RecyclerView)findViewById(R.id.rv_list);
         mAdapter = new FestivalDetailAdapter();
         mManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+
+        mAdapter.setOnItemClickListener(new UserViewHolder.OnItemClickListener() { //프로필 조회
+            @Override
+            public void onItemClick(View view, User user) {
+                NetworkManager.getInstance().show_mem_profile(FestivalDetailActivity.this, user.getMem_no(), new NetworkManager.OnResultListener<ShowMemProfileResult>() {
+                    @Override
+                    public void onSuccess(Request request, ShowMemProfileResult result) {
+                        Toast.makeText(FestivalDetailActivity.this, "성공",Toast.LENGTH_SHORT).show();
+                        ProfileDialogFragment f = new ProfileDialogFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("user", result.result);
+                        f.setArguments(bundle);
+                        f.show(getSupportFragmentManager(), "aaaa");
+                    }
+
+                    @Override
+                    public void onFail(Request request, IOException exception) {
+                        Toast.makeText(FestivalDetailActivity.this, "실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
+        mAdapter.setOnItemClickListener2(new TicketLinkHolder.OnItemClickListner() { // 티켓링크
+            @Override
+            public void onItemClick(String str) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                Uri uri = Uri.parse(str);
+                intent.setData(uri);
+                startActivity(intent);
+
+            }
+        });
+
+
         listView.setAdapter(mAdapter);
         listView.setLayoutManager(mManager);
 
@@ -94,7 +133,6 @@ public class FestivalDetailActivity extends AppCompatActivity {
                         Toast.makeText(FestivalDetailActivity.this, "Fail", Toast.LENGTH_SHORT).show();
                     }
                 });
-
     }
 
     @Override

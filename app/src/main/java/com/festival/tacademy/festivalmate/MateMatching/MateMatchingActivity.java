@@ -61,6 +61,7 @@ public class MateMatchingActivity extends AppCompatActivity {
         listView = (RecyclerView)findViewById(R.id.rv_list);
         mAdapter = new MatetalkDetailAdapter();
         mAdapter.setOnItemClickListener(new MatetalkDetailViewHolder.OnItemClickListener() { // 더보기
+
             @Override
             public void onItemClick(final View view, final MateTalkRoom room) {
                 final View v = view.findViewById(R.id.detail_view);
