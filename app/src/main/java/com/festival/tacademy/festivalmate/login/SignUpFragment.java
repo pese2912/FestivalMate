@@ -106,7 +106,7 @@ public class SignUpFragment extends Fragment {
                     return;
                 }
 
-                NetworkManager.getInstance().signup(getContext(), name, email, password,"https://image", new NetworkManager.OnResultListener<MySignUpResult>() { // 회원가입
+                NetworkManager.getInstance().signup(getContext(), name, email, password,"https://image",PropertyManager.getInstance().getRegistrationToken(), new NetworkManager.OnResultListener<MySignUpResult>() { // 회원가입
                     @Override
                     public void onSuccess(Request request, MySignUpResult result) {
 

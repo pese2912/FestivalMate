@@ -47,7 +47,7 @@ public class SplashActivity extends AppCompatActivity {
 //            }
 //        };
 //        setUpIfNeeded();
-        doRealStart();
+        setUpIfNeeded();
     }
     @Override
     protected void onResume() {
@@ -72,6 +72,7 @@ public class SplashActivity extends AppCompatActivity {
         if (checkPlayServices()) {
             String regId = PropertyManager.getInstance().getRegistrationToken();
             if (!regId.equals("")) {
+              //  Toast.makeText(SplashActivity.this,regId,Toast.LENGTH_SHORT).show();
                 doRealStart();
             } else {
                 Intent intent = new Intent(this, RegistrationIntentService.class);
@@ -79,6 +80,7 @@ public class SplashActivity extends AppCompatActivity {
             }
         }
     }
+
     private void doRealStart() {
         startSplash();
     }
@@ -132,7 +134,6 @@ public class SplashActivity extends AppCompatActivity {
 
         goMainActivity();
     }
-
 
     private void goHomeActivity() { // 홈으로 이동
         startActivity(new Intent(SplashActivity.this, HomeActivity.class));

@@ -125,10 +125,12 @@ public class NetworkManager {
 
     private static final String MY_SERVER = "http://52.79.159.248:3000";  //회원가입
     private static final String URL_SIGN_UP = MY_SERVER + "/signup";
+
     public Request signup(Object tag, String mem_name,
                           String mem_id,
                           String mem_pwd,
                           String mem_img,
+                          String mem_notification_key,
                           OnResultListener<MySignUpResult> listener) {
 
         RequestBody body = new FormBody.Builder()
@@ -136,6 +138,7 @@ public class NetworkManager {
                 .add("mem_pwd", mem_pwd)
                 .add("mem_id", mem_id)
                 .add("mem_img",mem_img)
+                .add("mem_notification_key",mem_notification_key)
                 .build();
 
         Request request = new Request.Builder()

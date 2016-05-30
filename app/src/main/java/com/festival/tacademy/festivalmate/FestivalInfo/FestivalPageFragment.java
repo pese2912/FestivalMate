@@ -19,8 +19,8 @@ import com.festival.tacademy.festivalmate.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FestivalPageFragment extends Fragment {
 
+public class FestivalPageFragment extends Fragment {
 
     public FestivalPageFragment() {
         // Required empty public constructor
@@ -55,6 +55,7 @@ public class FestivalPageFragment extends Fragment {
         ImageView image_festival = (ImageView) view.findViewById(R.id.image_festival);
         TextView name_festival = (TextView)view.findViewById(R.id.text_name);
         //image_festival.setImageResource(res);
+
         Glide.with(image_festival.getContext()).load(festival.getFestival_img()).into(image_festival);
         name_festival.setText(festival.getFestival_name());
         view.setOnClickListener(new View.OnClickListener() {
