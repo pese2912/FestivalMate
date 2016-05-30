@@ -1,7 +1,9 @@
 package com.festival.tacademy.festivalmate.FestivalInfo;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -35,6 +37,7 @@ public class FestivalPageFragment extends Fragment {
 
     Festival festival;
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +46,7 @@ public class FestivalPageFragment extends Fragment {
             festival = (Festival)getArguments().get("festival");
         }
     }
-    
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,6 +57,22 @@ public class FestivalPageFragment extends Fragment {
         //image_festival.setImageResource(res);
         Glide.with(image_festival.getContext()).load(festival.getFestival_img()).into(image_festival);
         name_festival.setText(festival.getFestival_name());
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final  Festival festival1 = festival;
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Toast.makeText(getContext(),festival.getName(), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getActivity(), FestivalDetailActivity.class);
+                        intent.putExtra("festival", festival1);
+                        startActivity(intent);
+                    }
+                }, 250);
+            }
+        });
         return view;
     }
 }
