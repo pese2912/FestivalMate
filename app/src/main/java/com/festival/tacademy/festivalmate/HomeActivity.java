@@ -170,6 +170,17 @@ public class HomeActivity extends AppCompatActivity
             startActivity(new Intent(HomeActivity.this, SettingsActivity.class));
         }
 
+        else if (id == R.id.logout) { // 로그아웃 클릭 시
+            //startActivity(new Intent(HomeActivity.this, SettingsActivity.class));
+            PropertyManager.getInstance().setLogin(false);
+            PropertyManager.getInstance().setUser(null);
+            PropertyManager.getInstance().setEmail("");
+            PropertyManager.getInstance().setNo(0);
+            PropertyManager.getInstance().setPassword("");
+            onResume();
+
+        }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

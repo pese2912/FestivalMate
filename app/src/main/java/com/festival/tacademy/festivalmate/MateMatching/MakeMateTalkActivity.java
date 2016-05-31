@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -34,8 +36,13 @@ public class MakeMateTalkActivity extends AppCompatActivity {
     Spinner locationView;
     Spinner ageView;
     SelectedArtist selectedArtist;
+    int location=1,age=1;
 
+    String[] city = {"서울","부산","대구","인천","광주"
+            ,"대전","울산","세종","경기","강원","충북"
+            ,"충남","전북","전남","경북","경남","제주"};
 
+    String[] old = {"10대","20대","30대","40대","40대 이상"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +53,43 @@ public class MakeMateTalkActivity extends AppCompatActivity {
         locationView = (Spinner)findViewById(R.id.spinner_location);
         ageView = (Spinner)findViewById(R.id.spinner_age);
 
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>
+                (this,android.R.layout.simple_spinner_item,city); //스피너와 안의 내용을 합치는것
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>
+                (this,android.R.layout.simple_spinner_item,old); //스피너와 안의 내용을 합치는것
+
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        locationView.setAdapter(adapter);
+        ageView.setAdapter(adapter2);
+
+        locationView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                location= position+1;
+               // Toast.makeText(MakeMateTalkActivity.this,location+"",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        locationView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                age= position+1;
+                //Toast.makeText(MakeMateTalkActivity.this,location+"",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
@@ -53,7 +97,6 @@ public class MakeMateTalkActivity extends AppCompatActivity {
         Intent intent = getIntent();
         festival = (Festival) intent.getExtras().getSerializable("festival");
         selectedArtist = (SelectedArtist) intent.getExtras().getSerializable("selectedArtist");
-
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -68,8 +111,7 @@ public class MakeMateTalkActivity extends AppCompatActivity {
                 String chatroom_name = roomNameView.getText().toString();
                 int chatroom_maxSize = Integer.parseInt(maxSizeView.getText().toString());
 
-
-                NetworkManager.getInstance().create_new_chatroom(MakeMateTalkActivity.this, memNo, fesNo, chatroom_name, chatroom_maxSize, 1, 1, "", selectedArtist.result, new NetworkManager.OnResultListener<CreateNewChatroomResult>() {
+                NetworkManager.getInstance().create_new_chatroom(MakeMateTalkActivity.this, memNo, fesNo, chatroom_name, chatroom_maxSize,location, age, "", selectedArtist.result, new NetworkManager.OnResultListener<CreateNewChatroomResult>() {
                     @Override
                     public void onSuccess(Request request, CreateNewChatroomResult result) {
                         Toast.makeText(MakeMateTalkActivity.this,"성공",Toast.LENGTH_SHORT).show();

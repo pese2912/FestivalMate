@@ -92,6 +92,7 @@
     <string name="exile">강퇴</string>
     <string name="approve_waiter">승인대기자</string>
     <string name="chat_joiner">대화참여자</string>
+    <string name="logout">로그아웃</string>
 
 
 </resources>

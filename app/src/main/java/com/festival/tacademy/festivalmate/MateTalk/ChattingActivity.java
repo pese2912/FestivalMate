@@ -119,6 +119,7 @@ public class ChattingActivity extends AppCompatActivity {
             finish();
             return true;
         }
+
         else if(id == R.id.chat_join_list){
             Intent intent = new Intent(ChattingActivity.this, ChatJoinListActivity.class);
             intent.putExtra("chatting",mateTalkRoom);
