@@ -115,9 +115,9 @@ public class MakeMateTalkActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Request request, CreateNewChatroomResult result) {
                         Toast.makeText(MakeMateTalkActivity.this,"성공",Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(MakeMateTalkActivity.this, ChattingActivity.class);
-                        intent.putExtra("chatroomNo",result.result.getChatroom_no());
-                        startActivity(intent);
+                   //     Intent intent = new Intent(MakeMateTalkActivity.this, ChattingActivity.class);
+                     //   intent.putExtra("chatroomNo",result.result.getChatroom_no());
+                       // startActivity(intent);
                     }
 
                     @Override
@@ -126,7 +126,6 @@ public class MakeMateTalkActivity extends AppCompatActivity {
 
                     }
                 });
-
 //                Intent intent = new Intent(MakeMateTalkActivity.this, HomeActivity.class);
 //                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 //                startActivity(intent);

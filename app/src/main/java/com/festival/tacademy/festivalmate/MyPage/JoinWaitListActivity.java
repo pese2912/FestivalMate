@@ -58,7 +58,7 @@ public class JoinWaitListActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        initData();
+     //   initData();
     }
 
     private void initData(){

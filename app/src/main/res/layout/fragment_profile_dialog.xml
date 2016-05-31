@@ -58,7 +58,9 @@
         android:paddingTop="20dp"
         android:layout_below="@+id/text_user_email"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/rv_list2"
+        android:layout_alignEnd="@+id/rv_list2" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -68,8 +70,10 @@
         android:paddingTop="20dp"
         android:id="@+id/textView3"
         android:layout_below="@+id/rv_list1"
-        android:layout_toLeftOf="@+id/text_user_email"
-        android:layout_toStartOf="@+id/text_user_email" />
+        android:layout_alignRight="@+id/btn_exit"
+        android:layout_alignEnd="@+id/btn_exit"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

@@ -113,7 +113,7 @@ public class ChatJoinListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if( position == 0 ) {
-            HeaderWaitViewHolder h = (HeaderWaitViewHolder)holder;
+            //HeaderWaitViewHolder h = (HeaderWaitViewHolder)holder;
             return;
         }
         position--;
@@ -127,10 +127,12 @@ public class ChatJoinListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             }
             position -= list.getChatroom_waitings().size();
         }
+
         if( position == 0 ) {
-            HeaderJoinViewHolder h = (HeaderJoinViewHolder)holder;
+           // HeaderJoinViewHolder h = (HeaderJoinViewHolder)holder;
             return;
         }
+
         position--;
         if(list.getChatroom_members().size() > 0) {
             if (position < list.getChatroom_members().size()) {

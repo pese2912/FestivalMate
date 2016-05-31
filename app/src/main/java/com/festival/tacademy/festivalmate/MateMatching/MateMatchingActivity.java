@@ -195,7 +195,7 @@ public class MateMatchingActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-    //    initData();
+       initData();
     }
 
     @Override
