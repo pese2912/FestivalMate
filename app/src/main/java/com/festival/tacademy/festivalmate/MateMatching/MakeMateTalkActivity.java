@@ -37,13 +37,13 @@ public class MakeMateTalkActivity extends AppCompatActivity {
     Spinner locationView;
     Spinner ageView;
     SelectedArtist selectedArtist;
-    int location=1,age=1;
+    int location=0,age=0;
 
-    String[] city = {"서울","부산","대구","인천","광주"
+    String[] city = {"무관","서울","부산","대구","인천","광주"
             ,"대전","울산","세종","경기","강원","충북"
             ,"충남","전북","전남","경북","경남","제주"};
 
-    String[] old = {"10대","20대","30대","40대","40대 이상"};
+    String[] old = {"무관","10대","20대","30대","40대","40대 이상"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +69,7 @@ public class MakeMateTalkActivity extends AppCompatActivity {
         locationView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                location= position+1;
+                location= position;
                // Toast.makeText(MakeMateTalkActivity.this,location+"",Toast.LENGTH_SHORT).show();
             }
 
@@ -82,7 +82,7 @@ public class MakeMateTalkActivity extends AppCompatActivity {
         locationView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                age= position+1;
+                age= position;
                 //Toast.makeText(MakeMateTalkActivity.this,location+"",Toast.LENGTH_SHORT).show();
             }
 

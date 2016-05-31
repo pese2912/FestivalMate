@@ -136,10 +136,20 @@
         android:textColor="#ffffff"
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
-        android:layout_marginRight="54dp"
-        android:layout_marginEnd="54dp"
+        android:layout_marginRight="52dp"
+        android:layout_marginEnd="52dp"
+        android:layout_alignBottom="@+id/rv_list3"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rv_list3"
+        android:layout_alignLeft="@+id/spinner_location"
+        android:layout_alignStart="@+id/spinner_location"
         android:layout_below="@+id/spinner_location"
-        android:layout_alignRight="@+id/spinner_location"
-        android:layout_alignEnd="@+id/spinner_location" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
 
 </RelativeLayout>

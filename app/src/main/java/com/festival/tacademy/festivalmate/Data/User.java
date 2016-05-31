@@ -15,6 +15,8 @@ public class User implements Serializable {
     public  String mem_name;
     public String mem_state_msg;
 
+
+    public int mem_location;
     public  List<Festival> mem_going = new ArrayList<>();
     public List<Artist> mem_fav_artist = new ArrayList<>();
     public int bad_cnt;
@@ -24,6 +26,14 @@ public class User implements Serializable {
     public String chatroom_mem_name;
     public String chatroom_mem_img;
 
+
+    public int getMem_location() {
+        return mem_location;
+    }
+
+    public void setMem_location(int mem_location) {
+        this.mem_location = mem_location;
+    }
 
     public int getChatroom_mems_no() {
         return chatroom_mems_no;

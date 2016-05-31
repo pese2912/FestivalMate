@@ -9,6 +9,8 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MenuItem;
@@ -19,15 +21,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.festival.tacademy.festivalmate.Data.ModifyProfileResult;
-import com.festival.tacademy.festivalmate.Data.ShowMiniProfileResult;
 import com.festival.tacademy.festivalmate.Data.ShowMyProfileResult;
 import com.festival.tacademy.festivalmate.Manager.NetworkManager;
 import com.festival.tacademy.festivalmate.Manager.PropertyManager;
+import com.festival.tacademy.festivalmate.MateTalk.PreferArtistAdapter;
+import com.festival.tacademy.festivalmate.MyApplication;
 import com.festival.tacademy.festivalmate.R;
 
 import java.io.File;
@@ -37,18 +39,18 @@ import okhttp3.Request;
 
 public class ProfileUpdateActivity extends AppCompatActivity {
 
-    String[] city = {"서울","부산","대구","인천","광주"
+    String[] city = {"무관","서울","부산","대구","인천","광주"
             ,"대전","울산","세종","경기","강원","충북"
             ,"충남","전북","전남","경북","경남","제주"};
 
     ImageView photoView;
     Toolbar toolbar;
-
+    RecyclerView rv_list;
     EditText nameView;
     EditText messageView;
     Spinner locationView;
-
-    int location=1;
+    int location=0;
+    PreferArtistAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,28 +60,46 @@ public class ProfileUpdateActivity extends AppCompatActivity {
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
+        rv_list = (RecyclerView)findViewById(R.id.rv_list3);
+        rv_list.setAdapter(mAdapter);
+        rv_list.setLayoutManager(new LinearLayoutManager(MyApplication.getContext(), LinearLayoutManager.HORIZONTAL, false));
+
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
-
 
         nameView= (EditText)findViewById(R.id.edit_name);
         messageView = (EditText)findViewById(R.id.edit_state);
         locationView= (Spinner)findViewById(R.id.spinner_location);
         photoView = (ImageView)findViewById(R.id.image_profile);
-
+        mAdapter = new PreferArtistAdapter();
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>
                 (this,android.R.layout.simple_spinner_item,city); //스피너와 안의 내용을 합치는것
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         locationView.setAdapter(adapter);
-        setData();
+        //setData();
+                int memNo = PropertyManager.getInstance().getNo();
+        NetworkManager.getInstance().show_my_profile(ProfileUpdateActivity.this, memNo, new NetworkManager.OnResultListener<ShowMyProfileResult>() {
+            @Override
+            public void onSuccess(Request request, ShowMyProfileResult result) {
+
+                nameView.setText(result.result.getName());
+                messageView.setText(result.result.getMem_state_msg());
+                Glide.with(photoView.getContext()).load(result.result.mem_img).into(photoView);
+                mAdapter.addAll(result.result.getArtist());
+
+            }
+
+            @Override
+            public void onFail(Request request, IOException exception) {
+
+            }
+        });
         locationView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                location= position+1;
+                location= position;
                 // Toast.makeText(MakeMateTalkActivity.this,location+"",Toast.LENGTH_SHORT).show();
             }
 
@@ -143,25 +163,26 @@ public class ProfileUpdateActivity extends AppCompatActivity {
 
     }
 
-    private void setData(){
-
-        int memNo = PropertyManager.getInstance().getNo();
-        NetworkManager.getInstance().show_my_profile(ProfileUpdateActivity.this, memNo, new NetworkManager.OnResultListener<ShowMyProfileResult>() {
-            @Override
-            public void onSuccess(Request request, ShowMyProfileResult result) {
-
-                nameView.setText(result.result.getName());
-                messageView.setText(result.result.getMem_state_msg());
-                Glide.with(photoView.getContext()).load(result.result.mem_img).into(photoView);
-
-            }
-
-            @Override
-            public void onFail(Request request, IOException exception) {
-
-            }
-        });
-    }
+//    private void setData(){
+//
+//        int memNo = PropertyManager.getInstance().getNo();
+//        NetworkManager.getInstance().show_my_profile(ProfileUpdateActivity.this, memNo, new NetworkManager.OnResultListener<ShowMyProfileResult>() {
+//            @Override
+//            public void onSuccess(Request request, ShowMyProfileResult result) {
+//
+//                nameView.setText(result.result.getName());
+//                messageView.setText(result.result.getMem_state_msg());
+//                Glide.with(photoView.getContext()).load(result.result.mem_img).into(photoView);
+//                mAdapter.addAll(result.result.getArtist());
+//
+//            }
+//
+//            @Override
+//            public void onFail(Request request, IOException exception) {
+//
+//            }
+//        });
+//    }
 
     private static final int RC_GALLERY = 1;
 
@@ -187,6 +208,7 @@ public class ProfileUpdateActivity extends AppCompatActivity {
                     BitmapFactory.Options opts = new BitmapFactory.Options();
                     opts.inSampleSize = 2;
                     Bitmap bm = BitmapFactory.decodeFile(path, opts);
+                    photoView.setImageResource(R.mipmap.ic_launcher);
                     photoView.setImageBitmap(bm);
                 }
             }
