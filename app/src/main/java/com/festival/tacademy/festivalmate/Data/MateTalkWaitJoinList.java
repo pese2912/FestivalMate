@@ -1,5 +1,6 @@
 package com.festival.tacademy.festivalmate.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,6 +8,16 @@ import java.util.List;
  */
 
 public class MateTalkWaitJoinList {
+
+    public int is_host;
+    public int chatroom_no;
+    public String chatroom_name;
+    public List<chatroom_member> chatroom_members;
+    public List<chatroom_waiting> chatroom_waiting;
+    public String festival_name;
+    public String festival_location;
+    public List<Artist> festival_lineups = new ArrayList<>();
+
 
     public int getChatroom_no() {
         return chatroom_no;
@@ -48,10 +59,31 @@ public class MateTalkWaitJoinList {
         this.is_host = is_host;
     }
 
-    public int is_host;
-    public int chatroom_no;
-    public String chatroom_name;
-    public List<chatroom_member> chatroom_members;
-    public List<chatroom_waiting> chatroom_waiting;
+
+
+    public String getFestival_name() {
+        return festival_name;
+    }
+
+    public void setFestival_name(String festival_name) {
+        this.festival_name = festival_name;
+    }
+
+    public String getFestival_location() {
+        return festival_location;
+    }
+
+    public void setFestival_location(String festival_location) {
+        this.festival_location = festival_location;
+    }
+
+    public List<Artist> getFestival_lineups() {
+        return festival_lineups;
+    }
+
+    public void setFestival_lineups(List<Artist> festival_lineups) {
+        this.festival_lineups = festival_lineups;
+    }
+
 
 }

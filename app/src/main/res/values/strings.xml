@@ -94,6 +94,8 @@
     <string name="chat_joiner">대화참여자</string>
     <string name="logout">로그아웃</string>
     <string name="update_prefer_artist">선호 가수 수정하기</string>
+    <string name="prefer_artist">좋아하는 가수</string>
+    <string name="update">수정하기</string>
 
 
 </resources>

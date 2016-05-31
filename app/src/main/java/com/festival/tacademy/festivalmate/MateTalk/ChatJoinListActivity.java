@@ -129,7 +129,7 @@ public class ChatJoinListActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        setData();
+     //   setData();
     }
 
     private void setData(){

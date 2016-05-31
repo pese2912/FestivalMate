@@ -28,6 +28,6 @@ public class PreferArtistViewHolder extends RecyclerView.ViewHolder {
     public void setData(Artist item) {
         Glide.with(image_artist_photo.getContext()).load(item.getPhoto()).into(image_artist_photo);
         //image_artist_photo.setImageResource(R.mipmap.ic_launcher);
-        text_artist_name.setText(item.artist_name);
+        text_artist_name.setText(item.getName());
     }
 }

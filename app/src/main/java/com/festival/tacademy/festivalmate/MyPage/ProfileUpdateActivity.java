@@ -30,6 +30,7 @@ import com.festival.tacademy.festivalmate.Manager.NetworkManager;
 import com.festival.tacademy.festivalmate.Manager.PropertyManager;
 import com.festival.tacademy.festivalmate.MateTalk.PreferArtistAdapter;
 import com.festival.tacademy.festivalmate.MyApplication;
+import com.festival.tacademy.festivalmate.Preference.PreferenceActivity;
 import com.festival.tacademy.festivalmate.R;
 
 import java.io.File;
@@ -50,6 +51,7 @@ public class ProfileUpdateActivity extends AppCompatActivity {
     EditText messageView;
     Spinner locationView;
     int location=0;
+
     PreferArtistAdapter mAdapter;
 
     @Override
@@ -61,6 +63,7 @@ public class ProfileUpdateActivity extends AppCompatActivity {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         rv_list = (RecyclerView)findViewById(R.id.rv_list3);
+        mAdapter = new PreferArtistAdapter();
         rv_list.setAdapter(mAdapter);
         rv_list.setLayoutManager(new LinearLayoutManager(MyApplication.getContext(), LinearLayoutManager.HORIZONTAL, false));
 
@@ -71,31 +74,13 @@ public class ProfileUpdateActivity extends AppCompatActivity {
         messageView = (EditText)findViewById(R.id.edit_state);
         locationView= (Spinner)findViewById(R.id.spinner_location);
         photoView = (ImageView)findViewById(R.id.image_profile);
-        mAdapter = new PreferArtistAdapter();
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>
                 (this,android.R.layout.simple_spinner_item,city); //스피너와 안의 내용을 합치는것
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         locationView.setAdapter(adapter);
-        //setData();
-                int memNo = PropertyManager.getInstance().getNo();
-        NetworkManager.getInstance().show_my_profile(ProfileUpdateActivity.this, memNo, new NetworkManager.OnResultListener<ShowMyProfileResult>() {
-            @Override
-            public void onSuccess(Request request, ShowMyProfileResult result) {
-
-                nameView.setText(result.result.getName());
-                messageView.setText(result.result.getMem_state_msg());
-                Glide.with(photoView.getContext()).load(result.result.mem_img).into(photoView);
-                mAdapter.addAll(result.result.getArtist());
-
-            }
-
-            @Override
-            public void onFail(Request request, IOException exception) {
-
-            }
-        });
+        setData();
         locationView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -160,29 +145,37 @@ public class ProfileUpdateActivity extends AppCompatActivity {
             }
         }
 
+        btn = (Button)findViewById(R.id.btn_prefer_update);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ProfileUpdateActivity.this, PreferenceActivity.class));
+            }
+        });
+
 
     }
 
-//    private void setData(){
-//
-//        int memNo = PropertyManager.getInstance().getNo();
-//        NetworkManager.getInstance().show_my_profile(ProfileUpdateActivity.this, memNo, new NetworkManager.OnResultListener<ShowMyProfileResult>() {
-//            @Override
-//            public void onSuccess(Request request, ShowMyProfileResult result) {
-//
-//                nameView.setText(result.result.getName());
-//                messageView.setText(result.result.getMem_state_msg());
-//                Glide.with(photoView.getContext()).load(result.result.mem_img).into(photoView);
-//                mAdapter.addAll(result.result.getArtist());
-//
-//            }
-//
-//            @Override
-//            public void onFail(Request request, IOException exception) {
-//
-//            }
-//        });
-//    }
+    private void setData(){
+
+        int memNo = PropertyManager.getInstance().getNo();
+        NetworkManager.getInstance().show_my_profile(ProfileUpdateActivity.this, memNo, new NetworkManager.OnResultListener<ShowMyProfileResult>() {
+            @Override
+            public void onSuccess(Request request, ShowMyProfileResult result) {
+
+                nameView.setText(result.result.getName());
+                messageView.setText(result.result.getMem_state_msg());
+                Glide.with(photoView.getContext()).load(result.result.mem_img).into(photoView);
+                mAdapter.addAll(result.result.getArtist());
+                Toast.makeText(MyApplication.getContext(), result.result.getArtist().get(0).getName()+"",Toast.LENGTH_SHORT).show();
+
+            }
+            @Override
+            public void onFail(Request request, IOException exception) {
+
+            }
+        });
+    }
 
     private static final int RC_GALLERY = 1;
 
@@ -208,7 +201,6 @@ public class ProfileUpdateActivity extends AppCompatActivity {
                     BitmapFactory.Options opts = new BitmapFactory.Options();
                     opts.inSampleSize = 2;
                     Bitmap bm = BitmapFactory.decodeFile(path, opts);
-                    photoView.setImageResource(R.mipmap.ic_launcher);
                     photoView.setImageBitmap(bm);
                 }
             }
