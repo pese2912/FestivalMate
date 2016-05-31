@@ -17,10 +17,17 @@ import android.widget.Toast;
 
 import com.festival.tacademy.festivalmate.Data.MateTalkRoom;
 import com.festival.tacademy.festivalmate.Data.PreferenceArtist;
+import com.festival.tacademy.festivalmate.Data.ShowMyChatroomListResult;
+import com.festival.tacademy.festivalmate.Manager.NetworkManager;
+import com.festival.tacademy.festivalmate.Manager.PropertyManager;
 import com.festival.tacademy.festivalmate.MateMatching.MakeMateTalkActivity;
 import com.festival.tacademy.festivalmate.Preference.PreferenceAdapter;
 import com.festival.tacademy.festivalmate.Preference.PreferenceViewHolder;
 import com.festival.tacademy.festivalmate.R;
+
+import java.io.IOException;
+
+import okhttp3.Request;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -65,22 +72,43 @@ public class MateTalkFragment extends Fragment {
         listView = (RecyclerView)view.findViewById(R.id.rv_list);
         listView.setAdapter(mAdapter);
         listView.setLayoutManager(new LinearLayoutManager(getContext()));
-
         return  view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        setData();
+    }
+
     private void setData(){
-        for (int i = 0; i < 20; i++) {
-            MateTalkRoom room = new MateTalkRoom();
-            room.setChatroom_festival_name("name " + i);
-       //     room.setChatroom_img(R.mipmap.ic_launcher);
-            room.setChatroom_name("hey, 모두들 안녕~ 내가누군지 아니??");
-            room.date="7월 24일";
-            room.setChatroom_no(i);
-            room.setMatched_artist_number(i);
-            room.setUnRead(i+"");
-            mAdapter.add(room); // 값 추가
-        }
+
+        int memNo = PropertyManager.getInstance().getNo();
+
+        NetworkManager.getInstance().show_my_chatroom_list(getContext(), memNo, new NetworkManager.OnResultListener<ShowMyChatroomListResult>() {
+            @Override
+            public void onSuccess(Request request, ShowMyChatroomListResult result) {
+                Toast.makeText(getContext(),"성공",Toast.LENGTH_SHORT).show();
+                mAdapter.clear();
+                mAdapter.addAll(result.result);
+            }
+
+            @Override
+            public void onFail(Request request, IOException exception) {
+                Toast.makeText(getContext(),"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+//        for (int i = 0; i < 20; i++) {
+//            MateTalkRoom room = new MateTalkRoom();
+//            room.setChatroom_festival_name("name " + i);
+//       //     room.setChatroom_img(R.mipmap.ic_launcher);
+//            room.setChatroom_name("hey, 모두들 안녕~ 내가누군지 아니??");
+//            room.date="7월 24일";
+//            room.setChatroom_no(i);
+//            room.setMatched_artist_number(i);
+//            room.setUnRead(i+"");
+//            mAdapter.add(room); // 값 추가
+//        }
     }
 }
 

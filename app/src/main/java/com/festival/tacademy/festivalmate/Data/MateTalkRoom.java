@@ -24,11 +24,43 @@ public class MateTalkRoom implements Serializable {
     public int chatroom_location;
     public int chatroom_age;
     public int mem_chatroom_state;
-
+    public String chatroom_new_chat_date;
     public String date;
-
     public List<User> chatroom_mems;
     public String unRead;
+    public int chatroom_new_count;
+    public int chatroom_style;
+
+
+    public int getChatroom_new_count() {
+        return chatroom_new_count;
+    }
+
+    public void setChatroom_new_count(int chatroom_new_count) {
+        this.chatroom_new_count = chatroom_new_count;
+    }
+
+    public int getChatroom_style() {
+        return chatroom_style;
+    }
+
+    public void setChatroom_style(int chatroom_style) {
+        this.chatroom_style = chatroom_style;
+    }
+
+
+
+
+
+    public String getChatroom_new_chat_date() {
+        return chatroom_new_chat_date;
+    }
+
+    public void setChatroom_new_chat_date(String chatroom_new_chat_date) {
+        this.chatroom_new_chat_date = chatroom_new_chat_date;
+    }
+
+
 
     public int getMem_chatroom_state() {
         return mem_chatroom_state;

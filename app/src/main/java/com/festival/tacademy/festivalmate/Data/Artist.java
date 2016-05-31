@@ -69,7 +69,7 @@ public class Artist implements Serializable {
     @Expose
     public int artist_img_no;
     @Expose
-    public int artist_fav_state=0;
+    public int artist_fav_state;
     @Expose
     public int matched_artist_no;
     @Expose

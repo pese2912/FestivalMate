@@ -26,6 +26,7 @@ import com.festival.tacademy.festivalmate.MyPage.JoinWaitListActivity;
 import com.festival.tacademy.festivalmate.MyPage.LetsGoListActivity;
 import com.festival.tacademy.festivalmate.MyPage.ProfileUpdateActivity;
 import com.festival.tacademy.festivalmate.MyPage.SettingsActivity;
+import com.festival.tacademy.festivalmate.Preference.PreferenceActivity;
 
 import java.io.IOException;
 
@@ -169,7 +170,10 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.settings) { // 설정 클릭 시
             startActivity(new Intent(HomeActivity.this, SettingsActivity.class));
         }
+        else if(id == R.id.update_prefer_artist){
+            startActivity(new Intent(HomeActivity.this, PreferenceActivity.class));
 
+        }
         else if (id == R.id.logout) { // 로그아웃 클릭 시
             //startActivity(new Intent(HomeActivity.this, SettingsActivity.class));
             PropertyManager.getInstance().setLogin(false);
@@ -177,7 +181,7 @@ public class HomeActivity extends AppCompatActivity
             PropertyManager.getInstance().setEmail("");
             PropertyManager.getInstance().setNo(0);
             PropertyManager.getInstance().setPassword("");
-            onResume();
+            startActivity(new Intent(HomeActivity.this, MainActivity.class));
 
         }
 

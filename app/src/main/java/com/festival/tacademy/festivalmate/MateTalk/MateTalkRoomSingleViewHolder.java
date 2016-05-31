@@ -7,19 +7,16 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.festival.tacademy.festivalmate.Data.MateTalkRoom;
-import com.festival.tacademy.festivalmate.Data.PreferenceArtist;
 import com.festival.tacademy.festivalmate.R;
 
 /**
- * Created by Tacademy on 2016-05-16.
+ * Created by Tacademy on 2016-05-31.
  */
-public class MateTalkRoomViewHolder extends RecyclerView.ViewHolder {
+public class MateTalkRoomSingleViewHolder extends RecyclerView.ViewHolder {
 
-    TextView festivalView;
     TextView nameView;
     ImageView photoView;
     TextView contentView;
-    TextView numberView;
     TextView dateView;
     TextView unReadView;
 
@@ -36,13 +33,11 @@ public class MateTalkRoomViewHolder extends RecyclerView.ViewHolder {
 
 
 
-    public MateTalkRoomViewHolder(View itemView) {
+    public MateTalkRoomSingleViewHolder(View itemView) {
         super(itemView);
-        festivalView = (TextView)itemView.findViewById(R.id.room_festival);
         nameView = (TextView)itemView.findViewById(R.id.room_name);
         photoView = (ImageView)itemView.findViewById(R.id.room_image);
         contentView = (TextView)itemView.findViewById(R.id.room_content);
-        numberView = (TextView)itemView.findViewById(R.id.room_num);
         dateView = (TextView)itemView.findViewById(R.id.room_date);
         unReadView = (TextView)itemView.findViewById(R.id.room_unread);
         itemView.setOnClickListener(new View.OnClickListener() {
@@ -57,11 +52,9 @@ public class MateTalkRoomViewHolder extends RecyclerView.ViewHolder {
 
     public void setMateTalkRoom(MateTalkRoom room){
         this.talkRoom = room;
-        festivalView.setText(room.getChatroom_festival_name());
-        nameView.setText(room.getChatroom_name());
+        nameView.setText(room.getChatroom_host_name());
         contentView.setText(room.getChatroom_name());
         Glide.with(photoView.getContext()).load(room.getChatroom_img()).into(photoView);
-        numberView.setText(room.getMatched_artist_number()+"");
         dateView.setText(room.getChatroom_new_chat_date());
         unReadView.setText(room.getChatroom_new_count()+"");
     }

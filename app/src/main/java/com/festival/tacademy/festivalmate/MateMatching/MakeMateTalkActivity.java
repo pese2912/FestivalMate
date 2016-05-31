@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.festival.tacademy.festivalmate.Data.CreateNewChatroomResult;
 import com.festival.tacademy.festivalmate.Data.Festival;
+import com.festival.tacademy.festivalmate.Data.MateTalkRoom;
 import com.festival.tacademy.festivalmate.Data.SelectedArtist;
 import com.festival.tacademy.festivalmate.Data.ShowMatchingResult;
 import com.festival.tacademy.festivalmate.HomeActivity;
@@ -115,9 +116,11 @@ public class MakeMateTalkActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Request request, CreateNewChatroomResult result) {
                         Toast.makeText(MakeMateTalkActivity.this,"성공",Toast.LENGTH_SHORT).show();
-                   //     Intent intent = new Intent(MakeMateTalkActivity.this, ChattingActivity.class);
-                     //   intent.putExtra("chatroomNo",result.result.getChatroom_no());
-                       // startActivity(intent);
+                        Intent intent = new Intent(MakeMateTalkActivity.this, ChattingActivity.class);
+                        MateTalkRoom room = new MateTalkRoom();
+                        room.setChatroom_no(result.result.getChatroom_no());
+                        intent.putExtra("chatting",room);
+                        startActivity(intent);
                     }
 
                     @Override

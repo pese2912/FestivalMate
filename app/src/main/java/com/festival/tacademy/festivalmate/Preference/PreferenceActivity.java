@@ -98,6 +98,7 @@ public class PreferenceActivity extends AppCompatActivity {
                             Toast.makeText(PreferenceActivity.this,"성공",Toast.LENGTH_SHORT).show();
                             mAdapter.clear();
                             mAdapter.addAll(result.result);
+                            artistList.addAll(result.result);
                            // artistList=result.result;
                         }
 
@@ -139,14 +140,22 @@ public class PreferenceActivity extends AppCompatActivity {
                 mAdapter.addAll(result.result);
 
                 artistList = result.result;
+                int size=0;
+
+                for(int i = 0; i<result.result.size(); i++){
+                    if(result.result.get(i).isCheck()==1)
+                        size++;
+                }
+
+                Toast.makeText(PreferenceActivity.this,size+"",Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFail(Request request, IOException exception) {
-
                 Toast.makeText(PreferenceActivity.this,"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
+
 
 //           for (int i = 0; i < 20; i++) {
 //                Artist artist = new Artist("name " + i,"http://sitehomebos.kocca.kr/knowledge/abroad/deep/__icsFiles/artimage/2012/03/26/2_1.jpg");

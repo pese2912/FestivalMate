@@ -143,7 +143,6 @@ public class ChatJoinListActivity extends AppCompatActivity {
               //  Toast.makeText(ChatJoinListActivity.this, result.result.getChatroom_waitings().get(0).getMem_name()+"", Toast.LENGTH_SHORT).show();
         //        Toast.makeText(ChatJoinListActivity.this, result.result.getChatroom_members().get(0)+"", Toast.LENGTH_SHORT).show();
                 mAdapter.setMateTalkWaitJoinList(result.result);
-
             }
 
             @Override

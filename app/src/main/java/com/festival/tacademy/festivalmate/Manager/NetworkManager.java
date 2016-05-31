@@ -18,6 +18,7 @@ import com.festival.tacademy.festivalmate.Data.FestivalDetailResult;
 import com.festival.tacademy.festivalmate.Data.FestivalResultResult;
 import com.festival.tacademy.festivalmate.Data.HateResult;
 import com.festival.tacademy.festivalmate.Data.JsonNewChatroom;
+import com.festival.tacademy.festivalmate.Data.ModifyProfileResult;
 import com.festival.tacademy.festivalmate.Data.MySignInResult;
 import com.festival.tacademy.festivalmate.Data.MySignUpResult;
 import com.festival.tacademy.festivalmate.Data.RequestChatroomJoinResult;
@@ -27,6 +28,8 @@ import com.festival.tacademy.festivalmate.Data.ShowGoingListResult;
 import com.festival.tacademy.festivalmate.Data.ShowMatchingResult;
 import com.festival.tacademy.festivalmate.Data.ShowMemProfileResult;
 import com.festival.tacademy.festivalmate.Data.ShowMiniProfileResult;
+import com.festival.tacademy.festivalmate.Data.ShowMyChatroomListResult;
+import com.festival.tacademy.festivalmate.Data.ShowMyProfileResult;
 import com.festival.tacademy.festivalmate.Data.ShowWaitingListResult;
 import com.festival.tacademy.festivalmate.MyApplication;
 import com.google.gson.Gson;
@@ -43,6 +46,7 @@ import okhttp3.Callback;
 import okhttp3.FormBody;
 import okhttp3.JavaNetCookieJar;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -134,17 +138,27 @@ public class NetworkManager {
     public Request signup(Object tag, String mem_name,
                           String mem_id,
                           String mem_pwd,
-                          String mem_img,
+                          File mem_img,
                           String mem_registration_id,
                           OnResultListener<MySignUpResult> listener) {
 
+//        RequestBody body = new FormBody.Builder()
+//                .add("mem_name", mem_name)
+//                .add("mem_pwd", mem_pwd)
+//                .add("mem_id", mem_id)
+//                .add("mem_img",mem_img)
+//                .add("mem_registration_id",mem_registration_id)
+//                .build();
 
-        RequestBody body = new FormBody.Builder()
-                .add("mem_name", mem_name)
-                .add("mem_pwd", mem_pwd)
-                .add("mem_id", mem_id)
-                .add("mem_img",mem_img)
-                .add("mem_registration_id",mem_registration_id)
+
+        RequestBody body = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("mem_name", mem_name)
+                .addFormDataPart("mem_pwd", mem_pwd)
+                .addFormDataPart("mem_id", mem_id)
+                .addFormDataPart("picture", mem_img.getName(),
+                        RequestBody.create(MediaType.parse("image/jpeg"), mem_img))
+                .addFormDataPart("mem_registration_id", mem_registration_id)
                 .build();
 
         Request request = new Request.Builder()
@@ -566,11 +580,14 @@ public class NetworkManager {
                                      String mem_img,
                                     String mem_name,
                                   String mem_state_msg,
-                                     OnResultListener<ShowMiniProfileResult> listener) {
+                                  int mem_location,
+                                     OnResultListener<ModifyProfileResult> listener) {
         RequestBody body = new FormBody.Builder()
                 .add("mem_no", mem_no+"")
                 .add("mem_name", mem_name)
+                .add("mem_img", mem_img)
                 .add("mem_state_msg", mem_state_msg)
+                .add("mem_location", mem_location+"")
                 .build();
 
 
@@ -579,7 +596,7 @@ public class NetworkManager {
                 .post(body)
                 .build();
 
-        final NetworkResult<ShowMiniProfileResult> result = new NetworkResult<>();
+        final NetworkResult<ModifyProfileResult> result = new NetworkResult<>();
         result.request = request;
         result.listener = listener;
         mClient.newCall(request).enqueue(new Callback() {
@@ -593,7 +610,7 @@ public class NetworkManager {
             public void onResponse(Call call, Response response) throws IOException {
                 if (response.isSuccessful()) {
                     String text = response.body().string();
-                    ShowMiniProfileResult data = gson.fromJson(text, ShowMiniProfileResult.class);
+                    ModifyProfileResult data = gson.fromJson(text, ModifyProfileResult.class);
                     if (data.success == 1) {
                         result.result = data;
                         mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SUCCESS, result));
@@ -1332,9 +1349,9 @@ public class NetworkManager {
 
     private static final String URL_CHATROOM_DISAPPROVE = MY_SERVER + "/chatroom_disapprove";       // 채팅방 거절
     public Request chatroom_disapprove(Object tag,
-                                 int disapproved_mem_no,
-                                 int chatroom_no,
-                                 OnResultListener<ChatroomDisapproveResult> listener) {
+                                       int disapproved_mem_no,
+                                       int chatroom_no,
+                                       OnResultListener<ChatroomDisapproveResult> listener) {
 
         RequestBody body = new FormBody.Builder()
                 .add("disapproved_mem_no", disapproved_mem_no+"")
@@ -1361,6 +1378,101 @@ public class NetworkManager {
                 if (response.isSuccessful()) {
                     String text = response.body().string();
                     ChatroomDisapproveResult data = gson.fromJson(text, ChatroomDisapproveResult.class);
+                    if (data.success == 1) {
+                        result.result = data;
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SUCCESS, result));
+                    } else {
+                        result.exception = new IOException(data.message);
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                    }
+
+                } else {
+                    result.exception = new IOException(response.message());
+                    mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                }
+            }
+        });
+
+        return request;
+    }
+
+    private static final String URL_SHOW_MY_PROFILE = MY_SERVER + "/show_my_profile";       // 프로필 조회
+    public Request show_my_profile(Object tag,
+                                       int mem_no,
+                                       OnResultListener<ShowMyProfileResult> listener) {
+
+        RequestBody body = new FormBody.Builder()
+                .add("mem_no", mem_no+"")
+                .build();
+
+        Request request = new Request.Builder()
+                .url(URL_SHOW_MY_PROFILE)
+                .post(body)
+                .build();
+
+        final NetworkResult<ShowMyProfileResult> result = new NetworkResult<>();
+        result.request = request;
+        result.listener = listener;
+        mClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                result.exception = e;
+                mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String text = response.body().string();
+                    ShowMyProfileResult data = gson.fromJson(text, ShowMyProfileResult.class);
+                    if (data.success == 1) {
+                        result.result = data;
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SUCCESS, result));
+                    } else {
+                        result.exception = new IOException(data.message);
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                    }
+
+                } else {
+                    result.exception = new IOException(response.message());
+                    mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                }
+            }
+        });
+
+        return request;
+    }
+
+
+    private static final String URL_SHOW_MY_CHATROOM_LIST = MY_SERVER + "/show_my_chatroom_list";       // 메이트톡 리스트
+    public Request show_my_chatroom_list(Object tag,
+                                   int mem_no,
+                                   OnResultListener<ShowMyChatroomListResult> listener) {
+
+        RequestBody body = new FormBody.Builder()
+                .add("mem_no", mem_no+"")
+                .build();
+
+        Request request = new Request.Builder()
+                .url(URL_SHOW_MY_CHATROOM_LIST)
+                .post(body)
+                .build();
+
+        final NetworkResult<ShowMyChatroomListResult> result = new NetworkResult<>();
+        result.request = request;
+        result.listener = listener;
+        mClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                result.exception = e;
+                mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String text = response.body().string();
+                    ShowMyChatroomListResult data = gson.fromJson(text, ShowMyChatroomListResult.class);
                     if (data.success == 1) {
                         result.result = data;
                         mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SUCCESS, result));

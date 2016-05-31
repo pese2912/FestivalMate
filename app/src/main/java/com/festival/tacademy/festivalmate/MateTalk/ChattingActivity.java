@@ -58,7 +58,7 @@ public class ChattingActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         mateTalkRoom = (MateTalkRoom) intent.getExtras().getSerializable("chatting");
-        String chatroomNo = intent.getStringExtra("chatroomNo");
+      //  String chatroomNo = intent.getStringExtra("chatroomNo");
 
         toolbarTitle.setText(mateTalkRoom.getChatroom_name());
 

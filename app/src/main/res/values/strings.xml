@@ -93,6 +93,7 @@
     <string name="approve_waiter">승인대기자</string>
     <string name="chat_joiner">대화참여자</string>
     <string name="logout">로그아웃</string>
+    <string name="update_prefer_artist">선호 가수 수정하기</string>
 
 
 </resources>

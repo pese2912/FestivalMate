@@ -45,7 +45,7 @@ tools:context="com.festival.tacademy.festivalmate.login.SignUpFragment">
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="match_parent"
         android:id="@+id/image_profile"
         android:layout_gravity="center" />
 

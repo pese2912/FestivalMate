@@ -106,7 +106,7 @@ public class SignUpFragment extends Fragment {
                     return;
                 }
 
-                NetworkManager.getInstance().signup(getContext(), name, email, password,"https://image",PropertyManager.getInstance().getRegistrationToken(), new NetworkManager.OnResultListener<MySignUpResult>() { // 회원가입
+                NetworkManager.getInstance().signup(getContext(), name, email, password,mUploadFile,PropertyManager.getInstance().getRegistrationToken(), new NetworkManager.OnResultListener<MySignUpResult>() { // 회원가입
                     @Override
                     public void onSuccess(Request request, MySignUpResult result) {
 
@@ -181,9 +181,11 @@ public class SignUpFragment extends Fragment {
                     BitmapFactory.Options opts = new BitmapFactory.Options();
                     opts.inSampleSize = 2;
                     Bitmap bm = BitmapFactory.decodeFile(path, opts);
+                    Toast.makeText(getContext(), mUploadFile.getName(),Toast.LENGTH_SHORT).show();
                     profileView.setImageBitmap(bm);
                 }
             }
+
             return;
         }
     }
