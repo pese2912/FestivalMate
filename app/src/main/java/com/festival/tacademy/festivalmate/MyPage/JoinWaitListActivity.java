@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.festival.tacademy.festivalmate.Data.Lineup;
 import com.festival.tacademy.festivalmate.Data.MateTalkWaitList;
 import com.festival.tacademy.festivalmate.Data.PreferenceArtist;
+import com.festival.tacademy.festivalmate.Data.RequestChatroomJoinResult;
 import com.festival.tacademy.festivalmate.Data.ShowWaitingListResult;
 import com.festival.tacademy.festivalmate.Manager.NetworkManager;
 import com.festival.tacademy.festivalmate.Manager.PropertyManager;
@@ -46,8 +47,26 @@ public class JoinWaitListActivity extends AppCompatActivity {
         mAdapter = new JoinWaitListAdapter();
         mAdapter.setOnItemClickListener(new JoinWaitListViewHolder.OnItemClickListener() {
             @Override
-            public void onItemClick(View view, MateTalkWaitList list) {
-                Toast.makeText(JoinWaitListActivity.this, list.getChatroom_name(), Toast.LENGTH_SHORT).show();
+            public void onItemClick(View view, final MateTalkWaitList list) {
+                //Toast.makeText(JoinWaitListActivity.this, list.getChatroom_name(), Toast.LENGTH_SHORT).show();
+                int memNo = PropertyManager.getInstance().getNo();
+                int chatroomNo = list.getChatroom_no();
+                int state =1;
+                list.setMem_chatroom_state(1);
+
+                NetworkManager.getInstance().request_chatroom_join(JoinWaitListActivity.this, memNo, chatroomNo, state, new NetworkManager.OnResultListener<RequestChatroomJoinResult>() {
+                    @Override
+                    public void onSuccess(Request request, RequestChatroomJoinResult result) {
+                        Toast.makeText(JoinWaitListActivity.this, "성공", Toast.LENGTH_SHORT).show();
+                        list.setMem_chatroom_state(result.result.getMem_chatroom_state());
+                        initData();
+                    }
+
+                    @Override
+                    public void onFail(Request request, IOException exception) {
+                        Toast.makeText(JoinWaitListActivity.this, "실패"+exception.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
         listView.setAdapter(mAdapter);
@@ -70,7 +89,7 @@ public class JoinWaitListActivity extends AppCompatActivity {
             @Override
             public void onSuccess(Request request, ShowWaitingListResult result) {
 
-                Toast.makeText(JoinWaitListActivity.this, "성공"+result.message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(JoinWaitListActivity.this, "성공"+result.result.size(), Toast.LENGTH_SHORT).show();
                 mAdapter.addAll(result.result);
             }
 

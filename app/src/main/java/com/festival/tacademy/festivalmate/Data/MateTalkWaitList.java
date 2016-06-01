@@ -15,6 +15,43 @@ public class MateTalkWaitList {
     public String chatroom_name;
     public List<Lineup> festival_lineups;
     public int chatroom_wait_num;
+    public int mem_chatroom_state;
+    public int chatroom_size;
+    public int chatroom_festival_no;
+    public String festival_name;
+
+
+    public int getMem_chatroom_state() {
+        return mem_chatroom_state;
+    }
+
+    public void setMem_chatroom_state(int mem_chatroom_state) {
+        this.mem_chatroom_state = mem_chatroom_state;
+    }
+    public int getChatroom_size() {
+        return chatroom_size;
+    }
+
+    public void setChatroom_size(int chatroom_size) {
+        this.chatroom_size = chatroom_size;
+    }
+
+    public int getChatroom_festival_no() {
+        return chatroom_festival_no;
+    }
+
+    public void setChatroom_festival_no(int chatroom_festival_no) {
+        this.chatroom_festival_no = chatroom_festival_no;
+    }
+
+    public String getFestival_name() {
+        return festival_name;
+    }
+
+    public void setFestival_name(String festival_name) {
+        this.festival_name = festival_name;
+    }
+
 
     public int getChatroom_no() {
         return chatroom_no;

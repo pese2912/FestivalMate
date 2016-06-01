@@ -12,6 +12,7 @@ import android.os.PersistableBundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -137,6 +138,7 @@ public class SignUpFragment extends Fragment {
                     @Override
                     public void onFail(Request request, IOException exception) {
                         Toast.makeText(getContext(), "가입실패 : "+exception,Toast.LENGTH_SHORT).show();
+                        Log.i("onFail: ",exception.getMessage());
                     }
                 });
 //
@@ -181,7 +183,7 @@ public class SignUpFragment extends Fragment {
                     BitmapFactory.Options opts = new BitmapFactory.Options();
                     opts.inSampleSize = 2;
                     Bitmap bm = BitmapFactory.decodeFile(path, opts);
-                    Toast.makeText(getContext(), mUploadFile.getName(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), mUploadFile.getAbsolutePath(),Toast.LENGTH_SHORT).show();
                     profileView.setImageBitmap(bm);
                 }
             }

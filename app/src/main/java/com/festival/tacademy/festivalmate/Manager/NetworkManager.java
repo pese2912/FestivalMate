@@ -150,13 +150,12 @@ public class NetworkManager {
 //                .add("mem_registration_id",mem_registration_id)
 //                .build();
 
-
         RequestBody body = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("mem_name", mem_name)
                 .addFormDataPart("mem_pwd", mem_pwd)
                 .addFormDataPart("mem_id", mem_id)
-                .addFormDataPart("picture", mem_img.getName(),
+                .addFormDataPart("mem_img", mem_img.getName(),
                         RequestBody.create(MediaType.parse("image/jpeg"), mem_img))
                 .addFormDataPart("mem_registration_id", mem_registration_id)
                 .build();
@@ -1122,11 +1121,13 @@ public class NetworkManager {
     public Request request_chatroom_join(Object tag,
                                  int mem_no,
                                  int chatroom_no,
+                                         int mem_chatroom_state,
                                  OnResultListener<RequestChatroomJoinResult> listener) {
 
         RequestBody body = new FormBody.Builder()
                 .add("mem_no", mem_no+"")
                 .add("chatroom_no", chatroom_no+"")
+                .add("mem_chatroom_state", mem_chatroom_state+"")
                 .build();
 
         Request request = new Request.Builder()
@@ -1490,4 +1491,6 @@ public class NetworkManager {
 
         return request;
     }
+
+
 }

@@ -73,6 +73,7 @@ public class MateMatchingActivity extends AppCompatActivity {
                 final View v = view.findViewById(R.id.detail_view);
                 final int memNo = PropertyManager.getInstance().getNo();
                final int roomNo = room.getChatroom_no();
+                final  int state = room.getMem_chatroom_state();
 
                 final Button btn = (Button)v.findViewById(R.id.btn_request);
 
@@ -102,7 +103,8 @@ public class MateMatchingActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
-                        NetworkManager.getInstance().request_chatroom_join(MateMatchingActivity.this, memNo, roomNo, new NetworkManager.OnResultListener<RequestChatroomJoinResult>() {
+                        NetworkManager.getInstance().request_chatroom_join(MateMatchingActivity.this, memNo, roomNo, state,new NetworkManager.OnResultListener<RequestChatroomJoinResult>() {
+
                             @Override
                             public void onSuccess(Request request, RequestChatroomJoinResult result) {
                                 Toast.makeText(MateMatchingActivity.this, "성공",Toast.LENGTH_SHORT).show();
@@ -110,15 +112,16 @@ public class MateMatchingActivity extends AppCompatActivity {
                                     room.setMem_chatroom_state(2);
                                     btn.setText("참여중");
                                 }
+
                                 else if(result.result.getMem_chatroom_state() == 1) {
                                     room.setMem_chatroom_state(1);
                                     btn.setText("대기중");
                                 }
+
                                 else if(result.result.getMem_chatroom_state() == 0) {
                                     room.setMem_chatroom_state(0);
                                     btn.setText("메이트톡 시작");
                                 }
-
                             }
 
                             @Override

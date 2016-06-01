@@ -2,6 +2,7 @@ package com.festival.tacademy.festivalmate.MyPage;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,8 +20,9 @@ public class JoinWaitListViewHolder extends RecyclerView.ViewHolder {
     TextView nameView;
     TextView titleView;
     TextView peopleView;
-    TextView dateView;
     TextView waitPeopleView;
+    TextView cancelView;
+
 
     MateTalkWaitList mateTalkWaitList;
 
@@ -40,9 +42,10 @@ public class JoinWaitListViewHolder extends RecyclerView.ViewHolder {
         nameView = (TextView)itemView.findViewById(R.id.text_name);
         titleView = (TextView)itemView.findViewById(R.id.text_title);
         peopleView = (TextView)itemView.findViewById(R.id.text_people);
-        dateView = (TextView)itemView.findViewById(R.id.text_date);
+        cancelView = (TextView)itemView.findViewById(R.id.btn_cancel);
+
         waitPeopleView = (TextView)itemView.findViewById(R.id.text_wait_people);
-        itemView.setOnClickListener(new View.OnClickListener() {
+        cancelView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if( mListener!=null ) {
@@ -55,12 +58,10 @@ public class JoinWaitListViewHolder extends RecyclerView.ViewHolder {
     public void setMateTalkWaitList(MateTalkWaitList mateTalkWaitList){
         this.mateTalkWaitList = mateTalkWaitList;
         Glide.with(photoView.getContext()).load(mateTalkWaitList.getChatroom_img()).into(photoView);
-      //  nameView.setText(mateTalkWaitList.getChatroom_festival());
+        nameView.setText(mateTalkWaitList.getFestival_name());
         titleView.setText(mateTalkWaitList.getChatroom_name());
-        //peopleView.setText(mateTalkWaitList.getChatroom_wait_num());
-        dateView.setText(mateTalkWaitList.getFestival_lineups().get(0).getDate());
+        peopleView.setText(mateTalkWaitList.getChatroom_size()+"명");
         waitPeopleView.setText(mateTalkWaitList.getChatroom_wait_num()+"명");
-
 
     }
 }
