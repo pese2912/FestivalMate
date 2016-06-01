@@ -16,9 +16,20 @@ public class MateTalkWaitJoinList {
     public List<chatroom_waiting> chatroom_waiting;
     public String festival_name;
     public String festival_location;
-    public List<Artist> festival_lineups = new ArrayList<>();
+    public List<Lineup> festival_lineups = new ArrayList<>();
 
 
+
+    public List<Artist> chatroom_lineups = new ArrayList<>();
+
+
+    public List<Artist> getChatroom_lineups() {
+        return chatroom_lineups;
+    }
+
+    public void setChatroom_lineups(List<Artist> chatroom_lineups) {
+        this.chatroom_lineups = chatroom_lineups;
+    }
     public int getChatroom_no() {
         return chatroom_no;
     }
@@ -77,11 +88,11 @@ public class MateTalkWaitJoinList {
         this.festival_location = festival_location;
     }
 
-    public List<Artist> getFestival_lineups() {
+    public List<Lineup> getFestival_lineups() {
         return festival_lineups;
     }
 
-    public void setFestival_lineups(List<Artist> festival_lineups) {
+    public void setFestival_lineups(List<Lineup> festival_lineups) {
         this.festival_lineups = festival_lineups;
     }
 

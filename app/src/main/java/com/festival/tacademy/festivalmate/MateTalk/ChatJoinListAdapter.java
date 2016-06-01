@@ -139,15 +139,16 @@ public class ChatJoinListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if( position == 0 ) {
             ChatFestivalInfoViewHolder h = (ChatFestivalInfoViewHolder)holder;
-            h.setText(list.getFestival_name(), "10.20~10.22", list.getFestival_location());
+            h.setText(list.getFestival_name(), list.getFestival_lineups(), list.getFestival_location());
             return;
         }
         position--;
         if( position == 0 ) {
             ChatPreferArtistViewHolder h = (ChatPreferArtistViewHolder)holder;
-            h.setData(list.getFestival_lineups());
+            h.setData(list.getChatroom_lineups());
             return;
         }
+
         position--;
         if( position == 0 ) {
             HeaderWaitViewHolder h = (HeaderWaitViewHolder)holder;

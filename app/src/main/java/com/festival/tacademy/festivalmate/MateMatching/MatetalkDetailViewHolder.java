@@ -66,6 +66,17 @@ public class MatetalkDetailViewHolder extends RecyclerView.ViewHolder {
         detailView.listView.setAdapter(detailView.mAdapter);
         detailView.listView.setLayoutManager(detailView.mLayoutManager);
 
+        if(chatinfo.getMem_chatroom_state()==0){
+            detailView.btn.setText("메이트톡 시작");
+        }
+
+        else if(chatinfo.getMem_chatroom_state()==1){
+            detailView.btn.setText("대기중");
+        }
+        else if(chatinfo.getMem_chatroom_state()==2){
+            detailView.btn.setText("참여중");
+        }
+
         if(chatinfo.getChatroom_mems()!=null) {
             detailView.mAdapter.addAll(chatinfo.getChatroom_mems());
             detailView.mAdapter.setOnItemClickListener(listener);

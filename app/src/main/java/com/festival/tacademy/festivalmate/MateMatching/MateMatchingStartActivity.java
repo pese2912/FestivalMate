@@ -89,7 +89,8 @@ public class MateMatchingStartActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Request request, ShowMatchingResult result) {
 
-                        Toast.makeText(MateMatchingStartActivity.this,"성공",Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(MateMatchingStartActivity.this,"성공"+ result.result.get(0).getMatched_artist_number(),Toast.LENGTH_SHORT).show();
+
                         Intent intent = new Intent(MateMatchingStartActivity.this, MateMatchingActivity.class);
                         intent.putExtra("ShowMatchingResult",result);
                         intent.putExtra("festival",festival);

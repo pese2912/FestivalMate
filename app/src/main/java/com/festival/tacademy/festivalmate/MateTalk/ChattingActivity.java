@@ -13,24 +13,37 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.festival.tacademy.festivalmate.Data.ChatroomSendMsgResult;
 import com.festival.tacademy.festivalmate.Data.Festival;
 import com.festival.tacademy.festivalmate.Data.MateTalkRoom;
+import com.festival.tacademy.festivalmate.Data.User;
+import com.festival.tacademy.festivalmate.Manager.NetworkManager;
+import com.festival.tacademy.festivalmate.Manager.PropertyManager;
+import com.festival.tacademy.festivalmate.MyApplication;
 import com.festival.tacademy.festivalmate.R;
 
-public class ChattingActivity extends AppCompatActivity {
+import java.io.IOException;
 
+import okhttp3.Request;
+
+public class ChattingActivity extends AppCompatActivity {
+    public static final String EXTRA_USER = "user";
     Toolbar toolbar;
     TextView toolbarTitle;
+    ListView listView;
+   // ChatCursorAdapter mAdapter;
 
     RecyclerView recyclerView;
     ChattingAdapter mAdapter;
 
     EditText inputView;
-    RadioGroup typeView;
     MateTalkRoom mateTalkRoom;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +57,15 @@ public class ChattingActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
+//        listView = (ListView)findViewById(R.id.listView);
+//        mAdapter = new ChatCursorAdapter(this);
+//        listView.setAdapter(mAdapter);
         inputView = (EditText)findViewById(R.id.edit_input);
-        typeView = (RadioGroup)findViewById(R.id.group_type);
 
 
-        recyclerView = (RecyclerView)findViewById(R.id.list);
+
+        recyclerView = (RecyclerView)findViewById(R.id.listView);
 
         mAdapter = new ChattingAdapter();
         recyclerView.setAdapter(mAdapter);
@@ -59,7 +76,7 @@ public class ChattingActivity extends AppCompatActivity {
         Intent intent = getIntent();
         mateTalkRoom = (MateTalkRoom) intent.getExtras().getSerializable("chatting");
       //  String chatroomNo = intent.getStringExtra("chatroomNo");
-
+        user = (User)getIntent().getSerializableExtra(EXTRA_USER);
         toolbarTitle.setText(mateTalkRoom.getChatroom_name());
 
         Button btn = (Button)findViewById(R.id.btn_send);
@@ -67,40 +84,32 @@ public class ChattingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String message = inputView.getText().toString();
+                int memNo = PropertyManager.getInstance().getNo();
+                Toast.makeText(MyApplication.getContext(), ""+mateTalkRoom.getChatroom_no(),Toast.LENGTH_SHORT).show();
+                final String message = inputView.getText().toString();
                 if (!TextUtils.isEmpty(message)) {
-
-                    switch (typeView.getCheckedRadioButtonId()) {
-
-                        case R.id.radio_s:
+                    NetworkManager.getInstance().chatroom_send_msg(ChattingActivity.this, memNo, mateTalkRoom.getChatroom_no(), message, memNo, new NetworkManager.OnResultListener<ChatroomSendMsgResult>() {
+                        @Override
+                        public void onSuccess(Request request, ChatroomSendMsgResult result) {
+                            Toast.makeText(MyApplication.getContext(), "성공",Toast.LENGTH_SHORT).show();
+                                //mAdapter.add();
                             Send send = new Send();
-                            send.message = message;
-
+                            send.message= message;
                             mAdapter.add(send);
-                            break;
+                        }
 
-                        case R.id.radio_r:
-
-                            Receive receive = new Receive();
-                            receive.message = message;
-                            receive.icon = ContextCompat.getDrawable(ChattingActivity.this, R.mipmap.ic_launcher);
-
-                            mAdapter.add(receive);
-
-                            break;
-                        case R.id.radio_d:
-                            Date date = new Date();
-                            date.message = message;
-                            mAdapter.add(date);
-
-                            break;
-
-                    }
-                    inputView.setText("");
+                        @Override
+                        public void onFail(Request request, IOException exception) {
+                            Toast.makeText(MyApplication.getContext(), "실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
+
             }
         });
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

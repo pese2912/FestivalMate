@@ -92,22 +92,24 @@ public class MateMatchingActivity extends AppCompatActivity {
 //                    }
 //                });
 
-                if(room.getMem_chatroom_state() == 2)
-                    btn.setText("참여중");
-                else if(room.getMem_chatroom_state() == 1)
-                    btn.setText("대기중");
-                else if(room.getMem_chatroom_state() == 0)
-                    btn.setText("메이트톡 시작");
+//                if(room.getMem_chatroom_state() == 2)
+//                    btn.setText("참여중");
+//                else if(room.getMem_chatroom_state() == 1)
+//                    btn.setText("대기중");
+//                else if(room.getMem_chatroom_state() == 0)
+//                    btn.setText("메이트톡 시작");
 
                 btn.setOnClickListener(new View.OnClickListener() {  // 버튼 클릭
                     @Override
                     public void onClick(View v) {
+                        Toast.makeText(MateMatchingActivity.this, memNo+ "  "+roomNo+"  "+state+"  " ,Toast.LENGTH_SHORT).show();
 
                         NetworkManager.getInstance().request_chatroom_join(MateMatchingActivity.this, memNo, roomNo, state,new NetworkManager.OnResultListener<RequestChatroomJoinResult>() {
 
                             @Override
                             public void onSuccess(Request request, RequestChatroomJoinResult result) {
-                                Toast.makeText(MateMatchingActivity.this, "성공",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MateMatchingActivity.this,result.result.getMem_chatroom_state()+"",Toast.LENGTH_SHORT).show();
+
                                 if(result.result.getMem_chatroom_state() == 2) {
                                     room.setMem_chatroom_state(2);
                                     btn.setText("참여중");

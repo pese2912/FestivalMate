@@ -23,6 +23,7 @@ import com.festival.tacademy.festivalmate.Data.ShowArtistSurveyResult;
 import com.festival.tacademy.festivalmate.HomeActivity;
 import com.festival.tacademy.festivalmate.Manager.NetworkManager;
 import com.festival.tacademy.festivalmate.Manager.PropertyManager;
+import com.festival.tacademy.festivalmate.MyPage.ProfileUpdateActivity;
 import com.festival.tacademy.festivalmate.R;
 
 import java.io.IOException;
@@ -31,7 +32,7 @@ import java.util.List;
 
 import okhttp3.Request;
 
-public class PreferenceActivity extends AppCompatActivity {
+public class Preference_profile_Activity extends AppCompatActivity {
 
     RecyclerView listView;
     PreferenceAdapter mAdapter;
@@ -43,7 +44,7 @@ public class PreferenceActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_preference);
+        setContentView(R.layout.activity_preference_profile_);
 
         mAdapter = new PreferenceAdapter();
         artistList = new ArrayList<Artist>();
@@ -60,17 +61,17 @@ public class PreferenceActivity extends AppCompatActivity {
                 else
                     artist.setCheck(1);
 
-               for(int i = 0; i < artistList.size(); i++){
-                   if(artistList.get(i).isCheck() == 1){
-                       selectedArtist.add(artistList.get(i));
-                   }
-               }
+                for(int i = 0; i < artistList.size(); i++){
+                    if(artistList.get(i).isCheck() == 1){
+                        selectedArtist.add(artistList.get(i));
+                    }
+                }
 
                 if(selectedArtist.size() >= 10){
                     item.setTitle(getString(R.string.complete));
                 }
-               // Toast.makeText(PreferenceActivity.this, artist.isCheck() + artist.getName(), Toast.LENGTH_SHORT).show();
-                Toast.makeText(PreferenceActivity.this, selectedArtist.size()+"", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(PreferenceActivity.this, artist.isCheck() + artist.getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(Preference_profile_Activity.this, selectedArtist.size()+"", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -92,10 +93,10 @@ public class PreferenceActivity extends AppCompatActivity {
                 String name =editSearch.getText().toString();
                 int memNo = PropertyManager.getInstance().getNo();
                 if(!TextUtils.isEmpty(name)){
-                    NetworkManager.getInstance().searchArtistSurvey(PreferenceActivity.this, memNo, name, new NetworkManager.OnResultListener<ShowArtistSurveyResult>() {
+                    NetworkManager.getInstance().searchArtistSurvey(Preference_profile_Activity.this, memNo, name, new NetworkManager.OnResultListener<ShowArtistSurveyResult>() {
                         @Override
                         public void onSuccess(Request request, ShowArtistSurveyResult result) {
-                            Toast.makeText(PreferenceActivity.this,"성공",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Preference_profile_Activity.this,"성공",Toast.LENGTH_SHORT).show();
                             mAdapter.clear();
                             artistList.addAll(result.result);
                             mAdapter.addAll(result.result);
@@ -105,7 +106,7 @@ public class PreferenceActivity extends AppCompatActivity {
 
                         @Override
                         public void onFail(Request request, IOException exception) {
-                            Toast.makeText(PreferenceActivity.this,"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Preference_profile_Activity.this,"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -125,18 +126,18 @@ public class PreferenceActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_prefer, menu);
-         item = menu.findItem(R.id.complete);
-      //  item.setTitle(getResources().getString(R.string.complete));
+        item = menu.findItem(R.id.complete);
+        //  item.setTitle(getResources().getString(R.string.complete));
         return true;
     }
 
     private void setData() {
         int memNo = PropertyManager.getInstance().getNo();
 
-        NetworkManager.getInstance().showArtistSurvey(PreferenceActivity.this, memNo, new NetworkManager.OnResultListener<ShowArtistSurveyResult>() {
+        NetworkManager.getInstance().showArtistSurvey(Preference_profile_Activity.this, memNo, new NetworkManager.OnResultListener<ShowArtistSurveyResult>() {
             @Override
             public void onSuccess(Request request, ShowArtistSurveyResult result) {
-                Toast.makeText(PreferenceActivity.this,"성공",Toast.LENGTH_SHORT).show();
+                Toast.makeText(Preference_profile_Activity.this,"성공",Toast.LENGTH_SHORT).show();
                 mAdapter.clear();
                 mAdapter.addAll(result.result);
 
@@ -146,7 +147,7 @@ public class PreferenceActivity extends AppCompatActivity {
 
             @Override
             public void onFail(Request request, IOException exception) {
-                Toast.makeText(PreferenceActivity.this,"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(Preference_profile_Activity.this,"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -171,12 +172,12 @@ public class PreferenceActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.complete) {
             int memNo = PropertyManager.getInstance().getNo();
-            NetworkManager.getInstance().saveArtistSurvey(PreferenceActivity.this, memNo, selectedArtist, new NetworkManager.OnResultListener<MySignUpResult>() {
+            NetworkManager.getInstance().saveArtistSurvey(Preference_profile_Activity.this, memNo, selectedArtist, new NetworkManager.OnResultListener<MySignUpResult>() {
                 @Override
                 public void onSuccess(Request request, MySignUpResult result) {
-                    Toast.makeText(PreferenceActivity.this,"성공",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(PreferenceActivity.this, HomeActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    Toast.makeText(Preference_profile_Activity.this,"성공",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Preference_profile_Activity.this, ProfileUpdateActivity.class);
+                 //   intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     finish();
                 }
@@ -184,7 +185,7 @@ public class PreferenceActivity extends AppCompatActivity {
                 @Override
                 public void onFail(Request request, IOException exception) {
 
-                    Toast.makeText(PreferenceActivity.this,"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Preference_profile_Activity.this,"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
                 }
             });
 

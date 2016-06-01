@@ -31,6 +31,7 @@ public class ChattingViewHolder extends RecyclerView.ViewHolder  {
     public ChattingViewHolder(View itemView, int viewType) {
         super(itemView);
        switch (viewType){
+
            case TYPE_SEND:
                send_message = (TextView)itemView.findViewById(R.id.chatting_message);
                send_date = (TextView)itemView.findViewById(R.id.text_date);
@@ -38,7 +39,7 @@ public class ChattingViewHolder extends RecyclerView.ViewHolder  {
            case TYPE_RECEIVE:
 
                receive_message = (TextView)itemView.findViewById(R.id.chatting_message);
-               receive_icon = (ImageView)itemView.findViewById(R.id.image_icon);
+       //        receive_icon = (ImageView)itemView.findViewById(R.id.image_icon);
                receive_date = (TextView)itemView.findViewById(R.id.text_date);
 
            case TYPE_DATE:

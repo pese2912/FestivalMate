@@ -31,6 +31,7 @@ import com.festival.tacademy.festivalmate.Manager.PropertyManager;
 import com.festival.tacademy.festivalmate.MateTalk.PreferArtistAdapter;
 import com.festival.tacademy.festivalmate.MyApplication;
 import com.festival.tacademy.festivalmate.Preference.PreferenceActivity;
+import com.festival.tacademy.festivalmate.Preference.Preference_profile_Activity;
 import com.festival.tacademy.festivalmate.R;
 
 import java.io.File;
@@ -149,11 +150,9 @@ public class ProfileUpdateActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ProfileUpdateActivity.this, PreferenceActivity.class));
+                startActivity(new Intent(ProfileUpdateActivity.this, Preference_profile_Activity.class));
             }
         });
-
-
     }
 
     private void setData(){

@@ -49,7 +49,7 @@
         <activity
             android:name=".MateTalk.ChattingActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".MateTalk.ChatJoinListActivity"></activity>
+        <activity android:name=".MateTalk.ChatJoinListActivity" />
 
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
@@ -57,6 +57,7 @@
             android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
                 <category android:name="net.saltfactory.demo.gcm" />
             </intent-filter>
         </receiver>
@@ -68,7 +69,6 @@
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
         </service>
-
         <service
             android:name=".GCM.MyInstanceIDListenerService"
             android:exported="false">
@@ -76,10 +76,11 @@
                 <action android:name="com.google.android.gms.iid.InstanceID" />
             </intent-filter>
         </service>
-
         <service
             android:name=".GCM.RegistrationIntentService"
-            android:exported="false"></service>
+            android:exported="false" />
+
+        <activity android:name=".Preference.Preference_profile_Activity"></activity>
     </application>
 
 </manifest>

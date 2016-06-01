@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.festival.tacademy.festivalmate.MateTalk.ChattingActivity">
+    tools:context=".Preference.Preference_profile_Activity">
 
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
         android:background="#ff3300">
 
         <TextView
-            android:text=""
+            android:text="@string/prefer_research"
             android:textSize="20dp"
             android:id="@+id/toolbar_title"
             android:layout_width="wrap_content"
@@ -27,33 +27,46 @@
             />
 
     </android.support.v7.widget.Toolbar>
-    <Button
-        style="?android:attr/buttonStyleSmall"
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Send"
-        android:id="@+id/btn_send"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/prefer_research_ment"
+        android:id="@+id/textView"
+        android:textColor="#ffffff"
+        android:layout_alignBottom="@+id/toolbar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/edit_input"
-        android:layout_alignBottom="@+id/btn_send"
+        android:id="@+id/edit_search"
+        android:textSize="15dp"
+        android:layout_below="@+id/toolbar"
+        android:layout_alignRight="@+id/textView"
+        android:layout_alignEnd="@+id/textView"
+        android:hint="@string/search_ment"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/btn_send"
-        android:layout_toStartOf="@+id/btn_send" />
+        android:layout_alignParentStart="true" />
 
-    <android.support.v7.widget.RecyclerView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/listView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_above="@+id/btn_send"
-        android:layout_below="@+id/toolbar" />
+        android:text="@string/search"
+        android:id="@+id/btn_search"
+        android:layout_alignTop="@+id/edit_search"
+        android:layout_toRightOf="@+id/edit_search"
+        android:layout_toEndOf="@+id/edit_search" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rv_list"
+        android:layout_below="@+id/btn_search"
+        android:layout_centerHorizontal="true" />
+
 
 </RelativeLayout>

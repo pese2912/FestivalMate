@@ -79,11 +79,11 @@ public class MakeMateTalkActivity extends AppCompatActivity {
             }
         });
 
-        locationView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        ageView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 age= position;
-                //Toast.makeText(MakeMateTalkActivity.this,location+"",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MakeMateTalkActivity.this,age+"",Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -102,6 +102,7 @@ public class MakeMateTalkActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Button btn = (Button)findViewById(R.id.btn_maketalk);
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,8 +110,9 @@ public class MakeMateTalkActivity extends AppCompatActivity {
                 int memNo = PropertyManager.getInstance().getNo();
                 int fesNo = festival.getFestival_no();
 
-                String chatroom_name = roomNameView.getText().toString();
+                final String chatroom_name = roomNameView.getText().toString();
                 int chatroom_maxSize = Integer.parseInt(maxSizeView.getText().toString());
+
 
                 NetworkManager.getInstance().create_new_chatroom(MakeMateTalkActivity.this, memNo, fesNo, chatroom_name, chatroom_maxSize,location, age, "", selectedArtist.result, new NetworkManager.OnResultListener<CreateNewChatroomResult>() {
                     @Override
@@ -119,6 +121,8 @@ public class MakeMateTalkActivity extends AppCompatActivity {
                         Intent intent = new Intent(MakeMateTalkActivity.this, ChattingActivity.class);
                         MateTalkRoom room = new MateTalkRoom();
                         room.setChatroom_no(result.result.getChatroom_no());
+                        //room.setFestival_name(result.result.getFestival_name());
+                        room.setChatroom_name(chatroom_name);
                         intent.putExtra("chatting",room);
                         startActivity(intent);
                     }

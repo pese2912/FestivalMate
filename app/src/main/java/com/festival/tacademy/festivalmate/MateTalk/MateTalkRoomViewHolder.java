@@ -59,9 +59,9 @@ public class MateTalkRoomViewHolder extends RecyclerView.ViewHolder {
         this.talkRoom = room;
         festivalView.setText(room.getChatroom_festival_name());
         nameView.setText(room.getChatroom_name());
-        contentView.setText(room.getChatroom_name());
+        contentView.setText(room.getChatroom_new_chat_content());
         Glide.with(photoView.getContext()).load(room.getChatroom_img()).into(photoView);
-        numberView.setText(room.getMatched_artist_number()+"");
+        numberView.setText(room.getChatroom_size()+"");
         dateView.setText(room.getChatroom_new_chat_date());
         unReadView.setText(room.getChatroom_new_count()+"");
     }

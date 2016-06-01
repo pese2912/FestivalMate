@@ -19,6 +19,7 @@ public class MateTalkRoom implements Serializable {
     public  String chatroom_name;
     public int chatroom_host_no;
     public String chatroom_host_name;
+    public String chatroom_host;
     public  int chatroom_festival_no;
     public   String chatroom_festival_name;
     public int chatroom_location;
@@ -30,6 +31,34 @@ public class MateTalkRoom implements Serializable {
     public String unRead;
     public int chatroom_new_count;
     public int chatroom_style;
+    public String festival_name;
+    public String chatroom_new_chat_content;
+
+
+    public String getChatroom_host() {
+        return chatroom_host;
+    }
+
+    public void setChatroom_host(String chatroom_host) {
+        this.chatroom_host = chatroom_host;
+    }
+
+
+    public String getFestival_name() {
+        return festival_name;
+    }
+
+    public void setFestival_name(String festival_name) {
+        this.festival_name = festival_name;
+    }
+
+    public String getChatroom_new_chat_content() {
+        return chatroom_new_chat_content;
+    }
+
+    public void setChatroom_new_chat_content(String chatroom_new_chat_content) {
+        this.chatroom_new_chat_content = chatroom_new_chat_content;
+    }
 
 
     public int getChatroom_new_count() {
@@ -47,8 +76,6 @@ public class MateTalkRoom implements Serializable {
     public void setChatroom_style(int chatroom_style) {
         this.chatroom_style = chatroom_style;
     }
-
-
 
 
 

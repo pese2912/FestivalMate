@@ -11,6 +11,7 @@ import com.festival.tacademy.festivalmate.Data.ChatroomApproveResult;
 import com.festival.tacademy.festivalmate.Data.ChatroomDisapproveResult;
 import com.festival.tacademy.festivalmate.Data.ChatroomKickResult;
 import com.festival.tacademy.festivalmate.Data.ChatroomMemListResult;
+import com.festival.tacademy.festivalmate.Data.ChatroomSendMsgResult;
 import com.festival.tacademy.festivalmate.Data.CheckGoingResult;
 import com.festival.tacademy.festivalmate.Data.CreateNewChatroomResult;
 import com.festival.tacademy.festivalmate.Data.DeleteGoingListResult;
@@ -146,7 +147,7 @@ public class NetworkManager {
 //                .add("mem_name", mem_name)
 //                .add("mem_pwd", mem_pwd)
 //                .add("mem_id", mem_id)
-//                .add("mem_img",mem_img)
+//               // .add("mem_img",mem_img)
 //                .add("mem_registration_id",mem_registration_id)
 //                .build();
 
@@ -155,6 +156,9 @@ public class NetworkManager {
                 .addFormDataPart("mem_name", mem_name)
                 .addFormDataPart("mem_pwd", mem_pwd)
                 .addFormDataPart("mem_id", mem_id)
+//                .add("mem_name", mem_name)
+//                .add("mem_pwd", mem_pwd)
+//               .add("mem_id", mem_id)
                 .addFormDataPart("mem_img", mem_img.getName(),
                         RequestBody.create(MediaType.parse("image/jpeg"), mem_img))
                 .addFormDataPart("mem_registration_id", mem_registration_id)
@@ -1492,5 +1496,59 @@ public class NetworkManager {
         return request;
     }
 
+
+    private static final String URL_CHATROOM_SEND_MSG = MY_SERVER + "/chatroom_send_msg";
+
+    public Request chatroom_send_msg(Object tag,
+                                     int mem_no,
+                                     int chatroom_no,
+                                     String chat_content,
+                                     int chat_sender_no,
+                               OnResultListener<ChatroomSendMsgResult> listener) {
+
+        RequestBody body = new FormBody.Builder()
+                .add("mem_no", "" + mem_no)
+                .add("chatroom_no", "" + chatroom_no)
+                .add("chat_content", chat_content)
+                .add("chat_sender_no", "" + chat_sender_no)
+                .build();
+
+        Request request = new Request.Builder()
+                .url(URL_CHATROOM_SEND_MSG)
+                .post(body)
+                .build();
+
+        final NetworkResult<ChatroomSendMsgResult> result = new NetworkResult<>();
+        result.request = request;
+        result.listener = listener;
+        mClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                result.exception = e;
+                mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String text = response.body().string();
+                    ChatroomSendMsgResult data = gson.fromJson(text, ChatroomSendMsgResult.class);
+                    if (data.success == 1) {
+                        result.result = data;
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SUCCESS, result));
+                    } else {
+                        result.exception = new IOException(data.message);
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                    }
+
+                } else {
+                    result.exception = new IOException(response.message());
+                    mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                }
+            }
+        });
+
+        return request;
+    }
 
 }

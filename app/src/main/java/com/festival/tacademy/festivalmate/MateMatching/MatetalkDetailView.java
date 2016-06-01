@@ -41,6 +41,8 @@ public class MatetalkDetailView extends RelativeLayout {
     }
 
     TextView text_title, text_artist_num, text_artists, text_region, text_age, text_mem_user;
+    Button btn;
+
     RecyclerView listView;
     ChatUserAdapter mAdapter;
     LinearLayoutManager mLayoutManager;
@@ -54,6 +56,7 @@ public class MatetalkDetailView extends RelativeLayout {
         text_region = (TextView) findViewById(R.id.text_region);
         text_age = (TextView) findViewById(R.id.text_age);
         text_mem_user = (TextView) findViewById(R.id.text_mem_user);
+        btn = (Button) findViewById(R.id.btn_request);
 
         listView = (RecyclerView) findViewById(R.id.rv_list);
         mAdapter = new ChatUserAdapter(getContext());
@@ -77,13 +80,13 @@ public class MatetalkDetailView extends RelativeLayout {
         text_age.setText(chatinfo.getChatroom_age() + "");
 
         text_mem_user.setText(chatinfo.getChatroom_size() + "명");
-        Button btn = (Button)findViewById(R.id.btn_request);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MyApplication.getContext(),chatinfo.getChatroom_name() , Toast.LENGTH_SHORT);
-            }
-        });
+//        Button btn = (Button)findViewById(R.id.btn_request);
+//        btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(MyApplication.getContext(),chatinfo.getChatroom_name() , Toast.LENGTH_SHORT);
+//            }
+//        });
 
         mAdapter.addAll(chatinfo.getChatroom_mems());
     }

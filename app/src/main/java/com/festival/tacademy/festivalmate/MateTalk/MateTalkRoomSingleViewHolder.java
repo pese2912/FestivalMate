@@ -41,6 +41,7 @@ public class MateTalkRoomSingleViewHolder extends RecyclerView.ViewHolder {
         dateView = (TextView)itemView.findViewById(R.id.room_date);
         unReadView = (TextView)itemView.findViewById(R.id.room_unread);
         itemView.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 if( mListener!=null ) {
@@ -52,8 +53,8 @@ public class MateTalkRoomSingleViewHolder extends RecyclerView.ViewHolder {
 
     public void setMateTalkRoom(MateTalkRoom room){
         this.talkRoom = room;
-        nameView.setText(room.getChatroom_host_name());
-        contentView.setText(room.getChatroom_name());
+        nameView.setText(room.getChatroom_host());
+        contentView.setText(room.getChatroom_new_chat_content());
         Glide.with(photoView.getContext()).load(room.getChatroom_img()).into(photoView);
         dateView.setText(room.getChatroom_new_chat_date());
         unReadView.setText(room.getChatroom_new_count()+"");
