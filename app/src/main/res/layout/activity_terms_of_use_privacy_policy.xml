@@ -1,53 +1,26 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.festival.tacademy.festivalmate.MyPage.TermsOfUsePrivacyPolicyActivity">
+<?xml version="1.0" encoding="UTF-8"?>
 
-    <android.support.v7.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:id="@+id/toolbar"
-        android:layout_centerInParent="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:background="#ff3300">
+    <RelativeLayout tools:context="com.festival.tacademy.festivalmate.MyPage.TermsOfUsePrivacyPolicyActivity" android:layout_height="match_parent" android:layout_width="match_parent" xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
 
-        <TextView
-            android:text="@string/terms_use_privacy_policy"
-            android:textSize="20dp"
-            android:id="@+id/toolbar_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#ffffff"
-            android:layout_gravity="left"
-            />
-    </android.support.v7.widget.Toolbar>
 
-    <android.support.v4.app.FragmentTabHost
-        android:layout_below="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/tabHost"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true">
+    <android.support.v7.widget.Toolbar android:layout_height="?attr/actionBarSize" android:layout_width="match_parent" android:background="@color/color_toolbar" android:layout_alignParentRight="true" android:layout_alignParentStart="true" android:layout_alignParentLeft="true" android:layout_alignParentTop="true" android:layout_centerInParent="true" android:id="@+id/toolbar">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <TabWidget
-                android:id="@android:id/tabs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-            <FrameLayout
-                android:id="@android:id/tabcontent"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
-        </LinearLayout>
-    </android.support.v4.app.FragmentTabHost>
+    <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/toolbar_title" android:layout_gravity="left" android:textColor="#ffffff" android:textSize="18sp" android:textStyle="bold" android:text="@string/terms_use_privacy_policy"/>
+
+</android.support.v7.widget.Toolbar>
+
+
+    <android.support.v4.app.FragmentTabHost android:layout_height="match_parent" android:layout_width="match_parent" android:id="@+id/tabHost" android:layout_centerHorizontal="true" android:layout_alignParentBottom="true" android:layout_below="@+id/toolbar">
+
+
+    <LinearLayout android:layout_height="match_parent" android:layout_width="match_parent" android:orientation="vertical">
+
+    <TabWidget android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@android:id/tabs"/>
+
+    <FrameLayout android:layout_height="0dp" android:layout_width="match_parent" android:id="@android:id/tabcontent" android:layout_weight="1"/>
+
+</LinearLayout>
+
+</android.support.v4.app.FragmentTabHost>
+
 </RelativeLayout>

@@ -30,7 +30,8 @@
         android:layout_height="match_parent"
         android:id="@+id/rv_list"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/pager">
+        android:layout_below="@+id/pager"
+        android:layout_marginTop="7dp">
 
     </android.support.v7.widget.RecyclerView>
 

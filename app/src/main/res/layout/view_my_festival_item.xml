@@ -1,56 +1,93 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <RelativeLayout
+    android:background="@drawable/background_festival_item"
+    android:layout_height="122dp"
+    android:layout_width="wrap_content"
+    android:orientation="horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ImageView
-        android:layout_width="@dimen/festival_preview_img"
         android:layout_height="@dimen/festival_preview_img"
-        android:id="@+id/photo_view" />
+        android:layout_width="@dimen/festival_preview_img"
+        android:id="@+id/photo_view"/>
 
     <TextView
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Large Text"
+        android:layout_width="wrap_content"
         android:id="@+id/text_title"
-        android:layout_gravity="center_horizontal"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/photo_view"
+        android:layout_marginRight="25dp"
+        android:layout_marginLeft="19dp"
+        android:layout_marginTop="27dp"
         android:layout_toEndOf="@+id/photo_view"
-        android:layout_marginTop="15dp" />
+        android:layout_toRightOf="@+id/photo_view"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center_horizontal"
+        android:singleLine="true"
+        android:textColor="#666666"
+        android:text="Large Text"
+        android:textStyle="bold"
+        android:textSize="15sp"/>
 
     <TextView
+        android:layout_height="15dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Large Text"
         android:id="@+id/text_date"
-        android:layout_gravity="center_horizontal"
-        android:layout_below="@+id/text_title"
+        android:layout_marginLeft="38dp"
+        android:layout_marginTop="19dp"
         android:layout_toRightOf="@+id/photo_view"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#888888"
+        android:text="Large Text"
+        android:textSize="12sp"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_below="@+id/text_title"/>
 
     <TextView
+        android:layout_height="15dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Large Text"
         android:id="@+id/text_location"
-        android:layout_gravity="center_horizontal"
-        android:layout_below="@+id/text_date"
+        android:layout_marginLeft="38dp"
         android:layout_toRightOf="@+id/photo_view"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#888888"
+        android:text="Large Text"
+        android:textSize="12sp"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_below="@+id/text_date"/>
 
     <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="25dp"
+        android:layout_width="60dp"
         android:id="@+id/check_going"
+        android:layout_marginRight="16dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:checked="false" />
+        android:layout_alignParentRight="true"
+        android:button="@drawable/selector_going"
+        android:checked="false"
+        android:layout_marginTop="7dp" />
+
+    <ImageView
+        android:layout_height="13dp"
+        android:layout_width="13dp"
+        android:id="@+id/imageView3"
+        android:layout_marginLeft="19dp"
+        android:layout_toEndOf="@+id/photo_view"
+        android:layout_toRightOf="@+id/photo_view"
+        android:layout_alignBottom="@+id/text_location"
+        android:src="@drawable/icon_date"/>
+
+    <ImageView
+        android:layout_height="13dp"
+        android:layout_width="13dp"
+        android:id="@+id/imageView4"
+        android:layout_marginLeft="19dp"
+        android:layout_toEndOf="@+id/photo_view"
+        android:layout_toRightOf="@+id/photo_view"
+        android:layout_alignBottom="@+id/text_date"
+        android:src="@drawable/icon_location"/>
 
 </RelativeLayout>

@@ -14,7 +14,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
-        android:background="#ff3300">
+        android:background="@color/color_toolbar">
 
         <TextView
             android:text="@string/lets_go_list"

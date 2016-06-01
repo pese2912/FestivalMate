@@ -14,7 +14,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
-        android:background="#ff3300">
+        android:background="@color/color_toolbar">
 
         <TextView
             android:text="@string/make_talk"
@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:text="@string/make_talk"
         android:id="@+id/btn_maketalk"
-        android:background="#ff3300"
+        android:background="@color/color_toolbar"
         android:textColor="#ffffff"
         android:layout_marginRight="71dp"
         android:layout_marginEnd="71dp"

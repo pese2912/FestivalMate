@@ -1,28 +1,49 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="100dp"
-    android:layout_height="100dp">
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <LinearLayout
+    android:layout_height="100dp"
+    android:layout_width="100dp"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:padding="10dp">
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/image_artist"
-        android:layout_gravity="center" />
+        android:layout_height="144dp"
+        android:layout_width="98dp"
+        android:layout_gravity="center"
+        android:id="@+id/image_artist"/>
 
     <CheckBox
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/checkBox_artist"
+        android:layout_width="wrap_content"
         android:layout_gravity="right|top"
-        android:checked="false" />
+        android:id="@+id/checkBox_artist"
+        android:button="@drawable/selector_checked"
+        android:background="@drawable/prefer_notchecked"
+        android:layout_alignEnd="@+id/image_artist"
+        android:layout_alignRight="@+id/image_artist"
+        android:layout_alignParentTop="true"
+        android:checked="false"/>
 
     <TextView
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
-        android:layout_marginBottom="50dp"
+        android:layout_width="match_parent"
         android:id="@+id/name_artist"
-        android:layout_gravity="center_horizontal|bottom" />
-</FrameLayout>
+        android:background="#10000000"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:singleLine="true"
+        android:gravity="center"
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="15dp"/>
+
+</RelativeLayout>
+
+</LinearLayout>

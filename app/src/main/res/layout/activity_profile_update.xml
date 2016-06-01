@@ -1,168 +1,157 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <RelativeLayout
+    tools:context="com.festival.tacademy.festivalmate.MyPage.ProfileUpdateActivity"
     android:layout_height="match_parent"
-    tools:context="com.festival.tacademy.festivalmate.MyPage.ProfileUpdateActivity">
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
 
     <android.support.v7.widget.Toolbar
-        android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:id="@+id/toolbar"
-        android:layout_centerInParent="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_width="match_parent"
+        android:background="@color/color_toolbar"
         android:layout_alignParentRight="true"
-        android:background="#ff3300">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:id="@+id/toolbar">
 
-        <TextView
-            android:text="@string/profile_update"
-            android:textSize="20dp"
-            android:id="@+id/toolbar_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#ffffff"
-            android:layout_gravity="left"
-            />
-    </android.support.v7.widget.Toolbar>
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/toolbar_title"
+        android:layout_gravity="left"
+        android:textColor="#ffffff"
+        android:textSize="20dp"
+        android:text="@string/profile_update"/>
+
+</android.support.v7.widget.Toolbar>
+
 
     <FrameLayout
-        android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_alignParentLeft="true"
+        android:layout_width="match_parent"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/toolbar"
-        android:id="@+id/frameLayout">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="나만의 프로필 사진을 설정해 주세요."
-            android:id="@+id/textView3"
-            android:layout_gravity="center" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/image_profile"
-            android:layout_gravity="center" />
-
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="gallery"
-            android:id="@+id/btn_gallery"
-            android:layout_gravity="right|bottom" />
-    </FrameLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/name"
-        android:id="@+id/textView2"
-        android:textColor="#ff3300"
-        android:layout_below="@+id/frameLayout"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="30dp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/edit_name"
-        android:hint="@string/name_ment"
-        android:layout_alignTop="@+id/textView2"
-        android:layout_toRightOf="@+id/textView2"
-        android:layout_alignRight="@+id/edit_state"
-        android:layout_alignEnd="@+id/edit_state" />
+        android:id="@+id/frameLayout"
+        android:layout_below="@+id/toolbar">
 
     <TextView
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/state"
-        android:id="@+id/textView7"
-        android:textColor="#ff3300"
-        android:layout_below="@+id/edit_name"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_alignStart="@+id/textView2" />
+        android:layout_width="wrap_content"
+        android:id="@+id/textView3"
+        android:layout_gravity="center"
+        android:text="나만의 프로필 사진을 설정해 주세요."
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/edit_state"
-        android:layout_below="@+id/edit_name"
-        android:hint="@string/state_ment"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_toRightOf="@+id/textView7"
-        android:layout_toEndOf="@+id/textView7" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/location"
-        android:id="@+id/textView8"
-        android:textColor="#ff3300"
-        android:layout_below="@+id/edit_state"
-        android:layout_alignLeft="@+id/textView7"
-        android:layout_alignStart="@+id/textView7" />
-
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinner_location"
-        android:entries="@array/city"
-        android:spinnerMode="dropdown"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/edit_state"
-        android:layout_toRightOf="@+id/textView8"
-        android:layout_toEndOf="@+id/textView8" />
+    <ImageView
+        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:id="@+id/image_profile"
+        android:layout_gravity="center"/>
 
     <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/profile_update_do"
-        android:id="@+id/btn_update"
-        android:background="#ff3300"
-        android:textColor="#ffffff"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp"
-        android:layout_marginRight="52dp"
-        android:layout_marginEnd="52dp"
-        android:layout_alignBottom="@+id/rv_list3"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-    <android.support.v7.widget.RecyclerView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/rv_list3"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/textView19"
-        android:layout_alignLeft="@+id/textView19"
-        android:layout_alignStart="@+id/textView19" />
+        android:id="@+id/btn_gallery"
+        android:layout_gravity="right|bottom"
+        android:text="gallery"
+        style="?android:attr/buttonStyleSmall"/>
+
+</FrameLayout>
 
     <TextView
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/prefer_artist"
-        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:id="@+id/textView2"
         android:textColor="#ff3300"
-        android:layout_below="@+id/spinner_location"
-        android:layout_alignLeft="@+id/textView8"
-        android:layout_alignStart="@+id/textView8"
-        android:layout_alignRight="@+id/btn_update"
-        android:layout_alignEnd="@+id/btn_update" />
+        android:text="@string/name"
+        android:layout_below="@+id/frameLayout"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="50dp"/>
+
+    <EditText
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/edit_name"
+        android:layout_alignEnd="@+id/edit_state"
+        android:layout_alignRight="@+id/edit_state"
+        android:layout_toRightOf="@+id/textView2"
+        android:layout_alignTop="@+id/textView2"
+        android:hint="@string/name_ment"/>
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/textView7"
+        android:textColor="#ff3300"
+        android:text="@string/state"
+        android:layout_below="@+id/edit_name"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_alignLeft="@+id/textView2"/>
+
+    <EditText
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_alignParentRight="true"
+        android:id="@+id/edit_state"
+        android:layout_below="@+id/edit_name"
+        android:layout_toRightOf="@+id/textView7"
+        android:hint="@string/state_ment"
+        android:layout_toEndOf="@+id/textView7"
+        android:layout_alignParentEnd="true"/>
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/textView8"
+        android:textColor="#ff3300"
+        android:text="@string/location"
+        android:layout_below="@+id/edit_state"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_alignStart="@+id/textView7"
+        android:layout_alignLeft="@+id/textView7"/>
+
+    <Spinner
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_alignParentRight="true"
+        android:id="@+id/spinner_location"
+        android:layout_below="@+id/edit_state"
+        android:layout_toRightOf="@+id/textView8"
+        android:layout_toEndOf="@+id/textView8"
+        android:spinnerMode="dropdown"
+        android:entries="@array/city"/>
+
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:background="@color/color_toolbar"
+        android:id="@+id/btn_update"
+        android:textColor="#ffffff"
+        android:text="@string/profile_update_do"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:paddingRight="30dp"
+        android:paddingLeft="30dp"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/rv_list3"
+        android:layout_below="@+id/textView8"
+        android:layout_above="@+id/btn_update"
+        android:layout_toRightOf="@+id/textView8"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -170,9 +159,8 @@
         android:layout_height="wrap_content"
         android:text="@string/update"
         android:id="@+id/btn_prefer_update"
-        android:layout_above="@+id/rv_list3"
-        android:layout_alignRight="@+id/textView19"
-        android:layout_alignEnd="@+id/textView19" />
-
+        android:layout_alignTop="@+id/rv_list3"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

@@ -40,11 +40,14 @@ public class Preference_profile_Activity extends AppCompatActivity {
     EditText editSearch;
     List<Artist> artistList;
     List<Artist> selectedArtist;
+    Button btn_complete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preference_profile_);
+
+        btn_complete = (Button)findViewById(R.id.btn_complete);
 
         mAdapter = new PreferenceAdapter();
         artistList = new ArrayList<Artist>();
@@ -68,8 +71,12 @@ public class Preference_profile_Activity extends AppCompatActivity {
                 }
 
                 if(selectedArtist.size() >= 10){
-                    item.setTitle(getString(R.string.complete));
+                    btn_complete.setVisibility(View.VISIBLE);
                 }
+                else if(selectedArtist.size() < 10 ) {
+                    btn_complete.setVisibility(View.GONE);
+                }
+
                 // Toast.makeText(PreferenceActivity.this, artist.isCheck() + artist.getName(), Toast.LENGTH_SHORT).show();
                 Toast.makeText(Preference_profile_Activity.this, selectedArtist.size()+"", Toast.LENGTH_SHORT).show();
             }
@@ -112,24 +119,47 @@ public class Preference_profile_Activity extends AppCompatActivity {
                 }
             }
         });
+
+        btn_complete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                            int memNo = PropertyManager.getInstance().getNo();
+            NetworkManager.getInstance().saveArtistSurvey(Preference_profile_Activity.this, memNo, selectedArtist, new NetworkManager.OnResultListener<MySignUpResult>() {
+                @Override
+                public void onSuccess(Request request, MySignUpResult result) {
+                    Toast.makeText(Preference_profile_Activity.this,"성공",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Preference_profile_Activity.this, ProfileUpdateActivity.class);
+                 //   intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    finish();
+                }
+
+                @Override
+                public void onFail(Request request, IOException exception) {
+
+                    Toast.makeText(Preference_profile_Activity.this,"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+                 }
+                });
+            }
+        });
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        setData();
-    }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        setData();
+//    }
 
-    MenuItem item;
+   // MenuItem item;
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_prefer, menu);
-        item = menu.findItem(R.id.complete);
-        //  item.setTitle(getResources().getString(R.string.complete));
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.menu_prefer, menu);
+//        item = menu.findItem(R.id.complete);
+//        //  item.setTitle(getResources().getString(R.string.complete));
+//        return true;
+//    }
 
     private void setData() {
         int memNo = PropertyManager.getInstance().getNo();
@@ -163,35 +193,48 @@ public class Preference_profile_Activity extends AppCompatActivity {
     }
 
 
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.complete) {
+//            int memNo = PropertyManager.getInstance().getNo();
+//            NetworkManager.getInstance().saveArtistSurvey(Preference_profile_Activity.this, memNo, selectedArtist, new NetworkManager.OnResultListener<MySignUpResult>() {
+//                @Override
+//                public void onSuccess(Request request, MySignUpResult result) {
+//                    Toast.makeText(Preference_profile_Activity.this,"성공",Toast.LENGTH_SHORT).show();
+//                    Intent intent = new Intent(Preference_profile_Activity.this, ProfileUpdateActivity.class);
+//                 //   intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                    startActivity(intent);
+//                    finish();
+//                }
+//
+//                @Override
+//                public void onFail(Request request, IOException exception) {
+//
+//                    Toast.makeText(Preference_profile_Activity.this,"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+//                }
+//            });
+//
+//            return true;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.complete) {
-            int memNo = PropertyManager.getInstance().getNo();
-            NetworkManager.getInstance().saveArtistSurvey(Preference_profile_Activity.this, memNo, selectedArtist, new NetworkManager.OnResultListener<MySignUpResult>() {
-                @Override
-                public void onSuccess(Request request, MySignUpResult result) {
-                    Toast.makeText(Preference_profile_Activity.this,"성공",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(Preference_profile_Activity.this, ProfileUpdateActivity.class);
-                 //   intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                    finish();
-                }
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        setData();
 
-                @Override
-                public void onFail(Request request, IOException exception) {
-
-                    Toast.makeText(Preference_profile_Activity.this,"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
-                }
-            });
-
-            return true;
+        if(mAdapter.getItemCount() >= 10){
+            btn_complete.setVisibility(View.VISIBLE);
         }
-
-        return super.onOptionsItemSelected(item);
+        else if(mAdapter.getItemCount() < 10 ) {
+            btn_complete.setVisibility(View.GONE);
+        }
     }
 }

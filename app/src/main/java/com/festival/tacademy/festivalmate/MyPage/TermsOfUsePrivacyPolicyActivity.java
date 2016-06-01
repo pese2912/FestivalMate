@@ -27,6 +27,7 @@ public class TermsOfUsePrivacyPolicyActivity extends AppCompatActivity {
         tabHost.setup(this, getSupportFragmentManager(), android.R.id.tabcontent);
         tabHost.addTab(tabHost.newTabSpec("tab1").setIndicator(getResources().getString(R.string.terms_use)), TermsOfUseFragment.class, null);
         tabHost.addTab(tabHost.newTabSpec("tab2").setIndicator(getResources().getString(R.string.privacy_policy)), PrivacyFragment.class, null);
+
     }
 
     @Override
