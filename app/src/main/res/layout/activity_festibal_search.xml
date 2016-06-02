@@ -27,36 +27,63 @@
             />
     </android.support.v7.widget.Toolbar>
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/search"
-        android:id="@+id/btn_search"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@+id/toolbar"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:background="#f5f5f5">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/edit_info"
-        android:hint="@string/festibal_search_ment"
-        android:layout_below="@+id/toolbar"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/btn_match"
-        android:layout_toStartOf="@+id/btn_match" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#ffffff"
+            android:layout_marginBottom="5dp">
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/rv_list"
-        android:layout_below="@+id/btn_search"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:id="@+id/imageView5"
+                android:layout_marginLeft="16dp"
+                android:layout_centerInParent="true"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/festival_search_img"/>
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="45dp"
+                android:layout_height="25dp"
+                android:id="@+id/btn_search"
+                android:layout_marginRight="16dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:background="@drawable/festival_search_btn"/>
+
+            <EditText
+                android:layout_width="279dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/edit_info"
+                android:hint="@string/festibal_search_ment"
+                android:layout_toLeftOf="@+id/btn_match"
+                android:layout_toStartOf="@+id/btn_match"
+                android:textSize="12sp"
+                android:layout_centerInParent="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="14dp"/>
+        </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rv_list"
+            android:layout_below="@+id/btn_search"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+    </LinearLayout>
 
 </RelativeLayout>

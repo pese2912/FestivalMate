@@ -39,7 +39,7 @@ public class MateTalkRoomSingleViewHolder extends RecyclerView.ViewHolder {
         photoView = (ImageView)itemView.findViewById(R.id.room_image);
         contentView = (TextView)itemView.findViewById(R.id.room_content);
         dateView = (TextView)itemView.findViewById(R.id.room_date);
-        unReadView = (TextView)itemView.findViewById(R.id.room_unread);
+      //  unReadView = (TextView)itemView.findViewById(R.id.room_unread);
         itemView.setOnClickListener(new View.OnClickListener() {
 
             @Override

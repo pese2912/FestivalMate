@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +38,8 @@ public class MateTalkFragment extends Fragment {
     TextView titleView;
     RecyclerView listView;
     MateTalkRoomAdapter mAdapter;
+    FrameLayout non_matetalk;
+
 
 
     public MateTalkFragment() {
@@ -82,6 +85,7 @@ public class MateTalkFragment extends Fragment {
         listView = (RecyclerView)view.findViewById(R.id.rv_list);
         listView.setAdapter(mAdapter);
         listView.setLayoutManager(new LinearLayoutManager(getContext()));
+        non_matetalk = (FrameLayout)view.findViewById(R.id.matetalk_size0);
         return  view;
     }
 
@@ -93,7 +97,7 @@ public class MateTalkFragment extends Fragment {
 
     private void setData(){
 
-        int memNo = PropertyManager.getInstance().getNo();
+        final int memNo = PropertyManager.getInstance().getNo();
 
         NetworkManager.getInstance().show_my_chatroom_list(getContext(), memNo, new NetworkManager.OnResultListener<ShowMyChatroomListResult>() {
             @Override
@@ -101,6 +105,15 @@ public class MateTalkFragment extends Fragment {
                 Toast.makeText(getContext(),"성공",Toast.LENGTH_SHORT).show();
                 mAdapter.clear();
                 mAdapter.addAll(result.result);
+
+
+                if(result.result.size()==0 || result.result == null || memNo == 0){
+                    non_matetalk.setVisibility(View.VISIBLE);
+                }
+
+                else{
+                    non_matetalk.setVisibility(View.GONE);
+                }
             }
 
             @Override

@@ -82,6 +82,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/edit_max_size"
+        android:inputType="number"
         android:layout_below="@+id/edit_room_name"
         android:layout_toRightOf="@+id/textView16"
         android:layout_alignRight="@+id/edit_room_name"
