@@ -8,17 +8,29 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
-        android:id="@+id/text_festival_name" />
+        android:id="@+id/text_festival_name"
+        android:textSize="15sp"
+        android:textColor="@color/text6"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="12dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
-        android:id="@+id/text_festival_date" />
+        android:id="@+id/text_festival_date"
+        android:textSize="12sp"
+        android:textColor="@color/text8"
+        android:layout_marginLeft="16dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
-        android:id="@+id/text_festival_location" />
+        android:id="@+id/text_festival_location"
+        android:textSize="12sp"
+        android:textColor="@color/text8"
+        android:layout_marginLeft="16dp" />
+
 </LinearLayout>

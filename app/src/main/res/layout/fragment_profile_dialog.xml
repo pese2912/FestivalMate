@@ -4,101 +4,132 @@
     android:layout_height="match_parent"
     >
 
-    <ImageView
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:id="@+id/profile_photo"
-        android:src="@mipmap/ic_launcher"
-        android:layout_below="@+id/btn_report"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="신고하기"
-        android:id="@+id/btn_report"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="페스티벌 같이 가요!!"
-        android:id="@+id/text_user_state"
-        android:layout_below="@+id/profile_photo"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="홍길동 님"
-        android:id="@+id/text_user_name"
-        android:paddingTop="50dp"
-        android:layout_below="@+id/text_user_state"
-        android:layout_alignLeft="@+id/profile_photo"
-        android:layout_alignStart="@+id/profile_photo" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="honggildong@gmail.com"
-        android:id="@+id/text_user_email"
-        android:layout_below="@+id/text_user_name"
-        android:layout_alignRight="@+id/text_user_state"
-        android:layout_alignEnd="@+id/text_user_state" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="갈꺼야한 공연"
-        android:id="@+id/textView"
-        android:paddingTop="20dp"
-        android:layout_below="@+id/text_user_email"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/textf"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/rv_list2"
-        android:layout_alignEnd="@+id/rv_list2" />
+        android:layout_alignParentTop="true">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="좋아하는 가수"
-        android:paddingTop="20dp"
-        android:id="@+id/textView3"
-        android:layout_below="@+id/rv_list1"
-        android:layout_alignRight="@+id/btn_exit"
-        android:layout_alignEnd="@+id/btn_exit"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        <ImageView
+            android:layout_width="116dp"
+            android:layout_height="116dp"
+            android:id="@+id/profile_photo"
+            android:src="@mipmap/ic_launcher"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/rv_list2"
-        android:layout_below="@+id/textView3"
-        android:layout_alignLeft="@+id/textView3"
-        android:layout_alignStart="@+id/textView3" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="페스티벌 같이 가요!!"
+            android:textSize="16sp"
+            android:textColor="@color/textf"
+            android:id="@+id/text_user_state"
+            android:layout_below="@+id/profile_photo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp" />
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:id="@+id/rv_list1"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="홍길동 님"
+            android:textSize="14sp"
+            android:textColor="@color/text6"
+            android:id="@+id/text_user_name"
+            android:layout_below="@+id/text_user_state"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="8dp" />
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="X"
-        android:id="@+id/btn_exit"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="honggildong@gmail.com"
+            android:id="@+id/text_user_email"
+            android:textSize="12sp"
+            android:textColor="@color/text6"
+            android:layout_below="@+id/text_user_name"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="갈꺼야한 공연"
+            android:textSize="14sp"
+            android:textColor="@color/text8"
+            android:id="@+id/textView"
+            android:layout_below="@+id/text_user_email"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignRight="@+id/rv_list2"
+            android:layout_alignEnd="@+id/rv_list2"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="23dp"
+            android:layout_marginBottom="14dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="좋아하는 가수"
+            android:textSize="14sp"
+            android:textColor="@color/text8"
+            android:id="@+id/text_ment"
+            android:layout_below="@+id/rv_list1"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="23dp"
+            android:layout_marginBottom="15dp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rv_list2"
+            android:layout_below="@+id/text_ment"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="16dp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rv_list1"
+            android:layout_below="@+id/textView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="신고하기"
+            android:id="@+id/btn_report"
+            android:textSize="11sp"
+            android:textColor="@color/textf"
+
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="53dp" />
+
+        <TextView
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+           android:background="@drawable/btn_exit"
+            android:id="@+id/btn_exit"
+            android:textSize="11sp"
+            android:textColor="@color/textf"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="53dp"
+            android:layout_marginRight="16dp" />
+    </RelativeLayout>
 
 </RelativeLayout>

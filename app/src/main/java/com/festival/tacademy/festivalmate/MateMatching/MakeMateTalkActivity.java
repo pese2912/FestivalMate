@@ -24,6 +24,7 @@ import com.festival.tacademy.festivalmate.Manager.PropertyManager;
 import com.festival.tacademy.festivalmate.MateTalk.ChattingActivity;
 import com.festival.tacademy.festivalmate.R;
 
+import java.io.File;
 import java.io.IOException;
 
 import okhttp3.Request;
@@ -44,6 +45,7 @@ public class MakeMateTalkActivity extends AppCompatActivity {
             ,"충남","전북","전남","경북","경남","제주"};
 
     String[] old = {"무관","10대","20대","30대","40대","40대 이상"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,7 +116,16 @@ public class MakeMateTalkActivity extends AppCompatActivity {
                 int chatroom_maxSize = Integer.parseInt(maxSizeView.getText().toString());
 
 
-                NetworkManager.getInstance().create_new_chatroom(MakeMateTalkActivity.this, memNo, fesNo, chatroom_name, chatroom_maxSize,location, age, "", selectedArtist.result, new NetworkManager.OnResultListener<CreateNewChatroomResult>() {
+//                for(int i = 0; i <selectedArtist.result.size(); i++){
+//
+//                    Toast.makeText(MakeMateTalkActivity.this, selectedArtist.result.get(i).getName(),Toast.LENGTH_SHORT).show();
+//
+//                }
+
+                File file = new File("");
+
+                NetworkManager.getInstance().create_new_chatroom(MakeMateTalkActivity.this, memNo, fesNo, chatroom_name, chatroom_maxSize,location, age, file,1, selectedArtist.result, new NetworkManager.OnResultListener<CreateNewChatroomResult>() {
+
                     @Override
                     public void onSuccess(Request request, CreateNewChatroomResult result) {
                         Toast.makeText(MakeMateTalkActivity.this,"성공",Toast.LENGTH_SHORT).show();
@@ -125,6 +136,7 @@ public class MakeMateTalkActivity extends AppCompatActivity {
                         room.setChatroom_name(chatroom_name);
                         intent.putExtra("chatting",room);
                         startActivity(intent);
+
                     }
 
                     @Override

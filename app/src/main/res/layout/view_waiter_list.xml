@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="16dp"
+        app:riv_oval="true"
         android:id="@+id/image_photo" />
 
     <TextView
@@ -13,36 +17,44 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
+        android:textSize="15sp"
+        android:textColor="@color/text3"
         android:id="@+id/text_name"
         android:layout_gravity="center_horizontal"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/image_photo"
         android:layout_toEndOf="@+id/image_photo"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="23dp"
+        android:layout_marginBottom="23dp"
+        android:layout_marginLeft="14dp" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="24dp"
         android:text="@string/reject"
-        android:background="#ffffff"
-        android:textColor="@color/colorAccent"
-        android:id="@+id/btn_reject"
+        android:background="@drawable/btn_reject"
+        android:textColor="@color/color_ment"
+        android:id="@+id/btn_exile"
         android:layout_alignBottom="@+id/image_photo"
         android:layout_toLeftOf="@+id/btn_approved"
         android:layout_toStartOf="@+id/btn_approved"
-        android:layout_marginRight="10dp" />
+        android:layout_marginTop="18dp" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="24dp"
         android:text="@string/approved"
         android:textColor="@color/colorPrimary"
         android:id="@+id/btn_approved"
-        android:background="#ffffff"
-        android:layout_alignTop="@+id/btn_reject"
+        android:background="@drawable/btn_approve"
+        android:layout_alignTop="@+id/image_photo"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="false"
+        android:layout_alignBottom="@+id/btn_exile"
+        android:layout_marginTop="18dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="10dp" />
 
 </RelativeLayout>

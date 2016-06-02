@@ -62,7 +62,4 @@ public class ChattingViewHolder extends RecyclerView.ViewHolder  {
         send_message.setText(s.message);
         send_date.setText(s.date);
     }
-
-
-
 }

@@ -53,6 +53,8 @@ public class SignUpFragment extends Fragment {
     CheckBox checkBoxAgree; // 이용약관 동의 체크
     TextView agreeMent;  //이용약관 동의 멘트
 
+    TextView mentView;
+
     String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     private Matcher matcher;
     private Pattern pattern = Pattern.compile(EMAIL_PATTERN);
@@ -74,12 +76,14 @@ public class SignUpFragment extends Fragment {
         repasswordView  =(EditText)view.findViewById(R.id.edit_re_password);
         checkBoxAgree = (CheckBox)view.findViewById(R.id.checkBox_agree);
         agreeMent = (TextView)view.findViewById(R.id.text_agree);
+        mentView = (TextView)view.findViewById(R.id.text_ment);
 
         agreeMent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext(), TermsOfUsePrivacyPolicyActivity.class));
             }
+
         });
 
         Button btn = (Button)view.findViewById(R.id.btn_gallery);
@@ -184,6 +188,7 @@ public class SignUpFragment extends Fragment {
                     opts.inSampleSize = 2;
                     Bitmap bm = BitmapFactory.decodeFile(path, opts);
                     Toast.makeText(getContext(), mUploadFile.getAbsolutePath(),Toast.LENGTH_SHORT).show();
+                    mentView.setVisibility(View.GONE);
                     profileView.setImageBitmap(bm);
                 }
             }
@@ -203,5 +208,11 @@ public class SignUpFragment extends Fragment {
     public boolean validateEmail(final String hex) {
         matcher = pattern.matcher(hex);
         return matcher.matches();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mentView.setVisibility(View.GONE);
     }
 }

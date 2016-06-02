@@ -20,6 +20,6 @@ public class ProfileLetsgoViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void setText(String str) {
-        textView.setText(str);
+        textView.setText("-"+str);
     }
 }

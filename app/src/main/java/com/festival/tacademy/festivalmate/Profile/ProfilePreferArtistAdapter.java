@@ -35,15 +35,15 @@ public class ProfilePreferArtistAdapter extends RecyclerView.Adapter<ProfilePref
     @Override
     public ProfilePreferArtistViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_user, null);
-
         return new ProfilePreferArtistViewHolder(view);
     }
+
 
     @Override
     public void onBindViewHolder(ProfilePreferArtistViewHolder holder, int position) {
         holder.setArtist(items.get(position));
-
     }
+
 
     @Override
     public int getItemCount() {

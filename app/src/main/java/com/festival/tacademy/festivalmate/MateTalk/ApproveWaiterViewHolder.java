@@ -5,20 +5,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.festival.tacademy.festivalmate.Data.ChatroomApproveResult;
-import com.festival.tacademy.festivalmate.Data.ChatroomDisapproveResult;
-import com.festival.tacademy.festivalmate.Data.MateTalkRoom;
 import com.festival.tacademy.festivalmate.Data.chatroom_waiting;
-import com.festival.tacademy.festivalmate.Manager.NetworkManager;
-import com.festival.tacademy.festivalmate.MyApplication;
 import com.festival.tacademy.festivalmate.R;
-
-import java.io.IOException;
-
-import okhttp3.Request;
 
 /**
  * Created by Tacademy on 2016-05-19.
@@ -53,7 +43,7 @@ public class ApproveWaiterViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
         photoView = (ImageView)itemView.findViewById(R.id.image_photo);
         nameView  = (TextView)itemView.findViewById(R.id.text_name);
-        btnReject = (Button)itemView.findViewById(R.id.btn_reject);
+        btnReject = (Button)itemView.findViewById(R.id.btn_exile);
         btnApproved = (Button)itemView.findViewById(R.id.btn_approved);
         btnReject.setOnClickListener(new View.OnClickListener() { //거절
             @Override

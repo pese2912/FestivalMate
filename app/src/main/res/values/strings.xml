@@ -97,6 +97,7 @@
     <string name="prefer_artist">좋아하는 가수</string>
     <string name="update">수정하기</string>
     <string name="cancel_join">신청 취소하기</string>
+    <string name="report">신고하기</string>
 
 
 </resources>

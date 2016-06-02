@@ -11,7 +11,7 @@
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/mate_icon"
+        android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoTitle">
@@ -80,7 +80,8 @@
             android:name=".GCM.RegistrationIntentService"
             android:exported="false" />
 
-        <activity android:name=".Preference.Preference_profile_Activity"></activity>
+        <activity android:name=".Preference.Preference_profile_Activity" />
+        <activity android:name=".MyPage.ReportActivity"></activity>
     </application>
 
 </manifest>

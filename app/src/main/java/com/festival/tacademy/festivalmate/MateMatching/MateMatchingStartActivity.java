@@ -41,6 +41,7 @@ public class MateMatchingStartActivity extends AppCompatActivity {
     List<Artist> selectedArtist;
     SelectedArtist selectedArtistResult;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

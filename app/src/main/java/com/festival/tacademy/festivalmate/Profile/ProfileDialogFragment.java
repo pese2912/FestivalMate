@@ -1,5 +1,6 @@
 package com.festival.tacademy.festivalmate.Profile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -18,6 +19,7 @@ import com.festival.tacademy.festivalmate.Data.HateResult;
 import com.festival.tacademy.festivalmate.Data.User;
 import com.festival.tacademy.festivalmate.Manager.NetworkManager;
 import com.festival.tacademy.festivalmate.MyApplication;
+import com.festival.tacademy.festivalmate.MyPage.ReportActivity;
 import com.festival.tacademy.festivalmate.R;
 
 import java.io.IOException;
@@ -71,40 +73,42 @@ public class ProfileDialogFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile_dialog, container, false);
-        Button btn = (Button)view.findViewById(R.id.btn_exit);
+        TextView btn = (TextView)view.findViewById(R.id.btn_exit);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dismiss();
             }
         });
-        btn =(Button)view.findViewById(R.id.btn_report); // 신고하기
+        btn =(TextView)view.findViewById(R.id.btn_report); // 신고하기
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NetworkManager.getInstance().hate(getContext(), user.getMem_no(), new NetworkManager.OnResultListener<HateResult>() {
-                    @Override
-                    public void onSuccess(Request request, HateResult result) {
+//                NetworkManager.getInstance().hate(getContext(), user.getMem_no(), new NetworkManager.OnResultListener<HateResult>() {
+//                    @Override
+//                    public void onSuccess(Request request, HateResult result) {
+//
+//                        Toast.makeText(getContext(), "성공",Toast.LENGTH_SHORT).show();
+//                    }
+//
+//                    @Override
+//                    public void onFail(Request request, IOException exception) {
+//
+//                        Toast.makeText(getContext(), "실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+//                    }
+//                });
 
-                        Toast.makeText(getContext(), "성공",Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onFail(Request request, IOException exception) {
-
-                        Toast.makeText(getContext(), "실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
-                    }
-                });
+                startActivity(new Intent(getActivity(), ReportActivity.class));
             }
         });
 
+        
         user_state = (TextView)view.findViewById(R.id.text_user_state);
         user_image= (ImageView)view.findViewById(R.id.profile_photo);
         user_name = (TextView)view.findViewById(R.id.text_user_name);
         user_email = (TextView)view.findViewById(R.id.text_user_email);
         rv_list1 = (RecyclerView)view.findViewById(R.id.rv_list1);
         rv_list2 = (RecyclerView)view.findViewById(R.id.rv_list2);
-
 
         rv_list1.setAdapter(mAdapter1);
         rv_list1.setLayoutManager(mLayoutManager1);
@@ -117,8 +121,8 @@ public class ProfileDialogFragment extends DialogFragment {
 //        mAdapter2.addAll(user.getArtist());
 
         user_state.setText(user.getMem_state_msg());
-        user_name.setText(user.getName());
-        user_email.setText(user.getMem_id());
+        user_name.setText(user.getName()+" 님");
+        user_email.setText("("+user.getMem_id()+")");
         Glide.with(user_image.getContext()).load(user.getChatroom_mem_img()).into(user_image);
         return view;
     }

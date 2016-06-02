@@ -7,5 +7,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
+        android:textSize="12sp"
+        android:textColor="@color/text8"
         android:id="@+id/text_profile_letsgo" />
 </LinearLayout>

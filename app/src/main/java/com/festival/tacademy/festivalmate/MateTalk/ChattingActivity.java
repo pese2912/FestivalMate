@@ -95,6 +95,7 @@ public class ChattingActivity extends AppCompatActivity {
                                 //mAdapter.add();
                             Send send = new Send();
                             send.message= message;
+                            send.date= "2016-07-24";
                             mAdapter.add(send);
                         }
 

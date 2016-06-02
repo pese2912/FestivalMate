@@ -12,4 +12,5 @@ public class ShowMatchingResult implements Serializable {
     public String message;
     public List<MateTalkRoom> result;
 
+
 }

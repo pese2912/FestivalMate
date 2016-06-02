@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.widget.Toast;
 
 import com.festival.tacademy.festivalmate.Data.Artist;
 import com.festival.tacademy.festivalmate.Data.ArtistNo;
@@ -133,7 +134,7 @@ public class NetworkManager {
 
     Gson gson = new Gson();
 
-    private static final String MY_SERVER = "http://52.79.159.248:3000";  //회원가입
+    private static final String MY_SERVER ="http://52.79.159.248:3000";  //회원가입 "http://192.168.204.189:3000";
     private static final String URL_SIGN_UP = MY_SERVER + "/signup";
 
     public Request signup(Object tag, String mem_name,
@@ -151,18 +152,17 @@ public class NetworkManager {
 //                .add("mem_registration_id",mem_registration_id)
 //                .build();
 
+
         RequestBody body = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("mem_name", mem_name)
                 .addFormDataPart("mem_pwd", mem_pwd)
                 .addFormDataPart("mem_id", mem_id)
-//                .add("mem_name", mem_name)
-//                .add("mem_pwd", mem_pwd)
-//               .add("mem_id", mem_id)
                 .addFormDataPart("mem_img", mem_img.getName(),
                         RequestBody.create(MediaType.parse("image/jpeg"), mem_img))
                 .addFormDataPart("mem_registration_id", mem_registration_id)
                 .build();
+
 
         Request request = new Request.Builder()
                 .url(URL_SIGN_UP)
@@ -201,11 +201,14 @@ public class NetworkManager {
         return request;
     }
 
+
     private static final String URL_SIGN_IN = MY_SERVER + "/login"; // 로그인
+
     public Request signin(Object tag,
                           String mem_id,
                           String mem_pwd,
                           OnResultListener<MySignInResult> listener) {
+
         RequestBody body = new FormBody.Builder()
                 .add("mem_id", mem_id)
                 .add("mem_pwd", mem_pwd)
@@ -1269,7 +1272,6 @@ public class NetworkManager {
         return request;
     }
 
-
     private static final String URL_CREATE_NEW_CHATROOM = MY_SERVER + "/create_new_chatroom";       // 새로운 채팅방을 만듦
     public Request create_new_chatroom(Object tag,
                                int mem_no,
@@ -1278,46 +1280,45 @@ public class NetworkManager {
                                        int chatroom_maxSize,
                                        int chatroom_location,
                                        int chatroom_age,
-                                       String chatroom_img,
-                                       List<Artist> chatroom_lineups,
+                                       File chatroom_img,
+                                       int chatroom_bg,
+                                       List<Artist> chatroom_lineup,
                                OnResultListener<CreateNewChatroomResult> listener) {
 
 
-        JsonNewChatroom data = new JsonNewChatroom();
-        data.mem_no = mem_no;
-        data.festival_no = festival_no;
-        data.chatroom_name = chatroom_name;
-        data.chatroom_maxSize = chatroom_maxSize;
-        data.chatroom_location = chatroom_location;
-        data.chatroom_age = chatroom_age;
-        data.chatroom_img = chatroom_img;
-        data.chatroom_lineups = chatroom_lineups;
+//        JsonNewChatroom data = new JsonNewChatroom();
+//        data.mem_no = mem_no;
+//        data.festival_no = festival_no;
+//        data.chatroom_name = chatroom_name;
+//        data.chatroom_maxSize = chatroom_maxSize;
+//        data.chatroom_location = chatroom_location;
+//        data.chatroom_age = chatroom_age;
+//        data.chatroom_img = chatroom_img;
+//        data.chatroom_lineup = chatroom_lineup;
 
+        FormBody.Builder builder = new FormBody.Builder();
+        builder.add("mem_no", mem_no+"");
+        builder.add("festival_no", festival_no+"");
+        builder.add("mem_no", mem_no+"");
+        builder.add("festival_no", festival_no+"");
+        builder.add("chatroom_name", chatroom_name);
+        builder.add("chatroom_maxSize", chatroom_maxSize+"");
+        builder.add("chatroom_location", chatroom_location+"");
+        builder.add("chatroom_age", chatroom_age+"");
+        builder.add("chatroom_bg", chatroom_bg+"");
+      //  builder.add("chatroom_img", chatroom_img);
 
-//        FormBody.Builder builder = new FormBody.Builder();
-//        builder.add("mem_no", mem_no+"");
-//        builder.add("festival_no", festival_no+"");
-//        builder.add("mem_no", mem_no+"");
-//        builder.add("festival_no", festival_no+"");
-//        builder.add("chatroom_name", chatroom_name);
-//        builder.add("chatroom_maxSize", chatroom_maxSize+"");
-//        builder.add("chatroom_location", chatroom_location+"");
-//        builder.add("chatroom_age", chatroom_age+"");
-//        builder.add("chatroom_img", chatroom_img);
-//
-//        for(Artist a : chatroom_lineups) {
-//            builder.add("chatroom_lineups_no",a+"");
-//            builder.add("chatroom_lineups_date",a.getArtist_date());
-//        }
+        for(Artist a : chatroom_lineup) {
+            builder.add("chatroom_lineup",a.getArtist_no()+"");
+        }
 
-        String json = gson.toJson(data);
-        RequestBody body = RequestBody.create(MediaType.parse("application/json"), json);
-
+//        String json = gson.toJson(data);
+//        RequestBody body = RequestBody.create(MediaType.parse("application/json"), json);
+        RequestBody body = builder.build();
         Request request = new Request.Builder()
                 .url(URL_CREATE_NEW_CHATROOM)
                 .post(body)
                 .build();
-
         final NetworkResult<CreateNewChatroomResult> result = new NetworkResult<>();
         result.request = request;
         result.listener = listener;
