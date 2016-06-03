@@ -1301,19 +1301,47 @@ public class NetworkManager {
 //        data.chatroom_img = chatroom_img;
 //        data.chatroom_lineup = chatroom_lineup;
 
-        FormBody.Builder builder = new FormBody.Builder();
-        builder.add("mem_no", mem_no+"");
-        builder.add("festival_no", festival_no+"");
-        builder.add("chatroom_name", chatroom_name);
-        builder.add("chatroom_maxSize", chatroom_maxSize+"");
-        builder.add("chatroom_location", chatroom_location+"");
-        builder.add("chatroom_age", chatroom_age+"");
-        builder.add("chatroom_bg", chatroom_bg+"");
-        builder.add("chatroom_img", chatroom_img.getName());
+//        FormBody.Builder builder = new FormBody.Builder();
+//        builder.add("mem_no", mem_no+"");
+//        builder.add("festival_no", festival_no+"");
+//        builder.add("chatroom_name", chatroom_name);
+//        builder.add("chatroom_maxSize", chatroom_maxSize+"");
+//        builder.add("chatroom_location", chatroom_location+"");
+//        builder.add("chatroom_age", chatroom_age+"");
+//        builder.add("chatroom_bg", chatroom_bg+"");
+//        builder.add("chatroom_img", chatroom_img.getName());
+//
+//        for(Artist a : chatroom_lineup) {
+//            builder.add("chatroom_lineup",a.getArtist_no()+"");
+//        }
+
+        MultipartBody.Builder builder = new MultipartBody.Builder();
+        builder.setType(MultipartBody.FORM);
+        builder.addFormDataPart("mem_no", mem_no+"");
+        builder.addFormDataPart("festival_no", festival_no+"");
+        builder.addFormDataPart("chatroom_name", chatroom_name);
+        builder.addFormDataPart("chatroom_maxSize", chatroom_maxSize+"");
+        builder.addFormDataPart("chatroom_location", chatroom_location+"");
+        builder.addFormDataPart("chatroom_age", chatroom_age+"");
+        builder.addFormDataPart("chatroom_bg", chatroom_bg+"");
+        builder.addFormDataPart("chatroom_img", chatroom_img.getName(),
+                RequestBody.create(MediaType.parse("image/jpeg"), chatroom_img));
 
         for(Artist a : chatroom_lineup) {
-            builder.add("chatroom_lineup",a.getArtist_no()+"");
+            builder.addFormDataPart("chatroom_lineup", a.getArtist_no()+"");
         }
+
+//
+//        RequestBody body = new MultipartBody.Builder()
+//                .setType(MultipartBody.FORM)
+//                .addFormDataPart("mem_name", mem_name)
+//                .addFormDataPart("mem_pwd", mem_pwd)
+//                .addFormDataPart("mem_id", mem_id)
+//                .addFormDataPart("mem_img", mem_img.getName(),
+//                        RequestBody.create(MediaType.parse("image/jpeg"), mem_img))
+//                .addFormDataPart("mem_registration_id", mem_registration_id)
+//                .build();
+
 
 //        String json = gson.toJson(data);
 //        RequestBody body = RequestBody.create(MediaType.parse("application/json"), json);
