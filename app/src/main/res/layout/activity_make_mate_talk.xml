@@ -28,22 +28,23 @@
     </android.support.v7.widget.Toolbar>
 
     <Button
+
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="44dp"
         android:text="@string/make_talk"
         android:id="@+id/btn_maketalk"
-        android:background="@color/color_toolbar"
+        android:background="@drawable/login_btn_default"
         android:textColor="#ffffff"
-        android:layout_marginRight="71dp"
-        android:layout_marginEnd="71dp"
-        android:layout_marginTop="142dp"
-        android:layout_below="@+id/textView17"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:paddingLeft="30dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:paddingRight="30dp" />
+        android:paddingRight="30dp"
+        android:layout_below="@+id/imageView11"
+        android:layout_alignRight="@+id/imageView11"
+        android:layout_alignEnd="@+id/imageView11"
+        android:layout_alignLeft="@+id/imageView11"
+        android:layout_alignStart="@+id/imageView11"
+        android:layout_marginTop="34dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -139,7 +140,7 @@
         android:layout_alignEnd="@+id/spinner_location" />
 
     <ImageView
-        android:background="@drawable/under_line"
+        android:background="@drawable/text_bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageView7"
@@ -153,7 +154,7 @@
         android:layout_marginRight="30dp" />
 
     <ImageView
-        android:background="@drawable/under_line"
+        android:background="@drawable/text_bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageView8"
@@ -171,7 +172,7 @@
         android:background="@null"
         android:textSize="12sp"
         android:inputType="number"
-        android:textColor="@color/text6"
+        android:textColor="#666666"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/imageView7"
@@ -182,7 +183,7 @@
         android:layout_marginTop="20dp" />
 
     <ImageView
-        android:background="@drawable/under_line"
+        android:background="@drawable/text_bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageView9"
@@ -196,7 +197,7 @@
         android:layout_marginTop="34dp" />
 
     <ImageView
-        android:background="@drawable/under_line"
+        android:background="@drawable/text_bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageView10"
@@ -208,5 +209,92 @@
         android:layout_alignParentEnd="true"
         android:layout_marginRight="30dp"
         android:layout_marginTop="34dp" />
+
+    <ImageView
+        android:background="@drawable/text_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView11"
+        android:layout_below="@+id/textView18"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp" />
+
+    <TextView
+        android:textColor="#f65f6a"
+        android:textSize="12sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/clickbg"
+        android:id="@+id/textView20"
+        android:layout_alignBottom="@+id/imageView11"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="43dp"
+        android:layout_marginBottom="12dp" />
+
+    <RadioGroup
+        android:id="@+id/group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView11"
+        android:layout_marginLeft="132dp"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
+
+        <RadioButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/radioButton"
+            android:checked="false"
+            android:button="@null"
+            android:drawableLeft="@color/common_action_bar_splitter"
+            android:background="@drawable/selector_pic3"/>
+
+        <RadioButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/radioButton2"
+            android:checked="false"
+            android:button="@null"
+            android:drawableLeft="@color/common_action_bar_splitter"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/selector_pic4" />
+
+        <RadioButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/radioButton3"
+            android:checked="false"
+            android:layout_marginLeft="10dp"
+            android:button="@null"
+            android:drawableLeft="@color/common_action_bar_splitter"
+            android:background="@drawable/selector_pic2"/>
+
+        <RadioButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/radioButton4"
+            android:checked="false"
+            android:layout_marginLeft="10dp"
+            android:button="@null"
+            android:drawableLeft="@color/common_action_bar_splitter"
+            android:background="@drawable/selector_pic" />
+
+        <RadioButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/radioButton5"
+            android:checked="false"
+            android:layout_marginLeft="20dp"
+            android:button="@null"
+            android:drawableLeft="@color/common_action_bar_splitter"
+            android:background="@drawable/camera" />
+
+    </RadioGroup>
 
 </RelativeLayout>

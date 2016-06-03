@@ -101,6 +101,8 @@
     <string name="non_matetalk_ment">메이트톡 대화 내역이 없어요.</string>
     <string name="non_matetalk_ment2">메이트 매칭하기를 이용하여</string>
     <string name="non_matetalk_ment3">음악 취향이 같은 친구를 메이트톡으로 만나보세요.</string>
+    <string name="clickbg">배경 선택</string>
+    <string name="do_edit">수정하기</string>
 
 
 </resources>

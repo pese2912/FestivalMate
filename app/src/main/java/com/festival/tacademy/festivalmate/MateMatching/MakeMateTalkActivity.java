@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -38,7 +40,8 @@ public class MakeMateTalkActivity extends AppCompatActivity {
     Spinner locationView;
     Spinner ageView;
     SelectedArtist selectedArtist;
-    int location=0,age=0;
+    int location=0,age=0,bg=0;
+    RadioGroup group;
 
     String[] city = {"무관","서울","부산","대구","인천","광주"
             ,"대전","울산","세종","경기","강원","충북"
@@ -55,6 +58,8 @@ public class MakeMateTalkActivity extends AppCompatActivity {
         maxSizeView = (EditText)findViewById(R.id.edit_max_size);
         locationView = (Spinner)findViewById(R.id.spinner_location);
         ageView = (Spinner)findViewById(R.id.spinner_age);
+        group = (RadioGroup)findViewById(R.id.group);
+
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>
                 (this,android.R.layout.simple_spinner_item,city); //스피너와 안의 내용을 합치는것
@@ -113,9 +118,13 @@ public class MakeMateTalkActivity extends AppCompatActivity {
                 int fesNo = festival.getFestival_no();
 
                 final String chatroom_name = roomNameView.getText().toString();
-                int chatroom_maxSize = Integer.parseInt(maxSizeView.getText().toString());
 
 
+
+                if(!TextUtils.isEmpty(chatroom_name) || !TextUtils.isEmpty(maxSizeView.getText().toString())) {
+                    return;
+                }
+                int chatroom_maxSize=  Integer.parseInt(maxSizeView.getText().toString());
 //                for(int i = 0; i <selectedArtist.result.size(); i++){
 //
 //                    Toast.makeText(MakeMateTalkActivity.this, selectedArtist.result.get(i).getName(),Toast.LENGTH_SHORT).show();

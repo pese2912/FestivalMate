@@ -13,6 +13,7 @@ import com.festival.tacademy.festivalmate.Data.ChatroomKickResult;
 import com.festival.tacademy.festivalmate.Data.chatroom_member;
 import com.festival.tacademy.festivalmate.Data.chatroom_waiting;
 import com.festival.tacademy.festivalmate.Manager.NetworkManager;
+import com.festival.tacademy.festivalmate.Manager.PropertyManager;
 import com.festival.tacademy.festivalmate.MyApplication;
 import com.festival.tacademy.festivalmate.R;
 
@@ -55,11 +56,20 @@ public class ChatJoinerViewHolder extends RecyclerView.ViewHolder {
         });
     }
 
-    public void setChatJoin(chatroom_member member, int chatNo){
+    public void setChatJoin(chatroom_member member, int chatNo, int host){
         this.member = member;
-        Glide.with(photoView.getContext()).load(member.getMem_img()).into(photoView);
+        Glide.with(photoView.getContext()).load(NetworkManager.MY_SERVER+"/"+member.getMem_img()).into(photoView);
 //        Toast.makeText(MyApplication.getContext(), member.getMem_no()+" "+ member.getMem_name()+" "+member.getMem_img(), Toast.LENGTH_SHORT).show();
         nameView.setText(member.getMem_name());
+        if(host==1){
+            if(PropertyManager.getInstance().getNo() == member.getMem_no()){
+                btn.setVisibility(View.GONE);
+            }
+            else{
+                btn.setVisibility(View.VISIBLE);
+            }
+        }
+
 //        btn.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {

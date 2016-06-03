@@ -66,7 +66,7 @@ public class ChatJoinListActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Request request, ChatroomDisapproveResult result) {
                         //Toast.makeText(MyApplication.getContext(), "거절 : "+waiting.getMem_no(), Toast.LENGTH_SHORT).show();
-                        onResume();
+                       setData();
                     }
 
                     @Override
@@ -87,7 +87,7 @@ public class ChatJoinListActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Request request, ChatroomApproveResult result) {
                      //   Toast.makeText(MyApplication.getContext(), "승인 : " + waiting.getMem_no(), Toast.LENGTH_SHORT).show();
-                        onResume();
+                        setData();
                     }
 
                     @Override
@@ -108,7 +108,7 @@ public class ChatJoinListActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Request request, ChatroomKickResult result) {
                       //  Toast.makeText(MyApplication.getContext(), "강퇴 : "+member.getMem_no(), Toast.LENGTH_SHORT).show();
-                        onResume();
+                        setData();
                     }
 
                     @Override
@@ -140,8 +140,7 @@ public class ChatJoinListActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess(Request request, ChatroomMemListResult result) {
-                Toast.makeText(ChatJoinListActivity.this, result.result.getChatroom_members().get(0).getMem_name()+"", Toast.LENGTH_SHORT).show();
-                Toast.makeText(ChatJoinListActivity.this, result.result.getChatroom_members().get(0).getMem_no()+"", Toast.LENGTH_SHORT).show();
+
                 mAdapter.setMateTalkWaitJoinList(result.result);
             }
 

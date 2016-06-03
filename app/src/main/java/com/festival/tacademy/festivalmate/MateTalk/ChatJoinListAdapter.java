@@ -129,7 +129,6 @@ public class ChatJoinListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             }
 
             case VIEW_TYPE_CHAT_JOINER: {
-                Toast.makeText(MyApplication.getContext(), "asd",Toast.LENGTH_SHORT).show();
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_joiner_list, null);
                 return new ChatJoinerViewHolder(view);
             }
@@ -171,6 +170,7 @@ public class ChatJoinListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             }
             position -= list.getChatroom_waitings().size();
         }
+
         if( position == 0 ) {
             HeaderJoinViewHolder h = (HeaderJoinViewHolder)holder;
             return;
@@ -180,7 +180,7 @@ public class ChatJoinListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         if(list.getChatroom_members().size() > 0) {
             if (position < list.getChatroom_members().size()) {
                 ChatJoinerViewHolder h = (ChatJoinerViewHolder)holder;
-                h.setChatJoin(list.getChatroom_members().get(position), list.getChatroom_no());
+                h.setChatJoin(list.getChatroom_members().get(position), list.getChatroom_no(), list.getIs_host());
                 h.setOnItemClickListener(mListener3);
                 return;
             }
@@ -199,10 +199,9 @@ public class ChatJoinListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             return size;
         }
 
-        size=2;
-
+        size+=2;
+        size++;
         if (list.getChatroom_waitings().size() > 0) {
-            size++;
             size += list.getChatroom_waitings().size();
         }
 
@@ -210,6 +209,8 @@ public class ChatJoinListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         if (list.getChatroom_members().size() > 0) {
             size += list.getChatroom_members().size();
         }
+
+        //Toast.makeText(MyApplication.getContext(),""+size,Toast.LENGTH_SHORT).show();
 
         return size;
     }

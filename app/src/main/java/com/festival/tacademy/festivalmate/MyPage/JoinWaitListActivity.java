@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.festival.tacademy.festivalmate.Data.Lineup;
@@ -32,6 +33,7 @@ public class JoinWaitListActivity extends AppCompatActivity {
     RecyclerView listView;
     JoinWaitListAdapter mAdapter;
     Toolbar toolbar;
+    FrameLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class JoinWaitListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        layout = (FrameLayout)findViewById(R.id.non_wait_list);
 
         listView = (RecyclerView)findViewById(R.id.rv_list);
         mAdapter = new JoinWaitListAdapter();
@@ -91,6 +94,14 @@ public class JoinWaitListActivity extends AppCompatActivity {
 
                 Toast.makeText(JoinWaitListActivity.this, "성공"+result.result.size(), Toast.LENGTH_SHORT).show();
                 mAdapter.addAll(result.result);
+                if(result.result.size() == 0 || result.result ==null){
+                    layout.setVisibility(View.VISIBLE);
+
+                }
+
+                else{
+                    layout.setVisibility(View.GONE);
+                }
             }
 
             @Override

@@ -123,7 +123,7 @@ public class ProfileDialogFragment extends DialogFragment {
         user_state.setText(user.getMem_state_msg());
         user_name.setText(user.getName()+" 님");
         user_email.setText("("+user.getMem_id()+")");
-        Glide.with(user_image.getContext()).load(user.getChatroom_mem_img()).into(user_image);
+        Glide.with(user_image.getContext()).load(NetworkManager.MY_SERVER+"/"+user.getPhoto()).into(user_image);
         return view;
     }
 

@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.festival.tacademy.festivalmate.Data.User;
+import com.festival.tacademy.festivalmate.Manager.NetworkManager;
 import com.festival.tacademy.festivalmate.R;
 
 /**
@@ -45,7 +46,7 @@ public class ChatUserViewHolder extends RecyclerView.ViewHolder {
 
     public void setUser(User user) {
         this.user = user;
-        Glide.with(photoView.getContext()).load(user.getChatroom_mem_img()).into(photoView);
+        Glide.with(photoView.getContext()).load(NetworkManager.MY_SERVER+"/"+user.getChatroom_mem_img()).into(photoView);
         idView.setText(user.getChatroom_mem_name());
     }
 }

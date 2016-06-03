@@ -55,9 +55,10 @@ public class MyGcmListenerService extends GcmListenerService {
     // [START receive_message]
     @Override
     public void onMessageReceived(String from, Bundle data) {
-        String type = data.getString("type");
-        String senderid = data.getString("sender");
-        String message = data.getString("message");
+
+//        String type = data.getString("type");
+//        String senderid = data.getString("sender");
+        String message = data.getString("chat_content");
         Log.d(TAG, "From: " + from);
         Log.d(TAG, "ChatMessage: " + message);
 
@@ -92,7 +93,7 @@ public class MyGcmListenerService extends GcmListenerService {
 //            }
 //        }
 
-        sendNotification(message);
+       sendNotification(message);
     }
     // [END receive_message]
 
@@ -122,7 +123,7 @@ public class MyGcmListenerService extends GcmListenerService {
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+      //  notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
     }
 
 

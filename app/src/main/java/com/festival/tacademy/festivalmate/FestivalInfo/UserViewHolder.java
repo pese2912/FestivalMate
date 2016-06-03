@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.festival.tacademy.festivalmate.Data.User;
+import com.festival.tacademy.festivalmate.Manager.NetworkManager;
 import com.festival.tacademy.festivalmate.R;
 
 import org.w3c.dom.Text;
@@ -49,7 +50,7 @@ public class UserViewHolder extends RecyclerView.ViewHolder {
 
     public void setUser(User user) {
         this.user = user;
-        Glide.with(photoView.getContext()).load(user.getPhoto()).into(photoView);
+        Glide.with(photoView.getContext()).load(NetworkManager.MY_SERVER+"/"+user.getPhoto()).into(photoView);
         idView.setText(user.getName());
     }
 }

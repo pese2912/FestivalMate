@@ -9,7 +9,7 @@
     </style>
     <style name="MyDIalogTheme" parent="Theme.AppCompat.Dialog">
         <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowBackground">@drawable/profile_bg</item>
     </style>
 
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-    <RelativeLayout
+<RelativeLayout
     tools:context="com.festival.tacademy.festivalmate.MyPage.ProfileUpdateActivity"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
@@ -19,148 +19,261 @@
         android:layout_centerInParent="true"
         android:id="@+id/toolbar">
 
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:id="@+id/toolbar_title"
-        android:layout_gravity="left"
-        android:textColor="#ffffff"
-        android:textSize="20dp"
-        android:text="@string/profile_update"/>
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/toolbar_title"
+            android:layout_gravity="left"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="@string/profile_update"/>
 
-</android.support.v7.widget.Toolbar>
-
+    </android.support.v7.widget.Toolbar>
 
     <FrameLayout
-        android:layout_height="200dp"
+        android:layout_height="190dp"
         android:layout_width="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:id="@+id/frameLayout"
         android:layout_below="@+id/toolbar">
 
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:id="@+id/text_ment"
-        android:layout_gravity="center"
-        android:text="나만의 프로필 사진을 설정해 주세요."
-        android:textAppearance="?android:attr/textAppearanceLarge"/>
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/text_ment"
+            android:layout_gravity="center"
+            android:textSize="12sp"
+            android:textColor="#999999"
+            android:text="나만의 프로필 사진을 설정해 주세요."
+            />
 
-    <ImageView
-        android:layout_height="208dp"
-        android:layout_width="match_parent"
-        android:id="@+id/image_profile"
-        android:layout_gravity="center"/>
+        <ImageView
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:id="@+id/image_profile"
+            android:layout_gravity="center"/>
 
-    <Button
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:id="@+id/btn_gallery"
-        android:layout_gravity="right|bottom"
-        android:text="gallery"
-        style="?android:attr/buttonStyleSmall"/>
-
-</FrameLayout>
-
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:id="@+id/textView2"
-        android:textColor="#ff3300"
-        android:text="@string/name"
-        android:layout_below="@+id/frameLayout"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="50dp"/>
-
-    <EditText
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:id="@+id/edit_name"
-        android:layout_alignEnd="@+id/edit_state"
-        android:layout_alignRight="@+id/edit_state"
-        android:layout_toRightOf="@+id/textView2"
-        android:layout_alignTop="@+id/textView2"
-        android:hint="@string/name_ment"/>
-
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:id="@+id/textView7"
-        android:textColor="#ff3300"
-        android:text="@string/state"
-        android:layout_below="@+id/edit_name"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_alignStart="@+id/textView2"
-        android:layout_alignLeft="@+id/textView2"/>
-
-    <EditText
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_alignParentRight="true"
-        android:id="@+id/edit_state"
-        android:layout_below="@+id/edit_name"
-        android:layout_toRightOf="@+id/textView7"
-        android:hint="@string/state_ment"
-        android:layout_toEndOf="@+id/textView7"
-        android:layout_alignParentEnd="true"/>
-
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:id="@+id/textView8"
-        android:textColor="#ff3300"
-        android:text="@string/location"
-        android:layout_below="@+id/edit_state"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_alignStart="@+id/textView7"
-        android:layout_alignLeft="@+id/textView7"/>
+        <Button
+            android:layout_height="67dp"
+            android:layout_width="67dp"
+            android:id="@+id/btn_gallery"
+            android:background="@drawable/btn_camera"
+            android:layout_gravity="right|bottom"
+            style="?android:attr/buttonStyleSmall"/>
+    </FrameLayout>
 
     <Spinner
-        android:layout_height="wrap_content"
+        android:layout_height="20sp"
         android:layout_width="wrap_content"
-        android:layout_alignParentRight="true"
         android:id="@+id/spinner_location"
-        android:layout_below="@+id/edit_state"
-        android:layout_toRightOf="@+id/textView8"
-        android:layout_toEndOf="@+id/textView8"
-        android:spinnerMode="dropdown"
-        android:entries="@array/city"/>
+        android:layout_above="@+id/imageView15"
+        android:layout_alignLeft="@+id/editText5"
+        android:layout_alignStart="@+id/editText5"
+        android:layout_marginLeft="-5dp"
+        android:layout_alignRight="@+id/imageView15"
+        android:layout_alignEnd="@+id/imageView15" />
 
     <Button
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:background="@color/color_toolbar"
+        android:background="@drawable/login_btn_default"
         android:id="@+id/btn_update"
         android:textColor="#ffffff"
         android:text="@string/profile_update_do"
+        android:textStyle="bold"
         style="?android:attr/buttonStyleSmall"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:paddingRight="30dp"
-        android:paddingLeft="30dp"/>
+        android:paddingLeft="30dp"
+        android:layout_marginBottom="16dp" />
 
     <android.support.v7.widget.RecyclerView
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:id="@+id/rv_list3"
-        android:layout_below="@+id/textView8"
-        android:layout_above="@+id/btn_update"
-        android:layout_toRightOf="@+id/textView8"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_below="@+id/btn_prefer_update"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp" />
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/update"
+        android:text="@string/name"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/frameLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="43dp"
+        android:textSize="12sp"
+        android:textColor="@color/color_toolbar"
+        android:layout_marginTop="60dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_name"
+        android:layout_below="@+id/frameLayout"
+        android:layout_toRightOf="@+id/textView2"
+        android:layout_toEndOf="@+id/textView2"
+        android:background="@null"
+        android:hint="이름을 입력하세요."
+        android:textSize="12sp"
+        android:layout_marginLeft="50dp"
+        android:singleLine="true"
+        android:layout_marginTop="60dp" />
+
+    <ImageView
+        android:textSize="12sp"
+        android:textColor="@color/color_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView13"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/text_bottom"
+        android:layout_marginLeft="@dimen/text_bottom"
+        android:layout_marginRight="@dimen/text_bottom" />
+
+    <TextView
+        android:textSize="12sp"
+        android:textColor="@color/color_toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/state"
+        android:id="@+id/textView7"
+        android:singleLine="true"
+        android:layout_below="@+id/imageView13"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="43dp"
+        android:layout_marginTop="10dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_state"
+        android:singleLine="true"
+        android:background="@null"
+        android:hint="자신을 자유롭게 표현해 보세요."
+        android:textSize="12sp"
+        android:layout_below="@+id/imageView13"
+        android:layout_toRightOf="@+id/textView7"
+        android:layout_toEndOf="@+id/textView7"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView14"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/text_bottom"
+        android:layout_below="@+id/edit_state"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/text_bottom"
+        android:layout_marginRight="@dimen/text_bottom" />
+
+    <TextView
+        android:textColor="@color/color_toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/location"
+        android:id="@+id/textView26"
+        android:textSize="12sp"
+        android:layout_below="@+id/imageView14"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="43dp"
+        android:layout_marginTop="10dp" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView15"
+        android:background="@drawable/text_bottom"
+        android:layout_below="@+id/textView26"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="@dimen/text_bottom"
+        android:layout_marginRight="@dimen/text_bottom" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/birthday"
+        android:id="@+id/textView27"
+        android:textSize="12sp"
+        android:textColor="@color/color_toolbar"
+        android:layout_below="@+id/imageView15"
+        android:layout_alignLeft="@+id/textView26"
+        android:layout_alignStart="@+id/textView26"
+        android:layout_marginTop="10dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText5"
+
+        android:background="@null"
+        android:hint="숫자만 입력해주세요."
+        android:inputType="number"
+        android:textSize="12sp"
+        android:layout_below="@+id/imageView15"
+        android:layout_alignLeft="@+id/edit_state"
+        android:singleLine="true"
+        android:layout_alignStart="@+id/edit_state"
+        android:layout_marginTop="10dp" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView16"
+        android:background="@drawable/text_bottom"
+        android:layout_below="@+id/textView27"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="@dimen/text_bottom"
+        android:layout_marginRight="@dimen/text_bottom" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/do_edit"
+        android:background="@null"
+        android:textSize="12sp"
         android:id="@+id/btn_prefer_update"
-        android:layout_alignTop="@+id/rv_list3"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_below="@+id/imageView16"
+        android:layout_toRightOf="@+id/btn_update"
+        android:layout_toEndOf="@+id/btn_update"
+        android:textColor="#999999"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/prefer_artist"
+        android:id="@+id/textView28"
+        android:textSize="12sp"
+        android:textColor="@color/color_toolbar"
+        android:layout_below="@+id/imageView16"
+        android:layout_alignLeft="@+id/textView27"
+        android:layout_alignStart="@+id/textView27"
+        android:layout_marginTop="10dp" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView17"
+        android:background="@drawable/text_bottom"
+        android:layout_below="@+id/rv_list3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="@dimen/text_bottom"
+        android:layout_marginRight="@dimen/text_bottom" />
 
 </RelativeLayout>

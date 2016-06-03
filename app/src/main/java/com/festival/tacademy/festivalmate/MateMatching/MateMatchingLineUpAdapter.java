@@ -16,6 +16,7 @@ import java.util.List;
 /**
  * Created by Tacademy on 2016-05-17.
  */
+
 public class MateMatchingLineUpAdapter extends RecyclerView.Adapter<MateMatchingLineUpViewHolder> {
     List<Lineup> items = new ArrayList<Lineup>();
 
@@ -32,16 +33,19 @@ public class MateMatchingLineUpAdapter extends RecyclerView.Adapter<MateMatching
         notifyDataSetChanged();
     }
 
+
     @Override
     public MateMatchingLineUpViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view =  LayoutInflater.from(parent.getContext()).inflate(R.layout.view_mate_matching_lineup, null);
         return new MateMatchingLineUpViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(MateMatchingLineUpViewHolder holder, int position) {
         holder.setFestibalLineUp(items.get(position));
     }
+
 
     @Override
     public int getItemCount() {

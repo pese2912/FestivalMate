@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.festival.tacademy.festivalmate.Data.MateTalkWaitList;
 import com.festival.tacademy.festivalmate.Data.PreferenceArtist;
+import com.festival.tacademy.festivalmate.Manager.NetworkManager;
 import com.festival.tacademy.festivalmate.R;
 
 /**
@@ -57,7 +58,7 @@ public class JoinWaitListViewHolder extends RecyclerView.ViewHolder {
 
     public void setMateTalkWaitList(MateTalkWaitList mateTalkWaitList){
         this.mateTalkWaitList = mateTalkWaitList;
-        Glide.with(photoView.getContext()).load(mateTalkWaitList.getChatroom_img()).into(photoView);
+        Glide.with(photoView.getContext()).load(NetworkManager.MY_SERVER+"/"+mateTalkWaitList.getChatroom_img()).into(photoView);
         nameView.setText(mateTalkWaitList.getFestival_name());
         titleView.setText(mateTalkWaitList.getChatroom_name());
         peopleView.setText(mateTalkWaitList.getChatroom_size()+"명");

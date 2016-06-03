@@ -110,6 +110,9 @@ public class SignUpFragment extends Fragment {
                     Toast.makeText(getContext(), "invalid value", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                if(mUploadFile == null){
+                    mUploadFile= new File("");
+                }
 
                 NetworkManager.getInstance().signup(getContext(), name, email, password,mUploadFile,PropertyManager.getInstance().getRegistrationToken(), new NetworkManager.OnResultListener<MySignUpResult>() { // 회원가입
                     @Override
