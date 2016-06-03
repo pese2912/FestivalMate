@@ -52,6 +52,7 @@ public class ProfileUpdateActivity extends AppCompatActivity {
     EditText nameView;
     EditText messageView;
     Spinner locationView;
+    String imgUrl;
     int location=0;
 
     PreferArtistAdapter mAdapter;
@@ -113,6 +114,9 @@ public class ProfileUpdateActivity extends AppCompatActivity {
                     Toast.makeText(ProfileUpdateActivity.this, "invalid value", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                if(mUploadFile==null){
+                    mUploadFile=new File(imgUrl);
+                }
 
                 NetworkManager.getInstance().modify_profile(ProfileUpdateActivity.this, memNo, mUploadFile, name, message,location, new NetworkManager.OnResultListener<ModifyProfileResult>() {
                     @Override
@@ -168,8 +172,9 @@ public class ProfileUpdateActivity extends AppCompatActivity {
                 nameView.setText(result.result.getName());
                 messageView.setText(result.result.getMem_state_msg());
                 Glide.with(photoView.getContext()).load(NetworkManager.MY_SERVER+"/"+result.result.mem_img).into(photoView);
+                imgUrl=result.result.mem_img;
                 mAdapter.addAll(result.result.getArtist());
-                Toast.makeText(MyApplication.getContext(), NetworkManager.MY_SERVER+"/"+result.result.mem_img,Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(MyApplication.getContext(), NetworkManager.MY_SERVER+"/"+result.result.mem_img,Toast.LENGTH_SHORT).show();
                 Log.i("photo",NetworkManager.MY_SERVER+"/"+result.result.mem_img);
 
             }
