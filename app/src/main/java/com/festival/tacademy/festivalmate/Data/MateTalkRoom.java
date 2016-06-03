@@ -25,7 +25,7 @@ public class MateTalkRoom implements Serializable {
     public int chatroom_location;
     public int chatroom_age;
     public int mem_chatroom_state;
-    public String chatroom_new_chat_date;
+    public String chatroom_new_chat_regdate;
     public String date;
     public List<User> chatroom_mems;
     public String unRead;
@@ -80,11 +80,11 @@ public class MateTalkRoom implements Serializable {
 
 
     public String getChatroom_new_chat_date() {
-        return chatroom_new_chat_date;
+        return chatroom_new_chat_regdate;
     }
 
     public void setChatroom_new_chat_date(String chatroom_new_chat_date) {
-        this.chatroom_new_chat_date = chatroom_new_chat_date;
+        this.chatroom_new_chat_regdate = chatroom_new_chat_date;
     }
 
 
@@ -231,8 +231,4 @@ public class MateTalkRoom implements Serializable {
     public MateTalkRoom() {
 
     }
-
-
-
-
 }

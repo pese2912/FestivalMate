@@ -55,6 +55,16 @@ public class PreferenceViewHolder  extends RecyclerView.ViewHolder {
                 }
             }
         });
+
+        checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if( mListener!=null ) {
+                    mListener.onItemClick(v, artist);
+
+                }
+            }
+        });
     }
 
     public void setPreferenceArtist(Artist item){

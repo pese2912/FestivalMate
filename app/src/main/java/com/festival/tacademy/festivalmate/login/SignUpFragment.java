@@ -187,7 +187,7 @@ public class SignUpFragment extends Fragment {
                     BitmapFactory.Options opts = new BitmapFactory.Options();
                     opts.inSampleSize = 2;
                     Bitmap bm = BitmapFactory.decodeFile(path, opts);
-                    Toast.makeText(getContext(), mUploadFile.getAbsolutePath(),Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getContext(), mUploadFile.getAbsolutePath(),Toast.LENGTH_SHORT).show();
                     mentView.setVisibility(View.GONE);
                     profileView.setImageBitmap(bm);
                 }
@@ -213,6 +213,6 @@ public class SignUpFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        mentView.setVisibility(View.GONE);
+        mentView.setVisibility(View.VISIBLE);
     }
 }

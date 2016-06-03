@@ -102,7 +102,7 @@ public class MateTalkFragment extends Fragment {
         NetworkManager.getInstance().show_my_chatroom_list(getContext(), memNo, new NetworkManager.OnResultListener<ShowMyChatroomListResult>() {
             @Override
             public void onSuccess(Request request, ShowMyChatroomListResult result) {
-                Toast.makeText(getContext(),"성공",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"성공"+memNo,Toast.LENGTH_SHORT).show();
                 mAdapter.clear();
                 mAdapter.addAll(result.result);
 

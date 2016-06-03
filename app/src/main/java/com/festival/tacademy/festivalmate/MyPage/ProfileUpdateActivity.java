@@ -13,6 +13,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -79,6 +80,7 @@ public class ProfileUpdateActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>
                 (this,android.R.layout.simple_spinner_item,city); //스피너와 안의 내용을 합치는것
 
+
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         locationView.setAdapter(adapter);
         setData();
@@ -112,7 +114,7 @@ public class ProfileUpdateActivity extends AppCompatActivity {
                     return;
                 }
 
-                NetworkManager.getInstance().modify_profile(ProfileUpdateActivity.this, memNo, "", name, message,location, new NetworkManager.OnResultListener<ModifyProfileResult>() {
+                NetworkManager.getInstance().modify_profile(ProfileUpdateActivity.this, memNo, mUploadFile, name, message,location, new NetworkManager.OnResultListener<ModifyProfileResult>() {
                     @Override
                     public void onSuccess(Request request, ModifyProfileResult result) {
                         Toast.makeText(ProfileUpdateActivity.this,"성공",Toast.LENGTH_SHORT).show();
@@ -158,15 +160,17 @@ public class ProfileUpdateActivity extends AppCompatActivity {
     private void setData(){
 
         int memNo = PropertyManager.getInstance().getNo();
+
         NetworkManager.getInstance().show_my_profile(ProfileUpdateActivity.this, memNo, new NetworkManager.OnResultListener<ShowMyProfileResult>() {
             @Override
             public void onSuccess(Request request, ShowMyProfileResult result) {
 
                 nameView.setText(result.result.getName());
                 messageView.setText(result.result.getMem_state_msg());
-                Glide.with(photoView.getContext()).load(result.result.mem_img).into(photoView);
+                Glide.with(photoView.getContext()).load(NetworkManager.MY_SERVER+"/"+result.result.mem_img).into(photoView);
                 mAdapter.addAll(result.result.getArtist());
-                Toast.makeText(MyApplication.getContext(), result.result.getArtist().get(0).getName()+"",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MyApplication.getContext(), NetworkManager.MY_SERVER+"/"+result.result.mem_img,Toast.LENGTH_SHORT).show();
+                Log.i("photo",NetworkManager.MY_SERVER+"/"+result.result.mem_img);
 
             }
             @Override

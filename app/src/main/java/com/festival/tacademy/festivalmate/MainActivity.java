@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         PropertyManager.getInstance().setPassword("");
         PropertyManager.getInstance().setUser(null);
 
+
         TextView btn = (TextView)findViewById(R.id.btn_login);
         btn.setOnClickListener(new View.OnClickListener() { // 로그인 버튼 눌렀을 경우
             @Override
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() { // 시작하기 버튼 눌렀을 경우
             @Override
             public void onClick(View v) {
+
 
                 Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                 startActivity(intent); //일단 홈 액티비티로 이동, 원래는 선호도조사 액티비티로 이동

@@ -4,10 +4,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.festival.tacademy.festivalmate.Data.MateTalkRoom;
 import com.festival.tacademy.festivalmate.Data.PreferenceArtist;
+import com.festival.tacademy.festivalmate.Manager.NetworkManager;
+import com.festival.tacademy.festivalmate.MyApplication;
 import com.festival.tacademy.festivalmate.R;
 
 /**
@@ -56,13 +59,15 @@ public class MateTalkRoomViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void setMateTalkRoom(MateTalkRoom room){
+
         this.talkRoom = room;
-        festivalView.setText(room.getChatroom_festival_name());
-        nameView.setText(room.getChatroom_name());
+        festivalView.setText(room.getFestival_name());
+        nameView.setText("- "+room.getChatroom_name());
         contentView.setText(room.getChatroom_new_chat_content());
-        Glide.with(photoView.getContext()).load(room.getChatroom_img()).into(photoView);
-        numberView.setText(room.getChatroom_size()+"");
+        Toast.makeText(MyApplication.getContext(),room.getChatroom_img(),Toast.LENGTH_SHORT).show();
+        Glide.with(photoView.getContext()).load(NetworkManager.MY_SERVER+"/"+room.getChatroom_img()).into(photoView);
+        numberView.setText(room.getChatroom_size()+"명");
         dateView.setText(room.getChatroom_new_chat_date());
-        unReadView.setText(room.getChatroom_new_count()+"");
+//        unReadView.setText(room.getChatroom_new_count()+"");
     }
 }

@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.festival.tacademy.festivalmate.Data.MateTalkRoom;
+import com.festival.tacademy.festivalmate.Manager.NetworkManager;
 import com.festival.tacademy.festivalmate.R;
 
 /**
@@ -55,8 +56,8 @@ public class MateTalkRoomSingleViewHolder extends RecyclerView.ViewHolder {
         this.talkRoom = room;
         nameView.setText(room.getChatroom_host());
         contentView.setText(room.getChatroom_new_chat_content());
-        Glide.with(photoView.getContext()).load(room.getChatroom_img()).into(photoView);
+        Glide.with(photoView.getContext()).load(NetworkManager.MY_SERVER+"/"+room.getChatroom_img()).into(photoView);
         dateView.setText(room.getChatroom_new_chat_date());
-        unReadView.setText(room.getChatroom_new_count()+"");
+      //  unReadView.setText(room.getChatroom_new_count()+"");
     }
 }

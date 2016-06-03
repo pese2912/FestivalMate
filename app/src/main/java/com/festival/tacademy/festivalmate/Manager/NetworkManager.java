@@ -134,7 +134,7 @@ public class NetworkManager {
 
     Gson gson = new Gson();
 
-    private static final String MY_SERVER ="http://52.79.159.248:3000";  //회원가입 "http://192.168.204.189:3000";
+    public static final String MY_SERVER ="http://52.79.159.248:3000";  //회원가입 "http://192.168.204.189:3000";
     private static final String URL_SIGN_UP = MY_SERVER + "/signup";
 
     public Request signup(Object tag, String mem_name,
@@ -583,18 +583,23 @@ public class NetworkManager {
     private static final String URL_MODIFY_PROFILE = MY_SERVER + "/modify_profile";       // 프로필 수정
     public Request modify_profile(Object tag,
                                      int mem_no,
-                                     String mem_img,
+                                     File mem_img,
                                     String mem_name,
                                   String mem_state_msg,
                                   int mem_location,
                                      OnResultListener<ModifyProfileResult> listener) {
-        RequestBody body = new FormBody.Builder()
-                .add("mem_no", mem_no+"")
-                .add("mem_name", mem_name)
-                .add("mem_img", mem_img)
-                .add("mem_state_msg", mem_state_msg)
-                .add("mem_location", mem_location+"")
+
+
+        RequestBody body = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("mem_no", mem_no+"")
+                .addFormDataPart("mem_name", mem_name)
+                .addFormDataPart("mem_img", mem_img.getName(),
+                        RequestBody.create(MediaType.parse("image/jpeg"), mem_img))
+                .addFormDataPart("mem_state_msg", mem_state_msg)
+                .addFormDataPart("mem_location", mem_location+"")
                 .build();
+
 
 
         Request request = new Request.Builder()
@@ -1285,7 +1290,6 @@ public class NetworkManager {
                                        List<Artist> chatroom_lineup,
                                OnResultListener<CreateNewChatroomResult> listener) {
 
-
 //        JsonNewChatroom data = new JsonNewChatroom();
 //        data.mem_no = mem_no;
 //        data.festival_no = festival_no;
@@ -1299,14 +1303,12 @@ public class NetworkManager {
         FormBody.Builder builder = new FormBody.Builder();
         builder.add("mem_no", mem_no+"");
         builder.add("festival_no", festival_no+"");
-        builder.add("mem_no", mem_no+"");
-        builder.add("festival_no", festival_no+"");
         builder.add("chatroom_name", chatroom_name);
         builder.add("chatroom_maxSize", chatroom_maxSize+"");
         builder.add("chatroom_location", chatroom_location+"");
         builder.add("chatroom_age", chatroom_age+"");
         builder.add("chatroom_bg", chatroom_bg+"");
-      //  builder.add("chatroom_img", chatroom_img);
+        builder.add("chatroom_img", chatroom_img.getName());
 
         for(Artist a : chatroom_lineup) {
             builder.add("chatroom_lineup",a.getArtist_no()+"");

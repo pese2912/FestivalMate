@@ -48,7 +48,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"/>
 
     <ImageView
-        android:layout_height="fill_parent"
+        android:layout_height="208dp"
         android:layout_width="match_parent"
         android:id="@+id/image_profile"
         android:layout_gravity="center"/>

@@ -40,6 +40,7 @@ public class PreferenceActivity extends AppCompatActivity {
     List<Artist> artistList;
     List<Artist> selectedArtist;
     Button btn_complete;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +80,7 @@ public class PreferenceActivity extends AppCompatActivity {
                 Toast.makeText(PreferenceActivity.this, selectedArtist.size()+"", Toast.LENGTH_SHORT).show();
             }
         });
+
 
         listView = (RecyclerView)findViewById(R.id.rv_list);
         listView.setAdapter(mAdapter);
