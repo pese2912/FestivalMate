@@ -1,6 +1,7 @@
 package com.festival.tacademy.festivalmate.MateTalk;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -64,8 +65,9 @@ public class MateTalkRoomViewHolder extends RecyclerView.ViewHolder {
         festivalView.setText(room.getFestival_name());
         nameView.setText("- "+room.getChatroom_name());
         contentView.setText(room.getChatroom_new_chat_content());
-        Toast.makeText(MyApplication.getContext(),room.getChatroom_img(),Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(MyApplication.getContext(),room.getChatroom_img(),Toast.LENGTH_SHORT).show();
         Glide.with(photoView.getContext()).load(NetworkManager.MY_SERVER+"/"+room.getChatroom_img()).into(photoView);
+       // Log.i("photo",NetworkManager.MY_SERVER+"/"+room.getChatroom_img());
         numberView.setText(room.getChatroom_size()+"명");
         dateView.setText(room.getChatroom_new_chat_date());
 //        unReadView.setText(room.getChatroom_new_count()+"");

@@ -34,6 +34,7 @@ public class ChatJoinerViewHolder extends RecyclerView.ViewHolder {
     public interface OnItemClickListener {
         public void onItemClick(View view, chatroom_member member);
     }
+
     OnItemClickListener mListener;
     public void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener;
@@ -57,7 +58,7 @@ public class ChatJoinerViewHolder extends RecyclerView.ViewHolder {
     public void setChatJoin(chatroom_member member, int chatNo){
         this.member = member;
         Glide.with(photoView.getContext()).load(member.getMem_img()).into(photoView);
-
+//        Toast.makeText(MyApplication.getContext(), member.getMem_no()+" "+ member.getMem_name()+" "+member.getMem_img(), Toast.LENGTH_SHORT).show();
         nameView.setText(member.getMem_name());
 //        btn.setOnClickListener(new View.OnClickListener() {
 //            @Override

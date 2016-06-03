@@ -47,6 +47,7 @@ public class ChatJoinListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemViewType(int position) {
+
         if(position == 0) {
             return VIEW_TYPE_FESTIVAL_INFO;
         }
@@ -66,19 +67,20 @@ public class ChatJoinListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             }
             position -= list.getChatroom_waitings().size();
         }
+
         if (position == 0) {
             return VIEW_TYPE_HEADER_JOIN;
         }
         position--;
 
-        if(list.getChatroom_members()!=null) {
-            if (list.getChatroom_members().size() > 0) {
-                if (position < list.getChatroom_members().size()) {
-                    return VIEW_TYPE_CHAT_JOINER;
-                }
-                position -= list.getChatroom_members().size();
+
+        if (list.getChatroom_members().size() > 0) {
+            if (position < list.getChatroom_members().size()) {
+                return VIEW_TYPE_CHAT_JOINER;
             }
+            position -= list.getChatroom_members().size();
         }
+
 
         throw new IllegalArgumentException("Invalid Position");
 
@@ -125,12 +127,14 @@ public class ChatJoinListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_waiter_list, null);
                 return new ApproveWaiterViewHolder(view);
             }
+
             case VIEW_TYPE_CHAT_JOINER: {
+                Toast.makeText(MyApplication.getContext(), "asd",Toast.LENGTH_SHORT).show();
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_joiner_list, null);
                 return new ChatJoinerViewHolder(view);
             }
-
         }
+
         throw new IllegalArgumentException("Invalid position");
     }
 
@@ -142,6 +146,7 @@ public class ChatJoinListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             h.setText(list.getFestival_name(), list.getFestival_lineups(), list.getFestival_location());
             return;
         }
+
         position--;
         if( position == 0 ) {
             ChatPreferArtistViewHolder h = (ChatPreferArtistViewHolder)holder;
@@ -154,6 +159,7 @@ public class ChatJoinListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             HeaderWaitViewHolder h = (HeaderWaitViewHolder)holder;
             return;
         }
+
         position--;
         if ( list.getChatroom_waitings().size() > 0 ) {
             if( position < list.getChatroom_waitings().size() ) {
@@ -169,6 +175,7 @@ public class ChatJoinListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             HeaderJoinViewHolder h = (HeaderJoinViewHolder)holder;
             return;
         }
+
         position--;
         if(list.getChatroom_members().size() > 0) {
             if (position < list.getChatroom_members().size()) {
@@ -187,14 +194,18 @@ public class ChatJoinListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public int getItemCount() {
         int size = 0;
+
         if( list == null ) {
             return size;
         }
-        size+=2;
+
+        size=2;
+
         if (list.getChatroom_waitings().size() > 0) {
             size++;
             size += list.getChatroom_waitings().size();
         }
+
         size+=1;
         if (list.getChatroom_members().size() > 0) {
             size += list.getChatroom_members().size();

@@ -48,86 +48,165 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#ff3300"
+        android:textColor="#f65f6a"
+        android:textSize="12sp"
         android:text="@string/mate_talk_room_name"
         android:id="@+id/textView15"
-        android:layout_marginLeft="37dp"
-        android:layout_marginTop="45dp"
         android:layout_below="@+id/toolbar"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="37dp" />
+        android:layout_marginLeft="43dp"
+        android:layout_marginTop="30dp" />
 
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/edit_room_name"
-        android:layout_alignBottom="@+id/textView15"
-        android:layout_alignRight="@+id/btn_maketalk"
-        android:layout_alignEnd="@+id/btn_maketalk"
-        android:layout_toRightOf="@+id/textView17"
-        android:layout_toEndOf="@+id/textView17" />
+        android:layout_below="@+id/toolbar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="132dp"
+        android:layout_marginRight="30dp"
+        android:background="@null"
+        android:textSize="12sp"
+        android:textColor="@color/text6"
+        android:layout_marginTop="30dp" />
 
     <TextView
-        android:textColor="#ff3300"
+        android:textColor="#f65f6a"
+        android:textSize="12sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/mate_talk_max_people"
         android:id="@+id/textView16"
-        android:layout_alignBottom="@+id/edit_max_size"
-        android:layout_alignLeft="@+id/textView15"
-        android:layout_alignStart="@+id/textView15" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/edit_max_size"
-        android:inputType="number"
-        android:layout_below="@+id/edit_room_name"
-        android:layout_toRightOf="@+id/textView16"
-        android:layout_alignRight="@+id/edit_room_name"
-        android:layout_alignEnd="@+id/edit_room_name" />
+        android:layout_alignBottom="@+id/imageView8"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="43dp"
+        android:layout_marginBottom="12dp" />
 
     <TextView
-        android:textColor="#ff3300"
+        android:textColor="#f65f6a"
+        android:textSize="12sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/prefer_location"
         android:id="@+id/textView17"
-        android:layout_marginTop="52dp"
-        android:layout_below="@+id/textView16"
-        android:layout_alignLeft="@+id/textView16"
-        android:layout_alignStart="@+id/textView16" />
+        android:layout_alignBottom="@+id/imageView9"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="43dp"
+        android:layout_marginBottom="12dp" />
 
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/spinner_location"
-        android:layout_alignTop="@+id/textView17"
-        android:layout_alignLeft="@+id/edit_max_size"
-        android:layout_alignStart="@+id/edit_max_size"
-        android:layout_alignRight="@+id/btn_maketalk"
-        android:layout_alignEnd="@+id/btn_maketalk" />
+        android:layout_below="@+id/imageView8"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="132dp"
+        android:layout_marginTop="15dp"
+        android:layout_alignRight="@+id/imageView9"
+        android:layout_alignEnd="@+id/imageView9" />
 
     <TextView
-        android:textColor="#ff3300"
+        android:textColor="#f65f6a"
+        android:textSize="12sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/prefer_age"
         android:id="@+id/textView18"
-        android:layout_below="@+id/spinner_location"
-        android:layout_alignLeft="@+id/textView17"
-        android:layout_alignStart="@+id/textView17" />
+        android:layout_alignBottom="@+id/imageView10"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="43dp"
+        android:layout_marginBottom="12dp" />
 
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/spinner_age"
-        android:layout_below="@+id/spinner_location"
-        android:layout_alignLeft="@+id/spinner_location"
-        android:layout_alignStart="@+id/spinner_location"
-        android:layout_alignRight="@+id/btn_maketalk"
-        android:layout_alignEnd="@+id/btn_maketalk" />
+        android:layout_below="@+id/imageView9"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="132dp"
+        android:layout_marginTop="15dp"
+        android:layout_alignRight="@+id/spinner_location"
+        android:layout_alignEnd="@+id/spinner_location" />
+
+    <ImageView
+        android:background="@drawable/under_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView7"
+        android:layout_below="@+id/textView15"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="4dp"
+        android:layout_marginRight="30dp" />
+
+    <ImageView
+        android:background="@drawable/under_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView8"
+        android:layout_alignRight="@+id/imageView7"
+        android:layout_alignEnd="@+id/imageView7"
+        android:layout_below="@+id/imageView7"
+        android:layout_alignLeft="@+id/imageView7"
+        android:layout_alignStart="@+id/imageView7"
+        android:layout_marginTop="34dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_max_size"
+        android:background="@null"
+        android:textSize="12sp"
+        android:inputType="number"
+        android:textColor="@color/text6"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/imageView7"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="132dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="20dp" />
+
+    <ImageView
+        android:background="@drawable/under_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView9"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/imageView8"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="34dp" />
+
+    <ImageView
+        android:background="@drawable/under_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView10"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="30dp"
+        android:layout_below="@+id/imageView9"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="34dp" />
 
 </RelativeLayout>

@@ -39,6 +39,7 @@ public class ChatJoinListActivity extends AppCompatActivity {
     ChatJoinListAdapter mAdapter;
     MateTalkRoom mateTalkRoom;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,8 +60,6 @@ public class ChatJoinListActivity extends AppCompatActivity {
         mAdapter.setOnItemClickListener(new ApproveWaiterViewHolder.OnItemClickListener() { //거절
             @Override
             public void onItemClick(View view, final chatroom_waiting waiting) {
-
-
 
               //  Toast.makeText(MyApplication.getContext(), "거절 : "+waiting.getMem_name(), Toast.LENGTH_SHORT).show();
                 NetworkManager.getInstance().chatroom_disapprove(MyApplication.getContext(), waiting.getMem_no(), mateTalkRoom.getChatroom_no(), new NetworkManager.OnResultListener<ChatroomDisapproveResult>() {
@@ -132,6 +131,7 @@ public class ChatJoinListActivity extends AppCompatActivity {
      //   setData();
     }
 
+
     private void setData(){
         int memNo = PropertyManager.getInstance().getNo();
         int chatNo = mateTalkRoom.getChatroom_no();
@@ -140,8 +140,8 @@ public class ChatJoinListActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess(Request request, ChatroomMemListResult result) {
-              //  Toast.makeText(ChatJoinListActivity.this, result.result.getChatroom_waitings().get(0).getMem_name()+"", Toast.LENGTH_SHORT).show();
-        //        Toast.makeText(ChatJoinListActivity.this, result.result.getChatroom_members().get(0)+"", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChatJoinListActivity.this, result.result.getChatroom_members().get(0).getMem_name()+"", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChatJoinListActivity.this, result.result.getChatroom_members().get(0).getMem_no()+"", Toast.LENGTH_SHORT).show();
                 mAdapter.setMateTalkWaitJoinList(result.result);
             }
 
