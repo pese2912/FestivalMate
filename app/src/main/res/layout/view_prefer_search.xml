@@ -4,19 +4,20 @@
     android:layout_height="100dp"
     android:layout_width="100dp"
     android:orientation="vertical"
+    android:background="@color/textf"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
     <RelativeLayout
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:padding="10dp">
+        android:layout_width="wrap_content">
 
     <ImageView
-        android:layout_height="144dp"
-        android:layout_width="98dp"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
         android:layout_gravity="center"
-        android:id="@+id/image_artist"/>
+        android:id="@+id/image_artist"
+        android:layout_margin="4dp" />
 
     <CheckBox
         android:layout_height="wrap_content"
@@ -31,18 +32,19 @@
         android:checked="false"/>
 
     <TextView
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_width="match_parent"
         android:id="@+id/name_artist"
-        android:background="#10000000"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
+        android:background="#60ffffff"
         android:singleLine="true"
         android:gravity="center"
+        android:textColor="@color/text3"
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="15dp"/>
+        android:textSize="14sp"
+        android:layout_alignBottom="@+id/image_artist"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
 

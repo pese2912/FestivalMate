@@ -166,8 +166,8 @@ public class HomeActivity extends AppCompatActivity {
         else {
             mAdapter.clear();
             mAdapter.add(new NavigationItem(0, R.drawable.menu_going, getResources().getString(R.string.lets_go_list)));
-            mAdapter.add(new NavigationItem(1, R.drawable.menu_wait_list, getResources().getString(R.string.mate_matching)));
-            mAdapter.add(new NavigationItem(2, R.drawable.menu_wait_list, getResources().getString(R.string.update_prefer_artist)));
+            mAdapter.add(new NavigationItem(1, R.drawable.menu_wait_list, getResources().getString(R.string.join_wait_list)));
+            mAdapter.add(new NavigationItem(2, R.drawable.menu_update_artist, getResources().getString(R.string.update_prefer_artist)));
             mAdapter.add(new NavigationItem(3, R.drawable.menu_setting, getResources().getString(R.string.settings)));
             NetworkManager.getInstance().show_mini_profile(HomeActivity.this, memNo, new NetworkManager.OnResultListener<ShowMiniProfileResult>() {
                 @Override

@@ -116,7 +116,7 @@
         android:layout_marginLeft="43dp"
         android:textSize="12sp"
         android:textColor="@color/color_toolbar"
-        android:layout_marginTop="60dp" />
+        android:layout_marginTop="30dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -130,7 +130,7 @@
         android:textSize="12sp"
         android:layout_marginLeft="50dp"
         android:singleLine="true"
-        android:layout_marginTop="60dp" />
+        android:layout_marginTop="30dp" />
 
     <ImageView
         android:textSize="12sp"

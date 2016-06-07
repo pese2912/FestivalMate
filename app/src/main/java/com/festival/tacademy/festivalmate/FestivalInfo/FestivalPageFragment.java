@@ -56,7 +56,7 @@ public class FestivalPageFragment extends Fragment {
         TextView name_festival = (TextView)view.findViewById(R.id.text_name);
         //image_festival.setImageResource(res);
 
-        
+
         Glide.with(image_festival.getContext()).load(festival.getFestival_img()).into(image_festival);
 //        name_festival.setText(festival.getFestival_name());
         name_festival.setText("");

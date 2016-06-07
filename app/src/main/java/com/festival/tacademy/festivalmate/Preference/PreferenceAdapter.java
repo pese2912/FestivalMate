@@ -42,7 +42,7 @@ public class PreferenceAdapter extends RecyclerView.Adapter<PreferenceViewHolder
 
     @Override
     public PreferenceViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view =  LayoutInflater.from(parent.getContext()).inflate(R.layout.view_prefer_search, null);
+        View view =  LayoutInflater.from(parent.getContext()).inflate(R.layout.view_prefer_search, parent, false);
         return new PreferenceViewHolder(view);
     }
 
