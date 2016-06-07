@@ -19,6 +19,9 @@ android {
         }
     }
 }
+repositories {
+    mavenCentral()
+}
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -36,4 +39,5 @@ dependencies {
     compile "com.wefika:flowlayout:0.4.1"
     compile 'com.makeramen:roundedimageview:2.2.1'
     compile 'com.google.android.gms:play-services-gcm:8.3.0'
+    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
 }

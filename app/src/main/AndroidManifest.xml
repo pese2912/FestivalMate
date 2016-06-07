@@ -51,6 +51,12 @@
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".MateTalk.ChatJoinListActivity" />
 
+        <provider android:authorities="com.facebook.app.FacebookContentProvider1548409195453832"
+            android:name="com.facebook.FacebookContentProvider"
+            android:exported="true" />
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+
+
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
             android:exported="true"

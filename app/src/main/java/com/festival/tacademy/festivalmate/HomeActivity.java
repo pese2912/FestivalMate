@@ -18,6 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.facebook.AccessToken;
+import com.facebook.login.LoginManager;
 import com.festival.tacademy.festivalmate.Data.ShowMiniProfileResult;
 import com.festival.tacademy.festivalmate.FestivalInfo.FestivalInfoFragment;
 import com.festival.tacademy.festivalmate.Manager.NetworkManager;
@@ -107,6 +109,7 @@ public class HomeActivity extends AppCompatActivity
 
         int memNo = PropertyManager.getInstance().getNo();
         NetworkManager.getInstance().show_mini_profile(HomeActivity.this, memNo, new NetworkManager.OnResultListener<ShowMiniProfileResult>() {
+
             @Override
             public void onSuccess(Request request, ShowMiniProfileResult result) {
                 nameView.setText(result.result.getName());
@@ -173,17 +176,26 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.settings) { // 설정 클릭 시
             startActivity(new Intent(HomeActivity.this, SettingsActivity.class));
         }
+
         else if(id == R.id.update_prefer_artist){
             startActivity(new Intent(HomeActivity.this, PreferenceActivity.class));
 
         }
+
         else if (id == R.id.logout) { // 로그아웃 클릭 시
             //startActivity(new Intent(HomeActivity.this, SettingsActivity.class));
             PropertyManager.getInstance().setLogin(false);
             PropertyManager.getInstance().setUser(null);
             PropertyManager.getInstance().setEmail("");
+            PropertyManager.getInstance().setFacebookId("");
             PropertyManager.getInstance().setNo(0);
             PropertyManager.getInstance().setPassword("");
+            AccessToken token = AccessToken.getCurrentAccessToken();
+            if (token != null) {
+                LoginManager loginManager = LoginManager.getInstance();
+                loginManager.logOut();
+            }
+
             startActivity(new Intent(HomeActivity.this, MainActivity.class));
 
         }
@@ -192,7 +204,4 @@ public class HomeActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
-
 }

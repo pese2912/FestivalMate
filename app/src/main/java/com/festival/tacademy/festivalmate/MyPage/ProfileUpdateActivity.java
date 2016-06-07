@@ -115,7 +115,7 @@ public class ProfileUpdateActivity extends AppCompatActivity {
                     return;
                 }
                 if(mUploadFile==null){
-                    mUploadFile=new File(imgUrl);
+                    mUploadFile=new File("");
                 }
 
                 NetworkManager.getInstance().modify_profile(ProfileUpdateActivity.this, memNo, mUploadFile, name, message,location, new NetworkManager.OnResultListener<ModifyProfileResult>() {

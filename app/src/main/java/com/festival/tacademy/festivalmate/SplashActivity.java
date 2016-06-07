@@ -48,7 +48,6 @@ public class SplashActivity extends AppCompatActivity {
 //                doRealStart();
 //            }
 //        };
-//        setUpIfNeeded();
         setUpIfNeeded();
     }
     @Override
@@ -62,6 +61,7 @@ public class SplashActivity extends AppCompatActivity {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
         super.onPause();
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -70,6 +70,7 @@ public class SplashActivity extends AppCompatActivity {
             setUpIfNeeded();
         }
     }
+
     private void setUpIfNeeded() {
         if (checkPlayServices()) {
             String regId = PropertyManager.getInstance().getRegistrationToken();
@@ -111,6 +112,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void startSplash() {
+
 //        String email = PropertyManager.getInstance().getEmail();
 //        if (!TextUtils.isEmpty(email)) {
 //            String password = PropertyManager.getInstance().getPassword();

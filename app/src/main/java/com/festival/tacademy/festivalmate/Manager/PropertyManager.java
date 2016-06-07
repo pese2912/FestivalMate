@@ -59,6 +59,7 @@ public class PropertyManager {
         mEditor.putString(FIELD_FACEBOOK_ID, facebookId);
         mEditor.commit();
     }
+
     public String getFacebookId() {
         return mPrefs.getString(FIELD_FACEBOOK_ID, "");
     }
