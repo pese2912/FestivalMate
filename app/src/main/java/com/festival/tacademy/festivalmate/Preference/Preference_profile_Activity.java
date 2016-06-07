@@ -99,7 +99,7 @@ public class Preference_profile_Activity extends AppCompatActivity {
             public void onClick(View v) {
                 String name =editSearch.getText().toString();
                 int memNo = PropertyManager.getInstance().getNo();
-                if(!TextUtils.isEmpty(name)){
+
                     NetworkManager.getInstance().searchArtistSurvey(Preference_profile_Activity.this, memNo, name, new NetworkManager.OnResultListener<ShowArtistSurveyResult>() {
                         @Override
                         public void onSuccess(Request request, ShowArtistSurveyResult result) {
@@ -117,7 +117,7 @@ public class Preference_profile_Activity extends AppCompatActivity {
                         }
                     });
                 }
-            }
+
         });
 
         btn_complete.setOnClickListener(new View.OnClickListener() {

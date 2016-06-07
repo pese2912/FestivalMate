@@ -18,6 +18,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.login.LoginManager;
 import com.festival.tacademy.festivalmate.Data.MySignInResult;
 import com.festival.tacademy.festivalmate.GCM.RegistrationIntentService;
 import com.festival.tacademy.festivalmate.Manager.NetworkManager;
@@ -42,12 +44,12 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-//        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
-//            @Override
-//            public void onReceive(Context context, Intent intent) {
-//                doRealStart();
-//            }
-//        };
+        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                doRealStart();
+            }
+        };
         setUpIfNeeded();
     }
     @Override
@@ -111,33 +113,63 @@ public class SplashActivity extends AppCompatActivity {
         return true;
     }
 
+
     private void startSplash() {
 
-//        String email = PropertyManager.getInstance().getEmail();
-//        if (!TextUtils.isEmpty(email)) {
-//            String password = PropertyManager.getInstance().getPassword();
-//            NetworkManager.getInstance().signin(SplashActivity.this, email, password, new NetworkManager.OnResultListener<MySignInResult>() {
-//                @Override
-//                public void onSuccess(Request request, MySignInResult result) {
-//                    if(result.success==1)
-//                    {
-//                        Toast.makeText(SplashActivity.this,"자동로그인성공",Toast.LENGTH_SHORT).show();
-//                        PropertyManager.getInstance().setLogin(true);
-//                        PropertyManager.getInstance().setUser(result.result);
-//                        goHomeActivity();
-//                    }
-//                }
-//                @Override
-//                public void onFail(Request request, IOException exception) {
-//                    Toast.makeText(SplashActivity.this, "자동로그인 실패 : " + exception.getMessage(), Toast.LENGTH_SHORT).show();
-//                    goMainActivity();
-//                }
-//            });
-//        }else {
-//            goMainActivity();
-//        }
+        String email = PropertyManager.getInstance().getEmail();
+        if (!TextUtils.isEmpty(email)) {
+            String password = PropertyManager.getInstance().getPassword();
+            NetworkManager.getInstance().signin(SplashActivity.this, email, password, new NetworkManager.OnResultListener<MySignInResult>() {
+                @Override
+                public void onSuccess(Request request, MySignInResult result) {
+                    if(result.success==1)
+                    {
+                        Toast.makeText(SplashActivity.this,"자동로그인성공",Toast.LENGTH_SHORT).show();
+                        PropertyManager.getInstance().setLogin(true);
+                        PropertyManager.getInstance().setUser(result.result);
+                        goHomeActivity();
+                    }
+                }
+                @Override
+                public void onFail(Request request, IOException exception) {
+                    Toast.makeText(SplashActivity.this, "자동로그인 실패 : " + exception.getMessage(), Toast.LENGTH_SHORT).show();
+                    goMainActivity();
+                }
+            });
+        }else {
+            String facebookId = PropertyManager.getInstance().getFacebookId();
+            if (!TextUtils.isEmpty(facebookId)) {
+                AccessToken token = AccessToken.getCurrentAccessToken();
+                if (token == null) {
+                    PropertyManager.getInstance().setFacebookId("");
+                    goMainActivity();
+                } else {
+                    if (facebookId.equals(token.getUserId())) {
 
-        goMainActivity();
+                        NetworkManager.getInstance().login_fb(this, token.getToken(), PropertyManager.getInstance().getRegistrationToken(), new NetworkManager.OnResultListener<MySignInResult>() {
+                            @Override
+                            public void onSuccess(Request request, MySignInResult result) {
+
+                            }
+
+                            @Override
+                            public void onFail(Request request, IOException exception) {
+
+                            }
+                        });
+
+                    } else {
+                        PropertyManager.getInstance().setFacebookId("");
+                        LoginManager.getInstance().logOut();
+                        goMainActivity();
+                    }
+                }
+            } else {
+                goMainActivity();
+            }
+        }
+
+
     }
 
     private void goHomeActivity() { // 홈으로 이동

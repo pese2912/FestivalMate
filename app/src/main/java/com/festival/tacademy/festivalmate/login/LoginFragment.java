@@ -214,17 +214,17 @@ public class LoginFragment extends Fragment {
         }
         updateButtonText();
     }
-
     @Override
     public void onStop() {
         super.onStop();
         tokenTracker.stopTracking();
     }
+
     private void updateButtonText() {
         if (isLogin()) {
-            facebookLoginButton.setText("facebook logout");
+           // facebookLoginButton.setText("facebook logout");
         } else {
-            facebookLoginButton.setText("facebook login");
+           // facebookLoginButton.setText("facebook login");
         }
     }
     private boolean isLogin() {
@@ -244,9 +244,8 @@ public class LoginFragment extends Fragment {
                     NetworkManager.getInstance().login_fb(getContext(), token.getToken(), PropertyManager.getInstance().getRegistrationToken(), new NetworkManager.OnResultListener<MySignInResult>() {
                         @Override
                         public void onSuccess(Request request, MySignInResult result) {
-
-                            Toast.makeText(getContext(), "페이스북 로그인"+result.result.getName()+" "+result.result.getMem_id(),Toast.LENGTH_SHORT).show();
-                            User user = (User)result.result;
+                            User user = result.result;
+                            Toast.makeText(getContext(), "페이스북 로그인"+user.getName()+" "+user.getMem_id()+" "+user.getMem_no(),Toast.LENGTH_SHORT).show();
                             // login success
                             PropertyManager.getInstance().setLogin(true);
                             PropertyManager.getInstance().setNo(user.getMem_no());

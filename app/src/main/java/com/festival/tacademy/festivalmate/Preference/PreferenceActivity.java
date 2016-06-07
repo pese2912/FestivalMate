@@ -99,7 +99,7 @@ public class PreferenceActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String name =editSearch.getText().toString();
                 int memNo = PropertyManager.getInstance().getNo();
-                if(!TextUtils.isEmpty(name)){
+
                     NetworkManager.getInstance().searchArtistSurvey(PreferenceActivity.this, memNo, name, new NetworkManager.OnResultListener<ShowArtistSurveyResult>() {
                         @Override
                         public void onSuccess(Request request, ShowArtistSurveyResult result) {
@@ -116,8 +116,8 @@ public class PreferenceActivity extends AppCompatActivity {
                             Toast.makeText(PreferenceActivity.this,"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
                         }
                     });
-                }
-            }
+
+               }
         });
 
         btn_complete.setOnClickListener(new View.OnClickListener() {

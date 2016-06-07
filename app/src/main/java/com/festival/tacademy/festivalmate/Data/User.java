@@ -26,7 +26,6 @@ public class User implements Serializable {
     public String chatroom_mem_name;
     public String chatroom_mem_img;
 
-
     public int getMem_location() {
         return mem_location;
     }

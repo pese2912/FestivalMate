@@ -20,6 +20,7 @@ import com.festival.tacademy.festivalmate.Data.FestivalDetailResult;
 import com.festival.tacademy.festivalmate.Data.FestivalResultResult;
 import com.festival.tacademy.festivalmate.Data.HateResult;
 import com.festival.tacademy.festivalmate.Data.JsonNewChatroom;
+import com.festival.tacademy.festivalmate.Data.JsonSelectedArtist;
 import com.festival.tacademy.festivalmate.Data.ModifyProfileResult;
 import com.festival.tacademy.festivalmate.Data.MySignInResult;
 import com.festival.tacademy.festivalmate.Data.MySignUpResult;
@@ -366,6 +367,7 @@ public class NetworkManager {
                 .url(URL_SAVE_ARTIST_SURVEY)
                 .post(body)
                 .build();
+
 
 
         final NetworkResult<MySignUpResult> result = new NetworkResult<>();
@@ -795,15 +797,26 @@ public class NetworkManager {
 //                .add("festival_no", festival_no+"")
 //                .build();
 
-        FormBody.Builder builder = new FormBody.Builder();
-        builder.add("mem_no", mem_no+"");
-        builder.add("festival_no", festival_no+"");
 
-        for(Artist a : selected_artist) {
-            builder.add("selected_artist_no",a.getArtist_no()+"");
-        }
 
-        RequestBody body = builder.build();
+//        FormBody.Builder builder = new FormBody.Builder();
+//        builder.add("mem_no", mem_no+"");
+//        builder.add("festival_no", festival_no+"");
+//
+//        for(Artist a : selected_artist) {
+//            builder.add("selected_artist",a.getArtist_no()+"");
+//        }
+
+        JsonSelectedArtist data = new JsonSelectedArtist();
+        data.mem_no = mem_no;
+        data.festival_no = festival_no;
+        data.selected_artist = selected_artist;
+
+
+        String json = gson.toJson(data);
+        RequestBody body = RequestBody.create(MediaType.parse("application/json"), json);
+
+      //  RequestBody body = builder.build();
 
         Request request = new Request.Builder()
                 .url(URL_SHOW_MATCHING_RESULT)
@@ -1550,6 +1563,7 @@ public class NetworkManager {
                 .post(body)
                 .build();
 
+
         final NetworkResult<ChatroomSendMsgResult> result = new NetworkResult<>();
         result.request = request;
         result.listener = listener;
@@ -1582,7 +1596,6 @@ public class NetworkManager {
 
         return request;
     }
-
 
     private static final String URL_LOGIN_FB = MY_SERVER + "/login_fb"; // 페이스북 로그인
     public Request login_fb(Object tag,
@@ -1629,6 +1642,7 @@ public class NetworkManager {
                 }
             }
         });
+
         return request;
     }
 }

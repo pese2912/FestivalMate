@@ -62,7 +62,6 @@ public class MyGcmListenerService extends GcmListenerService {
         Log.d(TAG, "From: " + from);
         Log.d(TAG, "ChatMessage: " + message);
 
-        
 //        if (from.startsWith("/topics/")) {
 //            // message received from some topic.
 //        } else {
