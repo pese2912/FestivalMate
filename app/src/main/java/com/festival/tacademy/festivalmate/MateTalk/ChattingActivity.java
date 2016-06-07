@@ -85,9 +85,10 @@ public class ChattingActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 int memNo = PropertyManager.getInstance().getNo();
-                Toast.makeText(MyApplication.getContext(), ""+mateTalkRoom.getChatroom_no(),Toast.LENGTH_SHORT).show();
+            //    Toast.makeText(MyApplication.getContext(), ""+mateTalkRoom.getChatroom_no(),Toast.LENGTH_SHORT).show();
                 final String message = inputView.getText().toString();
                 if (!TextUtils.isEmpty(message)) {
+
                     NetworkManager.getInstance().chatroom_send_msg(ChattingActivity.this, memNo, mateTalkRoom.getChatroom_no(), message, memNo, new NetworkManager.OnResultListener<ChatroomSendMsgResult>() {
                         @Override
                         public void onSuccess(Request request, ChatroomSendMsgResult result) {
@@ -95,7 +96,7 @@ public class ChattingActivity extends AppCompatActivity {
                                 //mAdapter.add();
                             Send send = new Send();
                             send.message= message;
-                            send.date= "2016-07-24";
+                          //  send.date= "2016-07-24";
                             mAdapter.add(send);
                         }
 
@@ -129,6 +130,8 @@ public class ChattingActivity extends AppCompatActivity {
             finish();
             return true;
         }
+
+
 
         else if(id == R.id.chat_join_list){
             Intent intent = new Intent(ChattingActivity.this, ChatJoinListActivity.class);

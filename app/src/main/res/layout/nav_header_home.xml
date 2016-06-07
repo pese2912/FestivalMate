@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-    <RelativeLayout
-    android:theme="@style/ThemeOverlay.AppCompat.Dark"
+<RelativeLayout android:theme="@style/ThemeOverlay.AppCompat.Dark"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -11,51 +10,61 @@
     android:background="@color/color_toolbar"
     android:layout_height="@dimen/nav_header_height"
     android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignBottom="@+id/profile_update"
-        android:layout_gravity="right"
-        android:id="@+id/btn_close"
-        android:text="X"
-        android:textAppearance="?android:attr/textAppearanceLarge"/>
+
 
     <TextView
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:id="@+id/profile_update"
         android:text="@string/profile_update"
+        android:textSize="12sp"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignTop="@+id/profile_image"
         android:textStyle=""
-        android:textColor="#ffffff"/>
-
-    <ImageView
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:layout_height="75dp"
-        android:layout_width="75dp"
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/profile_image"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@android:drawable/sym_def_app_icon"/>
+        android:textColor="#ffffff"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="50dp" />
 
     <TextView
+        android:layout_height="15dp"
+        android:layout_width="15dp"
+        android:layout_gravity="right"
+        android:id="@+id/btn_close"
+        android:text="      "
+        android:background="@drawable/img_x"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="50dp" />
+
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        app:riv_oval="true"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:layout_height="100dp"
+        android:layout_width="100dp"
+        android:layout_gravity="center_horizontal"
+
+        android:id="@+id/profile_image"
+        android:src="@android:drawable/sym_def_app_icon"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp" />
+
+    <TextView
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:id="@+id/profile_id"
-        android:text="Android Studio"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:layout_alignStart="@+id/profile_image"
-        android:layout_alignLeft="@+id/profile_image"
-        android:layout_alignParentBottom="true"
-        android:textAlignment="center"/>
+        android:text="das"
+        android:textSize="14sp"
+        android:textColor="@color/textf"
+        android:layout_below="@+id/profile_image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp" />
 
 </RelativeLayout>

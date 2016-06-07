@@ -41,6 +41,11 @@ public class FestivalDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         mListener2 = listener;
     }
 
+//    MapViewHolder.OnItemClickListener mListener3;
+//
+//    public void setOnItemClickListener3(MapViewHolder.OnItemClickListener listener) {
+//        mListener3 = listener;
+//    }
 
     @Override
     public int getItemViewType(int position) {
@@ -70,6 +75,10 @@ public class FestivalDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         position--;
         if( position == 0 ) {
             return VIEW_TYPE_LETSGO;
+        }
+        position--;
+        if( position == 0 ) {
+            return VIEW_TYPE_TITLE;
         }
         position--;
         if( position == 0 ) {
@@ -144,7 +153,7 @@ public class FestivalDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
         if( position == 0 ) {
             TitleViewHolder h = (TitleViewHolder)holder;
-            h.setData("Lets Go");
+            h.setData("갈꺼야");
             return;
         }
         position--;
@@ -155,8 +164,16 @@ public class FestivalDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         }
         position--;
         if( position == 0 ) {
+            TitleViewHolder h = (TitleViewHolder)holder;
+            h.setData("장소");
+            return;
+        }
+        position--;
+
+        if( position == 0 ) {
             MapViewHolder h = (MapViewHolder)holder;
             h.setLocation(festival);
+//            h.setOnItemClickListener(mListener3);
             return;
         }
 
@@ -176,6 +193,7 @@ public class FestivalDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         if( festival.getFestival_going_mem().size() > 0 ) {
             size += 2;
         }
+        size+=2;
 
         return size;
     }

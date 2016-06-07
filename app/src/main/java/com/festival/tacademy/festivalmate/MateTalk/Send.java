@@ -5,6 +5,6 @@ package com.festival.tacademy.festivalmate.MateTalk;
  */
 public class Send implements ChattingMessage{
     String message;
-    String date;
+  //  String date;
 
 }

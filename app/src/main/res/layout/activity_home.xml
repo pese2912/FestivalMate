@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-    <android.support.v4.widget.DrawerLayout
+<android.support.v4.widget.DrawerLayout
     tools:openDrawer="start"
     android:fitsSystemWindows="true"
     android:layout_height="match_parent"
@@ -19,8 +19,42 @@
         android:layout_height="match_parent"
         android:layout_width="wrap_content"
         android:id="@+id/nav_view"
-        app:menu="@menu/activity_home_drawer"
         app:headerLayout="@layout/nav_header_home"
-        android:layout_gravity="start"/>
+        android:layout_gravity="start" >
+
+        <ListView
+            android:id="@+id/list_view"
+            android:layout_marginTop="213dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </ListView>
+
+
+        <!--<com.festival.tacademy.festivalmate.LogoutView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:id="@+id/view_logout"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_marginTop="600dp"-->
+            <!--android:layout_marginLeft="170dp"-->
+            <!--/>-->
+
+    <!--</android.support.design.widget.NavigationView>-->
+
+    <com.festival.tacademy.festivalmate.MyPage.LogoutView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/view_logout"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="600dp"
+        android:layout_marginLeft="170dp"
+        >
+    </com.festival.tacademy.festivalmate.MyPage.LogoutView>
+    </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>

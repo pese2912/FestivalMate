@@ -141,7 +141,8 @@ public class MakeMateTalkActivity extends AppCompatActivity {
 
 
                 if(mUploadFile == null){
-                    mUploadFile = new File("");
+                    mUploadFile = new File("/default.jpg");
+                    mUploadFile.mkdirs();
                 }
 
                 NetworkManager.getInstance().create_new_chatroom(MakeMateTalkActivity.this, memNo, fesNo, chatroom_name, chatroom_maxSize,location, age, mUploadFile,bg, selectedArtist.result, new NetworkManager.OnResultListener<CreateNewChatroomResult>() {
@@ -207,6 +208,7 @@ public class MakeMateTalkActivity extends AppCompatActivity {
                     case R.id.radioButton5:
                         bg=0;
                         getImageFromGallery();
+                        //Toast.makeText(MakeMateTalkActivity.this,mUploadFile.getName()+"",Toast.LENGTH_SHORT).show();
                         break;
                 }
                 Toast.makeText(MakeMateTalkActivity.this,bg+"",Toast.LENGTH_SHORT).show();
@@ -262,7 +264,6 @@ public class MakeMateTalkActivity extends AppCompatActivity {
             finish();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

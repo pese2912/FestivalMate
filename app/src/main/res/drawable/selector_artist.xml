@@ -3,10 +3,10 @@
 
     <item
         android:state_checked="true"
-        android:drawable="@drawable/non_selected_artist"
+        android:drawable="@drawable/selectedartist"
         />
 
     <item
         android:state_checked="false"
-        android:drawable="@drawable/non_selected_artist" />
+        android:drawable="@drawable/non_selectedartst" />
 </selector>

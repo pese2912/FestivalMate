@@ -490,8 +490,6 @@ public class NetworkManager {
         return request;
     }
 
-
-
     private static final String URL_SHOW_GOING_LIST = MY_SERVER + "/show_going_list";       // 갈꺼야 등록한 공연 리스트 조회
     public Request show_going_list(Object tag,
                                      int mem_no,

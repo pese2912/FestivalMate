@@ -44,33 +44,44 @@
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:id="@+id/imageView5"
-                android:layout_marginLeft="16dp"
+                android:layout_marginLeft="23dp"
                 android:layout_centerInParent="true"
                 android:layout_alignParentLeft="true"
                 android:background="@drawable/festival_search_img"/>
 
             <Button
                 style="?android:attr/buttonStyleSmall"
-                android:layout_width="45dp"
-                android:layout_height="25dp"
+                android:layout_width="50dp"
+                android:layout_height="27dp"
                 android:id="@+id/btn_search"
                 android:layout_marginRight="16dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerInParent="true"
+                android:layout_marginLeft="14dp"
                 android:background="@drawable/festival_search_btn"/>
 
             <EditText
-                android:layout_width="279dp"
+                android:layout_width="255dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/edit_info"
                 android:hint="@string/festibal_search_ment"
-                android:layout_toLeftOf="@+id/btn_match"
-                android:layout_toStartOf="@+id/btn_match"
+                android:layout_toRightOf="@+id/imageView5"
+                android:layout_toEndOf="@+id/imageView5"
                 android:textSize="12sp"
                 android:layout_centerInParent="true"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="35dp"
-                android:layout_marginRight="14dp"/>
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="14dp"
+                android:background="@null"/>
+
+            <ImageView
+                android:layout_width="290dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView19"
+                android:background="@drawable/text_bottom"
+                android:layout_below="@+id/imageView5"
+                android:layout_marginLeft="16dp"
+                android:layout_toLeftOf="@+id/btn_search"
+                android:layout_toStartOf="@+id/btn_search" />
         </RelativeLayout>
 
         <android.support.v7.widget.RecyclerView

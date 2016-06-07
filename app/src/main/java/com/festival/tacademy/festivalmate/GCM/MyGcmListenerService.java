@@ -58,9 +58,12 @@ public class MyGcmListenerService extends GcmListenerService {
 
 //        String type = data.getString("type");
 //        String senderid = data.getString("sender");
-        String message = data.getString("chat_content");
+//        String message = data.getString("chat_content");
+
         Log.d(TAG, "From: " + from);
-        Log.d(TAG, "ChatMessage: " + message);
+
+        //Log.d(TAG, "ChatMessage: " + message);
+
 
 //        if (from.startsWith("/topics/")) {
 //            // message received from some topic.
@@ -92,7 +95,7 @@ public class MyGcmListenerService extends GcmListenerService {
 //            }
 //        }
 
-       sendNotification(message);
+    //   sendNotification(message);
     }
     // [END receive_message]
 

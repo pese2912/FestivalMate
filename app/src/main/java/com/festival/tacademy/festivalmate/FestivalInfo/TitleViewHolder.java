@@ -14,7 +14,7 @@ public class TitleViewHolder extends RecyclerView.ViewHolder {
     TextView titleView;
     public TitleViewHolder(View itemView) {
         super(itemView);
-        titleView = (TextView)itemView.findViewById(R.id.text_title);
+        titleView = (TextView)itemView.findViewById(R.id.text_menu);
     }
 
     public void setData(String title) {
