@@ -3,12 +3,12 @@ package com.festival.tacademy.festivalmate.FestivalInfo;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
-
 import com.festival.tacademy.festivalmate.R;
 
 /**
  * Created by J.K.Lee on 2016-05-16.
  */
+
 public class TitleViewHolder extends RecyclerView.ViewHolder {
 
     TextView titleView;

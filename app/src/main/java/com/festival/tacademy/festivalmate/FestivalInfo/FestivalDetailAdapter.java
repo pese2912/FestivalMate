@@ -95,6 +95,7 @@ public class FestivalDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_festival_photo, parent, false);
                 return new PhotoViewHolder(view);
             }
+
             case VIEW_TICKET_LINK: {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_ticket_link, null);
                 return new TicketLinkHolder(view);

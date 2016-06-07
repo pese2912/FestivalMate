@@ -36,8 +36,16 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="메이트 매칭하기"
+        android:text="메이트 매칭 시작하기"
+        android:textColor="@color/textf"
+        android:background="@drawable/login_btn_default"
         android:id="@+id/btn_matching"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="34dp" />
 </RelativeLayout>

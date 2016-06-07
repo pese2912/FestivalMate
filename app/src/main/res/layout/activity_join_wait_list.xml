@@ -67,7 +67,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="대기중인 메이트톡이 없어요."
                 android:textColor="#b5b5b5"
-                android:id="@+id/textView19"
+                android:id="@+id/text_location"
                 android:layout_below="@+id/imageView7"
                 android:layout_centerInParent="true"
                 android:layout_marginTop="25dp"

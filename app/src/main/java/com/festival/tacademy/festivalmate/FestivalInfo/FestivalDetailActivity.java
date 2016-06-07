@@ -82,7 +82,30 @@ public class FestivalDetailActivity extends AppCompatActivity {
                 Uri uri = Uri.parse(str);
                 intent.setData(uri);
                 startActivity(intent);
+            }
 
+            @Override
+            public void onItemClick2(String str) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                Uri uri = Uri.parse(str);
+                intent.setData(uri);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onItemClick3(String str) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                Uri uri = Uri.parse(str);
+                intent.setData(uri);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onItemClick4(String str) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                Uri uri = Uri.parse(str);
+                intent.setData(uri);
+                startActivity(intent);
             }
         });
 
