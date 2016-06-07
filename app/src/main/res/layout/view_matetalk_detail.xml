@@ -1,107 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/textf"
     android:layout_height="match_parent">
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
+        android:textStyle="bold"
+        android:textColor="@color/text6"
+        android:textSize="13sp"
         android:id="@+id/text_title"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp" />
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text8"
+        android:textSize="13sp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="매칭 가수"
         android:id="@+id/text_title1"
         android:layout_below="@+id/text_title"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="16dp" />
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Small Text"
         android:id="@+id/text_artist_num"
+        android:textColor="@color/text8"
+        android:textSize="12sp"
         android:layout_alignTop="@+id/text_title1"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="16dp" />
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:id="@+id/text_artists"
+        android:textColor="@color/text8"
+        android:textSize="12sp"
         android:layout_below="@+id/text_title1"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/text_region"
+        android:layout_alignEnd="@+id/text_region"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginBottom="16dp" />
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="선호 거주 지역"
+        android:textColor="@color/text8"
+        android:textSize="13sp"
         android:id="@+id/textView8"
         android:layout_below="@+id/text_artists"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp" />
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Small Text"
+        android:textColor="@color/text8"
+        android:textSize="12sp"
         android:id="@+id/text_region"
         android:layout_alignTop="@+id/textView8"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="16dp" />
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="연령대"
         android:id="@+id/textView10"
+        android:textColor="@color/text8"
+        android:textSize="13sp"
         android:layout_below="@+id/text_region"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignLeft="@+id/edit_input"
+        android:layout_alignStart="@+id/edit_input"
+        android:layout_marginTop="32dp" />
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Small Text"
         android:id="@+id/text_age"
         android:layout_below="@+id/text_region"
+        android:textColor="@color/text8"
+        android:textSize="12sp"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="32dp" />
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="참여자"
         android:id="@+id/edit_input"
         android:layout_below="@+id/textView10"
+        android:textColor="@color/text8"
+        android:textSize="13sp"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Small Text"
         android:id="@+id/text_mem_user"
+        android:textColor="@color/text8"
+        android:textSize="12sp"
         android:layout_below="@+id/text_age"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="32dp" />
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
@@ -109,16 +154,25 @@
         android:layout_below="@+id/edit_input"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/rv_list">
+        android:id="@+id/rv_list"
+        android:layout_marginLeft="16dp">
 
     </android.support.v7.widget.RecyclerView>
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:text="매칭 시작하기"
+        android:textStyle="bold"
+        android:textColor="@color/textf"
+        android:textSize="14sp"
+        android:background="@drawable/login_btn_default"
         android:id="@+id/btn_request"
         android:layout_below="@+id/rv_list"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="20dp" />
 
 </RelativeLayout>

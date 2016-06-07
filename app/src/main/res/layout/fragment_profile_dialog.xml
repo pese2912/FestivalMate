@@ -46,8 +46,8 @@
             android:id="@+id/text_user_name"
             android:layout_below="@+id/text_user_state"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="18dp" />
+            android:layout_marginBottom="6dp"
+            android:layout_marginTop="10dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -73,8 +73,8 @@
             android:layout_alignRight="@+id/rv_list2"
             android:layout_alignEnd="@+id/rv_list2"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="23dp"
-            android:layout_marginBottom="14dp" />
+            android:layout_marginTop="17dp"
+            android:layout_marginBottom="12dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -88,8 +88,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="23dp"
-            android:layout_marginBottom="15dp" />
+            android:layout_marginTop="17dp"
+            android:layout_marginBottom="12dp" />
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
@@ -98,7 +98,8 @@
             android:layout_below="@+id/text_ment"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginLeft="16dp" />
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="13dp" />
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
@@ -135,6 +136,21 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="53dp"
             android:layout_marginRight="16dp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/login_btn_default"
+            android:text="메이트톡 하기"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/textf"
+            android:id="@+id/btn_maketalk"
+            android:layout_below="@+id/rv_list2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="13dp" />
     </RelativeLayout>
 
 </RelativeLayout>

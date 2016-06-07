@@ -38,6 +38,7 @@
         android:background="#60ffffff"
         android:singleLine="true"
         android:gravity="center"
+        android:textStyle="bold"
         android:textColor="@color/text3"
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge"

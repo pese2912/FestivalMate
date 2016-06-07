@@ -1002,7 +1002,7 @@ public class NetworkManager {
 
         RequestBody body = new FormBody.Builder()
                 .add("mem_no", mem_no+"")
-                .add("chatroom_no", chatroom_no+"")
+                .add("chatroom_no", chatroom_no + "")
                 .build();
 
         Request request = new Request.Builder()
@@ -1150,7 +1150,7 @@ public class NetworkManager {
 
         RequestBody body = new FormBody.Builder()
                 .add("mem_no", mem_no+"")
-                .add("chatroom_no", chatroom_no+"")
+                .add("chatroom_no", chatroom_no + "")
                 .add("mem_chatroom_state", mem_chatroom_state+"")
                 .build();
 
@@ -1198,7 +1198,7 @@ public class NetworkManager {
                                          OnResultListener<DeleteGoingListResult> listener) {
 
         RequestBody body = new FormBody.Builder()
-                .add("mem_no", mem_no+"")
+                .add("mem_no", mem_no + "")
                 .add("festival_no", festival_no+"")
                 .build();
 
@@ -1248,7 +1248,7 @@ public class NetworkManager {
 
         RequestBody body = new FormBody.Builder()
                 .add("mem_no", mem_no+"")
-                .add("festival_no", festival_no+"")
+                .add("festival_no", festival_no + "")
                 .add("mem_going_check", mem_going_check+"")
                 .build();
 
@@ -1450,7 +1450,7 @@ public class NetworkManager {
                                        OnResultListener<ShowMyProfileResult> listener) {
 
         RequestBody body = new FormBody.Builder()
-                .add("mem_no", mem_no+"")
+                .add("mem_no", mem_no + "")
                 .build();
 
         Request request = new Request.Builder()
@@ -1626,6 +1626,57 @@ public class NetworkManager {
                 if (response.isSuccessful()) {
                     String text = response.body().string();
                     MySignInResult data = gson.fromJson(text, MySignInResult.class);
+                    if (data.success == 1) {
+                        result.result = data;
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SUCCESS, result));
+                    } else {
+                        result.exception = new IOException(data.message);
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                    }
+
+                } else {
+                    result.exception = new IOException(response.message());
+                    mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                }
+            }
+        });
+
+        return request;
+    }
+
+
+
+    private static final String URL_CREATE_NEW_PRIVATE_CHATROOM = MY_SERVER + "/create_new_private_chatroom"; // 새로운 채팅방을 만듦
+    public Request create_new_private_chatroom(Object tag,
+                            int mem_no,
+                            int another_mem_no,
+                            OnResultListener<CreateNewChatroomResult> listener) {
+
+        RequestBody body = new FormBody.Builder()
+                .add("mem_no", mem_no+"")
+                .add("another_mem_no", another_mem_no+"")
+                .build();
+
+        Request request = new Request.Builder()
+                .url(URL_CREATE_NEW_PRIVATE_CHATROOM)
+                .post(body)
+                .build();
+
+        final NetworkResult<CreateNewChatroomResult> result = new NetworkResult<>();
+        result.request = request;
+        result.listener = listener;
+        mClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                result.exception = e;
+                mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String text = response.body().string();
+                    CreateNewChatroomResult data = gson.fromJson(text, CreateNewChatroomResult.class);
                     if (data.success == 1) {
                         result.result = data;
                         mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SUCCESS, result));

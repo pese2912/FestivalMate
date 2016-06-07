@@ -18,6 +18,12 @@ public class MatetalkDetailViewHolder extends RecyclerView.ViewHolder {
     MatetalkDetailView detailView;
     MatetalkInfoView infoView;
     MateTalkRoom mateTalkRoom;
+    String[] city = {"무관","서울","부산","대구","인천","광주"
+            ,"대전","울산","세종","경기","강원","충북"
+            ,"충남","전북","전남","경북","경남","제주"};
+
+    String[] old = {"무관","10대","20대","30대","40대","40대 이상"};
+
 
     public MatetalkDetailViewHolder(View itemView) {
         super(itemView);
@@ -58,8 +64,8 @@ public class MatetalkDetailViewHolder extends RecyclerView.ViewHolder {
             }
         }
 
-        detailView.text_region.setText(chatinfo.getChatroom_location()+"");
-        detailView.text_age.setText(chatinfo.getChatroom_age()+"");
+        detailView.text_region.setText(city[chatinfo.getChatroom_location()]); //지역
+        detailView.text_age.setText(old[chatinfo.getChatroom_age()]);//나이
 
         detailView.text_mem_user.setText(chatinfo.getChatroom_size()+"명");
 

@@ -15,9 +15,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.festival.tacademy.festivalmate.Data.CreateNewChatroomResult;
 import com.festival.tacademy.festivalmate.Data.HateResult;
+import com.festival.tacademy.festivalmate.Data.MateTalkRoom;
 import com.festival.tacademy.festivalmate.Data.User;
 import com.festival.tacademy.festivalmate.Manager.NetworkManager;
+import com.festival.tacademy.festivalmate.Manager.PropertyManager;
+import com.festival.tacademy.festivalmate.MateTalk.ChattingActivity;
 import com.festival.tacademy.festivalmate.MyApplication;
 import com.festival.tacademy.festivalmate.MyPage.ReportActivity;
 import com.festival.tacademy.festivalmate.R;
@@ -37,6 +41,7 @@ public class ProfileDialogFragment extends DialogFragment {
     User user;
     TextView user_state, user_name, user_email;
     ImageView user_image;
+
     RecyclerView rv_list1, rv_list2;
     ProfileLetsgoAdapter mAdapter1;
     ProfilePreferArtistAdapter mAdapter2;
@@ -99,6 +104,36 @@ public class ProfileDialogFragment extends DialogFragment {
 //                });
 
                 startActivity(new Intent(getActivity(), ReportActivity.class));
+            }
+        });
+
+        Button btn_matetalk = (Button)view.findViewById(R.id.btn_maketalk);
+        btn_matetalk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int memNo = PropertyManager.getInstance().getNo();
+                int anoNo = user.getMem_no();
+
+                NetworkManager.getInstance().create_new_private_chatroom(MyApplication.getContext(), memNo, anoNo, new NetworkManager.OnResultListener<CreateNewChatroomResult>() {
+                    @Override
+                    public void onSuccess(Request request, CreateNewChatroomResult result) {
+                        Toast.makeText(getContext(), "성공",Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getContext(), ChattingActivity.class);
+                        MateTalkRoom room = new MateTalkRoom();
+                        room.setChatroom_no(result.result.getChatroom_no());
+                        //room.setFestival_name(result.result.getFestival_name());
+                        room.setChatroom_name(user.getName());
+                        intent.putExtra("chatting",room);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onFail(Request request, IOException exception) {
+
+                        Toast.makeText(getContext(), "실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 

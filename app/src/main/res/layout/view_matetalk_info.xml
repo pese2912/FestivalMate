@@ -8,29 +8,37 @@
     <ImageView
         android:id="@+id/image_view"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:src="@drawable/back3"
-        android:layout_gravity="top"/>
+        android:layout_height="130dp"
+        android:layout_gravity="top"
+        android:layout_marginTop="5dp" />
 
     <TextView
         android:id="@+id/title_view"
-        android:layout_width="217dp"
-        android:layout_height="68dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Hello"
-        android:textColor="#000000"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:textColor="@color/textf"
         android:layout_gravity="top"
         android:textAppearance="?android:textAppearanceLarge"
         android:layout_alignBottom="@+id/image_view"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="14dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/text_match_rate"
         android:text="99%"
-        android:layout_alignParentRight="true"/>
+        android:layout_alignParentRight="true"
+        android:textSize="11sp"
+        android:textColor="@color/textf"
+        android:layout_marginTop="14dp"
+        android:layout_marginRight="16dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -38,19 +46,25 @@
         android:id="@+id/text_joining"
         android:layout_alignParentRight="true"
         android:layout_alignBottom="@+id/image_view"
-        android:text="10명 참여 중"/>
+        android:text="10명 참여 중"
+        android:textSize="11sp"
+        android:textColor="@color/textf"
+        android:layout_marginBottom="14dp"
+        android:layout_marginRight="16dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Small Text"
+        android:textStyle="bold"
+        android:textSize="11sp"
+        android:textColor="@color/textf"
         android:id="@+id/text_hostName"
         android:layout_above="@+id/title_view"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="38dp"
-        android:layout_marginStart="38dp" />
+        android:layout_alignLeft="@+id/title_view"
+        android:layout_alignStart="@+id/title_view"
+        android:layout_marginBottom="7dp" />
 
 
 </RelativeLayout>
