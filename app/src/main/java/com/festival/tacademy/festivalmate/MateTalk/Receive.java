@@ -7,8 +7,13 @@ import android.graphics.drawable.Drawable;
  */
 public class Receive implements ChattingMessage{
 
-    Drawable icon;
-    String message;
-    String date;
+    public Drawable icon;
+    public String chat_regdate;
+    public  String chat_content;
+    public int chat_sender_no;
+    public  String mem_name;
+    public String mem_img;
+    public  String message;
+    public String date;
 
 }

@@ -58,9 +58,11 @@ public class ChatJoinerViewHolder extends RecyclerView.ViewHolder {
 
     public void setChatJoin(chatroom_member member, int chatNo, int host){
         this.member = member;
+
         Glide.with(photoView.getContext()).load(NetworkManager.MY_SERVER+"/"+member.getMem_img()).into(photoView);
 //        Toast.makeText(MyApplication.getContext(), member.getMem_no()+" "+ member.getMem_name()+" "+member.getMem_img(), Toast.LENGTH_SHORT).show();
         nameView.setText(member.getMem_name());
+
         if(host==1){
             if(PropertyManager.getInstance().getNo() == member.getMem_no()){
                 btn.setVisibility(View.GONE);
@@ -68,6 +70,9 @@ public class ChatJoinerViewHolder extends RecyclerView.ViewHolder {
             else{
                 btn.setVisibility(View.VISIBLE);
             }
+        }
+        else{
+            btn.setVisibility(View.GONE);
         }
 
 //        btn.setOnClickListener(new View.OnClickListener() {

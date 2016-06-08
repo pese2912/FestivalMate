@@ -114,13 +114,15 @@ public class SignUpFragment extends Fragment {
                     mUploadFile= new File("");
                 }
 
+
                 NetworkManager.getInstance().signup(getContext(), name, email, password,mUploadFile,PropertyManager.getInstance().getRegistrationToken(), new NetworkManager.OnResultListener<MySignUpResult>() { // 회원가입
                     @Override
                     public void onSuccess(Request request, MySignUpResult result) {
 
                         Toast.makeText(getContext(), "가입성공 : " + result.message,Toast.LENGTH_SHORT).show();
+                        final String regId = PropertyManager.getInstance().getRegistrationToken();
 
-                        NetworkManager.getInstance().signin(getContext(), email, password, new NetworkManager.OnResultListener<MySignInResult>() { //가입 성공하면 바로 로그인 요청
+                        NetworkManager.getInstance().signin(getContext(), email, password,regId, new NetworkManager.OnResultListener<MySignInResult>() { //가입 성공하면 바로 로그인 요청
 
                             @Override
                             public void onSuccess(Request request, MySignInResult result) {  // 로그인 성공

@@ -26,8 +26,8 @@ public class MateTalkRoomViewHolder extends RecyclerView.ViewHolder {
     TextView numberView;
     TextView dateView;
     TextView unReadView;
-
     MateTalkRoom talkRoom;
+
     public interface OnItemClickListener {
         public void onItemClick(View view, MateTalkRoom artist);
     }
@@ -37,8 +37,6 @@ public class MateTalkRoomViewHolder extends RecyclerView.ViewHolder {
     public void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener;
     }
-
-
 
     public MateTalkRoomViewHolder(View itemView) {
         super(itemView);
@@ -62,6 +60,7 @@ public class MateTalkRoomViewHolder extends RecyclerView.ViewHolder {
     public void setMateTalkRoom(MateTalkRoom room){
 
         this.talkRoom = room;
+        String date = room.getChatroom_new_chat_date();
         festivalView.setText(room.getFestival_name());
         nameView.setText("- "+room.getChatroom_name());
         contentView.setText(room.getChatroom_new_chat_content());
@@ -69,7 +68,10 @@ public class MateTalkRoomViewHolder extends RecyclerView.ViewHolder {
         Glide.with(photoView.getContext()).load(NetworkManager.MY_SERVER+"/"+room.getChatroom_img()).into(photoView);
        // Log.i("photo",NetworkManager.MY_SERVER+"/"+room.getChatroom_img());
         numberView.setText(room.getChatroom_size()+"명");
-        dateView.setText(room.getChatroom_new_chat_date());
+        if(date != null) {
+            dateView.setText(date.substring(5, 7) + "월 " + date.substring(8, 10) + "일");
+        }
+ //       dateView.setText(date);
 //        unReadView.setText(room.getChatroom_new_count()+"");
     }
 }

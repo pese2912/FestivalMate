@@ -13,9 +13,13 @@ import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.festival.tacademy.festivalmate.Data.RequestNewChatResult;
 import com.festival.tacademy.festivalmate.Data.User;
 import com.festival.tacademy.festivalmate.MainActivity;
+import com.festival.tacademy.festivalmate.Manager.NetworkManager;
+import com.festival.tacademy.festivalmate.Manager.PropertyManager;
 import com.festival.tacademy.festivalmate.MateTalk.ChattingActivity;
+import com.festival.tacademy.festivalmate.MyApplication;
 import com.festival.tacademy.festivalmate.R;
 import com.google.android.gms.gcm.GcmListenerService;
 
@@ -32,19 +36,27 @@ import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.gcm.GcmListenerService;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
+
+import okhttp3.Request;
 
 public class MyGcmListenerService extends GcmListenerService {
 
     private static final String TAG = "MyGcmListenerService";
 
-    public static final String ACTION_CHAT = "com.begentgroup.miniapplication.action.chat";
+    public static final String ACTION_CHAT = "com.festival.tacademy.festivalmate.action.chat";
     public static final String EXTRA_SENDER_ID = "senderid";
     public static final String EXTRA_RESULT = "result";
+
     /**
      * Called when message is received.
      *
@@ -53,14 +65,16 @@ public class MyGcmListenerService extends GcmListenerService {
      *             For Set of keys use data.keySet().
      */
     // [START receive_message]
+
     @Override
     public void onMessageReceived(String from, Bundle data) {
 
 //        String type = data.getString("type");
 //        String senderid = data.getString("sender");
-//        String message = data.getString("chat_content");
+         String message = data.getString("chat_content");
 
         Log.d(TAG, "From: " + from);
+        Log.d(TAG, "data: " + data);
 
         //Log.d(TAG, "ChatMessage: " + message);
 
@@ -94,8 +108,30 @@ public class MyGcmListenerService extends GcmListenerService {
 //                }
 //            }
 //        }
+        final String[] message1 = new String[1];
 
-    //   sendNotification(message);
+                if (from.startsWith("/topics/")) {
+            // message received from some topic.
+                 } else {
+            // normal downstream message.
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.KOREA);
+
+                    sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+                   String date = sdf.format(new Date(0));
+                    NetworkManager.getInstance().request_new_chat(MyApplication.getContext(), PropertyManager.getInstance().getNo(), 1, date, new NetworkManager.OnResultListener<RequestNewChatResult>() {
+                        @Override
+                        public void onSuccess(Request request, RequestNewChatResult result) {
+                            message1[0] = result.result.get(0).chat_content;
+                        }
+
+                        @Override
+                        public void onFail(Request request, IOException exception) {
+
+                        }
+                    });
+                  }
+
+       sendNotification(message1[0]);
     }
     // [END receive_message]
 
@@ -115,9 +151,9 @@ public class MyGcmListenerService extends GcmListenerService {
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setTicker("GCM message")
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("GCM ChatMessage")
-                .setContentText(message)
+                .setSmallIcon(R.drawable.festival_icon)
+                .setContentTitle("메시지가 도착했습니다.")
+                .setContentText("")
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent);
@@ -125,10 +161,7 @@ public class MyGcmListenerService extends GcmListenerService {
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-      //  notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
     }
-
-
-
 
 }

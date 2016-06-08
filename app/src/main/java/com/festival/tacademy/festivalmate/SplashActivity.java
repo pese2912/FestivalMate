@@ -52,6 +52,7 @@ public class SplashActivity extends AppCompatActivity {
         };
         setUpIfNeeded();
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -119,7 +120,8 @@ public class SplashActivity extends AppCompatActivity {
         String email = PropertyManager.getInstance().getEmail();
         if (!TextUtils.isEmpty(email)) {
             String password = PropertyManager.getInstance().getPassword();
-            NetworkManager.getInstance().signin(SplashActivity.this, email, password, new NetworkManager.OnResultListener<MySignInResult>() {
+            String regId = PropertyManager.getInstance().getRegistrationToken();
+            NetworkManager.getInstance().signin(SplashActivity.this, email, password, regId,new NetworkManager.OnResultListener<MySignInResult>() {
                 @Override
                 public void onSuccess(Request request, MySignInResult result) {
                     if(result.success==1)

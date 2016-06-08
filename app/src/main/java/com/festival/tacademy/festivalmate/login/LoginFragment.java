@@ -3,6 +3,7 @@ package com.festival.tacademy.festivalmate.login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringDef;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -136,8 +137,9 @@ public class LoginFragment extends Fragment {
             public void onClick(View v) {
                 final String email = emailView.getText().toString();
                 final String password = passwordView.getText().toString();
+                final String regId = PropertyManager.getInstance().getRegistrationToken();
 
-                NetworkManager.getInstance().signin(getContext(), email, password, new NetworkManager.OnResultListener<MySignInResult>() {
+                NetworkManager.getInstance().signin(getContext(), email, password,regId, new NetworkManager.OnResultListener<MySignInResult>() {
                     @Override
                     public void onSuccess(Request request, MySignInResult result) { // 로그인 성공하면
 

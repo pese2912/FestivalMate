@@ -25,6 +25,7 @@ import com.festival.tacademy.festivalmate.Data.ModifyProfileResult;
 import com.festival.tacademy.festivalmate.Data.MySignInResult;
 import com.festival.tacademy.festivalmate.Data.MySignUpResult;
 import com.festival.tacademy.festivalmate.Data.RequestChatroomJoinResult;
+import com.festival.tacademy.festivalmate.Data.RequestNewChatResult;
 import com.festival.tacademy.festivalmate.Data.ShowArtistSurveyResult;
 import com.festival.tacademy.festivalmate.Data.ShowFestivalLineups;
 import com.festival.tacademy.festivalmate.Data.ShowGoingListResult;
@@ -209,11 +210,13 @@ public class NetworkManager {
     public Request signin(Object tag,
                           String mem_id,
                           String mem_pwd,
+                          String mem_registration_id,
                           OnResultListener<MySignInResult> listener) {
 
         RequestBody body = new FormBody.Builder()
                 .add("mem_id", mem_id)
                 .add("mem_pwd", mem_pwd)
+                .add("mem_registration_id", mem_registration_id)
                 .build();
 
         Request request = new Request.Builder()
@@ -797,24 +800,24 @@ public class NetworkManager {
 
 
 
-//        FormBody.Builder builder = new FormBody.Builder();
-//        builder.add("mem_no", mem_no+"");
-//        builder.add("festival_no", festival_no+"");
+        FormBody.Builder builder = new FormBody.Builder();
+        builder.add("mem_no", mem_no+"");
+        builder.add("festival_no", festival_no+"");
+
+        for(Artist a : selected_artist) {
+            builder.add("selected_artist",a.getArtist_no()+"");
+        }
+
+//        JsonSelectedArtist data = new JsonSelectedArtist();
+//        data.mem_no = mem_no;
+//        data.festival_no = festival_no;
+//        data.selected_artist = selected_artist;
 //
-//        for(Artist a : selected_artist) {
-//            builder.add("selected_artist",a.getArtist_no()+"");
-//        }
+//
+//        String json = gson.toJson(data);
+//        RequestBody body = RequestBody.create(MediaType.parse("application/json"), json);
 
-        JsonSelectedArtist data = new JsonSelectedArtist();
-        data.mem_no = mem_no;
-        data.festival_no = festival_no;
-        data.selected_artist = selected_artist;
-
-
-        String json = gson.toJson(data);
-        RequestBody body = RequestBody.create(MediaType.parse("application/json"), json);
-
-      //  RequestBody body = builder.build();
+        RequestBody body = builder.build();
 
         Request request = new Request.Builder()
                 .url(URL_SHOW_MATCHING_RESULT)
@@ -1644,8 +1647,6 @@ public class NetworkManager {
         return request;
     }
 
-
-
     private static final String URL_CREATE_NEW_PRIVATE_CHATROOM = MY_SERVER + "/create_new_private_chatroom"; // 새로운 채팅방을 만듦
     public Request create_new_private_chatroom(Object tag,
                             int mem_no,
@@ -1694,4 +1695,60 @@ public class NetworkManager {
 
         return request;
     }
+
+    private static final String URL_REQUEST_NEW_CHAT = MY_SERVER + "/request_new_chat"; //새로운 메세지 전송
+
+
+    public Request request_new_chat(Object tag,
+                                     int mem_no,
+                                     int chatroom_no,
+                                     String last_regdate,
+                                     OnResultListener<RequestNewChatResult> listener) {
+
+        RequestBody body = new FormBody.Builder()
+                .add("mem_no", "" + mem_no)
+                .add("chatroom_no", "" + chatroom_no)
+                .add("last_regdate", last_regdate)
+                .build();
+
+        Request request = new Request.Builder()
+                .url(URL_REQUEST_NEW_CHAT)
+                .post(body)
+                .build();
+
+
+        final NetworkResult<RequestNewChatResult> result = new NetworkResult<>();
+        result.request = request;
+        result.listener = listener;
+        mClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                result.exception = e;
+                mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String text = response.body().string();
+                    RequestNewChatResult data = gson.fromJson(text, RequestNewChatResult.class);
+                    if (data.success == 1) {
+                        result.result = data;
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SUCCESS, result));
+                    } else {
+                        result.exception = new IOException(data.message);
+                        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                    }
+
+                } else {
+                    result.exception = new IOException(response.message());
+                    mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_FAIL, result));
+                }
+            }
+        });
+
+        return request;
+    }
+
+
 }

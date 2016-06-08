@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide;
 import com.festival.tacademy.festivalmate.Data.Festival;
 import com.festival.tacademy.festivalmate.Data.MateTalkRoom;
 import com.festival.tacademy.festivalmate.FestivalInfo.UserViewHolder;
+import com.festival.tacademy.festivalmate.Manager.NetworkManager;
 import com.festival.tacademy.festivalmate.R;
 
 
@@ -88,7 +89,7 @@ public class MatetalkDetailViewHolder extends RecyclerView.ViewHolder {
             detailView.mAdapter.setOnItemClickListener(listener);
         }
 
-        Glide.with(infoView.photoView.getContext()).load(chatinfo.getChatroom_img()).into(infoView.photoView);
+        Glide.with(infoView.photoView.getContext()).load(NetworkManager.MY_SERVER+"/"+chatinfo.getChatroom_img()).into(infoView.photoView);
         infoView.titleView.setText(chatinfo.getChatroom_name());
         infoView.joinView.setText(chatinfo.getChatroom_size()+"명 참여중");
         infoView.matchrateView.setText(chatinfo.getMatched_artist_number()+"명 일치");

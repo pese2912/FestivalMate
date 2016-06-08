@@ -32,10 +32,13 @@ import java.io.IOException;
 import okhttp3.Request;
 
 public class ChattingActivity extends AppCompatActivity {
+
     public static final String EXTRA_USER = "user";
     Toolbar toolbar;
     TextView toolbarTitle;
     ListView listView;
+    Button btn_join_list;
+
    // ChatCursorAdapter mAdapter;
 
     RecyclerView recyclerView;
@@ -62,6 +65,7 @@ public class ChattingActivity extends AppCompatActivity {
 //        mAdapter = new ChatCursorAdapter(this);
 //        listView.setAdapter(mAdapter);
         inputView = (EditText)findViewById(R.id.edit_input);
+        btn_join_list = (Button)findViewById(R.id.btn_join_list);
 
 
 
@@ -75,6 +79,11 @@ public class ChattingActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         mateTalkRoom = (MateTalkRoom) intent.getExtras().getSerializable("chatting");
+
+        if(mateTalkRoom.getChatroom_style()==1){
+            btn_join_list.setVisibility(View.GONE);
+        }
+
       //  String chatroomNo = intent.getStringExtra("chatroomNo");
         user = (User)getIntent().getSerializableExtra(EXTRA_USER);
         toolbarTitle.setText(mateTalkRoom.getChatroom_name());
@@ -98,6 +107,7 @@ public class ChattingActivity extends AppCompatActivity {
                             send.message= message;
                           //  send.date= "2016-07-24";
                             mAdapter.add(send);
+                            inputView.setText("");
                         }
 
                         @Override
@@ -109,6 +119,15 @@ public class ChattingActivity extends AppCompatActivity {
 
             }
         });
+
+        btn_join_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ChattingActivity.this, ChatJoinListActivity.class);
+                 intent.putExtra("chatting",mateTalkRoom);
+                  startActivity(intent);
+            }
+        });
     }
 
 
@@ -117,7 +136,7 @@ public class ChattingActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
 
         super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.menu_join_list, menu);
+
         return  true;
     }
 
@@ -131,13 +150,6 @@ public class ChattingActivity extends AppCompatActivity {
             return true;
         }
 
-
-
-        else if(id == R.id.chat_join_list){
-            Intent intent = new Intent(ChattingActivity.this, ChatJoinListActivity.class);
-            intent.putExtra("chatting",mateTalkRoom);
-            startActivity(intent);
-        }
 
         return super.onOptionsItemSelected(item);
     }

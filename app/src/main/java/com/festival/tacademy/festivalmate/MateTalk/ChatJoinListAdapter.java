@@ -119,6 +119,7 @@ public class ChatJoinListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_header_wait, null);
                 return new HeaderWaitViewHolder(view);
             }
+
             case VIEW_TYPE_HEADER_JOIN: {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_header_join, null);
                 return new HeaderJoinViewHolder(view);
@@ -159,14 +160,17 @@ public class ChatJoinListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             return;
         }
 
+
         position--;
         if ( list.getChatroom_waitings().size() > 0 ) {
             if( position < list.getChatroom_waitings().size() ) {
+
                 ApproveWaiterViewHolder h = (ApproveWaiterViewHolder)holder;
-                h.setApproveWaiter(list.getChatroom_waitings().get(position),list.getChatroom_no());
+                h.setApproveWaiter(list.getChatroom_waitings().get(position),list.getChatroom_no(),list.getIs_host());
                 h.setOnItemClickListener(mListener);
                 h.setOnItemClickListener2(mListener2);
                 return;
+
             }
             position -= list.getChatroom_waitings().size();
         }

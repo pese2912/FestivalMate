@@ -122,6 +122,7 @@ public class ProfileDialogFragment extends DialogFragment {
                         Intent intent = new Intent(getContext(), ChattingActivity.class);
                         MateTalkRoom room = new MateTalkRoom();
                         room.setChatroom_no(result.result.getChatroom_no());
+                        room.setChatroom_style(1);
                         //room.setFestival_name(result.result.getFestival_name());
                         room.setChatroom_name(user.getName());
                         intent.putExtra("chatting",room);

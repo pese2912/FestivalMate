@@ -17,13 +17,13 @@ public class ChattingViewHolder extends RecyclerView.ViewHolder  {
     private static final int TYPE_RECEIVE = 1;
     private static final int TYPE_DATE = 2;
 
-
     //These are the general elements in the RecyclerView
     public TextView date_message;
 
     public ImageView receive_icon;
     public TextView receive_message;
     public TextView receive_date;
+
 
     public TextView send_message;
     public TextView send_date;
@@ -33,29 +33,29 @@ public class ChattingViewHolder extends RecyclerView.ViewHolder  {
        switch (viewType){
 
            case TYPE_SEND:
-               send_message = (TextView)itemView.findViewById(R.id.chatting_message);
+               send_message = (TextView)itemView.findViewById(R.id.text_message);
                send_date = (TextView)itemView.findViewById(R.id.text_date);
 
            case TYPE_RECEIVE:
 
-               receive_message = (TextView)itemView.findViewById(R.id.chatting_message);
-       //        receive_icon = (ImageView)itemView.findViewById(R.id.image_icon);
+               receive_message = (TextView)itemView.findViewById(R.id.text_message);
+               receive_icon = (ImageView)itemView.findViewById(R.id.image_photo);
                receive_date = (TextView)itemView.findViewById(R.id.text_date);
 
            case TYPE_DATE:
-               date_message = (TextView)itemView.findViewById(R.id.chatting_message);
+               date_message = (TextView)itemView.findViewById(R.id.text_message);
        }
     }
-
 
     public void setDate(Date d) {
         date_message.setText(d.message);
 
     }
+
     public void setReceive(Receive r) {
         receive_message.setText(r.message);
         receive_icon.setImageDrawable(r.icon);
-        receive_date.setText(r.date);
+       // receive_date.setText(r.date);
     }
 
     public void setSend(Send s) {

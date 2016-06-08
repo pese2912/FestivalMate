@@ -40,8 +40,6 @@ public class MateTalkFragment extends Fragment {
     MateTalkRoomAdapter mAdapter;
     FrameLayout non_matetalk;
 
-
-
     public MateTalkFragment() {
         // Required empty public constructor
     }

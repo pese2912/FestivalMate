@@ -59,17 +59,22 @@ public class ApproveWaiterViewHolder extends RecyclerView.ViewHolder {
           public void onClick(View v) {
               if( mListener2!=null ) {
                   mListener2.onItemClick2(v,waiting);
+
               }
           }
       });
 
     }
 
-    public void setApproveWaiter( chatroom_waiting waiter, int chatNo){
+    public void setApproveWaiter( chatroom_waiting waiter, int chatNo, int host){
         this.waiting =waiter;
         Glide.with(photoView.getContext()).load(NetworkManager.MY_SERVER+"/"+waiter.getMem_img()).into(photoView);
         nameView.setText(waiter.getMem_name());
 
+        if(host == 0){
+            btnReject.setVisibility(View.GONE);
+            btnApproved.setVisibility(View.GONE);
+        }
 //        btnReject.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {

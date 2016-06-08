@@ -55,10 +55,13 @@ public class MateTalkRoomSingleViewHolder extends RecyclerView.ViewHolder {
 
     public void setMateTalkRoom(MateTalkRoom room){
         this.talkRoom = room;
-        nameView.setText(room.getChatroom_host());
+        String date = room.getChatroom_new_chat_date();
+        nameView.setText(room.getChatroom_name());
         contentView.setText(room.getChatroom_new_chat_content());
         Glide.with(photoView.getContext()).load(NetworkManager.MY_SERVER+"/"+room.getChatroom_img()).into(photoView);
-        dateView.setText(room.getChatroom_new_chat_date());
+        if(date != null) {
+            dateView.setText(date.substring(5, 7) + "월 " + date.substring(8, 10) + "일");
+        }
       //  unReadView.setText(room.getChatroom_new_count()+"");
     }
 }
