@@ -114,38 +114,61 @@ public class MyGcmListenerService extends GcmListenerService {
 
 
         final String[] message1 = new String[1];
-                if (from.startsWith("/topics/")) {
+//                if (from.startsWith("/topics/")) {
+//            // message received from some topic.
+//                 } else {
+//            // normal downstream message.
+//                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.KOREA);
+//                    sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+//                   String date = sdf.format(new Date(0));
+//                    NetworkManager.getInstance().request_new_chat(MyApplication.getContext(), PropertyManager.getInstance().getNo(), roomid, date, new NetworkManager.OnResultListener<RequestNewChatResult>() {
+//                        @Override
+//                        public void onSuccess(Request request, RequestNewChatResult result) {
+//                            message1[0] = result.result.get(0).chat_content;
+//                            Toast.makeText(MyApplication.getContext(), "성공"+message1[0] , Toast.LENGTH_SHORT).show();
+//                            newChatResult.result = result.result;
+//
+//                            Intent intent = new Intent(ACTION_CHAT);
+//                            intent.putExtra(EXTRA_SENDER_ID, newChatResult);
+//                            LocalBroadcastManager.getInstance(MyApplication.getContext()).sendBroadcastSync(intent);
+//                            boolean isProcessed = intent.getBooleanExtra(EXTRA_RESULT, false);
+//                            if (!isProcessed) {
+//                            sendNotification(message1[0]);
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onFail(Request request, IOException exception) {
+//                            Toast.makeText(MyApplication.getContext(), "실패"+exception.getMessage(), Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
+//                  }
+
+        if (from.startsWith("/topics/")) {
             // message received from some topic.
-                 } else {
+        } else {
             // normal downstream message.
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.KOREA);
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.KOREA);
                     sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
                    String date = sdf.format(new Date(0));
-                    NetworkManager.getInstance().request_new_chat(MyApplication.getContext(), PropertyManager.getInstance().getNo(), roomid, date, new NetworkManager.OnResultListener<RequestNewChatResult>() {
+                try {
+                    RequestNewChatResult result = NetworkManager.getInstance().request_new_chat(MyApplication.getContext(), PropertyManager.getInstance().getNo(), roomid, date);
 
-                        @Override
-                        public void onSuccess(Request request, RequestNewChatResult result) {
-                            message1[0] = result.result.get(0).chat_content;
-                            Toast.makeText(MyApplication.getContext(), "성공"+message1[0] , Toast.LENGTH_SHORT).show();
-                            newChatResult.result = result.result;
+                    Intent intent = new Intent(ACTION_CHAT);
+                    intent.putExtra(EXTRA_SENDER_ID, result);
+                    LocalBroadcastManager.getInstance(this).sendBroadcastSync(intent);
+                    boolean isProcessed = intent.getBooleanExtra(EXTRA_RESULT, false);
+                    if (!isProcessed) {
+                        sendNotification(result.message);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
-                            Intent intent = new Intent(ACTION_CHAT);
-                            intent.putExtra(EXTRA_SENDER_ID, newChatResult);
-                            LocalBroadcastManager.getInstance(MyApplication.getContext()).sendBroadcastSync(intent);
-                            boolean isProcessed = intent.getBooleanExtra(EXTRA_RESULT, false);
-                            if (!isProcessed) {
-                            sendNotification(message1[0]);
-                            }
-                        }
+        }
 
-                        @Override
-                        public void onFail(Request request, IOException exception) {
-                            Toast.makeText(MyApplication.getContext(), "실패"+exception.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                  }
-
-        sendNotification(message1[0]);
+   //     sendNotification(message1[0]);
     }
     // [END receive_message]
 

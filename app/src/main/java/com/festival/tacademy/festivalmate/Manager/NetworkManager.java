@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.support.annotation.WorkerThread;
 import android.widget.Toast;
 
 import com.festival.tacademy.festivalmate.Data.Artist;
@@ -1344,8 +1345,8 @@ public class NetworkManager {
             builder.addFormDataPart("chatroom_img", chatroom_img.getName(),
                     RequestBody.create(MediaType.parse("image/jpeg"), chatroom_img));
 
-
         }
+
         else{
             builder.setType(MultipartBody.FORM);
             builder.addFormDataPart("mem_no", mem_no + "");
@@ -1764,6 +1765,35 @@ public class NetworkManager {
         });
 
         return request;
+    }
+
+    @WorkerThread
+    public RequestNewChatResult request_new_chat(Object tag,
+                                                 int mem_no,
+                                                 int chatroom_no,
+                                                 String last_regdate) throws IOException {
+
+        RequestBody body = new FormBody.Builder()
+                .add("mem_no", "" + mem_no)
+                .add("chatroom_no", "" + chatroom_no)
+                .add("last_regdate", last_regdate)
+                .build();
+
+        Request request = new Request.Builder()
+                .url(URL_REQUEST_NEW_CHAT)
+                .post(body)
+                .build();
+
+        Response response = mClient.newCall(request).execute();
+
+        if (response.isSuccessful()) {
+            String text = response.body().string();
+            RequestNewChatResult data = gson.fromJson(text, RequestNewChatResult.class);
+            return data;
+
+        } else {
+            throw new IOException(response.message());
+        }
     }
 
 

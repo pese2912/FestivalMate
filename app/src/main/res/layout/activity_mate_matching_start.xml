@@ -21,13 +21,14 @@
 
     <ImageView android:layout_height="wrap_content" android:layout_width="match_parent" android:background="@drawable/text_bottom" android:id="@+id/imageView7" android:layout_below="@+id/textView14" android:layout_marginRight="30dp" android:layout_marginLeft="30dp"/>
 
-    <Button android:layout_height="25dp" android:layout_width="45dp" android:background="@drawable/login_btn_default" android:id="@+id/btn_search" android:textSize="13sp" android:text="검색" android:layout_above="@+id/imageView7" android:layout_toEndOf="@+id/spinner_festival" android:layout_toRightOf="@+id/spinner_festival"/>
+    <Button android:layout_height="25dp" android:layout_width="45dp" android:textColor="@color/textf" android:background="@drawable/login_btn_default" android:id="@+id/btn_search" android:textSize="13sp" android:text="검색" android:layout_above="@+id/imageView7" android:layout_toEndOf="@+id/spinner_festival" android:layout_toRightOf="@+id/spinner_festival"/>
 
 </RelativeLayout>
 
     <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_alignParentStart="true" android:layout_alignParentLeft="true" android:id="@+id/textView13" android:textColor="#999999" android:textSize="10sp" android:text="@string/mate_matching_start_ment" android:layout_below="@+id/editText" android:layout_marginTop="20dp" android:layout_marginLeft="16dp" android:textAppearance="?android:attr/textAppearanceMedium"/>
 
-    <android.support.v7.widget.RecyclerView android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_alignParentStart="true" android:layout_alignParentLeft="true" android:id="@+id/rv_list" android:layout_above="@+id/btn_match" android:layout_marginTop="5dp" android:layout_weight="0.48"/>
+    <android.support.v7.widget.RecyclerView android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_alignParentStart="true" android:layout_alignParentLeft="true" android:id="@+id/rv_list" android:layout_above="@+id/btn_match" android:layout_marginTop="5dp" android:layout_weight="0.48"
+        android:layout_marginLeft="16dp" />
 
 </LinearLayout>
 
