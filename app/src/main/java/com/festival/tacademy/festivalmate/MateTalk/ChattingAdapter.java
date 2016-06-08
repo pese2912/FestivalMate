@@ -31,6 +31,13 @@ public class ChattingAdapter extends RecyclerView.Adapter<ChattingViewHolder>  {
         notifyDataSetChanged();
     }
 
+
+    public  void addAll(List<ChattingMessage> item){
+
+        items.addAll(item);
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemViewType(int position) {
         ChattingMessage message = items.get(position);

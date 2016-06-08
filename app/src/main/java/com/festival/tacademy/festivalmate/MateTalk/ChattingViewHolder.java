@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.festival.tacademy.festivalmate.Manager.NetworkManager;
 import com.festival.tacademy.festivalmate.R;
 
 /**
@@ -53,8 +55,9 @@ public class ChattingViewHolder extends RecyclerView.ViewHolder  {
     }
 
     public void setReceive(Receive r) {
-        receive_message.setText(r.message);
-        receive_icon.setImageDrawable(r.icon);
+        receive_message.setText(r.chat_content);
+        Glide.with(receive_icon.getContext()).load(NetworkManager.MY_SERVER+"/"+r.mem_img).into(receive_icon);
+       // receive_icon.setImageDrawable(r.icon);
        // receive_date.setText(r.date);
     }
 

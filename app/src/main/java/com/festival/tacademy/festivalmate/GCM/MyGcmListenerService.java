@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.festival.tacademy.festivalmate.Data.MateTalkRoom;
 import com.festival.tacademy.festivalmate.Data.RequestNewChatResult;
 import com.festival.tacademy.festivalmate.Data.User;
 import com.festival.tacademy.festivalmate.MainActivity;
@@ -65,19 +66,20 @@ public class MyGcmListenerService extends GcmListenerService {
      *             For Set of keys use data.keySet().
      */
     // [START receive_message]
-
+    RequestNewChatResult newChatResult;
     @Override
     public void onMessageReceived(String from, Bundle data) {
 
 //        String type = data.getString("type");
 //        String senderid = data.getString("sender");
-         String message = data.getString("chat_content");
+        //final int roomid = Integer.parseInt(data.getString("chatroom_no"));
+        final int roomid = data.getInt("chatroom_no");
+        newChatResult = new RequestNewChatResult();
+//        Log.i(TAG, "From: " + from);
+//        Log.i(TAG, "chatroom_no: " + roomid+"");
 
-        Log.d(TAG, "From: " + from);
-        Log.d(TAG, "data: " + data);
 
         //Log.d(TAG, "ChatMessage: " + message);
-
 
 //        if (from.startsWith("/topics/")) {
 //            // message received from some topic.
@@ -108,30 +110,42 @@ public class MyGcmListenerService extends GcmListenerService {
 //                }
 //            }
 //        }
-        final String[] message1 = new String[1];
 
+
+
+        final String[] message1 = new String[1];
                 if (from.startsWith("/topics/")) {
             // message received from some topic.
                  } else {
             // normal downstream message.
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.KOREA);
-
                     sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
                    String date = sdf.format(new Date(0));
-                    NetworkManager.getInstance().request_new_chat(MyApplication.getContext(), PropertyManager.getInstance().getNo(), 1, date, new NetworkManager.OnResultListener<RequestNewChatResult>() {
+                    NetworkManager.getInstance().request_new_chat(MyApplication.getContext(), PropertyManager.getInstance().getNo(), roomid, date, new NetworkManager.OnResultListener<RequestNewChatResult>() {
+
                         @Override
                         public void onSuccess(Request request, RequestNewChatResult result) {
                             message1[0] = result.result.get(0).chat_content;
+                            Toast.makeText(MyApplication.getContext(), "성공"+message1[0] , Toast.LENGTH_SHORT).show();
+                            newChatResult.result = result.result;
+
+                            Intent intent = new Intent(ACTION_CHAT);
+                            intent.putExtra(EXTRA_SENDER_ID, newChatResult);
+                            LocalBroadcastManager.getInstance(MyApplication.getContext()).sendBroadcastSync(intent);
+                            boolean isProcessed = intent.getBooleanExtra(EXTRA_RESULT, false);
+                            if (!isProcessed) {
+                            sendNotification(message1[0]);
+                            }
                         }
 
                         @Override
                         public void onFail(Request request, IOException exception) {
-
+                            Toast.makeText(MyApplication.getContext(), "실패"+exception.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
                   }
 
-       sendNotification(message1[0]);
+        sendNotification(message1[0]);
     }
     // [END receive_message]
 
@@ -143,7 +157,7 @@ public class MyGcmListenerService extends GcmListenerService {
 
     private void sendNotification(String message) {
         Intent intent = new Intent(this, ChattingActivity.class);
-        //intent.putExtra(ChattingActivity.EXTRA_USER, user);
+        intent.putExtra("chatting",new MateTalkRoom());
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
@@ -153,7 +167,7 @@ public class MyGcmListenerService extends GcmListenerService {
                 .setTicker("GCM message")
                 .setSmallIcon(R.drawable.festival_icon)
                 .setContentTitle("메시지가 도착했습니다.")
-                .setContentText("")
+                .setContentText(message)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent);

@@ -18,7 +18,9 @@ import android.widget.Toast;
 
 import com.festival.tacademy.festivalmate.Data.MateTalkRoom;
 import com.festival.tacademy.festivalmate.Data.PreferenceArtist;
+import com.festival.tacademy.festivalmate.Data.RequestNewChatResult;
 import com.festival.tacademy.festivalmate.Data.ShowMyChatroomListResult;
+import com.festival.tacademy.festivalmate.GCM.MyGcmListenerService;
 import com.festival.tacademy.festivalmate.Manager.NetworkManager;
 import com.festival.tacademy.festivalmate.Manager.PropertyManager;
 import com.festival.tacademy.festivalmate.MateMatching.MakeMateTalkActivity;
@@ -65,6 +67,7 @@ public class MateTalkFragment extends Fragment {
                 Toast.makeText(getContext(), talkRoom.getChatroom_festival_name(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(), ChattingActivity.class);
                 intent.putExtra("chatting",talkRoom);
+                intent.putExtra(MyGcmListenerService.EXTRA_SENDER_ID, new RequestNewChatResult());
                 startActivity(intent);
             }
         });
