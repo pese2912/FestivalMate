@@ -27,6 +27,7 @@ public class QuestionActivity extends AppCompatActivity {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.btn_navigation_back);
 
         inputView = (EditText)findViewById(R.id.edit_input);
 

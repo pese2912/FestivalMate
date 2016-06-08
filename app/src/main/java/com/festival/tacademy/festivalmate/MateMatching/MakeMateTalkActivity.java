@@ -115,6 +115,7 @@ public class MakeMateTalkActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.btn_navigation_back);
         Button btn = (Button)findViewById(R.id.btn_maketalk);
 
         btn.setOnClickListener(new View.OnClickListener() {

@@ -58,6 +58,7 @@ public class MateMatchingActivity extends AppCompatActivity {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.btn_navigation_back);
 
         Intent intent = getIntent();
         result = (ShowMatchingResult)intent.getExtras().getSerializable("ShowMatchingResult");

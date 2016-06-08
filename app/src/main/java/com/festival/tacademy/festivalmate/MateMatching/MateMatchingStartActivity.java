@@ -8,8 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +43,10 @@ public class MateMatchingStartActivity extends AppCompatActivity {
     List<Lineup> selectedLineup;
     List<Artist> selectedArtist;
     SelectedArtist selectedArtistResult;
+    Spinner festival_spinner;
+    ArrayAdapter<String> adapter;
+    List<Festival> items;
+    int num;
 
 
     @Override
@@ -50,6 +57,22 @@ public class MateMatchingStartActivity extends AppCompatActivity {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.btn_navigation_back);
+
+        festival_spinner = (Spinner)findViewById(R.id.spinner_festival);
+
+        festival_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(MateMatchingStartActivity.this, items.get(position).getFestival_no() + items.get(position).getFestival_name(), Toast.LENGTH_SHORT).show();
+                num = items.get(position).getFestival_no();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         listView = (RecyclerView)findViewById(R.id.rv_list);
         mAdapter = new MateMatchingLineUpAdapter();
@@ -64,24 +87,21 @@ public class MateMatchingStartActivity extends AppCompatActivity {
         selectedLineup = new ArrayList<>();
         selectedArtist= new ArrayList<>();
         result = new ShowMatchingResult();
-        initData();
 
         Button btn = (Button)findViewById(R.id.btn_match);
         btn.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
-
                 for(int i=0; i<selectedLineup.size(); i++){
                     for(int j =0; j<selectedLineup.get(i).getLineup().size(); j++){
                         if(selectedLineup.get(i).getLineup().get(j).isCheck() == 1){
-                          //  Toast.makeText(MateMatchingStartActivity.this,""+selectedLineup.get(i).getLineup().get(j).getName(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MateMatchingStartActivity.this,""+selectedLineup.get(i).getLineup().get(j).getName(),Toast.LENGTH_SHORT).show();
                             selectedArtist.add(selectedLineup.get(i).getLineup().get(j));
                         }
                     }
                 }
 
-              //  Toast.makeText(MateMatchingStartActivity.this,""+selectedArtist.size(),Toast.LENGTH_SHORT).show();
+                //  Toast.makeText(MateMatchingStartActivity.this,""+selectedArtist.size(),Toast.LENGTH_SHORT).show();
                 int memNo = PropertyManager.getInstance().getNo();
                 int fesNo = festival.getFestival_no();
 
@@ -90,7 +110,7 @@ public class MateMatchingStartActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Request request, ShowMatchingResult result) {
 
-                      //  Toast.makeText(MateMatchingStartActivity.this,"성공"+ result.result.get(0).getMatched_artist_number(),Toast.LENGTH_SHORT).show();
+               //         Toast.makeText(MateMatchingStartActivity.this,"성공"+ result.result.get(0).getMatched_artist_number(),Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent(MateMatchingStartActivity.this, MateMatchingActivity.class);
                         intent.putExtra("ShowMatchingResult",result);
@@ -112,19 +132,32 @@ public class MateMatchingStartActivity extends AppCompatActivity {
 //                        startActivity(intent);
             }
         });
+
+        btn = (Button)findViewById(R.id.btn_search);
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              //  Toast.makeText(MateMatchingStartActivity.this, "dddddd: " + num, Toast.LENGTH_SHORT).show();
+                mAdapter.clear();
+                setData(num);
+            }
+        });
+
+        setData(festival.getFestival_no());
     }
+//
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        selectedArtist.clear();
+//        selectedLineup.clear();
+//        initData();
+//    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        selectedArtist.clear();
-        selectedLineup.clear();
-        initData();
-    }
-
-    private void initData(){
-
-        NetworkManager.getInstance().show_festival_lineups(MateMatchingStartActivity.this, festival.getFestival_no(), new NetworkManager.OnResultListener<ShowFestivalLineups>() {
+    private void setData(int no){
+     //   Toast.makeText(MateMatchingStartActivity.this,"Init()()(): "+no,Toast.LENGTH_SHORT).show();
+        NetworkManager.getInstance().show_festival_lineups(MateMatchingStartActivity.this, no, new NetworkManager.OnResultListener<ShowFestivalLineups>() {
             @Override
             public void onSuccess(Request request, ShowFestivalLineups result) {
                 Toast.makeText(MateMatchingStartActivity.this,"성공",Toast.LENGTH_SHORT).show();
@@ -133,6 +166,15 @@ public class MateMatchingStartActivity extends AppCompatActivity {
                 mAdapter.addAll(result.result.getFestival_lineups());
                 selectedLineup = result.result.getFestival_lineups();
 
+                String[] festivals = new String[result.festival_list.size()];
+
+                items = result.festival_list;
+                for(int i=0; i<result.festival_list.size(); i++) {
+                    festivals[i] = result.festival_list.get(i).getFestival_name();
+                }
+                adapter = new ArrayAdapter<>(MateMatchingStartActivity.this, R.layout.spinner_item, festivals);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                festival_spinner.setAdapter(adapter);
             }
 
             @Override
@@ -140,23 +182,6 @@ public class MateMatchingStartActivity extends AppCompatActivity {
                 Toast.makeText(MateMatchingStartActivity.this,"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
-
-//        mAdapter.clear();
-//        List<Artist> artistList = new ArrayList<>();
-//        for(int j=0; j<10; j++) {
-//            Artist artist = new Artist("김창완밴드");
-//            artist.setName("김창완밴드"+j);
-//            artistList.add(artist);
-//        }
-//
-//        for (int i = 0; i < 3; i++) {
-//            Lineup festibalLineUp = new Lineup("2016-07-24");
-//            festibalLineUp.setDate("2016-07-24");
-//            festibalLineUp.setLineup(artistList);
-//            selectedLineup.add(festibalLineUp);
-//            mAdapter.add(festibalLineUp);
-//        }
-
     }
 
     @Override
@@ -168,7 +193,6 @@ public class MateMatchingStartActivity extends AppCompatActivity {
             finish();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

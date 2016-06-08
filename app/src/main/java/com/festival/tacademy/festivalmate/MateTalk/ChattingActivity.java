@@ -65,7 +65,7 @@ public class ChattingActivity extends AppCompatActivity {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.btn_navigation_back);
 
 //        listView = (ListView)findViewById(R.id.listView);
 //        mAdapter = new ChatCursorAdapter(this);

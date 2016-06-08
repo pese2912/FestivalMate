@@ -43,6 +43,7 @@ public class JoinWaitListActivity extends AppCompatActivity {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.btn_navigation_back);
 
         layout = (FrameLayout)findViewById(R.id.non_wait_list);
 

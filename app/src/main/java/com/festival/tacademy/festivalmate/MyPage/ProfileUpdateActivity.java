@@ -72,7 +72,7 @@ public class ProfileUpdateActivity extends AppCompatActivity {
 
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.btn_navigation_back);
         nameView= (EditText)findViewById(R.id.edit_name);
         messageView = (EditText)findViewById(R.id.edit_state);
         locationView= (Spinner)findViewById(R.id.spinner_location);

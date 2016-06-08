@@ -45,6 +45,7 @@ public class LetsGoListActivity extends AppCompatActivity {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.btn_navigation_back);
         mAdapter = new FestivalAdapter();
         listView = (RecyclerView)findViewById(R.id.rv_list);
         listView.setAdapter(mAdapter);

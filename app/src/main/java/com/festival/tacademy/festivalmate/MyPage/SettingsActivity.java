@@ -27,6 +27,7 @@ public class SettingsActivity extends AppCompatActivity {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.btn_navigation_back);
 
         layout_quest = (RelativeLayout)findViewById(R.id.layout_quest);
         layout_info = (RelativeLayout)findViewById(R.id.layout_info);

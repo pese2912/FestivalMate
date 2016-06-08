@@ -1329,18 +1329,34 @@ public class NetworkManager {
 //            builder.add("chatroom_lineup",a.getArtist_no()+"");
 //        }
 
-        MultipartBody.Builder builder = new MultipartBody.Builder();
-        builder.setType(MultipartBody.FORM);
-        builder.addFormDataPart("mem_no", mem_no+"");
-        builder.addFormDataPart("festival_no", festival_no+"");
-        builder.addFormDataPart("chatroom_name", chatroom_name);
-        builder.addFormDataPart("chatroom_maxSize", chatroom_maxSize+"");
-        builder.addFormDataPart("chatroom_location", chatroom_location+"");
-        builder.addFormDataPart("chatroom_age", chatroom_age+"");
-        builder.addFormDataPart("chatroom_bg", chatroom_bg+"");
-        builder.addFormDataPart("chatroom_img", chatroom_img.getName(),
-                RequestBody.create(MediaType.parse("image/jpeg"), chatroom_img));
 
+
+            MultipartBody.Builder builder = new MultipartBody.Builder();
+        if(chatroom_bg==0) {
+            builder.setType(MultipartBody.FORM);
+            builder.addFormDataPart("mem_no", mem_no + "");
+            builder.addFormDataPart("festival_no", festival_no + "");
+            builder.addFormDataPart("chatroom_name", chatroom_name);
+            builder.addFormDataPart("chatroom_maxSize", chatroom_maxSize + "");
+            builder.addFormDataPart("chatroom_location", chatroom_location + "");
+            builder.addFormDataPart("chatroom_age", chatroom_age + "");
+            builder.addFormDataPart("chatroom_bg", chatroom_bg + "");
+            builder.addFormDataPart("chatroom_img", chatroom_img.getName(),
+                    RequestBody.create(MediaType.parse("image/jpeg"), chatroom_img));
+
+
+        }
+        else{
+            builder.setType(MultipartBody.FORM);
+            builder.addFormDataPart("mem_no", mem_no + "");
+            builder.addFormDataPart("festival_no", festival_no + "");
+            builder.addFormDataPart("chatroom_name", chatroom_name);
+            builder.addFormDataPart("chatroom_maxSize", chatroom_maxSize + "");
+            builder.addFormDataPart("chatroom_location", chatroom_location + "");
+            builder.addFormDataPart("chatroom_age", chatroom_age + "");
+            builder.addFormDataPart("chatroom_bg", chatroom_bg + "");
+
+        }
         for(Artist a : chatroom_lineup) {
             builder.addFormDataPart("chatroom_lineup", a.getArtist_no()+"");
         }

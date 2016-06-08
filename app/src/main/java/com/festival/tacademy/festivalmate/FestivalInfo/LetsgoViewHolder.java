@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.festival.tacademy.festivalmate.Data.User;
 import com.festival.tacademy.festivalmate.MyApplication;
+import com.festival.tacademy.festivalmate.R;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class LetsgoViewHolder extends RecyclerView.ViewHolder {
 
     public LetsgoViewHolder(View itemView) {
         super(itemView);
-        rv_list = (RecyclerView)itemView;
+        rv_list = (RecyclerView)itemView.findViewById(R.id.rv_list);
     }
     FragmentActivity fm = new FragmentActivity();
     public void setList(List<User> user, UserViewHolder.OnItemClickListener listener) {

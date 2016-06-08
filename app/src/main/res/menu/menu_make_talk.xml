@@ -6,6 +6,6 @@
         android:id="@+id/make_talk"
         android:orderInCategory="100"
         app:showAsAction="ifRoom"
-        android:icon="@android:drawable/ic_menu_add"
+        android:icon="@drawable/btn_navigation_add"
         android:title="make_talk" />
 </menu>

@@ -17,6 +17,17 @@ public class Festival implements Serializable {
     public List<Lineup> festival_lineups;
     public List<User>  festival_going_mem = new ArrayList<>();
 
+    public List<Festival> getFestival_list() {
+        return festival_list;
+    }
+
+    public void setFestival_list(List<Festival> festival_list) {
+        this.festival_list = festival_list;
+    }
+
+    public List<Festival> festival_list;
+
+
     int photo_location;
     String date;
 

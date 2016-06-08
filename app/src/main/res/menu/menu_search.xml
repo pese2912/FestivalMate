@@ -5,7 +5,7 @@
         android:id="@+id/festibal_search"
         android:orderInCategory="100"
         app:showAsAction="ifRoom"
-        android:icon="@android:drawable/ic_menu_search"
+        android:icon="@drawable/btn_navigation_search"
         android:title="@string/search" />
 
 </menu>
