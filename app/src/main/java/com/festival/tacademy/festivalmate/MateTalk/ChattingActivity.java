@@ -12,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,6 +35,8 @@ import com.festival.tacademy.festivalmate.MyApplication;
 import com.festival.tacademy.festivalmate.R;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import okhttp3.Request;
 
@@ -94,6 +97,24 @@ public class ChattingActivity extends AppCompatActivity {
         user = (User)getIntent().getSerializableExtra(EXTRA_USER);
         toolbarTitle.setText(mateTalkRoom.getChatroom_name());
 
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.KOREA);
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+        String date = sdf.format(new java.util.Date(0));
+        NetworkManager.getInstance().request_new_chat(ChattingActivity.this, PropertyManager.getInstance().getNo(), mateTalkRoom.getChatroom_no(), date, new NetworkManager.OnResultListener<RequestNewChatResult>() {
+            @Override
+            public void onSuccess(Request request, RequestNewChatResult result) {
+                newChatResult = result;
+                initData();
+
+            }
+
+            @Override
+            public void onFail(Request request, IOException exception) {
+
+            }
+        });
+
+
         Button btn = (Button)findViewById(R.id.btn_send);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,11 +129,11 @@ public class ChattingActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Request request, ChatroomSendMsgResult result) {
                             Toast.makeText(MyApplication.getContext(), "성공",Toast.LENGTH_SHORT).show();
-                                //mAdapter.add();
-                            Send send = new Send();
-                            send.message= message;
+                            // mAdapter.add();
+                           // Send send = new Send();
+                           // send.message= message;
                           //  send.date= "2016-07-24";
-                            mAdapter.add(send);
+                           // mAdapter.add(send);
                             inputView.setText("");
                         }
 
@@ -122,7 +143,6 @@ public class ChattingActivity extends AppCompatActivity {
                         }
                     });
                 }
-
             }
         });
 
@@ -183,7 +203,7 @@ public class ChattingActivity extends AppCompatActivity {
 
             newChatResult = (RequestNewChatResult) intent.getExtras().getSerializable(MyGcmListenerService.EXTRA_SENDER_ID);
           //  long sid = intent.getLongExtra(MyGcmListenerService.EXTRA_SENDER_ID, 0);
-            Toast.makeText(ChattingActivity.this, "2313",Toast.LENGTH_SHORT).show();
+
                 runOnUiThread(initRunnable);
                 intent.putExtra(MyGcmListenerService.EXTRA_RESULT, true);
                 return;
@@ -200,10 +220,18 @@ public class ChattingActivity extends AppCompatActivity {
 
     private void initData() {
 
-        Toast.makeText(ChattingActivity.this, "dasd",Toast.LENGTH_SHORT).show();
+        mAdapter.clear();
         for(Receive r : newChatResult.result) {
-            if(r.chat_sender_no != PropertyManager.getInstance().getNo())
-                 mAdapter.add(r);
+
+            if(r.chat_sender_no != PropertyManager.getInstance().getNo()) {
+                mAdapter.add(r);
+            }
+
+            else{
+                Send s = new Send();
+                s.message = r.chat_content;
+                mAdapter.add(s);
+            }
         }
     }
 

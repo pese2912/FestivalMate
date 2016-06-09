@@ -37,6 +37,10 @@ public class ChattingAdapter extends RecyclerView.Adapter<ChattingViewHolder>  {
         items.addAll(item);
         notifyDataSetChanged();
     }
+    public void clear(){
+        items.clear();
+        notifyDataSetChanged();
+    }
 
     @Override
     public int getItemViewType(int position) {
@@ -68,9 +72,7 @@ public class ChattingAdapter extends RecyclerView.Adapter<ChattingViewHolder>  {
             case TYPE_DATE: //This would be the header view in my Recycler
                  view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_date, parent, false);
                 return new ChattingViewHolder(view,viewType);
-
         }
-
 
         return null;
     }

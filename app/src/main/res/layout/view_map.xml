@@ -19,7 +19,7 @@
 
     <ImageView
         android:layout_width="328dp"
-        android:layout_height="192dp"
+        android:layout_height="193dp"
         android:id="@+id/image_location"
         android:layout_below="@+id/text_location"
         android:layout_centerHorizontal="true"

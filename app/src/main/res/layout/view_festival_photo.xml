@@ -6,6 +6,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="197dp"
+        android:scaleType ="centerCrop"
         android:id="@+id/image_festival_photo"
         android:layout_gravity="center" />
 

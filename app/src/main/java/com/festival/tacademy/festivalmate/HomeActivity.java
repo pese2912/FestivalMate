@@ -36,6 +36,7 @@ import com.festival.tacademy.festivalmate.MyPage.NavigationAdapter;
 import com.festival.tacademy.festivalmate.MyPage.ProfileUpdateActivity;
 import com.festival.tacademy.festivalmate.MyPage.SettingsActivity;
 import com.festival.tacademy.festivalmate.Preference.PreferenceActivity;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.io.IOException;
 
@@ -48,13 +49,11 @@ public class HomeActivity extends AppCompatActivity {
     TextView closeTab;
     TextView profileUpdate;
     TextView nameView;
-    ImageView profileView;
+    RoundedImageView profileView;
     NavigationView navigationView;
     ListView listView;
     NavigationAdapter mAdapter;
     LogoutView logoutView;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,7 +123,7 @@ public class HomeActivity extends AppCompatActivity {
         View headerView = navigationView.getHeaderView(0);
 
         nameView = (TextView)headerView.findViewById(R.id.profile_id);
-        profileView = (ImageView)headerView.findViewById(R.id.profile_image);
+        profileView = (RoundedImageView)headerView.findViewById(R.id.profile_image);
 
         closeTab = (TextView)headerView.findViewById(R.id.btn_close);
         closeTab.setOnClickListener(new View.OnClickListener() {
@@ -175,7 +174,7 @@ public class HomeActivity extends AppCompatActivity {
                 public void onSuccess(Request request, ShowMiniProfileResult result) {
                     nameView.setText(result.result.getName());
                     Toast.makeText(HomeActivity.this,result.result.getName(),Toast.LENGTH_SHORT).show();
-                    Glide.with(HomeActivity.this).load(NetworkManager.MY_SERVER+"/"+result.result.getPhoto()).into(profileView);
+                    Glide.with(HomeActivity.this).load(NetworkManager.MY_SERVER+"/"+result.result.getPhoto()).asBitmap().into(profileView);
                 }
 
                 @Override

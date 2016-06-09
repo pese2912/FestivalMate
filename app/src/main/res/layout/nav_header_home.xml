@@ -6,7 +6,7 @@
 
     <TextView android:layout_width="15dp" android:layout_height="15dp" android:background="@drawable/img_x" android:layout_marginTop="10dp" android:layout_alignParentTop="true" android:textAppearance="?android:attr/textAppearanceLarge" android:text=" " android:id="@+id/btn_close" android:layout_alignParentEnd="true" android:layout_alignParentRight="true" android:layout_gravity="right"/>
 
-    <com.makeramen.roundedimageview.RoundedImageView android:layout_width="150dp" android:layout_height="150dp" android:paddingTop="@dimen/nav_header_vertical_spacing" android:layout_alignParentTop="true" android:id="@+id/profile_image" android:layout_gravity="center_horizontal" android:layout_centerHorizontal="true" android:cropToPadding="@bool/default_line_indicator_centered" android:src="@android:drawable/sym_def_app_icon" app:riv_oval="true"/>
+    <com.makeramen.roundedimageview.RoundedImageView android:layout_width="150dp" android:layout_height="150dp" android:paddingTop="@dimen/nav_header_vertical_spacing" android:layout_alignParentTop="true" android:id="@+id/profile_image" android:layout_gravity="center_horizontal" android:layout_centerHorizontal="true" android:cropToPadding="@bool/default_line_indicator_centered" android:src="@android:drawable/sym_def_app_icon"  android:scaleType ="centerCrop" app:riv_oval="true"/>
 
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:textColor="@color/textf" android:textSize="14sp" android:text="das" android:id="@+id/profile_id" android:layout_centerHorizontal="true" android:layout_below="@+id/profile_image"/>
 

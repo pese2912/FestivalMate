@@ -110,6 +110,17 @@ public class FestivalDetailActivity extends AppCompatActivity {
             }
         });
 
+        mAdapter.setOnItemClickListener(new MapViewHolder.OnItemClickListner() {
+            @Override
+            public void onItemClick(String str) {
+            //    Toast.makeText(FestivalDetailActivity.this, str, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                Uri uri = Uri.parse(str);
+                intent.setData(uri);
+                startActivity(intent);
+            }
+        });
+
 
         listView.setAdapter(mAdapter);
         listView.setLayoutManager(mManager);
@@ -146,9 +157,10 @@ public class FestivalDetailActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Request request, FestivalDetailResult result) {
                         if(result.success==1) {
-                            Toast.makeText(FestivalDetailActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                      //      Toast.makeText(FestivalDetailActivity.this, "Success"+result.result.getFestival_location_url(), Toast.LENGTH_SHORT).show();
 
                             mAdapter.setFestval(result.result);
+
                         }
                     }
 

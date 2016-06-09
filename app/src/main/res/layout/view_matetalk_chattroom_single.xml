@@ -12,6 +12,7 @@
         android:layout_height="50dp"
         android:id="@+id/room_image"
         android:layout_marginLeft="16dp"
+        android:scaleType ="centerCrop"
         android:layout_marginTop="16dp"
         android:layout_margin="16dp" />
 

@@ -14,7 +14,7 @@
         android:layout_gravity="right"
         android:textColor="@color/text3"
         android:background="@drawable/img_receive_msg"
-        android:textSize="12sp"
+        android:textSize="15sp"
         android:layout_alignBottom="@+id/image_photo"
         android:layout_toRightOf="@+id/image_photo"
         android:layout_toEndOf="@+id/image_photo"
@@ -24,7 +24,24 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         app:riv_oval="true"
+        android:scaleType ="centerCrop"
         android:id="@+id/image_photo"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="15dp" />
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="7dp" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:textSize="12sp"
+        android:textColor="@color/text6"
+        android:id="@+id/text_name"
+        android:layout_above="@+id/text_message"
+        android:layout_alignLeft="@+id/text_message"
+        android:layout_alignStart="@+id/text_message"
+        android:layout_marginBottom="3dp"
+        android:layout_marginLeft="5dp" />
 </RelativeLayout>

@@ -51,6 +51,7 @@
             android:text="나만의 프로필 사진을 설정해 주세요."/>
 
         <ImageView
+            android:scaleType ="centerCrop"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
             android:id="@+id/image_profile"

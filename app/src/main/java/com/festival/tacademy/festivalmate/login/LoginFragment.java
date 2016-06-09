@@ -173,7 +173,7 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(getContext(), "카카오톡 로그인",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "카카오톡 로그인",Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getContext(), HomeActivity.class)); // 일단 홈으로 이동
                 getActivity().finish();
             }
@@ -256,7 +256,6 @@ public class LoginFragment extends Fragment {
                             Intent intent = new Intent(getContext(), HomeActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent); // 일단 홈으로 이동
-
                         }
 
                         @Override

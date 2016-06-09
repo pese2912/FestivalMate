@@ -72,8 +72,10 @@ public class MyGcmListenerService extends GcmListenerService {
 
 //        String type = data.getString("type");
 //        String senderid = data.getString("sender");
-        //final int roomid = Integer.parseInt(data.getString("chatroom_no"));
-        final int roomid = data.getInt("chatroom_no");
+//        final int roomid = Integer.parseInt(data.getString("chatroom_no"));
+        final String room = data.getString("chatroom_no");
+        final int roomid = Integer.parseInt(room);
+       // final int roomid = data.getInt("chatroom_no");
         newChatResult = new RequestNewChatResult();
 //        Log.i(TAG, "From: " + from);
 //        Log.i(TAG, "chatroom_no: " + roomid+"");
@@ -154,7 +156,6 @@ public class MyGcmListenerService extends GcmListenerService {
                    String date = sdf.format(new Date(0));
                 try {
                     RequestNewChatResult result = NetworkManager.getInstance().request_new_chat(MyApplication.getContext(), PropertyManager.getInstance().getNo(), roomid, date);
-
                     Intent intent = new Intent(ACTION_CHAT);
                     intent.putExtra(EXTRA_SENDER_ID, result);
                     LocalBroadcastManager.getInstance(this).sendBroadcastSync(intent);
@@ -163,9 +164,9 @@ public class MyGcmListenerService extends GcmListenerService {
                         sendNotification(result.message);
                     }
                 } catch (IOException e) {
+                    Toast.makeText(MyApplication.getContext(), "제발",Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
-
         }
 
    //     sendNotification(message1[0]);

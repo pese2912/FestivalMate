@@ -18,6 +18,7 @@
         <com.makeramen.roundedimageview.RoundedImageView
             app:riv_oval="true"
             android:layout_width="116dp"
+            android:scaleType ="centerCrop"
             android:layout_height="116dp"
             android:id="@+id/profile_photo"
             android:src="@mipmap/ic_launcher"

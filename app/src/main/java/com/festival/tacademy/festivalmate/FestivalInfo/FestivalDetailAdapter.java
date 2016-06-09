@@ -35,6 +35,12 @@ public class FestivalDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         mListener = listener;
     }
 
+    MapViewHolder.OnItemClickListner mListener3;
+
+    public void setOnItemClickListener(MapViewHolder.OnItemClickListner listener) {
+        mListener3 = listener;
+    }
+
     TicketLinkHolder.OnItemClickListner mListener2;
 
     public void setOnItemClickListener2(TicketLinkHolder.OnItemClickListner listener) {

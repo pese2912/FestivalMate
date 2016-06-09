@@ -1,5 +1,6 @@
 package com.festival.tacademy.festivalmate.MyPage;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -52,7 +53,17 @@ public class QuestionActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(QuestionActivity.this, "문의완료",Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(QuestionActivity.this, "문의완료",Toast.LENGTH_SHORT).show();
+                Intent it = new Intent(Intent.ACTION_SEND);
+                it.setType("plain/text");
+
+                // 수신인 주소 - tos배열의 값을 늘릴 경우 다수의 수신자에게 발송됨
+                String[] tos = { "sjy032@naver.com" };
+                it.putExtra(Intent.EXTRA_EMAIL, tos);
+                it.putExtra(Intent.EXTRA_SUBJECT, inputView.getText().toString());
+                it.putExtra(Intent.EXTRA_TEXT, inputView.getText().toString());
+
+                startActivity(it);
                 finish();
             }
         });

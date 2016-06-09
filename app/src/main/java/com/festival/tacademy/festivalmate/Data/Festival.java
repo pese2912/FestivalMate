@@ -13,6 +13,26 @@ public class Festival implements Serializable {
     public String festival_name;
     public String festival_img;
     public String festival_location;
+
+    public String getFestival_location_url() {
+        return festival_location_url;
+    }
+
+    public void setFestival_location_url(String festival_location_url) {
+        this.festival_location_url = festival_location_url;
+    }
+
+    public String getFestival_location_img() {
+        return festival_location_img;
+    }
+
+    public void setFestival_location_img(String festival_location_img) {
+        this.festival_location_img = festival_location_img;
+    }
+
+    public String festival_location_img;
+    public String festival_location_url;
+
     public int mem_going_check;
     public List<Lineup> festival_lineups;
     public List<User>  festival_going_mem = new ArrayList<>();

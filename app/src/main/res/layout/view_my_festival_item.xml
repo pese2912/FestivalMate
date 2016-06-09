@@ -12,8 +12,17 @@
 
     <CheckBox android:layout_width="60dp" android:layout_height="20dp" android:background="@drawable/selector_going" android:id="@+id/check_going" android:layout_alignParentTop="true" android:layout_marginTop="7dp" android:layout_marginRight="16dp" android:layout_alignParentRight="true" android:layout_alignParentEnd="true" android:button="@null" android:checked="false"/>
 
-    <ImageView android:layout_width="13dp" android:layout_height="13dp" android:id="@+id/imageView3" android:layout_toRightOf="@+id/photo_view" android:layout_toEndOf="@+id/photo_view" android:layout_marginLeft="19dp" android:src="@drawable/icon_date" android:layout_alignBottom="@+id/text_location"/>
+    <ImageView android:layout_width="13dp" android:layout_height="13dp" android:id="@+id/imageView3"
+        android:src="@drawable/icon_date"
+        android:layout_above="@+id/text_location"
+        android:layout_alignLeft="@+id/text_title"
+        android:layout_alignStart="@+id/text_title" />
 
-    <ImageView android:layout_width="13dp" android:layout_height="13dp" android:id="@+id/imageView4" android:layout_toRightOf="@+id/photo_view" android:layout_toEndOf="@+id/photo_view" android:layout_marginLeft="19dp" android:src="@drawable/icon_location" android:layout_alignBottom="@+id/text_date"/>
+    <ImageView android:layout_width="13dp" android:layout_height="13dp" android:id="@+id/imageView4"
+        android:src="@drawable/icon_location"
+        android:scaleType ="centerCrop"
+        android:layout_alignBottom="@+id/text_location"
+        android:layout_alignLeft="@+id/imageView3"
+        android:layout_alignStart="@+id/imageView3" />
 
 </RelativeLayout>

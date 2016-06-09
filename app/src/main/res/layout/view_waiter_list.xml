@@ -10,6 +10,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="16dp"
         app:riv_oval="true"
+        android:scaleType ="centerCrop"
         android:id="@+id/image_photo" />
 
     <TextView

@@ -23,6 +23,7 @@ public class ChattingViewHolder extends RecyclerView.ViewHolder  {
     public TextView date_message;
 
     public ImageView receive_icon;
+    public TextView receive_name;
     public TextView receive_message;
     public TextView receive_date;
 
@@ -41,6 +42,7 @@ public class ChattingViewHolder extends RecyclerView.ViewHolder  {
            case TYPE_RECEIVE:
 
                receive_message = (TextView)itemView.findViewById(R.id.text_message);
+               receive_name = (TextView)itemView.findViewById(R.id.text_name);
                receive_icon = (ImageView)itemView.findViewById(R.id.image_photo);
                receive_date = (TextView)itemView.findViewById(R.id.text_date);
 
@@ -57,6 +59,7 @@ public class ChattingViewHolder extends RecyclerView.ViewHolder  {
     public void setReceive(Receive r) {
         receive_message.setText(r.chat_content);
         Glide.with(receive_icon.getContext()).load(NetworkManager.MY_SERVER+"/"+r.mem_img).into(receive_icon);
+        receive_name.setText(r.mem_name);
        // receive_icon.setImageDrawable(r.icon);
        // receive_date.setText(r.date);
     }
