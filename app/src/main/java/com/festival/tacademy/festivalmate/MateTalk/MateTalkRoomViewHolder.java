@@ -14,6 +14,9 @@ import com.festival.tacademy.festivalmate.Manager.NetworkManager;
 import com.festival.tacademy.festivalmate.MyApplication;
 import com.festival.tacademy.festivalmate.R;
 
+import java.text.SimpleDateFormat;
+import java.util.*;
+
 /**
  * Created by Tacademy on 2016-05-16.
  */
@@ -71,6 +74,10 @@ public class MateTalkRoomViewHolder extends RecyclerView.ViewHolder {
         if(date != null) {
             dateView.setText(date.substring(5, 7) + "월 " + date.substring(8, 10) + "일");
         }
+
+
+
+
  //       dateView.setText(date);
 //        unReadView.setText(room.getChatroom_new_count()+"");
     }

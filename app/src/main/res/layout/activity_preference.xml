@@ -28,7 +28,7 @@
         android:layout_gravity="left"
         android:textStyle="bold"
         android:textColor="#ffffff"
-        android:textSize="20dp"
+        android:textSize="18sp"
         android:text="@string/prefer_research"/>
 
 </android.support.v7.widget.Toolbar>
@@ -40,6 +40,7 @@
         android:layout_alignParentLeft="true"
         android:id="@+id/textView"
         android:layout_marginBottom="5dp"
+        android:textSize="13sp"
         android:textColor="#ffffff"
         android:text="@string/prefer_research_ment"
         android:layout_marginLeft="17dp"
@@ -99,6 +100,8 @@
         android:layout_alignParentTop="true"
         android:id="@+id/btn_complete"
         android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:textSize="15sp"
         android:text="@string/complete"
         android:visibility="gone"
         android:layout_alignParentEnd="true"/>

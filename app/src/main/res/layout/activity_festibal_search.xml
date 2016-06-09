@@ -18,7 +18,8 @@
 
         <TextView
             android:text="@string/festibal_search"
-            android:textSize="20dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
             android:id="@+id/toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

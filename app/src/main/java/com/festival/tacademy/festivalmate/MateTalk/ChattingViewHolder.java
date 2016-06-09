@@ -68,6 +68,7 @@ public class ChattingViewHolder extends RecyclerView.ViewHolder  {
     public void setDate(Date d) {
         date_message.setText(d.message);
 
+
     }
 
     public void setReceive(Receive r) {
@@ -84,13 +85,35 @@ public class ChattingViewHolder extends RecyclerView.ViewHolder  {
                 }
             }
         });
+
         receive_name.setText(r.mem_name);
        // receive_icon.setImageDrawable(r.icon);
-       // receive_date.setText(r.date);
+        int hour = Integer.parseInt(r.chat_regdate.substring(11, 13));
+        String second = r.chat_regdate.substring(14, 16);
+        if(hour >12){
+            hour-=12;
+            receive_date.setText("오후 "+hour+":"+second);
+        }
+        else{
+            receive_date.setText("오전 "+hour+":"+second);
+        }
+      //  receive_date.setText(r.chat_regdate);
     }
 
     public void setSend(Send s) {
         send_message.setText(s.message);
-       // send_date.setText(s.date);
+        int hour = Integer.parseInt(s.date.substring(11, 13));
+        String second = s.date.substring(14,16);
+
+        if(hour >12){
+            hour-=12;
+            send_date.setText("오후 "+hour+":"+second);
+        }
+
+        else{
+            send_date.setText("오전 "+hour+":"+second);
+        }
+
+        //send_date.setText(s.date);
     }
 }

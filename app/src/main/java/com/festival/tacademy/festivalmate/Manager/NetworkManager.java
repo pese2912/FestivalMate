@@ -147,25 +147,28 @@ public class NetworkManager {
                           String mem_registration_id,
                           OnResultListener<MySignUpResult> listener) {
 
-//        RequestBody body = new FormBody.Builder()
-//                .add("mem_name", mem_name)
-//                .add("mem_pwd", mem_pwd)
-//                .add("mem_id", mem_id)
-//               // .add("mem_img",mem_img)
-//                .add("mem_registration_id",mem_registration_id)
-//                .build();
+        MultipartBody.Builder builder = new MultipartBody.Builder();
+        if(mem_img==null) {
 
+            builder.setType(MultipartBody.FORM);
+            builder.addFormDataPart("mem_name", mem_name);
+            builder.addFormDataPart("mem_pwd", mem_pwd);
+            builder.addFormDataPart("mem_id", mem_id);
 
-        RequestBody body = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart("mem_name", mem_name)
-                .addFormDataPart("mem_pwd", mem_pwd)
-                .addFormDataPart("mem_id", mem_id)
-                .addFormDataPart("mem_img", mem_img.getName(),
-                        RequestBody.create(MediaType.parse("image/jpeg"), mem_img))
-                .addFormDataPart("mem_registration_id", mem_registration_id)
-                .build();
+        }
 
+        else{
+
+            builder.setType(MultipartBody.FORM);
+            builder.addFormDataPart("mem_name", mem_name);
+            builder.addFormDataPart("mem_pwd", mem_pwd);
+            builder.addFormDataPart("mem_id", mem_id);
+            builder.addFormDataPart("mem_img", mem_img.getName(),
+                    RequestBody.create(MediaType.parse("image/jpeg"), mem_img));
+            builder.addFormDataPart("mem_registration_id", mem_registration_id);
+        }
+
+        RequestBody body = builder.build();
 
         Request request = new Request.Builder()
                 .url(URL_SIGN_UP)
@@ -595,17 +598,28 @@ public class NetworkManager {
                                      OnResultListener<ModifyProfileResult> listener) {
 
 
-        RequestBody body = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart("mem_no", mem_no+"")
-                .addFormDataPart("mem_name", mem_name)
-                .addFormDataPart("mem_img", mem_img.getName(),
-                        RequestBody.create(MediaType.parse("image/jpeg"), mem_img))
-                .addFormDataPart("mem_state_msg", mem_state_msg)
-                .addFormDataPart("mem_location", mem_location+"")
-                .build();
 
+        MultipartBody.Builder builder = new MultipartBody.Builder();
+        if(mem_img==null) {
 
+            builder.setType(MultipartBody.FORM);
+            builder.addFormDataPart("mem_no", mem_no + "");
+            builder.addFormDataPart("mem_name", mem_name);
+            builder.addFormDataPart("mem_state_msg", mem_state_msg);
+            builder.addFormDataPart("mem_location", mem_location+"");
+
+        }
+        else{
+            builder.setType(MultipartBody.FORM);
+            builder.addFormDataPart("mem_no", mem_no+"");
+            builder.addFormDataPart("mem_name", mem_name);
+            builder.addFormDataPart("mem_state_msg", mem_state_msg);
+            builder.addFormDataPart("mem_location", mem_location+"");
+            builder.addFormDataPart("mem_img", mem_img.getName(),
+                    RequestBody.create(MediaType.parse("image/jpeg"), mem_img));
+        }
+
+        RequestBody body = builder.build();
 
         Request request = new Request.Builder()
                 .url(URL_MODIFY_PROFILE)
@@ -1306,31 +1320,6 @@ public class NetworkManager {
                                        List<Artist> chatroom_lineup,
                                OnResultListener<CreateNewChatroomResult> listener) {
 
-//        JsonNewChatroom data = new JsonNewChatroom();
-//        data.mem_no = mem_no;
-//        data.festival_no = festival_no;
-//        data.chatroom_name = chatroom_name;
-//        data.chatroom_maxSize = chatroom_maxSize;
-//        data.chatroom_location = chatroom_location;
-//        data.chatroom_age = chatroom_age;
-//        data.chatroom_img = chatroom_img;
-//        data.chatroom_lineup = chatroom_lineup;
-
-//        FormBody.Builder builder = new FormBody.Builder();
-//        builder.add("mem_no", mem_no+"");
-//        builder.add("festival_no", festival_no+"");
-//        builder.add("chatroom_name", chatroom_name);
-//        builder.add("chatroom_maxSize", chatroom_maxSize+"");
-//        builder.add("chatroom_location", chatroom_location+"");
-//        builder.add("chatroom_age", chatroom_age+"");
-//        builder.add("chatroom_bg", chatroom_bg+"");
-//        builder.add("chatroom_img", chatroom_img.getName());
-//
-//        for(Artist a : chatroom_lineup) {
-//            builder.add("chatroom_lineup",a.getArtist_no()+"");
-//        }
-
-
 
             MultipartBody.Builder builder = new MultipartBody.Builder();
         if(chatroom_bg==0) {
@@ -1362,20 +1351,7 @@ public class NetworkManager {
             builder.addFormDataPart("chatroom_lineup", a.getArtist_no()+"");
         }
 
-//
-//        RequestBody body = new MultipartBody.Builder()
-//                .setType(MultipartBody.FORM)
-//                .addFormDataPart("mem_name", mem_name)
-//                .addFormDataPart("mem_pwd", mem_pwd)
-//                .addFormDataPart("mem_id", mem_id)
-//                .addFormDataPart("mem_img", mem_img.getName(),
-//                        RequestBody.create(MediaType.parse("image/jpeg"), mem_img))
-//                .addFormDataPart("mem_registration_id", mem_registration_id)
-//                .build();
 
-
-//        String json = gson.toJson(data);
-//        RequestBody body = RequestBody.create(MediaType.parse("application/json"), json);
         RequestBody body = builder.build();
         Request request = new Request.Builder()
                 .url(URL_CREATE_NEW_CHATROOM)

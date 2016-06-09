@@ -88,7 +88,7 @@ public class MatetalkDetailView extends RelativeLayout {
 //            }
 //        });
 
-        mAdapter.addAll(chatinfo.getChatroom_mems());
+        // mAdapter.addAll(chatinfo.getChatroom_mems());
     }
 }
 

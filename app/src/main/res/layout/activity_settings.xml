@@ -23,7 +23,8 @@
             android:id="@+id/toolbar_title"
             android:layout_gravity="left"
             android:textColor="#ffffff"
-            android:textSize="20dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
             android:text="@string/settings"/>
 
     </android.support.v7.widget.Toolbar>
@@ -69,7 +70,7 @@
             <Switch
                 android:layout_width="50dp"
                 android:layout_height="14dp"
-                android:id="@+id/switch1"
+                android:id="@+id/switch_arlam"
                 android:checked="true"
                 android:layout_centerInParent="true"
                 android:layout_alignParentRight="true"

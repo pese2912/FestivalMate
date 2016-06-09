@@ -25,8 +25,9 @@
         android:background="@color/color_toolbar">
 
         <TextView
-            android:text="@string/mate_matching"
-            android:textSize="20dp"
+            android:text="@string/join_wait_list"
+            android:textSize="18sp"
+            android:textStyle="bold"
             android:id="@+id/toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

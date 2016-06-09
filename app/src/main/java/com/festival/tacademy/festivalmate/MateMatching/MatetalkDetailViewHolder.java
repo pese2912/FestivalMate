@@ -87,6 +87,7 @@ public class MatetalkDetailViewHolder extends RecyclerView.ViewHolder {
         }
 
         if(chatinfo.getChatroom_mems()!=null) {
+            detailView.mAdapter.clear();
             detailView.mAdapter.addAll(chatinfo.getChatroom_mems());
             detailView.mAdapter.setOnItemClickListener(listener);
         }

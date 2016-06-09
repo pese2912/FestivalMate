@@ -8,15 +8,21 @@ import android.text.Layout;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
+import android.widget.Toast;
 
 import com.festival.tacademy.festivalmate.R;
 
 public class SettingsActivity extends AppCompatActivity {
 
     Toolbar toolbar;
+    Switch alarm;
     RelativeLayout layout_quest;
     RelativeLayout layout_info;
+
+    public static  boolean switch_alarm =true;
 
 
     @Override
@@ -60,6 +66,21 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(SettingsActivity.this, TermsOfUsePrivacyPolicyActivity.class));
+            }
+        });
+
+
+
+        alarm =(Switch)findViewById(R.id.switch_arlam);
+        alarm.setChecked(switch_alarm);
+        alarm.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                    switch_alarm= isChecked;
+                else
+                    switch_alarm =isChecked;
+
             }
         });
 

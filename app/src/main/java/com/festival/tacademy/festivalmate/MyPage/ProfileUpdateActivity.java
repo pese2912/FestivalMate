@@ -110,12 +110,9 @@ public class ProfileUpdateActivity extends AppCompatActivity {
                 String message = messageView.getText().toString();
 //                int birthday = Integer.parseInt(birthView.getText().toString());
 
-                if (TextUtils.isEmpty(name) || TextUtils.isEmpty(message)) {
+                if (TextUtils.isEmpty(name)) {
                     Toast.makeText(ProfileUpdateActivity.this, "invalid value", Toast.LENGTH_SHORT).show();
                     return;
-                }
-                if(mUploadFile==null){
-                    mUploadFile=new File("");
                 }
 
                 NetworkManager.getInstance().modify_profile(ProfileUpdateActivity.this, memNo, mUploadFile, name, message,location, new NetworkManager.OnResultListener<ModifyProfileResult>() {
@@ -175,7 +172,7 @@ public class ProfileUpdateActivity extends AppCompatActivity {
                 imgUrl=result.result.mem_img;
                 mAdapter.addAll(result.result.getArtist());
               //  Toast.makeText(MyApplication.getContext(), NetworkManager.MY_SERVER+"/"+result.result.mem_img,Toast.LENGTH_SHORT).show();
-                Log.i("photo",NetworkManager.MY_SERVER+"/"+result.result.mem_img);
+               // Log.i("photo",NetworkManager.MY_SERVER+"/"+result.result.mem_img);
 
             }
             @Override

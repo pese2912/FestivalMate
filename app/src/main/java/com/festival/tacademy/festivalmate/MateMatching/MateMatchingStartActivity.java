@@ -122,6 +122,7 @@ public class MateMatchingStartActivity extends AppCompatActivity {
                         selectedArtistResult.result = selectedArtist;
                         intent.putExtra("selectedArtist",selectedArtistResult);
                         startActivity(intent);
+                        finish();
                     }
 
                     @Override

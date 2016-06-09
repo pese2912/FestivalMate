@@ -20,4 +20,17 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="7dp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:textSize="12sp"
+        android:textColor="@color/text9"
+        android:id="@+id/text_date"
+        android:layout_alignBottom="@+id/text_message"
+        android:layout_toLeftOf="@+id/text_message"
+        android:layout_toStartOf="@+id/text_message"
+        android:layout_marginRight="5dp" />
+
 </RelativeLayout>

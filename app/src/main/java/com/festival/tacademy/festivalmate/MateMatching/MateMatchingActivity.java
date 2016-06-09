@@ -78,20 +78,7 @@ public class MateMatchingActivity extends AppCompatActivity {
 
                 final Button btn = (Button)v.findViewById(R.id.btn_request);
 
-//                NetworkManager.getInstance().show_chatroom_detail(MateMatchingActivity.this, memNo, roomNo, new NetworkManager.OnResultListener<ShowMatchingResult>() {
-//                    @Override
-//                    public void onSuccess(Request request, ShowMatchingResult result) {
-//                        Toast.makeText(MateMatchingActivity.this, "성공",Toast.LENGTH_SHORT).show();
-//                        mAdapter.clear();
-//                        mAdapter.addAll(result.result);
-//
-//                    }
-//
-//                    @Override
-//                    public void onFail(Request request, IOException exception) {
-//                        Toast.makeText(MateMatchingActivity.this, "실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
-//                    }
-//                });
+
 
 //                if(room.getMem_chatroom_state() == 2)
 //                    btn.setText("참여중");
@@ -118,7 +105,7 @@ public class MateMatchingActivity extends AppCompatActivity {
 
                                 else if(result.result.getMem_chatroom_state() == 1) {
                                     room.setMem_chatroom_state(1);
-                                    btn.setText("대기중");
+                                    btn.setText("신청 완료! 방장 승인을 기다려 주세요.");
                                 }
 
                                 else if(result.result.getMem_chatroom_state() == 0) {

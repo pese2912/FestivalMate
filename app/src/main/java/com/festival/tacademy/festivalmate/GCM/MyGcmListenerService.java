@@ -21,6 +21,7 @@ import com.festival.tacademy.festivalmate.Manager.NetworkManager;
 import com.festival.tacademy.festivalmate.Manager.PropertyManager;
 import com.festival.tacademy.festivalmate.MateTalk.ChattingActivity;
 import com.festival.tacademy.festivalmate.MyApplication;
+import com.festival.tacademy.festivalmate.MyPage.SettingsActivity;
 import com.festival.tacademy.festivalmate.R;
 import com.google.android.gms.gcm.GcmListenerService;
 
@@ -160,9 +161,13 @@ public class MyGcmListenerService extends GcmListenerService {
                     intent.putExtra(EXTRA_SENDER_ID, result);
                     LocalBroadcastManager.getInstance(this).sendBroadcastSync(intent);
                     boolean isProcessed = intent.getBooleanExtra(EXTRA_RESULT, false);
-                    if (!isProcessed) {
-                        sendNotification(result.result.get(result.result.size()-1).chat_content);
+                    if (!isProcessed && SettingsActivity.switch_alarm) {
+
+                        MateTalkRoom mateTalkRoom = new MateTalkRoom();
+                        mateTalkRoom.setChatroom_no(roomid);
+                        sendNotification(result.result.get(result.result.size()-1).chat_content,mateTalkRoom);
                     }
+
                 } catch (IOException e) {
                     Toast.makeText(MyApplication.getContext(), "제발",Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
@@ -179,10 +184,11 @@ public class MyGcmListenerService extends GcmListenerService {
      * @param message GCM message received.
      */
 
-    private void sendNotification(String message) {
+    private void sendNotification(String message, MateTalkRoom room) {
         Intent intent = new Intent(this, ChattingActivity.class);
-        intent.putExtra("chatting",new MateTalkRoom());
+        intent.putExtra("chatting",room);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
 

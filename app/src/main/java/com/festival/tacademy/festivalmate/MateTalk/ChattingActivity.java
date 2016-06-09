@@ -253,6 +253,7 @@ public class ChattingActivity extends AppCompatActivity {
             else{
                 Send s = new Send();
                 s.message = r.chat_content;
+                s.date=r.chat_regdate;
                 mAdapter.add(s);
             }
         }

@@ -19,14 +19,6 @@
         android:layout_centerInParent="true"
         android:id="@+id/toolbar">
 
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/toolbar_title"
-            android:layout_gravity="center"
-            android:textColor="#ffffff"
-            android:textSize="25dp"
-            android:text="@string/festival_mate"/>
 
     </android.support.v7.widget.Toolbar>
 
@@ -151,6 +143,15 @@
 
         android:layout_marginRight="@dimen/text_bottom"
         android:layout_marginLeft="@dimen/text_bottom" />
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="20dp"
+        android:id="@+id/imageView20"
+        android:background="@drawable/img_festivalmate_title"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
 
 
 </RelativeLayout>
