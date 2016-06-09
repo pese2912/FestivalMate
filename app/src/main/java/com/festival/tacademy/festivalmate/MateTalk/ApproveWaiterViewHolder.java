@@ -47,7 +47,9 @@ public class ApproveWaiterViewHolder extends RecyclerView.ViewHolder {
         photoView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if( mListener2!=null ) {
+                    mListener2.onItemClick3(v,waiting);
+                }
             }
         });
 

@@ -99,6 +99,26 @@ public class ChatJoinListActivity extends AppCompatActivity {
                     }
                 });
             }
+
+            @Override
+            public void onItemClick3(View view, chatroom_waiting waiting) { //프로필 조회
+                NetworkManager.getInstance().show_mem_profile(ChatJoinListActivity.this, waiting.getMem_no(), new NetworkManager.OnResultListener<ShowMemProfileResult>() {
+                    @Override
+                    public void onSuccess(Request request, ShowMemProfileResult result) {
+                        //       Toast.makeText(ChattingActivity.this, "성공",Toast.LENGTH_SHORT).show();
+                        ProfileDialogFragment f = new ProfileDialogFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("user", result.result);
+                        f.setArguments(bundle);
+                        f.show(getSupportFragmentManager(), "aaaa");
+                    }
+
+                    @Override
+                    public void onFail(Request request, IOException exception) {
+                        Toast.makeText(ChatJoinListActivity.this, "실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
         });
 
 
@@ -122,7 +142,7 @@ public class ChatJoinListActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onItemClick2(View view, chatroom_member member) {
+            public void onItemClick2(View view, chatroom_member member) { // 프로필 조회
                 NetworkManager.getInstance().show_mem_profile(ChatJoinListActivity.this, member.getMem_no(), new NetworkManager.OnResultListener<ShowMemProfileResult>() {
                     @Override
                     public void onSuccess(Request request, ShowMemProfileResult result) {
