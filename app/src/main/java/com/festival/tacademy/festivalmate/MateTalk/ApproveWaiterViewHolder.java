@@ -27,6 +27,7 @@ public class ApproveWaiterViewHolder extends RecyclerView.ViewHolder {
     }
     public interface OnItemClickListener2 {
         public void onItemClick2(View view, chatroom_waiting waiting);
+        public void onItemClick3(View view, chatroom_waiting waiting);
     }
 
     OnItemClickListener mListener;
@@ -43,6 +44,14 @@ public class ApproveWaiterViewHolder extends RecyclerView.ViewHolder {
     public ApproveWaiterViewHolder(View itemView) {
         super(itemView);
         photoView = (ImageView)itemView.findViewById(R.id.image_photo);
+        photoView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
         nameView  = (TextView)itemView.findViewById(R.id.text_name);
         btnReject = (Button)itemView.findViewById(R.id.btn_exile);
         btnApproved = (Button)itemView.findViewById(R.id.btn_approved);

@@ -34,6 +34,7 @@ public class ChatJoinerViewHolder extends RecyclerView.ViewHolder {
 
     public interface OnItemClickListener {
         public void onItemClick(View view, chatroom_member member);
+        public void onItemClick2(View view, chatroom_member member);
     }
 
     OnItemClickListener mListener;
@@ -44,6 +45,14 @@ public class ChatJoinerViewHolder extends RecyclerView.ViewHolder {
     public ChatJoinerViewHolder(View itemView) {
         super(itemView);
         photoView = (ImageView)itemView.findViewById(R.id.image_photo);
+        photoView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if( mListener!=null ) {
+                    mListener.onItemClick2(v,member);
+                }
+            }
+        });
         nameView = (TextView)itemView.findViewById(R.id.text_name);
          btn = (Button)itemView.findViewById(R.id.btn_exile);
         btn.setOnClickListener(new View.OnClickListener() {

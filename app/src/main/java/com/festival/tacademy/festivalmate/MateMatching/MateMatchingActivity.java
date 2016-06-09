@@ -149,7 +149,7 @@ public class MateMatchingActivity extends AppCompatActivity {
             @Override
             public void onItemClick(View view, User user) {
 
-                NetworkManager.getInstance().show_mem_profile(MateMatchingActivity.this, user.getMem_no(), new NetworkManager.OnResultListener<ShowMemProfileResult>() {
+                NetworkManager.getInstance().show_mem_profile(MateMatchingActivity.this, user.getChatroom_mems_no(), new NetworkManager.OnResultListener<ShowMemProfileResult>() {
                     @Override
                     public void onSuccess(Request request, ShowMemProfileResult result) {
                         Toast.makeText(MateMatchingActivity.this, "성공",Toast.LENGTH_SHORT).show();

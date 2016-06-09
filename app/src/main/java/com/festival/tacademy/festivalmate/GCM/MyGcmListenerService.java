@@ -161,7 +161,7 @@ public class MyGcmListenerService extends GcmListenerService {
                     LocalBroadcastManager.getInstance(this).sendBroadcastSync(intent);
                     boolean isProcessed = intent.getBooleanExtra(EXTRA_RESULT, false);
                     if (!isProcessed) {
-                        sendNotification(result.message);
+                        sendNotification(result.result.get(result.result.size()-1).chat_content);
                     }
                 } catch (IOException e) {
                     Toast.makeText(MyApplication.getContext(), "제발",Toast.LENGTH_SHORT).show();

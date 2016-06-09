@@ -18,11 +18,13 @@ import com.festival.tacademy.festivalmate.Data.ChatroomKickResult;
 import com.festival.tacademy.festivalmate.Data.ChatroomMemListResult;
 import com.festival.tacademy.festivalmate.Data.MateTalkRoom;
 import com.festival.tacademy.festivalmate.Data.MateTalkWaitJoinList;
+import com.festival.tacademy.festivalmate.Data.ShowMemProfileResult;
 import com.festival.tacademy.festivalmate.Data.chatroom_member;
 import com.festival.tacademy.festivalmate.Data.chatroom_waiting;
 import com.festival.tacademy.festivalmate.Manager.NetworkManager;
 import com.festival.tacademy.festivalmate.Manager.PropertyManager;
 import com.festival.tacademy.festivalmate.MyApplication;
+import com.festival.tacademy.festivalmate.Profile.ProfileDialogFragment;
 import com.festival.tacademy.festivalmate.R;
 
 import java.io.IOException;
@@ -38,7 +40,6 @@ public class ChatJoinListActivity extends AppCompatActivity {
     RecyclerView listView;
     ChatJoinListAdapter mAdapter;
     MateTalkRoom mateTalkRoom;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +81,7 @@ public class ChatJoinListActivity extends AppCompatActivity {
 
 
         mAdapter.setOnItemClickListener2(new ApproveWaiterViewHolder.OnItemClickListener2() { //승인
+
             @Override
             public void onItemClick2(View view, final chatroom_waiting waiting) {
 
@@ -100,9 +102,9 @@ public class ChatJoinListActivity extends AppCompatActivity {
         });
 
 
-        mAdapter.setOnItemClickListener(new ChatJoinerViewHolder.OnItemClickListener() { //강퇴
+        mAdapter.setOnItemClickListener(new ChatJoinerViewHolder.OnItemClickListener() {
             @Override
-            public void onItemClick(View view, final chatroom_member member) {
+            public void onItemClick(View view, final chatroom_member member) {//강퇴
 
 
                 NetworkManager.getInstance().chatroom_kick(MyApplication.getContext(), member.getMem_no(), mateTalkRoom.getChatroom_no(), new NetworkManager.OnResultListener<ChatroomKickResult>() {
@@ -115,6 +117,26 @@ public class ChatJoinListActivity extends AppCompatActivity {
                     @Override
                     public void onFail(Request request, IOException exception) {
                         Toast.makeText(MyApplication.getContext(), "실패 : "+exception.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+            @Override
+            public void onItemClick2(View view, chatroom_member member) {
+                NetworkManager.getInstance().show_mem_profile(ChatJoinListActivity.this, member.getMem_no(), new NetworkManager.OnResultListener<ShowMemProfileResult>() {
+                    @Override
+                    public void onSuccess(Request request, ShowMemProfileResult result) {
+                        //       Toast.makeText(ChattingActivity.this, "성공",Toast.LENGTH_SHORT).show();
+                        ProfileDialogFragment f = new ProfileDialogFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("user", result.result);
+                        f.setArguments(bundle);
+                        f.show(getSupportFragmentManager(), "aaaa");
+                    }
+
+                    @Override
+                    public void onFail(Request request, IOException exception) {
+                        Toast.makeText(ChatJoinListActivity.this, "실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
                     }
                 });
             }

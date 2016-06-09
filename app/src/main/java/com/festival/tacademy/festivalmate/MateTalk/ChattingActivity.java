@@ -27,11 +27,13 @@ import com.festival.tacademy.festivalmate.Data.ChatroomSendMsgResult;
 import com.festival.tacademy.festivalmate.Data.Festival;
 import com.festival.tacademy.festivalmate.Data.MateTalkRoom;
 import com.festival.tacademy.festivalmate.Data.RequestNewChatResult;
+import com.festival.tacademy.festivalmate.Data.ShowMemProfileResult;
 import com.festival.tacademy.festivalmate.Data.User;
 import com.festival.tacademy.festivalmate.GCM.MyGcmListenerService;
 import com.festival.tacademy.festivalmate.Manager.NetworkManager;
 import com.festival.tacademy.festivalmate.Manager.PropertyManager;
 import com.festival.tacademy.festivalmate.MyApplication;
+import com.festival.tacademy.festivalmate.Profile.ProfileDialogFragment;
 import com.festival.tacademy.festivalmate.R;
 
 import java.io.IOException;
@@ -114,6 +116,27 @@ public class ChattingActivity extends AppCompatActivity {
             }
         });
 
+        mAdapter.setOnItemClickListener(new ChattingViewHolder.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, Receive receive) {
+                NetworkManager.getInstance().show_mem_profile(ChattingActivity.this, receive.chat_sender_no, new NetworkManager.OnResultListener<ShowMemProfileResult>() {
+                    @Override
+                    public void onSuccess(Request request, ShowMemProfileResult result) {
+                 //       Toast.makeText(ChattingActivity.this, "성공",Toast.LENGTH_SHORT).show();
+                        ProfileDialogFragment f = new ProfileDialogFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("user", result.result);
+                        f.setArguments(bundle);
+                        f.show(getSupportFragmentManager(), "aaaa");
+                    }
+
+                    @Override
+                    public void onFail(Request request, IOException exception) {
+                        Toast.makeText(ChattingActivity.this, "실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
 
         Button btn = (Button)findViewById(R.id.btn_send);
         btn.setOnClickListener(new View.OnClickListener() {

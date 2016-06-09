@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.festival.tacademy.festivalmate.MateMatching.ChatUserViewHolder;
+import com.festival.tacademy.festivalmate.MateMatching.MatetalkDetailViewHolder;
 import com.festival.tacademy.festivalmate.R;
 
 import java.util.ArrayList;
@@ -55,6 +57,12 @@ public class ChattingAdapter extends RecyclerView.Adapter<ChattingViewHolder>  {
     }
 
 
+    ChattingViewHolder.OnItemClickListener mListener;
+
+    public void setOnItemClickListener(ChattingViewHolder.OnItemClickListener listener) {
+        mListener = listener;
+    }
+
     @Override
     public ChattingViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;
@@ -88,6 +96,7 @@ public class ChattingAdapter extends RecyclerView.Adapter<ChattingViewHolder>  {
           case TYPE_RECEIVE: //This would be the header view in my Recycler
 
                 holder.setReceive((Receive)items.get(position));
+              holder.setOnItemClickListener(mListener);
                return;
            case TYPE_DATE: //This would be the header view in my Recycler
 
