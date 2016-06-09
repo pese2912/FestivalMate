@@ -69,6 +69,7 @@ public class MateMatchingStartActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 num = items.get(position).getFestival_no();
                 pos = position;
+                festival.setFestival_no(position);
             }
 
             @Override
@@ -164,6 +165,7 @@ public class MateMatchingStartActivity extends AppCompatActivity {
                     festivals[i] = result.festival_list.get(i).getFestival_name();
                     if(result.festival_list.get(i).getFestival_no() == num) {
                         pos = i;
+                        festival.setFestival_no(num);
                     }
                 }
 

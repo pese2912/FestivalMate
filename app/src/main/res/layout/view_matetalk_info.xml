@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/text_match_rate"
-        android:text="1명 일치"
+        android:text="  1명 일치"
         android:background="@drawable/img_matching_artist_num"
         android:layout_alignParentRight="true"
         android:textSize="11sp"

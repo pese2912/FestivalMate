@@ -77,9 +77,11 @@ public class MatetalkDetailViewHolder extends RecyclerView.ViewHolder {
             detailView.btn.setText("메이트톡 시작");
         }
 
+
         else if(chatinfo.getMem_chatroom_state()==1){
-            detailView.btn.setText("대기중");
+            detailView.btn.setText("신청 완료! 방장 승인을 기다려 주세요.");
         }
+
         else if(chatinfo.getMem_chatroom_state()==2){
             detailView.btn.setText("참여중");
         }
@@ -92,9 +94,8 @@ public class MatetalkDetailViewHolder extends RecyclerView.ViewHolder {
         Glide.with(infoView.photoView.getContext()).load(NetworkManager.MY_SERVER+"/"+chatinfo.getChatroom_img()).into(infoView.photoView);
         infoView.titleView.setText(chatinfo.getChatroom_name());
         infoView.joinView.setText(chatinfo.getChatroom_size()+"명 참여중");
-        infoView.matchrateView.setText(chatinfo.getMatched_artist_number()+"명 일치");
+        infoView.matchrateView.setText("  "+chatinfo.getMatched_artist_number()+"명 일치");
         infoView.hostNameView.setText(chatinfo.getChatroom_host_name()+" 님");
-
     }
 
 }

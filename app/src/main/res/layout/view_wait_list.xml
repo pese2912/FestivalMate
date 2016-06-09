@@ -38,6 +38,8 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
         android:id="@+id/text_title"
+        android:textSize="14sp"
+        android:textColor="@color/text6"
         android:layout_below="@+id/text_name"
         android:layout_toRightOf="@+id/image_photo"
         android:layout_toEndOf="@+id/image_photo"
@@ -49,6 +51,8 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="3명"
+        android:textSize="10sp"
+        android:textColor="@color/text9"
         android:id="@+id/text_people"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/imageView6"
@@ -81,6 +85,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="20dp"
         android:layout_marginRight="16dp"/>
+
 
     <ImageView
         android:layout_width="14dp"

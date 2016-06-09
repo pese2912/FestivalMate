@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.festival.tacademy.festivalmate.Data.CreateNewChatroomResult;
 import com.festival.tacademy.festivalmate.Data.Festival;
+import com.festival.tacademy.festivalmate.Data.FestivalDetailResult;
 import com.festival.tacademy.festivalmate.Data.MateTalkRoom;
 import com.festival.tacademy.festivalmate.Data.SelectedArtist;
 import com.festival.tacademy.festivalmate.Data.ShowMatchingResult;
@@ -111,6 +112,23 @@ public class MakeMateTalkActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         festival = (Festival) intent.getExtras().getSerializable("festival");
+        NetworkManager.getInstance().show_festival_detail(MakeMateTalkActivity.this, festival.getFestival_no(), PropertyManager.getInstance().getNo(),
+                new NetworkManager.OnResultListener<FestivalDetailResult>() {
+                    @Override
+                    public void onSuccess(Request request, FestivalDetailResult result) {
+                        if(result.success == 1) {
+                            festival = result.result;
+                        }
+                    }
+
+                    @Override
+                    public void onFail(Request request, IOException exception) {
+
+                    }
+                });
+
+
+
         selectedArtist = (SelectedArtist) intent.getExtras().getSerializable("selectedArtist");
 
         setSupportActionBar(toolbar);
@@ -172,6 +190,7 @@ public class MakeMateTalkActivity extends AppCompatActivity {
 //                startActivity(intent);
             }
         });
+
 
 
         if (savedInstanceState != null) {
