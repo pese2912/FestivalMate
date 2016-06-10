@@ -125,6 +125,8 @@ public class MateMatchingActivity extends AppCompatActivity {
 
                 if(isClick == false) {
                     v.setVisibility(View.VISIBLE);
+
+                    mManager.scrollToPositionWithOffset(mAdapter.getItemPosition(roomNo), 0);
                     isClick = true;
                 } else {
                     v.setVisibility(View.GONE);
@@ -154,8 +156,6 @@ public class MateMatchingActivity extends AppCompatActivity {
                     //    Toast.makeText(MateMatchingActivity.this, "실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
                     }
                 });
-
-
 
             }
         });

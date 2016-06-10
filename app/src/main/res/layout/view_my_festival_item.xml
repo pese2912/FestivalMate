@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="122dp" android:background="@drawable/background_festival_item">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="122dp" android:background="#f5f5f5">
 
+    <RelativeLayout
+        android:background="@color/textf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp">
     <ImageView android:layout_width="@dimen/festival_preview_img" android:layout_height="@dimen/festival_preview_img" android:layout_alignParentStart="true" android:layout_alignParentLeft="true"
         android:id="@+id/photo_view"
+        android:scaleType="centerCrop"
         android:layout_alignParentBottom="true"
         android:layout_alignParentTop="true" />
 
@@ -27,5 +33,6 @@
         android:layout_alignBottom="@+id/text_location"
         android:layout_alignLeft="@+id/imageView3"
         android:layout_alignStart="@+id/imageView3" />
+    </RelativeLayout>
 
 </RelativeLayout>

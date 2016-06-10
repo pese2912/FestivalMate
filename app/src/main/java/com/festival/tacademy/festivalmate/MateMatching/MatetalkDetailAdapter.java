@@ -65,6 +65,15 @@ public class MatetalkDetailAdapter extends RecyclerView.Adapter<MatetalkDetailVi
         return items.size();
     }
 
+    public int getItemPosition(int roomNo) {
+        for(int i=0; i<items.size(); i++) {
+            if(roomNo == items.get(i).getChatroom_no()) {
+                return i;
+            }
+        }
+        return 0;
+    }
+
 
 }
 

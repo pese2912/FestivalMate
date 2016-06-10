@@ -87,6 +87,8 @@ public class ChattingActivity extends AppCompatActivity {
         recyclerView.setAdapter(mAdapter);
         layoutManager = new LinearLayoutManager(ChattingActivity.this, LinearLayoutManager.VERTICAL, false);
 
+
+
         //layoutManager.smoothScrollToPosition(layoutManager);
 
 
@@ -242,9 +244,6 @@ public class ChattingActivity extends AppCompatActivity {
     };
 
     private void initData() {
-
-        layoutManager.scrollToPosition(newChatResult.result.size()-1);
-
         mAdapter.clear();
         for(Receive r : newChatResult.result) {
 
@@ -259,6 +258,7 @@ public class ChattingActivity extends AppCompatActivity {
                 mAdapter.add(s);
             }
         }
+        recyclerView.smoothScrollToPosition(mAdapter.getItemCount());
     }
 
     @Override
