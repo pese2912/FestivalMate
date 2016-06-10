@@ -5,13 +5,12 @@
     android:baselineAligned="false">
 
     <CheckBox
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:id="@+id/text_artist_name"
         android:checked="false"
         android:background="@drawable/selector_artist"
         android:button="@null"
-        android:text=""
         android:textSize="12sp"
         android:gravity="center"
         android:padding="5dp"
