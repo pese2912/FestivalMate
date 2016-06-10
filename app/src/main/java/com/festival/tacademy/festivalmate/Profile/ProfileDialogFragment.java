@@ -41,7 +41,7 @@ public class ProfileDialogFragment extends DialogFragment {
     User user;
     TextView user_state, user_name, user_email;
     ImageView user_image;
-
+    Button btn_matetalk;
     RecyclerView rv_list1, rv_list2;
     ProfileLetsgoAdapter mAdapter1;
     ProfilePreferArtistAdapter mAdapter2;
@@ -71,6 +71,8 @@ public class ProfileDialogFragment extends DialogFragment {
         user = (User)bundle.getSerializable("user");
         mAdapter1.addAll(user.getMem_going());
         mAdapter2.addAll(user.getArtist());
+
+
     }
 
 
@@ -107,7 +109,10 @@ public class ProfileDialogFragment extends DialogFragment {
             }
         });
 
-        Button btn_matetalk = (Button)view.findViewById(R.id.btn_maketalk);
+         btn_matetalk = (Button)view.findViewById(R.id.btn_maketalk);
+        if(PropertyManager.getInstance().getNo() == 0){
+            btn_matetalk.setVisibility(View.GONE);
+        }
         btn_matetalk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

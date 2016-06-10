@@ -21,6 +21,7 @@ import com.festival.tacademy.festivalmate.Data.User;
 import com.festival.tacademy.festivalmate.Manager.NetworkManager;
 import com.festival.tacademy.festivalmate.Manager.PropertyManager;
 import com.festival.tacademy.festivalmate.MateMatching.MateMatchingStartActivity;
+import com.festival.tacademy.festivalmate.MyApplication;
 import com.festival.tacademy.festivalmate.Profile.ProfileDialogFragment;
 import com.festival.tacademy.festivalmate.R;
 
@@ -54,13 +55,13 @@ public class FestivalDetailActivity extends AppCompatActivity {
         mAdapter = new FestivalDetailAdapter();
         mManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
-        mAdapter.setOnItemClickListener(new UserViewHolder.OnItemClickListener() { //프로필 조회
+        mAdapter.setOnItemClickListener(new UserViewHolder.OnItemClickListener() { //?꾨줈??議고쉶
             @Override
             public void onItemClick(View view, User user) {
                 NetworkManager.getInstance().show_mem_profile(FestivalDetailActivity.this, user.getMem_no(), new NetworkManager.OnResultListener<ShowMemProfileResult>() {
                     @Override
                     public void onSuccess(Request request, ShowMemProfileResult result) {
-                        //Toast.makeText(FestivalDetailActivity.this, "성공",Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(FestivalDetailActivity.this, "?깃났",Toast.LENGTH_SHORT).show();
                         ProfileDialogFragment f = new ProfileDialogFragment();
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("user", result.result);
@@ -70,13 +71,13 @@ public class FestivalDetailActivity extends AppCompatActivity {
 
                     @Override
                     public void onFail(Request request, IOException exception) {
-                  //      Toast.makeText(FestivalDetailActivity.this, "실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+                        //      Toast.makeText(FestivalDetailActivity.this, "?ㅽ뙣"+exception.getMessage(),Toast.LENGTH_SHORT).show();
                     }
                 });
             }
         });
 
-        mAdapter.setOnItemClickListener2(new TicketLinkHolder.OnItemClickListner() { // 티켓링크
+        mAdapter.setOnItemClickListener2(new TicketLinkHolder.OnItemClickListner() { // ?곗폆留곹겕
             @Override
             public void onItemClick(String str) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -92,6 +93,7 @@ public class FestivalDetailActivity extends AppCompatActivity {
                 intent.setData(uri);
                 startActivity(intent);
             }
+
 
             @Override
             public void onItemClick3(String str) {
@@ -112,10 +114,9 @@ public class FestivalDetailActivity extends AppCompatActivity {
 
         mAdapter.setOnItemClickListener(new MapViewHolder.OnItemClickListner() {
             @Override
-            public void onItemClick(String str) {
-            //    Toast.makeText(FestivalDetailActivity.this, str, Toast.LENGTH_SHORT).show();
+            public void onItemClick() {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                Uri uri = Uri.parse(str);
+                Uri uri = Uri.parse(festival.getFestival_location_url());
                 intent.setData(uri);
                 startActivity(intent);
             }
@@ -140,33 +141,23 @@ public class FestivalDetailActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-       // Toast.makeText(FestivalDetailActivity.this, festival.getFestival_name() + "+ " + festival.getDate() + "+ " + festival.getFestival_location(), Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-      //  setData();
+        if(PropertyManager.getInstance().getNo() == 0) {
+            btn.setVisibility(View.GONE);
+        }
     }
 
     private void setData(){
-
-    //    mAdapter.setFestval(festival);
         NetworkManager.getInstance().show_festival_detail(this, festival.getFestival_no(), 1,
                 new NetworkManager.OnResultListener<FestivalDetailResult>() {
                     @Override
                     public void onSuccess(Request request, FestivalDetailResult result) {
                         if(result.success==1) {
-                      //      Toast.makeText(FestivalDetailActivity.this, "Success"+result.result.getFestival_location_url(), Toast.LENGTH_SHORT).show();
-
                             mAdapter.setFestval(result.result);
-
+                            festival = result.result;
                         }
                     }
-
                     @Override
                     public void onFail(Request request, IOException exception) {
-                      //  Toast.makeText(FestivalDetailActivity.this, "Fail", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

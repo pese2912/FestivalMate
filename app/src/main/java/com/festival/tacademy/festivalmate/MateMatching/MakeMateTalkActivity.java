@@ -147,11 +147,15 @@ public class MakeMateTalkActivity extends AppCompatActivity {
 
 
 
-                if(TextUtils.isEmpty(chatroom_name) || TextUtils.isEmpty(maxSizeView.getText().toString())) {
-                    Toast.makeText(MakeMateTalkActivity.this,"invalid",Toast.LENGTH_SHORT).show();
+                if(TextUtils.isEmpty(chatroom_name) || TextUtils.isEmpty(maxSizeView.getText().toString())   ) {
+                    Toast.makeText(MakeMateTalkActivity.this,"잘못된 입력입니다.",Toast.LENGTH_SHORT).show();
                     return;
                 }
                 int chatroom_maxSize=  Integer.parseInt(maxSizeView.getText().toString());
+                if(chatroom_maxSize >20){
+                    Toast.makeText(MakeMateTalkActivity.this,"최대 인원은 20명입니다.",Toast.LENGTH_SHORT).show();
+                    return;
+                }
 //                for(int i = 0; i <selectedArtist.result.size(); i++){
 //
 //                    Toast.makeText(MakeMateTalkActivity.this, selectedArtist.result.get(i).getName(),Toast.LENGTH_SHORT).show();

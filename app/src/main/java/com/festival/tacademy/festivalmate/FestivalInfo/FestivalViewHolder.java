@@ -83,6 +83,11 @@ public class FestivalViewHolder extends RecyclerView.ViewHolder {
             text_date.setText(festival.getFestival_lineups().get(0).getDate() + "-" + festival.getFestival_lineups().get(size-1).getDate());
         text_location.setText(festival.getFestival_location());
 
+        if(PropertyManager.getInstance().getNo() == 0){
+            checkBox.setVisibility(View.GONE);
+        }
+
+
         if(festival.getMem_going_check() == 1) {
             checkBox.setChecked(true);
          //   Toast.makeText(MyApplication.getContext(),festival.getFestival_name(),Toast.LENGTH_SHORT).show();

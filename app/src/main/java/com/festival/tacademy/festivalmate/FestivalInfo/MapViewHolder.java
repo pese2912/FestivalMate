@@ -24,7 +24,7 @@ public class MapViewHolder extends RecyclerView.ViewHolder {
     Festival festival;
 
     public interface OnItemClickListner {
-        public void onItemClick(String str);
+        public void onItemClick();
     }
 
     OnItemClickListner mListener;
@@ -38,23 +38,17 @@ public class MapViewHolder extends RecyclerView.ViewHolder {
         locationView = (ImageView)itemView.findViewById(R.id.image_location);
         textLocation = (TextView)itemView.findViewById(R.id.text_location);
         locationView.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
-        //        Toast.makeText(MyApplication.getContext(),festival.getFestival_location_url()+"",Toast.LENGTH_SHORT).show();
-//                if(festival.getFestival_location_url() != null)
-//                     mListener.onItemClick(festival.getFestival_location_url());
+                mListener.onItemClick();
             }
         });
 
     }
 
     public void setLocation(Festival festival) {
-
         this.festival = festival;
-      //  locationView.setImageResource(festival.getPhoto_location());
-       Glide.with(locationView.getContext()).load( NetworkManager.MY_SERVER+"/"+festival.getFestival_location_img()).into(locationView);
-       // Toast.makeText(MyApplication.getContext(), NetworkManager.MY_SERVER+"/"+festival.getFestival_location_img(),Toast.LENGTH_SHORT).show();
+        Glide.with(locationView.getContext()).load( NetworkManager.MY_SERVER+"/"+festival.getFestival_location_img()).into(locationView);
         textLocation.setText(festival.getFestival_location());
     }
 }

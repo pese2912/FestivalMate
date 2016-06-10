@@ -101,7 +101,6 @@ public class FestivalDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_festival_photo, parent, false);
                 return new PhotoViewHolder(view);
             }
-
             case VIEW_TICKET_LINK: {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_ticket_link, null);
                 return new TicketLinkHolder(view);
@@ -111,10 +110,10 @@ public class FestivalDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 return new TitleViewHolder(view);
             }
             case VIEW_TYPE_FESTIVAL_LINEUP: {
+
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_lineup, null);
                 return new LineupViewHolder(view);
             }
-
             case VIEW_TYPE_LETSGO: {
                 View view =LayoutInflater.from(parent.getContext()).inflate(R.layout.view_letsgo, parent, false);
                 return new LetsgoViewHolder(view);
@@ -180,7 +179,7 @@ public class FestivalDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         if( position == 0 ) {
             MapViewHolder h = (MapViewHolder)holder;
             h.setLocation(festival);
-//            h.setOnItemClickListener(mListener3);
+            h.setOnItemClickListener(mListener3);
             return;
         }
 
@@ -197,10 +196,7 @@ public class FestivalDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             size++;
             size += festival.getLineups().size();
         }
-        if( festival.getFestival_going_mem().size() > 0 ) {
-            size += 2;
-        }
-        size+=2;
+        size+=4;
 
         return size;
     }
