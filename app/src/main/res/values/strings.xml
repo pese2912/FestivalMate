@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FestivalMate</string>
+    <string name="app_name">공연메이트</string>
     <string name="festival_mate">공연메이트</string>
     <string name="login">로그인</string>
     <string name="start">시작하기</string>

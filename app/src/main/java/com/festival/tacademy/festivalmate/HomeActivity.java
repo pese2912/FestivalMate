@@ -160,6 +160,13 @@ public class HomeActivity extends AppCompatActivity {
             profileUpdate.setVisibility(View.GONE);
             logoutView.setVisibility(View.GONE);
             nameView.setText(getResources().getString(R.string.join_festival_member));
+            nameView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(HomeActivity.this, MainActivity.class));
+                    finish();
+                }
+            });
             profileView.setImageResource(R.drawable.img_non_mem);
         }
 

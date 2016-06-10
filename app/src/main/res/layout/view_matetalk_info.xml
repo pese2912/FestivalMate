@@ -5,10 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
+
     <ImageView
         android:id="@+id/image_view"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="110dp"
+        android:layout_gravity="top"
+        android:scaleType ="centerCrop"
+        android:layout_marginTop="5dp" />
+
+    <ImageView
+        android:id="@+id/image_view2"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:background="@drawable/img_matching_back"
         android:layout_gravity="top"
         android:scaleType ="centerCrop"
         android:layout_marginTop="5dp" />

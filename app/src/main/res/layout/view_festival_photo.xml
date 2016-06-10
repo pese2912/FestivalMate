@@ -10,6 +10,14 @@
         android:id="@+id/image_festival_photo"
         android:layout_gravity="center" />
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="197dp"
+        android:scaleType ="centerCrop"
+        android:background="@drawable/img_festival_back"
+        android:id="@+id/image_festival_photo2"
+        android:layout_gravity="center" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,5 +46,6 @@
         android:layout_alignParentStart="true"
         android:layout_marginBottom="21dp"
         android:layout_marginLeft="16dp" />
+
 
 </RelativeLayout>

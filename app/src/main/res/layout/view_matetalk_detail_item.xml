@@ -5,7 +5,7 @@
 
     <com.festival.tacademy.festivalmate.MateMatching.MatetalkInfoView
         android:layout_width="wrap_content"
-        android:layout_height="130dp"
+        android:layout_height="110dp"
         android:id="@+id/info_view"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
