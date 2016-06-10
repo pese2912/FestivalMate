@@ -231,7 +231,7 @@ public class MakeMateTalkActivity extends AppCompatActivity {
                         //Toast.makeText(MakeMateTalkActivity.this,mUploadFile.getName()+"",Toast.LENGTH_SHORT).show();
                         break;
                 }
-                Toast.makeText(MakeMateTalkActivity.this,bg+"",Toast.LENGTH_SHORT).show();
+             //   Toast.makeText(MakeMateTalkActivity.this,bg+"",Toast.LENGTH_SHORT).show();
             }
         });
     }

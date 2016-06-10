@@ -90,7 +90,7 @@ public class MateMatchingActivity extends AppCompatActivity {
                 btn.setOnClickListener(new View.OnClickListener() {  // 버튼 클릭
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(MateMatchingActivity.this, memNo+ "  "+roomNo+"  "+state+"  " ,Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(MateMatchingActivity.this, memNo+ "  "+roomNo+"  "+state+"  " ,Toast.LENGTH_SHORT).show();
 
                         NetworkManager.getInstance().request_chatroom_join(MateMatchingActivity.this, memNo, roomNo, state,new NetworkManager.OnResultListener<RequestChatroomJoinResult>() {
 
@@ -121,6 +121,7 @@ public class MateMatchingActivity extends AppCompatActivity {
                         });
                     }
                 });
+
 
                 if(isClick == false) {
                     v.setVisibility(View.VISIBLE);
