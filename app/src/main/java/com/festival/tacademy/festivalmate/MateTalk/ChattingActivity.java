@@ -57,6 +57,7 @@ public class ChattingActivity extends AppCompatActivity {
 
     EditText inputView;
     MateTalkRoom mateTalkRoom;
+    LinearLayoutManager layoutManager;
     User user;
 
     @Override
@@ -84,7 +85,11 @@ public class ChattingActivity extends AppCompatActivity {
 
         mAdapter = new ChattingAdapter();
         recyclerView.setAdapter(mAdapter);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(ChattingActivity.this, LinearLayoutManager.VERTICAL, false);
+        layoutManager = new LinearLayoutManager(ChattingActivity.this, LinearLayoutManager.VERTICAL, false);
+
+        //layoutManager.smoothScrollToPosition(layoutManager);
+
+
         // GridLayoutManager layoutManager = new GridLayoutManager(this, 3, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
@@ -132,7 +137,7 @@ public class ChattingActivity extends AppCompatActivity {
 
                     @Override
                     public void onFail(Request request, IOException exception) {
-                        Toast.makeText(ChattingActivity.this, "실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(ChattingActivity.this, "실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -151,18 +156,13 @@ public class ChattingActivity extends AppCompatActivity {
                     NetworkManager.getInstance().chatroom_send_msg(ChattingActivity.this, memNo, mateTalkRoom.getChatroom_no(), message, memNo, new NetworkManager.OnResultListener<ChatroomSendMsgResult>() {
                         @Override
                         public void onSuccess(Request request, ChatroomSendMsgResult result) {
-                            Toast.makeText(MyApplication.getContext(), "성공",Toast.LENGTH_SHORT).show();
-                            // mAdapter.add();
-                           // Send send = new Send();
-                           // send.message= message;
-                          //  send.date= "2016-07-24";
-                           // mAdapter.add(send);
+
                             inputView.setText("");
                         }
 
                         @Override
                         public void onFail(Request request, IOException exception) {
-                            Toast.makeText(MyApplication.getContext(), "실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+                         //   Toast.makeText(MyApplication.getContext(), "실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -242,6 +242,8 @@ public class ChattingActivity extends AppCompatActivity {
     };
 
     private void initData() {
+
+        layoutManager.scrollToPosition(newChatResult.result.size()-1);
 
         mAdapter.clear();
         for(Receive r : newChatResult.result) {

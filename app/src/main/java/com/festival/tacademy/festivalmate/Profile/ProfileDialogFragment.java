@@ -118,7 +118,7 @@ public class ProfileDialogFragment extends DialogFragment {
                 NetworkManager.getInstance().create_new_private_chatroom(MyApplication.getContext(), memNo, anoNo, new NetworkManager.OnResultListener<CreateNewChatroomResult>() {
                     @Override
                     public void onSuccess(Request request, CreateNewChatroomResult result) {
-                        Toast.makeText(getContext(), "성공",Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(getContext(), "성공",Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getContext(), ChattingActivity.class);
                         MateTalkRoom room = new MateTalkRoom();
                         room.setChatroom_no(result.result.getChatroom_no());
@@ -132,7 +132,7 @@ public class ProfileDialogFragment extends DialogFragment {
                     @Override
                     public void onFail(Request request, IOException exception) {
 
-                        Toast.makeText(getContext(), "실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+                     //   Toast.makeText(getContext(), "실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
                     }
                 });
             }

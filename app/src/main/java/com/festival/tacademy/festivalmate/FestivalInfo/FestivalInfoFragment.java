@@ -133,7 +133,7 @@ public class FestivalInfoFragment extends Fragment {
 
             @Override
             public void onPageSelected(int position) {
-                Toast.makeText(getContext(), "position : " + position, Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getContext(), "position : " + position, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -169,7 +169,7 @@ public class FestivalInfoFragment extends Fragment {
                 mAdapter2.clear();
                 mAdapter.clear();
 
-                Toast.makeText(getContext(),"성공",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(),"성공",Toast.LENGTH_SHORT).show();
 
                 mAdapter.addAll(result.result_promotion);
                 mAdapter2.addAll(result.result);
@@ -178,7 +178,7 @@ public class FestivalInfoFragment extends Fragment {
 
             @Override
             public void onFail(Request request, IOException exception) {
-                Toast.makeText(getContext(),"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+            //    Toast.makeText(getContext(),"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
 

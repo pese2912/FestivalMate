@@ -78,7 +78,7 @@ public class Preference_profile_Activity extends AppCompatActivity {
                 }
 
                 // Toast.makeText(PreferenceActivity.this, artist.isCheck() + artist.getName(), Toast.LENGTH_SHORT).show();
-                Toast.makeText(Preference_profile_Activity.this, selectedArtist.size()+"", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(Preference_profile_Activity.this, selectedArtist.size()+"", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -103,7 +103,7 @@ public class Preference_profile_Activity extends AppCompatActivity {
                     NetworkManager.getInstance().searchArtistSurvey(Preference_profile_Activity.this, memNo, name, new NetworkManager.OnResultListener<ShowArtistSurveyResult>() {
                         @Override
                         public void onSuccess(Request request, ShowArtistSurveyResult result) {
-                            Toast.makeText(Preference_profile_Activity.this,"성공",Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(Preference_profile_Activity.this,"성공",Toast.LENGTH_SHORT).show();
                             mAdapter.clear();
                             artistList.addAll(result.result);
                             mAdapter.addAll(result.result);
@@ -113,7 +113,7 @@ public class Preference_profile_Activity extends AppCompatActivity {
 
                         @Override
                         public void onFail(Request request, IOException exception) {
-                            Toast.makeText(Preference_profile_Activity.this,"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+                          //  Toast.makeText(Preference_profile_Activity.this,"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -127,7 +127,7 @@ public class Preference_profile_Activity extends AppCompatActivity {
             NetworkManager.getInstance().saveArtistSurvey(Preference_profile_Activity.this, memNo, selectedArtist, new NetworkManager.OnResultListener<MySignUpResult>() {
                 @Override
                 public void onSuccess(Request request, MySignUpResult result) {
-                    Toast.makeText(Preference_profile_Activity.this,"성공",Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(Preference_profile_Activity.this,"성공",Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(Preference_profile_Activity.this, ProfileUpdateActivity.class);
                  //   intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
@@ -137,7 +137,7 @@ public class Preference_profile_Activity extends AppCompatActivity {
                 @Override
                 public void onFail(Request request, IOException exception) {
 
-                    Toast.makeText(Preference_profile_Activity.this,"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(Preference_profile_Activity.this,"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
                  }
                 });
             }
@@ -167,7 +167,7 @@ public class Preference_profile_Activity extends AppCompatActivity {
         NetworkManager.getInstance().showArtistSurvey(Preference_profile_Activity.this, memNo, new NetworkManager.OnResultListener<ShowArtistSurveyResult>() {
             @Override
             public void onSuccess(Request request, ShowArtistSurveyResult result) {
-                Toast.makeText(Preference_profile_Activity.this,"성공",Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(Preference_profile_Activity.this,"성공",Toast.LENGTH_SHORT).show();
                 mAdapter.clear();
                 mAdapter.addAll(result.result);
 
@@ -177,7 +177,7 @@ public class Preference_profile_Activity extends AppCompatActivity {
 
             @Override
             public void onFail(Request request, IOException exception) {
-                Toast.makeText(Preference_profile_Activity.this,"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(Preference_profile_Activity.this,"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
 

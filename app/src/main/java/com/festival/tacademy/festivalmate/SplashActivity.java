@@ -126,7 +126,7 @@ public class SplashActivity extends AppCompatActivity {
                 public void onSuccess(Request request, MySignInResult result) {
                     if(result.success==1)
                     {
-                        Toast.makeText(SplashActivity.this,"자동로그인성공",Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(SplashActivity.this,"자동로그인성공",Toast.LENGTH_SHORT).show();
                         PropertyManager.getInstance().setLogin(true);
                         PropertyManager.getInstance().setUser(result.result);
                         goHomeActivity();
@@ -134,7 +134,7 @@ public class SplashActivity extends AppCompatActivity {
                 }
                 @Override
                 public void onFail(Request request, IOException exception) {
-                    Toast.makeText(SplashActivity.this, "자동로그인 실패 : " + exception.getMessage(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(SplashActivity.this, "자동로그인 실패 : " + exception.getMessage(), Toast.LENGTH_SHORT).show();
                     goMainActivity();
                 }
             });

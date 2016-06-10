@@ -173,7 +173,7 @@ public class HomeActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(Request request, ShowMiniProfileResult result) {
                     nameView.setText(result.result.getName());
-                    Toast.makeText(HomeActivity.this,result.result.getName(),Toast.LENGTH_SHORT).show();
+                 //   Toast.makeText(HomeActivity.this,result.result.getName(),Toast.LENGTH_SHORT).show();
                     Glide.with(HomeActivity.this).load(NetworkManager.MY_SERVER+"/"+result.result.getPhoto()).asBitmap().into(profileView);
                 }
 

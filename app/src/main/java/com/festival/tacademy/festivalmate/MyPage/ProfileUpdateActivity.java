@@ -111,20 +111,20 @@ public class ProfileUpdateActivity extends AppCompatActivity {
 //                int birthday = Integer.parseInt(birthView.getText().toString());
 
                 if (TextUtils.isEmpty(name)) {
-                    Toast.makeText(ProfileUpdateActivity.this, "invalid value", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProfileUpdateActivity.this, "잘못된 입력입니다.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 NetworkManager.getInstance().modify_profile(ProfileUpdateActivity.this, memNo, mUploadFile, name, message,location, new NetworkManager.OnResultListener<ModifyProfileResult>() {
                     @Override
                     public void onSuccess(Request request, ModifyProfileResult result) {
-                        Toast.makeText(ProfileUpdateActivity.this,"성공",Toast.LENGTH_SHORT).show();
+                    //    Toast.makeText(ProfileUpdateActivity.this,"성공",Toast.LENGTH_SHORT).show();
                         finish();
                     }
 
                     @Override
                     public void onFail(Request request, IOException exception) {
-                        Toast.makeText(ProfileUpdateActivity.this,"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+                     //   Toast.makeText(ProfileUpdateActivity.this,"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
                     }
                 });
             }

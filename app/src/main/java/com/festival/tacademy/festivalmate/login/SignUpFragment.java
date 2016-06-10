@@ -107,7 +107,7 @@ public class SignUpFragment extends Fragment {
 
                 if (TextUtils.isEmpty(name) || TextUtils.isEmpty(email) || !validateEmail(email)
                         || TextUtils.isEmpty(password) || password.length() < 8 || TextUtils.isEmpty(repassword) || !password.equals(repassword) || !checkBoxAgree.isChecked()) {
-                    Toast.makeText(getContext(), "invalid value", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "잘못된 입력입니다.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -116,14 +116,14 @@ public class SignUpFragment extends Fragment {
                     @Override
                     public void onSuccess(Request request, MySignUpResult result) {
 
-                        Toast.makeText(getContext(), "가입성공 : " + result.message,Toast.LENGTH_SHORT).show();
+                     //  Toast.makeText(getContext(), "가입성공 : " + result.message,Toast.LENGTH_SHORT).show();
                         final String regId = PropertyManager.getInstance().getRegistrationToken();
 
                         NetworkManager.getInstance().signin(getContext(), email, password,regId, new NetworkManager.OnResultListener<MySignInResult>() { //가입 성공하면 바로 로그인 요청
 
                             @Override
                             public void onSuccess(Request request, MySignInResult result) {  // 로그인 성공
-                                Toast.makeText(getContext(), "로그인 성공 : " + result.message,Toast.LENGTH_SHORT).show();
+                            //    Toast.makeText(getContext(), "로그인 성공 : " + result.message,Toast.LENGTH_SHORT).show();
                                 PropertyManager.getInstance().setLogin(true);
                                 PropertyManager.getInstance().setUser(result.result);
                                 PropertyManager.getInstance().setEmail(email);
@@ -135,7 +135,7 @@ public class SignUpFragment extends Fragment {
 
                             @Override
                             public void onFail(Request request, IOException exception) {
-                                Toast.makeText(getContext(), "로그인 실패 : " + exception,Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(getContext(), "로그인 실패 : " + exception,Toast.LENGTH_SHORT).show();
                             }
                         });
 
@@ -143,8 +143,8 @@ public class SignUpFragment extends Fragment {
 
                     @Override
                     public void onFail(Request request, IOException exception) {
-                        Toast.makeText(getContext(), "가입실패 : "+exception,Toast.LENGTH_SHORT).show();
-                        Log.i("onFail: ",exception.getMessage());
+                       // Toast.makeText(getContext(), "가입실패 : "+exception,Toast.LENGTH_SHORT).show();
+                     //   Log.i("onFail: ",exception.getMessage());
                     }
                 });
 //

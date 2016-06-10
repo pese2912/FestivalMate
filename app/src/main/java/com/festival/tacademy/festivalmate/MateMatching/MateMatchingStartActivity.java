@@ -104,7 +104,7 @@ public class MateMatchingStartActivity extends AppCompatActivity {
                 for(int i=0; i<selectedLineup.size(); i++){
                     for(int j =0; j<selectedLineup.get(i).getLineup().size(); j++){
                         if(selectedLineup.get(i).getLineup().get(j).isCheck() == 1){
-                            Toast.makeText(MateMatchingStartActivity.this,""+selectedLineup.get(i).getLineup().get(j).getName(),Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(MateMatchingStartActivity.this,""+selectedLineup.get(i).getLineup().get(j).getName(),Toast.LENGTH_SHORT).show();
                             selectedArtist.add(selectedLineup.get(i).getLineup().get(j));
                         }
                     }
@@ -113,7 +113,7 @@ public class MateMatchingStartActivity extends AppCompatActivity {
                 int fesNo = num;
 
                 NetworkManager.getInstance().show_matching_result(MateMatchingStartActivity.this, memNo, fesNo, selectedArtist, new NetworkManager.OnResultListener<ShowMatchingResult>() {
-                    //留ㅼ묶 寃곌낵
+
                     @Override
                     public void onSuccess(Request request, ShowMatchingResult result) {
                         Intent intent = new Intent(MateMatchingStartActivity.this, MateMatchingActivity.class);
@@ -152,7 +152,6 @@ public class MateMatchingStartActivity extends AppCompatActivity {
         NetworkManager.getInstance().show_festival_lineups(MateMatchingStartActivity.this, no, new NetworkManager.OnResultListener<ShowFestivalLineups>() {
             @Override
             public void onSuccess(Request request, ShowFestivalLineups result) {
-                Toast.makeText(MateMatchingStartActivity.this,"?깃났",Toast.LENGTH_SHORT).show();
 
                 mAdapter.clear();
                 mAdapter.addAll(result.result.getFestival_lineups());
@@ -179,7 +178,7 @@ public class MateMatchingStartActivity extends AppCompatActivity {
 
             @Override
             public void onFail(Request request, IOException exception) {
-                Toast.makeText(MateMatchingStartActivity.this,"?ㅽ뙣"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+             //   Toast.makeText(MateMatchingStartActivity.this,"?ㅽ뙣"+exception.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
     }

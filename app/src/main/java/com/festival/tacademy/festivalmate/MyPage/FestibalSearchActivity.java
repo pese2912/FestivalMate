@@ -114,13 +114,13 @@ public class FestibalSearchActivity extends AppCompatActivity {
                     public void onSuccess(Request request, FestivalResultResult result) {
 
                         if( result.success == 1 ) {
-                            Toast.makeText(FestibalSearchActivity.this, "Search Success", Toast.LENGTH_SHORT).show();
+                          //  Toast.makeText(FestibalSearchActivity.this, "Search Success", Toast.LENGTH_SHORT).show();
                             mAdapter.addAll(result.result);
                         }
                     }
                     @Override
                     public void onFail(Request request, IOException exception) {
-                        Toast.makeText(FestibalSearchActivity.this, "Search Failed", Toast.LENGTH_SHORT).show();
+                     //   Toast.makeText(FestibalSearchActivity.this, "Search Failed", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

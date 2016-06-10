@@ -168,7 +168,7 @@ public class MakeMateTalkActivity extends AppCompatActivity {
 
                     @Override
                     public void onSuccess(Request request, CreateNewChatroomResult result) {
-                        Toast.makeText(MakeMateTalkActivity.this,"성공",Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(MakeMateTalkActivity.this,"성공",Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(MakeMateTalkActivity.this, ChattingActivity.class);
                         MateTalkRoom room = new MateTalkRoom();
                         room.setChatroom_no(result.result.getChatroom_no());
@@ -181,7 +181,7 @@ public class MakeMateTalkActivity extends AppCompatActivity {
 
                     @Override
                     public void onFail(Request request, IOException exception) {
-                        Toast.makeText(MakeMateTalkActivity.this,"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+                     //   Toast.makeText(MakeMateTalkActivity.this,"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
 
                     }
                 });

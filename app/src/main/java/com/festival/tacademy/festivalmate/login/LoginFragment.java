@@ -51,66 +51,6 @@ public class LoginFragment extends Fragment {
     }
 
 
-//    private CallbackManager callbackManager = null;
-//    private AccessTokenTracker accessTokenTracker = null;
-//    private com.facebook.login.widget.LoginButton loginButton = null;
-//
-//    private FacebookCallback<LoginResult> callback = new FacebookCallback<LoginResult>() {
-//        @Override
-//        public void onSuccess(LoginResult loginResult) {
-//            AccessToken accessToken = loginResult.getAccessToken();
-//            Profile profile = Profile.getCurrentProfile();
-//            Toast.makeText(getActivity().getApplicationContext(), loginResult.getAccessToken().getUserId(), Toast.LENGTH_LONG).show();
-//// Toast.makeText(getActivity().getApplicationContext(), loginResult.getAccessToken().getToken(), Toast.LENGTH_LONG).show();
-//        }
-//
-//        @Override
-//        public void onCancel() {
-//            Toast.makeText(getActivity().getApplicationContext(), "User sign in canceled!", Toast.LENGTH_LONG).show();
-//        }
-//
-//        @Override
-//        public void onError(FacebookException e) {
-//
-//        }
-//    };
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        callbackManager.onActivityResult(requestCode, resultCode, data);
-//    }
-//
-//
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        FacebookSdk.sdkInitialize(getActivity().getApplicationContext());
-//        callbackManager = CallbackManager.Factory.create();
-//        accessTokenTracker = new AccessTokenTracker() {
-//            @Override
-//            protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
-//// App code
-//                Log.i("eNuri", "Current Token : " + currentAccessToken);
-//            }
-//        };
-//        accessTokenTracker.startTracking();
-//    }
-//
-//    @Override
-//    public void onStop() {
-//        super.onStop();
-//        accessTokenTracker.stopTracking();
-//    }
-//
-//    @Override
-//    public void onViewCreated(View view, Bundle savedInstanceState) {
-//        super.onViewCreated(view, savedInstanceState);
-//        LoginButton loginButton = (LoginButton)view.findViewById(R.id.btn_facebook);
-//        loginButton.setReadPermissions("public_profile", "user_friends");
-//        loginButton.setFragment(this);
-//        loginButton.registerCallback(callbackManager, callback);
-//    }
-//
 
 
     @Override
@@ -144,7 +84,7 @@ public class LoginFragment extends Fragment {
                     public void onSuccess(Request request, MySignInResult result) { // 로그인 성공하면
 
                         if (result.success == 1) {
-                            Toast.makeText(getContext(),"로그인 성공 : "+ result.message,Toast.LENGTH_SHORT ).show();
+                           // Toast.makeText(getContext(),"로그인 성공 : "+ result.message,Toast.LENGTH_SHORT ).show();
                             PropertyManager.getInstance().setLogin(true);
                             PropertyManager.getInstance().setUser(result.result);
                             PropertyManager.getInstance().setEmail(email);
@@ -160,7 +100,7 @@ public class LoginFragment extends Fragment {
                     @Override
                     public void onFail(Request request, IOException exception) { // 로그인 실패하면
 
-                        Toast.makeText(getContext(),"로그인 실패 : "+ exception,Toast.LENGTH_SHORT ).show();
+                      //  Toast.makeText(getContext(),"로그인 실패 : "+ exception,Toast.LENGTH_SHORT ).show();
                     }
                 });
             }
@@ -247,7 +187,7 @@ public class LoginFragment extends Fragment {
                         @Override
                         public void onSuccess(Request request, MySignInResult result) {
                             User user = result.result;
-                            Toast.makeText(getContext(), "페이스북 로그인"+user.getName()+" "+user.getMem_id()+" "+user.getMem_no(),Toast.LENGTH_SHORT).show();
+                         //   Toast.makeText(getContext(), "페이스북 로그인"+user.getName()+" "+user.getMem_id()+" "+user.getMem_no(),Toast.LENGTH_SHORT).show();
                             // login success
                             PropertyManager.getInstance().setLogin(true);
                             PropertyManager.getInstance().setNo(user.getMem_no());
@@ -260,7 +200,7 @@ public class LoginFragment extends Fragment {
 
                         @Override
                         public void onFail(Request request, IOException exception) {
-                            Toast.makeText(getContext(), "실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+                        //    Toast.makeText(getContext(), "실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

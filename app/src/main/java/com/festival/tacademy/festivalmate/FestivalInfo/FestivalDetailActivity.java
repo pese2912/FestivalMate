@@ -60,7 +60,7 @@ public class FestivalDetailActivity extends AppCompatActivity {
                 NetworkManager.getInstance().show_mem_profile(FestivalDetailActivity.this, user.getMem_no(), new NetworkManager.OnResultListener<ShowMemProfileResult>() {
                     @Override
                     public void onSuccess(Request request, ShowMemProfileResult result) {
-                        Toast.makeText(FestivalDetailActivity.this, "성공",Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(FestivalDetailActivity.this, "성공",Toast.LENGTH_SHORT).show();
                         ProfileDialogFragment f = new ProfileDialogFragment();
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("user", result.result);
@@ -70,7 +70,7 @@ public class FestivalDetailActivity extends AppCompatActivity {
 
                     @Override
                     public void onFail(Request request, IOException exception) {
-                        Toast.makeText(FestivalDetailActivity.this, "실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+                  //      Toast.makeText(FestivalDetailActivity.this, "실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -166,7 +166,7 @@ public class FestivalDetailActivity extends AppCompatActivity {
 
                     @Override
                     public void onFail(Request request, IOException exception) {
-                        Toast.makeText(FestivalDetailActivity.this, "Fail", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(FestivalDetailActivity.this, "Fail", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

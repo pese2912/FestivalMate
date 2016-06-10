@@ -104,13 +104,13 @@ public class LetsGoListActivity extends AppCompatActivity {
             public void onSuccess(Request request, ShowGoingListResult result) {
                 mAdapter.clear();
 
-                Toast.makeText(LetsGoListActivity.this,"성공",Toast.LENGTH_SHORT).show();
+               // Toast.makeText(LetsGoListActivity.this,"성공",Toast.LENGTH_SHORT).show();
                 mAdapter.addAll(result.result);
             }
 
             @Override
             public void onFail(Request request, IOException exception) {
-                Toast.makeText(LetsGoListActivity.this,"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(LetsGoListActivity.this,"실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
 

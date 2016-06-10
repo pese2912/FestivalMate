@@ -73,7 +73,7 @@ public class ChatJoinListActivity extends AppCompatActivity {
 
                     @Override
                     public void onFail(Request request, IOException exception) {
-                        Toast.makeText(MyApplication.getContext(), "실패 : "+exception.getMessage(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MyApplication.getContext(), "실패 : "+exception.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -95,7 +95,7 @@ public class ChatJoinListActivity extends AppCompatActivity {
 
                     @Override
                     public void onFail(Request request, IOException exception) {
-                        Toast.makeText(MyApplication.getContext(), "실패 : " + exception.getMessage(), Toast.LENGTH_SHORT).show();
+                    //    Toast.makeText(MyApplication.getContext(), "실패 : " + exception.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -115,7 +115,7 @@ public class ChatJoinListActivity extends AppCompatActivity {
 
                     @Override
                     public void onFail(Request request, IOException exception) {
-                        Toast.makeText(ChatJoinListActivity.this, "실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(ChatJoinListActivity.this, "실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -136,7 +136,7 @@ public class ChatJoinListActivity extends AppCompatActivity {
 
                     @Override
                     public void onFail(Request request, IOException exception) {
-                        Toast.makeText(MyApplication.getContext(), "실패 : "+exception.getMessage(), Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(MyApplication.getContext(), "실패 : "+exception.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -156,7 +156,7 @@ public class ChatJoinListActivity extends AppCompatActivity {
 
                     @Override
                     public void onFail(Request request, IOException exception) {
-                        Toast.makeText(ChatJoinListActivity.this, "실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+                   //     Toast.makeText(ChatJoinListActivity.this, "실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -189,7 +189,7 @@ public class ChatJoinListActivity extends AppCompatActivity {
 
             @Override
             public void onFail(Request request, IOException exception) {
-                Toast.makeText(ChatJoinListActivity.this, "실패"+exception.getMessage(), Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(ChatJoinListActivity.this, "실패"+exception.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 

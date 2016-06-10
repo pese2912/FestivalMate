@@ -61,14 +61,14 @@ public class JoinWaitListActivity extends AppCompatActivity {
                 NetworkManager.getInstance().request_chatroom_join(JoinWaitListActivity.this, memNo, chatroomNo, state, new NetworkManager.OnResultListener<RequestChatroomJoinResult>() {
                     @Override
                     public void onSuccess(Request request, RequestChatroomJoinResult result) {
-                        Toast.makeText(JoinWaitListActivity.this, "성공", Toast.LENGTH_SHORT).show();
+                     //   Toast.makeText(JoinWaitListActivity.this, "성공", Toast.LENGTH_SHORT).show();
                         list.setMem_chatroom_state(result.result.getMem_chatroom_state());
                         initData();
                     }
 
                     @Override
                     public void onFail(Request request, IOException exception) {
-                        Toast.makeText(JoinWaitListActivity.this, "실패"+exception.getMessage(), Toast.LENGTH_SHORT).show();
+                  //      Toast.makeText(JoinWaitListActivity.this, "실패"+exception.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -93,7 +93,7 @@ public class JoinWaitListActivity extends AppCompatActivity {
             @Override
             public void onSuccess(Request request, ShowWaitingListResult result) {
 
-                Toast.makeText(JoinWaitListActivity.this, "성공"+result.result.size(), Toast.LENGTH_SHORT).show();
+             //   Toast.makeText(JoinWaitListActivity.this, "성공"+result.result.size(), Toast.LENGTH_SHORT).show();
                 mAdapter.addAll(result.result);
                 if(result.result.size() == 0 || result.result ==null){
                     layout.setVisibility(View.VISIBLE);
@@ -107,7 +107,7 @@ public class JoinWaitListActivity extends AppCompatActivity {
 
             @Override
             public void onFail(Request request, IOException exception) {
-                Toast.makeText(JoinWaitListActivity.this, "실패"+exception.getMessage(), Toast.LENGTH_SHORT).show();
+             //   Toast.makeText(JoinWaitListActivity.this, "실패"+exception.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });

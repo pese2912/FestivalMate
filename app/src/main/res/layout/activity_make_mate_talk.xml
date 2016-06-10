@@ -253,7 +253,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:id="@+id/radioButton"
-            android:checked="false"
+            android:checked="true"
             android:button="@null"
             android:drawableLeft="@color/common_action_bar_splitter"
             android:background="@drawable/selector_pic3"/>

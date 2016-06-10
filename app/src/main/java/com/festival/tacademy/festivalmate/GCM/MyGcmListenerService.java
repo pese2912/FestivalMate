@@ -74,84 +74,25 @@ public class MyGcmListenerService extends GcmListenerService {
 //        String type = data.getString("type");
 //        String senderid = data.getString("sender");
 //        final int roomid = Integer.parseInt(data.getString("chatroom_no"));
+
         final String room = data.getString("chatroom_no");
+        final String roomname = data.getString("chatroom_name");
+        final String sendername = data.getString("sender_name");
+        final String style = data.getString("chatroom_style");
         final int roomid = Integer.parseInt(room);
+        final int room_style = Integer.parseInt(style);
+
        // final int roomid = data.getInt("chatroom_no");
         newChatResult = new RequestNewChatResult();
-//        Log.i(TAG, "From: " + from);
-//        Log.i(TAG, "chatroom_no: " + roomid+"");
-
-
-        //Log.d(TAG, "ChatMessage: " + message);
-
-//        if (from.startsWith("/topics/")) {
-//            // message received from some topic.
-//        } else {
-//            // normal downstream message.
-//            if (type.equals("chat")) {
-//                long serverid = Long.parseLong(senderid);
-//                String lastDate = DataManager.getInstance().getLastDate(serverid);
-//                try {
-//                    MyResult<List<ChatMessage>> result = NetworkManager.getInstance().getMessageSync(lastDate);
-//                    String notiMessage = null;
-//                    User u = null;
-//                    for (ChatMessage m : result.result) {
-//                        long id = DataManager.getInstance().getUserTableId(m.sender);
-//                        DataManager.getInstance().addChatMessage(id, DataConstant.ChatTable.TYPE_RECEIVE, m.message, m.date);
-//                        notiMessage = m.sender.userName + ":" + m.message;
-//                        u = m.sender;
-//                    }
-//                    Intent intent = new Intent(ACTION_CHAT);
-//                    intent.putExtra(EXTRA_SENDER_ID, serverid);
-//                    LocalBroadcastManager.getInstance(this).sendBroadcastSync(intent);
-//                    boolean isProcessed = intent.getBooleanExtra(EXTRA_RESULT, false);
-//                    if (!isProcessed) {
-//                        sendNotification(notiMessage, u);
-//                    }
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-
 
 
         final String[] message1 = new String[1];
-//                if (from.startsWith("/topics/")) {
-//            // message received from some topic.
-//                 } else {
-//            // normal downstream message.
-//                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.KOREA);
-//                    sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-//                   String date = sdf.format(new Date(0));
-//                    NetworkManager.getInstance().request_new_chat(MyApplication.getContext(), PropertyManager.getInstance().getNo(), roomid, date, new NetworkManager.OnResultListener<RequestNewChatResult>() {
-//                        @Override
-//                        public void onSuccess(Request request, RequestNewChatResult result) {
-//                            message1[0] = result.result.get(0).chat_content;
-//                            Toast.makeText(MyApplication.getContext(), "성공"+message1[0] , Toast.LENGTH_SHORT).show();
-//                            newChatResult.result = result.result;
-//
-//                            Intent intent = new Intent(ACTION_CHAT);
-//                            intent.putExtra(EXTRA_SENDER_ID, newChatResult);
-//                            LocalBroadcastManager.getInstance(MyApplication.getContext()).sendBroadcastSync(intent);
-//                            boolean isProcessed = intent.getBooleanExtra(EXTRA_RESULT, false);
-//                            if (!isProcessed) {
-//                            sendNotification(message1[0]);
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onFail(Request request, IOException exception) {
-//                            Toast.makeText(MyApplication.getContext(), "실패"+exception.getMessage(), Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//                  }
 
         if (from.startsWith("/topics/")) {
             // message received from some topic.
         } else {
-            // normal downstream message.
 
+            // normal downstream message.
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.KOREA);
                     sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
                    String date = sdf.format(new Date(0));
@@ -165,11 +106,14 @@ public class MyGcmListenerService extends GcmListenerService {
 
                         MateTalkRoom mateTalkRoom = new MateTalkRoom();
                         mateTalkRoom.setChatroom_no(roomid);
-                        sendNotification(result.result.get(result.result.size()-1).chat_content,mateTalkRoom);
+                        mateTalkRoom.setChatroom_name(roomname);
+                        mateTalkRoom.setChatroom_style(room_style);
+                        sendNotification(sendername+"님 : "+result.result.get(result.result.size()-1).chat_content,mateTalkRoom);
+
                     }
 
                 } catch (IOException e) {
-                    Toast.makeText(MyApplication.getContext(), "제발",Toast.LENGTH_SHORT).show();
+               //     Toast.makeText(MyApplication.getContext(), "제발",Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
         }
