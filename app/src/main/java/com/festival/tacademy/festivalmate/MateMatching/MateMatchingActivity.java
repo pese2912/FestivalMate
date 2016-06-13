@@ -23,6 +23,7 @@ import com.festival.tacademy.festivalmate.Data.User;
 import com.festival.tacademy.festivalmate.FestivalInfo.UserViewHolder;
 import com.festival.tacademy.festivalmate.Manager.NetworkManager;
 import com.festival.tacademy.festivalmate.Manager.PropertyManager;
+import com.festival.tacademy.festivalmate.MyApplication;
 import com.festival.tacademy.festivalmate.Profile.ProfileDialogFragment;
 import com.festival.tacademy.festivalmate.R;
 
@@ -190,6 +191,7 @@ public class MateMatchingActivity extends AppCompatActivity {
             Intent intent = new Intent(MateMatchingActivity.this, MakeMateTalkActivity.class);
             intent.putExtra("festival",festival);
             intent.putExtra("selectedArtist",selectedArtist);
+          //  Toast.makeText(MyApplication.getContext(),festival.getFestival_no()+"",Toast.LENGTH_SHORT).show();
             startActivity(intent);
 
             return true;

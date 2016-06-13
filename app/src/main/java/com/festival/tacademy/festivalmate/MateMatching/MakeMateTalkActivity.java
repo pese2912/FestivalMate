@@ -31,6 +31,7 @@ import com.festival.tacademy.festivalmate.HomeActivity;
 import com.festival.tacademy.festivalmate.Manager.NetworkManager;
 import com.festival.tacademy.festivalmate.Manager.PropertyManager;
 import com.festival.tacademy.festivalmate.MateTalk.ChattingActivity;
+import com.festival.tacademy.festivalmate.MyApplication;
 import com.festival.tacademy.festivalmate.R;
 
 import java.io.File;
@@ -177,6 +178,7 @@ public class MakeMateTalkActivity extends AppCompatActivity {
                         MateTalkRoom room = new MateTalkRoom();
                         room.setChatroom_no(result.result.getChatroom_no());
                         //room.setFestival_name(result.result.getFestival_name());
+                        //Toast.makeText(MyApplication.getContext(),festival.getFestival_no()+"",Toast.LENGTH_SHORT).show();
                         room.setChatroom_name(chatroom_name);
                         intent.putExtra("chatting",room);
                         startActivity(intent);

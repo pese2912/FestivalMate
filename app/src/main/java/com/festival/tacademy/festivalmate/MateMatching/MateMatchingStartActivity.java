@@ -120,6 +120,7 @@ public class MateMatchingStartActivity extends AppCompatActivity {
                         intent.putExtra("ShowMatchingResult",result);
                         intent.putExtra("festival",festival);
                         selectedArtistResult.result = selectedArtist;
+                      //  Toast.makeText(MateMatchingStartActivity.this,festival.getFestival_no()+"",Toast.LENGTH_SHORT).show();
                         intent.putExtra("selectedArtist",selectedArtistResult);
                         startActivity(intent);
                         finish();

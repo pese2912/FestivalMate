@@ -67,7 +67,7 @@ public class MateTalkFragment extends Fragment {
                 Toast.makeText(getContext(), talkRoom.getChatroom_festival_name(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(), ChattingActivity.class);
                 intent.putExtra("chatting",talkRoom);
-                intent.putExtra(MyGcmListenerService.EXTRA_SENDER_ID, new RequestNewChatResult());
+                intent.putExtra(MyGcmListenerService.EXTRA_SENDER_RESULT, new RequestNewChatResult());
                 startActivity(intent);
             }
         });

@@ -22,6 +22,7 @@ import com.festival.tacademy.festivalmate.MainActivity;
 import com.festival.tacademy.festivalmate.Manager.NetworkManager;
 import com.festival.tacademy.festivalmate.Manager.PropertyManager;
 import com.festival.tacademy.festivalmate.MateTalk.ChattingActivity;
+import com.festival.tacademy.festivalmate.MateTalk.Receive;
 import com.festival.tacademy.festivalmate.MyApplication;
 import com.festival.tacademy.festivalmate.MyPage.SettingsActivity;
 import com.festival.tacademy.festivalmate.R;
@@ -58,7 +59,8 @@ public class MyGcmListenerService extends GcmListenerService {
     private static final String TAG = "MyGcmListenerService";
 
     public static final String ACTION_CHAT = "com.festival.tacademy.festivalmate.action.chat";
-    public static final String EXTRA_SENDER_ID = "senderid";
+    public static final String EXTRA_SENDER_RESULT = "senderresult";
+    public static final String EXTRA_SENDER_NO = "senderno";
     public static final String EXTRA_RESULT = "result";
 
     /**
@@ -100,17 +102,25 @@ public class MyGcmListenerService extends GcmListenerService {
                    String date = sdf.format(new Date(0));
                 try {
                     RequestNewChatResult result = NetworkManager.getInstance().request_new_chat(MyApplication.getContext(), PropertyManager.getInstance().getNo(), roomid, date);
-                    Intent intent = new Intent(ACTION_CHAT);
-                    intent.putExtra(EXTRA_SENDER_ID, result);
-                    LocalBroadcastManager.getInstance(this).sendBroadcastSync(intent);
-                    boolean isProcessed = intent.getBooleanExtra(EXTRA_RESULT, false);
-                    if (!isProcessed && SettingsActivity.switch_alarm) {
 
-                        MateTalkRoom mateTalkRoom = new MateTalkRoom();
-                        mateTalkRoom.setChatroom_no(roomid);
-                        mateTalkRoom.setChatroom_name(roomname);
-                        mateTalkRoom.setChatroom_style(room_style);
-                        sendNotification(sendername+"님 : "+result.result.get(result.result.size()-1).chat_content,mateTalkRoom);
+                    // db save...
+
+                        Intent intent = new Intent(ACTION_CHAT);
+                        intent.putExtra(EXTRA_SENDER_RESULT, result);
+                        intent.putExtra(EXTRA_SENDER_NO,roomid);
+                        LocalBroadcastManager.getInstance(this).sendBroadcastSync(intent);
+                        boolean isProcessed = intent.getBooleanExtra(EXTRA_RESULT, false);
+
+
+                        if (!isProcessed && SettingsActivity.switch_alarm ) {
+
+                            MateTalkRoom mateTalkRoom = new MateTalkRoom();
+                            mateTalkRoom.setChatroom_no(roomid);
+                            mateTalkRoom.setChatroom_name(roomname);
+                            mateTalkRoom.setChatroom_style(room_style);
+
+                            sendNotification(sendername + "님 : " + result.result.get(result.result.size() - 1).chat_content, mateTalkRoom);
+
 
                     }
 
@@ -131,9 +141,11 @@ public class MyGcmListenerService extends GcmListenerService {
      */
 
     private void sendNotification(String message, MateTalkRoom room) {
+
         Intent intent = new Intent(this, ChattingActivity.class);
         intent.putExtra("chatting",room);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
 
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT);

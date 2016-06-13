@@ -57,6 +57,7 @@ public class ChattingActivity extends AppCompatActivity {
 
     EditText inputView;
     MateTalkRoom mateTalkRoom;
+    int gcmTalkRoom;
     LinearLayoutManager layoutManager;
     User user;
 
@@ -97,6 +98,7 @@ public class ChattingActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         mateTalkRoom = (MateTalkRoom) intent.getExtras().getSerializable("chatting");
+
 
         if(mateTalkRoom.getChatroom_style()==1){
             btn_join_list.setVisibility(View.GONE);
@@ -226,12 +228,15 @@ public class ChattingActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
 
-            newChatResult = (RequestNewChatResult) intent.getExtras().getSerializable(MyGcmListenerService.EXTRA_SENDER_ID);
+            newChatResult = (RequestNewChatResult) intent.getExtras().getSerializable(MyGcmListenerService.EXTRA_SENDER_RESULT);
           //  long sid = intent.getLongExtra(MyGcmListenerService.EXTRA_SENDER_ID, 0);
-
+              int roomid = intent.getIntExtra(MyGcmListenerService.EXTRA_SENDER_NO, 0);
+            if (roomid == mateTalkRoom.getChatroom_no()) {
                 runOnUiThread(initRunnable);
                 intent.putExtra(MyGcmListenerService.EXTRA_RESULT, true);
+//                intent.putExtra(MyGcmListenerService.EXTRA_RESULT, mateTalkRoom.getChatroom_no());
                 return;
+            }
 
         }
     };
@@ -244,21 +249,21 @@ public class ChattingActivity extends AppCompatActivity {
     };
 
     private void initData() {
-        mAdapter.clear();
-        for(Receive r : newChatResult.result) {
 
-            if(r.chat_sender_no != PropertyManager.getInstance().getNo()) {
-                mAdapter.add(r);
-            }
+            mAdapter.clear();
+            for (Receive r : newChatResult.result) {
 
-            else{
-                Send s = new Send();
-                s.message = r.chat_content;
-                s.date=r.chat_regdate;
-                mAdapter.add(s);
+                if (r.chat_sender_no != PropertyManager.getInstance().getNo()) {
+                    mAdapter.add(r);
+                } else {
+                    Send s = new Send();
+                    s.message = r.chat_content;
+                    s.date = r.chat_regdate;
+                    mAdapter.add(s);
+                }
             }
-        }
-        recyclerView.smoothScrollToPosition(mAdapter.getItemCount());
+            recyclerView.smoothScrollToPosition(mAdapter.getItemCount());
+
     }
 
     @Override
