@@ -112,7 +112,7 @@ public class MyGcmListenerService extends GcmListenerService {
                         boolean isProcessed = intent.getBooleanExtra(EXTRA_RESULT, false);
 
 
-                        if (!isProcessed && SettingsActivity.switch_alarm ) {
+                        if (!isProcessed && SettingsActivity.switch_alarm) {
 
                             MateTalkRoom mateTalkRoom = new MateTalkRoom();
                             mateTalkRoom.setChatroom_no(roomid);
@@ -120,7 +120,6 @@ public class MyGcmListenerService extends GcmListenerService {
                             mateTalkRoom.setChatroom_style(room_style);
 
                             sendNotification(sendername + "님 : " + result.result.get(result.result.size() - 1).chat_content, mateTalkRoom);
-
 
                     }
 
@@ -156,8 +155,8 @@ public class MyGcmListenerService extends GcmListenerService {
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setTicker("GCM message")
-                //.setSmallIcon(R.drawable.icon)
-                .setLargeIcon(icon)
+                .setSmallIcon(R.drawable.icon)
+                //.setLargeIcon(icon)
                 .setContentTitle("메시지가 도착했습니다.")
                 .setContentText(message)
                 .setAutoCancel(true)
