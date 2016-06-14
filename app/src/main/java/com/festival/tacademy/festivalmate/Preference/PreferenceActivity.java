@@ -58,8 +58,13 @@ public class PreferenceActivity extends AppCompatActivity {
             public void onItemClick(View view, Artist artist) {
 
                 selectedArtist.clear();
-                if(artist.isCheck()==1)
+                if(artist.isCheck()==1) {
+                    for (int i = 0; i < artistList.size(); i++) {
+                        if (artist.getArtist_no() == artistList.get(i).getArtist_no())
+                            artistList.get(i).setCheck(0);
+                    }
                     artist.setCheck(0);
+                }
                 else
                     artist.setCheck(1);
 

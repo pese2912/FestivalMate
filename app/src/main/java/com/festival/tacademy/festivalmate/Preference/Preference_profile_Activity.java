@@ -39,7 +39,7 @@ public class Preference_profile_Activity extends AppCompatActivity {
     Toolbar toolbar;
     EditText editSearch;
     List<Artist> artistList;
-    List<Artist> selectedArtist;
+  public   List<Artist> selectedArtist;
     Button btn_complete;
 
     @Override
@@ -55,18 +55,36 @@ public class Preference_profile_Activity extends AppCompatActivity {
 
         mAdapter.setOnItemClickListener(new PreferenceViewHolder.OnItemClickListener() {
 
+
             @Override
             public void onItemClick(View view, Artist artist) {
 
                 selectedArtist.clear();
-                if(artist.isCheck()==1)
+                if(artist.isCheck()==1) {
+                    for(int i = 0; i< artistList.size(); i++){
+                        if(artist.getArtist_no() == artistList.get(i).getArtist_no())
+                            artistList.get(i).setCheck(0);
+                    }
                     artist.setCheck(0);
-                else
+                }
+                else {
                     artist.setCheck(1);
-
+                }
                 for(int i = 0; i < artistList.size(); i++){
                     if(artistList.get(i).isCheck() == 1){
-                        selectedArtist.add(artistList.get(i));
+
+//
+//                        boolean flag = true;
+//
+//                        for(int j=0; j <selectedArtist.size(); j++){
+//
+//                              if(artistList.get(i).getArtist_no() == selectedArtist.get(j).getArtist_no())
+//                                  flag = false;
+//                        }
+//
+//                        if(flag == true)
+                            selectedArtist.add(artistList.get(i));
+
                     }
                 }
 
@@ -94,6 +112,7 @@ public class Preference_profile_Activity extends AppCompatActivity {
         setData();
 
         Button btn = (Button)findViewById(R.id.btn_search);
+
         btn.setOnClickListener(new View.OnClickListener() { // 검색
             @Override
             public void onClick(View v) {
@@ -103,9 +122,12 @@ public class Preference_profile_Activity extends AppCompatActivity {
                     NetworkManager.getInstance().searchArtistSurvey(Preference_profile_Activity.this, memNo, name, new NetworkManager.OnResultListener<ShowArtistSurveyResult>() {
                         @Override
                         public void onSuccess(Request request, ShowArtistSurveyResult result) {
-                           // Toast.makeText(Preference_profile_Activity.this,"성공",Toast.LENGTH_SHORT).show();
+                          //  Toast.makeText(Preference_profile_Activity.this,artistList.size()+"  "+result.result.size(),Toast.LENGTH_SHORT).show();
                             mAdapter.clear();
+
                             artistList.addAll(result.result);
+
+
                             mAdapter.addAll(result.result);
 
                             // artistList=result.result;
@@ -117,13 +139,13 @@ public class Preference_profile_Activity extends AppCompatActivity {
                         }
                     });
                 }
-
         });
 
         btn_complete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                            int memNo = PropertyManager.getInstance().getNo();
+
+                int memNo = PropertyManager.getInstance().getNo();
             NetworkManager.getInstance().saveArtistSurvey(Preference_profile_Activity.this, memNo, selectedArtist, new NetworkManager.OnResultListener<MySignUpResult>() {
                 @Override
                 public void onSuccess(Request request, MySignUpResult result) {
@@ -132,6 +154,7 @@ public class Preference_profile_Activity extends AppCompatActivity {
                  //   intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     finish();
+
                 }
 
                 @Override
@@ -190,6 +213,7 @@ public class Preference_profile_Activity extends AppCompatActivity {
 //             mAdapter.add(artist); // 값 추가
 //               artistList.add(artist);
 //         }
+
     }
 
 
