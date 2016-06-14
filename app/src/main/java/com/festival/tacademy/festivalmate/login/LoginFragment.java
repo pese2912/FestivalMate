@@ -75,6 +75,7 @@ public class LoginFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
+
                 final String email = emailView.getText().toString();
                 final String password = passwordView.getText().toString();
                 final String regId = PropertyManager.getInstance().getRegistrationToken();
@@ -97,16 +98,16 @@ public class LoginFragment extends Fragment {
                             getActivity().finish();
                         }
                     }
+
                     @Override
                     public void onFail(Request request, IOException exception) { // 로그인 실패하면
 
-                      //  Toast.makeText(getContext(),"로그인 실패 : "+ exception,Toast.LENGTH_SHORT ).show();
+                        Toast.makeText(getContext(),"로그인 실패 : "+ exception,Toast.LENGTH_SHORT ).show();
+
                     }
                 });
             }
         });
-
-
 
         btn = (Button)view.findViewById(R.id.btn_kaokaotalk_login);
         btn.setOnClickListener(new View.OnClickListener() { // 카카오톡 로그인 버튼 클릭시

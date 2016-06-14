@@ -81,6 +81,7 @@ public class MateMatchingActivity extends AppCompatActivity {
 
 
 
+
 //                if(room.getMem_chatroom_state() == 2)
 //                    btn.setText("참여중");
 //                else if(room.getMem_chatroom_state() == 1)
@@ -115,9 +116,10 @@ public class MateMatchingActivity extends AppCompatActivity {
                                 }
                             }
 
+
                             @Override
                             public void onFail(Request request, IOException exception) {
-                               // Toast.makeText(MateMatchingActivity.this, "실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MateMatchingActivity.this, "실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
                             }
                         });
                     }

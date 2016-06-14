@@ -135,7 +135,7 @@ public class SignUpFragment extends Fragment {
 
                             @Override
                             public void onFail(Request request, IOException exception) {
-                               // Toast.makeText(getContext(), "로그인 실패 : " + exception,Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "로그인 실패 : " + exception,Toast.LENGTH_SHORT).show();
                             }
                         });
 
@@ -143,7 +143,7 @@ public class SignUpFragment extends Fragment {
 
                     @Override
                     public void onFail(Request request, IOException exception) {
-                       // Toast.makeText(getContext(), "가입실패 : "+exception,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "가입실패 : "+exception,Toast.LENGTH_SHORT).show();
                      //   Log.i("onFail: ",exception.getMessage());
                     }
                 });

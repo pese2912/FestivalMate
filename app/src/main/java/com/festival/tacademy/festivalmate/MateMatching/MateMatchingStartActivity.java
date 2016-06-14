@@ -65,12 +65,16 @@ public class MateMatchingStartActivity extends AppCompatActivity {
 
 
         festival_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
                 num = items.get(position).getFestival_no();
                 pos = position;
                 festival.setFestival_no(position);
+             //  setData(num);
             }
+
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -85,16 +89,17 @@ public class MateMatchingStartActivity extends AppCompatActivity {
         listView.setAdapter(mAdapter);
         listView.setLayoutManager(new LinearLayoutManager(this));
 
+
         Intent intent = getIntent();
         festival = (Festival)intent.getExtras().getSerializable("festival");
         num = festival.getFestival_no();
+
 
         selectedLineup = new ArrayList<>();
         selectedArtist= new ArrayList<>();
         result = new ShowMatchingResult();
 
         setData(num);
-
 
 
         Button btn = (Button)findViewById(R.id.btn_match);
@@ -109,6 +114,7 @@ public class MateMatchingStartActivity extends AppCompatActivity {
                         }
                     }
                 }
+
                 int memNo = PropertyManager.getInstance().getNo();
                 int fesNo = num;
 
@@ -132,6 +138,7 @@ public class MateMatchingStartActivity extends AppCompatActivity {
                     }
                 });
 
+
 //                Intent intent = new Intent(MateMatchingStartActivity.this, MateMatchingActivity.class);
 //                        intent.putExtra("ShowMatchingResult",result);
 //                        startActivity(intent);
@@ -140,6 +147,7 @@ public class MateMatchingStartActivity extends AppCompatActivity {
 
         btn = (Button)findViewById(R.id.btn_search);
         btn.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 mAdapter.clear();

@@ -30,6 +30,7 @@ import com.festival.tacademy.festivalmate.Data.RequestNewChatResult;
 import com.festival.tacademy.festivalmate.Data.ShowMemProfileResult;
 import com.festival.tacademy.festivalmate.Data.User;
 import com.festival.tacademy.festivalmate.GCM.MyGcmListenerService;
+import com.festival.tacademy.festivalmate.HomeActivity;
 import com.festival.tacademy.festivalmate.Manager.NetworkManager;
 import com.festival.tacademy.festivalmate.Manager.PropertyManager;
 import com.festival.tacademy.festivalmate.MyApplication;
@@ -50,7 +51,7 @@ public class ChattingActivity extends AppCompatActivity {
     ListView listView;
     Button btn_join_list;
 
-   // ChatCursorAdapter mAdapter;
+    // ChatCursorAdapter mAdapter;
 
     RecyclerView recyclerView;
     ChattingAdapter mAdapter;
@@ -104,7 +105,7 @@ public class ChattingActivity extends AppCompatActivity {
             btn_join_list.setVisibility(View.GONE);
         }
 
-      //  String chatroomNo = intent.getStringExtra("chatroomNo");
+        //  String chatroomNo = intent.getStringExtra("chatroomNo");
         user = (User)getIntent().getSerializableExtra(EXTRA_USER);
         toolbarTitle.setText(mateTalkRoom.getChatroom_name());
 
@@ -131,7 +132,7 @@ public class ChattingActivity extends AppCompatActivity {
                 NetworkManager.getInstance().show_mem_profile(ChattingActivity.this, receive.chat_sender_no, new NetworkManager.OnResultListener<ShowMemProfileResult>() {
                     @Override
                     public void onSuccess(Request request, ShowMemProfileResult result) {
-                 //       Toast.makeText(ChattingActivity.this, "성공",Toast.LENGTH_SHORT).show();
+                        //       Toast.makeText(ChattingActivity.this, "성공",Toast.LENGTH_SHORT).show();
                         ProfileDialogFragment f = new ProfileDialogFragment();
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("user", result.result);
@@ -141,7 +142,7 @@ public class ChattingActivity extends AppCompatActivity {
 
                     @Override
                     public void onFail(Request request, IOException exception) {
-                      //  Toast.makeText(ChattingActivity.this, "실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+                        //  Toast.makeText(ChattingActivity.this, "실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -153,7 +154,7 @@ public class ChattingActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 int memNo = PropertyManager.getInstance().getNo();
-            //    Toast.makeText(MyApplication.getContext(), ""+mateTalkRoom.getChatroom_no(),Toast.LENGTH_SHORT).show();
+                //    Toast.makeText(MyApplication.getContext(), ""+mateTalkRoom.getChatroom_no(),Toast.LENGTH_SHORT).show();
                 final String message = inputView.getText().toString();
                 if (!TextUtils.isEmpty(message)) {
 
@@ -166,7 +167,7 @@ public class ChattingActivity extends AppCompatActivity {
 
                         @Override
                         public void onFail(Request request, IOException exception) {
-                         //   Toast.makeText(MyApplication.getContext(), "실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
+                            //   Toast.makeText(MyApplication.getContext(), "실패"+exception.getMessage(),Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -177,8 +178,8 @@ public class ChattingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ChattingActivity.this, ChatJoinListActivity.class);
-                 intent.putExtra("chatting",mateTalkRoom);
-                  startActivity(intent);
+                intent.putExtra("chatting",mateTalkRoom);
+                startActivity(intent);
             }
         });
     }
@@ -199,7 +200,7 @@ public class ChattingActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == android.R.id.home) {
-            finish();
+            startActivity(new Intent(ChattingActivity.this, HomeActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             return true;
         }
 
@@ -207,11 +208,16 @@ public class ChattingActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(ChattingActivity.this, HomeActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+    }
 
     @Override
     protected void onResume() {
         super.onResume();
-       // initData();
+        // initData();
         LocalBroadcastManager.getInstance(this).registerReceiver(mChatReceiver, filter);
     }
 
@@ -229,8 +235,8 @@ public class ChattingActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
 
             newChatResult = (RequestNewChatResult) intent.getExtras().getSerializable(MyGcmListenerService.EXTRA_SENDER_RESULT);
-          //  long sid = intent.getLongExtra(MyGcmListenerService.EXTRA_SENDER_ID, 0);
-              int roomid = intent.getIntExtra(MyGcmListenerService.EXTRA_SENDER_NO, 0);
+            //  long sid = intent.getLongExtra(MyGcmListenerService.EXTRA_SENDER_ID, 0);
+            int roomid = intent.getIntExtra(MyGcmListenerService.EXTRA_SENDER_NO, 0);
             if (roomid == mateTalkRoom.getChatroom_no()) {
                 runOnUiThread(initRunnable);
                 intent.putExtra(MyGcmListenerService.EXTRA_RESULT, true);
@@ -250,19 +256,23 @@ public class ChattingActivity extends AppCompatActivity {
 
     private void initData() {
 
-            mAdapter.clear();
-            for (Receive r : newChatResult.result) {
+        mAdapter.clear();
+        for (Receive r : newChatResult.result) {
 
-                if (r.chat_sender_no != PropertyManager.getInstance().getNo()) {
-                    mAdapter.add(r);
-                } else {
-                    Send s = new Send();
-                    s.message = r.chat_content;
-                    s.date = r.chat_regdate;
-                    mAdapter.add(s);
-                }
+            if (r.chat_sender_no != PropertyManager.getInstance().getNo()) {
+                mAdapter.add(r);
+            } else {
+                Send s = new Send();
+                s.message = r.chat_content;
+                s.date = r.chat_regdate;
+                mAdapter.add(s);
             }
-            recyclerView.smoothScrollToPosition(mAdapter.getItemCount());
+        }
+        if(mAdapter.getItemCount() < 8 ) {
+            recyclerView.smoothScrollToPosition(0);
+            return;
+        }
+        recyclerView.smoothScrollToPosition(mAdapter.getItemCount());
 
     }
 

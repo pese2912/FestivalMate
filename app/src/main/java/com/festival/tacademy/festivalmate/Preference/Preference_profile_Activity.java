@@ -78,7 +78,7 @@ public class Preference_profile_Activity extends AppCompatActivity {
                 }
 
                 // Toast.makeText(PreferenceActivity.this, artist.isCheck() + artist.getName(), Toast.LENGTH_SHORT).show();
-               // Toast.makeText(Preference_profile_Activity.this, selectedArtist.size()+"", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Preference_profile_Activity.this, selectedArtist.size()+"", Toast.LENGTH_SHORT).show();
             }
         });
 
